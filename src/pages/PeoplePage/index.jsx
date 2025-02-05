@@ -75,9 +75,7 @@ const PeoplePage = () => {
     <div className="city-slider__item" key={photo.id}>
       <div className="city-slider__card" onClick={handleOpenPopup}>
         <p className="city-slider__image">
-          <img src={photo.image
-            
-          } alt={photo.title} />
+          <img src={photo.image} alt={photo.title} />
         </p>
       </div>
     </div>
