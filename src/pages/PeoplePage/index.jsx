@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
 import { peopleService } from 'services/api';
@@ -12,7 +12,7 @@ import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
     const [policePhotos, setPolicePhotos] = useState([]);
-    const [firefighterPhotos, setFirefighterPhotos] = useState([]);
+    // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
     const [activePopup, setActivePopup] = useState(false);
     useEffect(() => {
         const fetchPhotos = async () => {
@@ -21,7 +21,7 @@ const PeoplePage = () => {
             const firefighterData = await peopleService.getFirefighterPhotos();
             
             setPolicePhotos(policeData);
-            setFirefighterPhotos(firefighterData);
+            // setFirefighterPhotos(firefighterData);
           } catch (error) {
             console.error(error);
           }
