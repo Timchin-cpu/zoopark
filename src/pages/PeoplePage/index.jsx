@@ -37,8 +37,10 @@ const PeoplePage = () => {
     setOpenAccordion(openAccordion === id ? null : id);
   };
 
-  const handleOpenPopup = (id) => {
+  const handleOpenPopup = (photo) => {
     document.documentElement.classList.add("fixed");
+    setSelectedPhoto(photo);
+
     setActivePopup(true);
   };
   // const handleOpenPopup1 = (photo) => {
