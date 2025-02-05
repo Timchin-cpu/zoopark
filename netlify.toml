@@ -1,0 +1,5 @@
+[[redirects]]
+  from = api
+  to = http91.186.198.1795000apisplat
+  status = 200
+  force = true
