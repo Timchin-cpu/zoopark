@@ -76,7 +76,7 @@ const PeoplePage = () => {
                     </svg>
                   </div>
                 </div>
-              
+              </div>
               <div
                 className="city-list__content"
                 style={{
@@ -85,26 +85,25 @@ const PeoplePage = () => {
                   paddingBottom: openAccordion === 1 ? "10px" : "0px",
                 }}
               >
-                 <div className="city-slider">
-                                    <Swiper
-                                        spaceBetween={8}
-                                        slidesPerView={'auto'}
-                                        
-                                        >
-                {policePhotos.map((photo) => (
-                  <SwiperSlide>
-                    <div className="city-slider__item" key={photo.id}>
-                      <div
-                        className="city-slider__card"
-                        onClick={handleOpenPopup}
-                      >
-                        <p className="city-slider__image">
-                          <img src={photo.url} alt={photo.title} />
-                        </p>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}</Swiper></div>
+                {" "}
+                <div className="city-slider">
+                  <Swiper spaceBetween={8} slidesPerView={"auto"}>
+                    {policePhotos.map((photo) => (
+                      <SwiperSlide>
+                        <div className="city-slider__item" key={photo.id}>
+                          <div
+                            className="city-slider__card"
+                            onClick={handleOpenPopup}
+                          >
+                            <p className="city-slider__image">
+                              <img src={photo.url} alt={photo.title} />
+                            </p>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
               </div>
             </li>
             <li className="city-list__item block-style">
