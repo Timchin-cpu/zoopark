@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
 import { peopleService } from 'services/api';
@@ -12,17 +12,16 @@ import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
     const [policePhotos, setPolicePhotos] = useState([]);
-    // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
+    const [firefighterPhotos, setFirefighterPhotos] = useState([]);
     const [activePopup, setActivePopup] = useState(false);
     useEffect(() => {
         const fetchPhotos = async () => {
           try {
             const policeData = await peopleService.getPolicePhotos();
-            // const firefighterData = await peopleService.getFirefighterPhotos();
+            const firefighterData = await peopleService.getFirefighterPhotos();
             
             setPolicePhotos(policeData);
-            console.log(policeData);
-            // setFirefighterPhotos(firefighterData);
+            setFirefighterPhotos(firefighterData);
           } catch (error) {
             console.error(error);
           }
@@ -70,17 +69,17 @@ const PeoplePage = () => {
                                 maxHeight: openAccordion === 1 ? '500px' : '0px', paddingTop: openAccordion === 1 ? '24px' : '0px',
                                 paddingBottom: openAccordion === 1 ? '10px' : '0px', 
                             }}>
-                                <SwiperSlide>
-  {policePhotos.map(photo => (
+                                {policePhotos.map(photo => (<SwiperSlide>
+  
     <div className="city-slider__item" key={photo.id}>
       <div className="city-slider__card" onClick={handleOpenPopup}>
         <p className="city-slider__image">
-          <img src={`http://localhost:3000${photo.image}`} alt={photo.title} />
+          <img src={photo.url} alt={photo.title} />
         </p>
       </div>
     </div>
-  ))}
-</SwiperSlide>
+  
+</SwiperSlide>))}
                             </div>
                         </li>
                         <li className="city-list__item block-style">
