@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import routeMain from "./routes";
 import MainSection from "components/MainSection";
 import MobileNav from "components/MobileNav";

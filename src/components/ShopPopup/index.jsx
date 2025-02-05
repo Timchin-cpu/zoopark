@@ -12,23 +12,20 @@ const ShopPopup = (props) => {
 
 
     const popupRef = useRef(null);
+
     const { setActivePopup } = props;
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-          if (popupRef.current && !popupRef.current.contains(event.target)) {
-            document.documentElement.classList.remove('fixed');
-            console.log('close')
-            props.setActivePopup(false);
-          }
-        };
-    
-        document.addEventListener('mousedown', handleClickOutside);
-    
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      }, [setActivePopup]);
+      const handleClickOutside = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          document.documentElement.classList.remove('fixed');
+          setActivePopup(false);
+        }
+      };
+      
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [setActivePopup]);
 
     return (
         <div ref={popupRef} className={`shop-popup ${props.active ? 'show' : ''}`}>
