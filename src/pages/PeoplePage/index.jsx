@@ -18,7 +18,7 @@ const PeoplePage = () => {
         const fetchPhotos = async () => {
           try {
             const policeData = await peopleService.getPolicePhotos();
-            const firefighterData = await peopleService.getFirefighterPhotos();
+            // const firefighterData = await peopleService.getFirefighterPhotos();
             
             setPolicePhotos(policeData);
             // setFirefighterPhotos(firefighterData);
