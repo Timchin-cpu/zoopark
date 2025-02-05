@@ -11,6 +11,7 @@ import { routeTasks } from "pages/TasksPage";
 import { routeSets } from "pages/SetsPage";
 import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
+import { userService } from 'services/api';
 
 const MainSection = () => {
 
@@ -20,7 +21,19 @@ const MainSection = () => {
         document.documentElement.classList.add('fixed');
         setActivePopup(true);
     }
-
+    useEffect(() => {
+        const fetchUser = async () => {
+          try {
+            const response = await userService.getUser(1);
+            console.log(response);
+            // Обработка данных
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        
+        fetchUser();
+      }, []);
     return (
         <div className="main-section">
             <div className="main-section__wrap">
