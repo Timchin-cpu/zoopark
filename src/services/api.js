@@ -14,3 +14,26 @@ export const cardsService = {
 export const tasksService = {
   getAllTasks: () => axios.get('/tasks')
 };
+export const peopleService = {
+    // Получение списка фотографий для полиции
+    async getPolicePhotos() {
+      try {
+        const response = await axios.get(`/police/photos`);
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching police photos:', error);
+        throw error;
+      }
+    },
+  
+    // Получение списка фотографий для пожарных  
+    async getFirefighterPhotos() {
+      try {
+        const response = await axios.get(`/firefighter/photos`);
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching firefighter photos:', error);
+        throw error;
+      }
+    }
+  };

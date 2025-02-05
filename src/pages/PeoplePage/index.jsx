@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
+import { peopleService } from 'services/api';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
@@ -10,9 +11,24 @@ import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
-
+    const [policePhotos, setPolicePhotos] = useState([]);
+    const [firefighterPhotos, setFirefighterPhotos] = useState([]);
     const [activePopup, setActivePopup] = useState(false);
-
+    useEffect(() => {
+        const fetchPhotos = async () => {
+          try {
+            const policeData = await peopleService.getPolicePhotos();
+            const firefighterData = await peopleService.getFirefighterPhotos();
+            
+            setPolicePhotos(policeData);
+            setFirefighterPhotos(firefighterData);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        
+        fetchPhotos();
+      }, []);
     const [openAccordion, setOpenAccordion] = useState(null);
 
     const handleAccordionClick = (id) => {
@@ -53,95 +69,17 @@ const PeoplePage = () => {
                                 maxHeight: openAccordion === 1 ? '500px' : '0px', paddingTop: openAccordion === 1 ? '24px' : '0px',
                                 paddingBottom: openAccordion === 1 ? '10px' : '0px', 
                             }}>
-                                <div className="city-slider">
-                                    <Swiper
-                                        spaceBetween={8}
-                                        slidesPerView={'auto'}
-                                        
-                                        >
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                                                            <SwiperSlide>
-                                            <div className="city-slider__item">
-                                                <div className="city-slider__card" onClick={handleOpenPopup}>
-                                                    <p className="city-slider__image">
-                                                        <img src={DefaultImg} alt="" />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    </Swiper>
-                                </div>
+                                <SwiperSlide>
+  {policePhotos.map(photo => (
+    <div className="city-slider__item" key={photo.id}>
+      <div className="city-slider__card" onClick={handleOpenPopup}>
+        <p className="city-slider__image">
+          <img src={photo.url} alt={photo.title} />
+        </p>
+      </div>
+    </div>
+  ))}
+</SwiperSlide>
                             </div>
                         </li>
                         <li className="city-list__item block-style">
