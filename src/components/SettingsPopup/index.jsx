@@ -32,7 +32,7 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
         return () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []);
+    }, [setActivePopup]);
 
     const handleClickPopupClose = () => {
         setActivePopup(false);

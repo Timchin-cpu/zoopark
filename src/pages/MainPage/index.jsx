@@ -19,7 +19,7 @@ const MainPage = () => {
 
     const [activeShopPopup, setActiveShopPopup] = useState(false);
 
-    const swiperRef = useRef(null);
+    // const swiperRef = useRef(null);
 
     // slideChange
     // const handleSlideChange = () => {

@@ -27,7 +27,7 @@ const ShopPopup = (props) => {
         return () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
-      }, []);
+      }, [setActivePopup]);
 
     return (
         <div ref={popupRef} className={`shop-popup ${props.active ? 'show' : ''}`}>
