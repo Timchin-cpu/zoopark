@@ -1,17 +1,17 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import routeMain from "./routes";
 import MainSection from "components/MainSection";
 import MobileNav from "components/MobileNav";
 
-import DefaultImg from 'assets/img/default-card.png';
+// import DefaultImg from 'assets/img/default-card.png';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 // Import Swiper modules
-import { EffectCoverflow } from 'swiper/modules';
+// import { EffectCoverflow } from 'swiper/modules';
 import ShopPopup from "components/ShopPopup";
 import MainCarousel from "components/MainCarousel";
 
@@ -22,17 +22,17 @@ const MainPage = () => {
     const swiperRef = useRef(null);
 
     // slideChange
-    const handleSlideChange = () => {
-        if (swiperRef.current) {
-          console.log("Current active index:", swiperRef.current.swiper.activeIndex);
-        }
-      };
+    // const handleSlideChange = () => {
+    //     if (swiperRef.current) {
+    //       console.log("Current active index:", swiperRef.current.swiper.activeIndex);
+    //     }
+    //   };
 
-      const goToNextSlide = () => {
-        if (swiperRef.current) {
-          swiperRef.current.slideNext();
-        }
-      };
+    //   const goToNextSlide = () => {
+    //     if (swiperRef.current) {
+    //       swiperRef.current.slideNext();
+    //     }
+    //   };
 
     const handleOpenPopup = () => {
         setTimeout(function() {

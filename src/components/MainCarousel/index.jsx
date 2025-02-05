@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import ReactFlipCard from 'reactjs-flip-card'
 
-import Avatar from 'assets/img/avatar.png';
-import CardsIcon from 'assets/img/cards-icon.png';
-import TaskIcon from 'assets/img/task-icon.png';
-import BonusIcon from 'assets/img/bonus-icon.png';
-import TimeIcon from 'assets/img/time-icon.svg';
-import MoneyIcon from 'assets/img/money-icon.svg';
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { routeTasks } from "pages/TasksPage";
-import { routeSets } from "pages/SetsPage";
-import { routeBonus } from "pages/BonusPage";
-import SettingsPopup from "components/SettingsPopup";
+// import Avatar from 'assets/img/avatar.png';
+// import CardsIcon from 'assets/img/cards-icon.png';
+// import TaskIcon from 'assets/img/task-icon.png';
+// import BonusIcon from 'assets/img/bonus-icon.png';
+// import TimeIcon from 'assets/img/time-icon.svg';
+// import MoneyIcon from 'assets/img/money-icon.svg';
+// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+// import { routeTasks } from "pages/TasksPage";
+// import { routeSets } from "pages/SetsPage";
+// import { routeBonus } from "pages/BonusPage";
+// import SettingsPopup from "components/SettingsPopup";
 
 
 import DefaultImg from 'assets/img/default-card.png';
@@ -32,9 +32,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
 
-  const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
-  };
+  // const prevSlide = () => {
+  //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
+  // };
 
   const getStyles = (index) => {
     const currentIndex = activeSlide % data.length;

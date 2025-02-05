@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState} from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
 
