@@ -12,16 +12,16 @@ import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
     const [policePhotos, setPolicePhotos] = useState([]);
-    const [firefighterPhotos, setFirefighterPhotos] = useState([]);
+    // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
     const [activePopup, setActivePopup] = useState(false);
     useEffect(() => {
         const fetchPhotos = async () => {
           try {
             const policeData = await peopleService.getPolicePhotos();
-            const firefighterData = await peopleService.getFirefighterPhotos();
+            // const firefighterData = await peopleService.getFirefighterPhotos();
             
             setPolicePhotos(policeData);
-            setFirefighterPhotos(firefighterData);
+            // setFirefighterPhotos(firefighterData);
           } catch (error) {
             console.error(error);
           }
