@@ -37,12 +37,15 @@ const PeoplePage = () => {
     setOpenAccordion(openAccordion === id ? null : id);
   };
 
-  const handleOpenPopup = (photo) => {
+  const handleOpenPopup = (id) => {
+    document.documentElement.classList.add("fixed");
+    setActivePopup(true);
+  };
+  const handleOpenPopup1 = (photo) => {
     document.documentElement.classList.add("fixed");
     setSelectedPhoto(photo);
     setActivePopup(true);
   };
-
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopup(false);
@@ -96,7 +99,7 @@ const PeoplePage = () => {
                         <div className="city-slider__item" key={photo.id}>
                           <div
                             className="city-slider__card"
-                            onClick={handleOpenPopup(photo)}
+                            onClick={handleOpenPopup1(photo)}
                           >
                             <p className="city-slider__image">
                               <img
