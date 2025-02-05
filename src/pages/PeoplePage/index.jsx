@@ -13,6 +13,8 @@ import ShopPopup from "components/ShopPopup";
 const PeoplePage = () => {
   const [policePhotos, setPolicePhotos] = useState([]);
   // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+
   const [activePopup, setActivePopup] = useState(false);
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -35,8 +37,9 @@ const PeoplePage = () => {
     setOpenAccordion(openAccordion === id ? null : id);
   };
 
-  const handleOpenPopup = (id) => {
+  const handleOpenPopup = (photo) => {
     document.documentElement.classList.add("fixed");
+    setSelectedPhoto(photo);
     setActivePopup(true);
   };
 
@@ -93,7 +96,7 @@ const PeoplePage = () => {
                         <div className="city-slider__item" key={photo.id}>
                           <div
                             className="city-slider__card"
-                            onClick={handleOpenPopup}
+                            onClick={handleOpenPopup(photo)}
                           >
                             <p className="city-slider__image">
                               <img
@@ -277,6 +280,7 @@ const PeoplePage = () => {
         setActivePopup={setActivePopup}
         main={true}
         handleClosePopup={handleClosePopup}
+        selectedPhoto={selectedPhoto} // Добавим проп
       />
       <MobileNav />
     </section>
