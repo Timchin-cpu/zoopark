@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
 import { peopleService } from 'services/api';
