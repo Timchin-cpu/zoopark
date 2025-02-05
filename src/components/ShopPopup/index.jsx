@@ -47,7 +47,14 @@ const ShopPopup = (props) => {
         </button>
         <div className="shop-popup__inner">
           <div className="shop-popup__image">
-            <img src={`http://localhost:3000${photo.image}`} alt="" />
+            <img
+              src={
+                props.selectedPhoto
+                  ? `http://localhost:3000${props.selectedPhoto.image}`
+                  : DefaultImg
+              }
+              alt={props.selectedPhoto?.title || ""}
+            />{" "}
           </div>
           <div className="shop-popup__content">
             <h3 className="shop-popup__title">Название карты</h3>
