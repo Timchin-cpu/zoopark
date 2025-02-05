@@ -96,7 +96,10 @@ const PeoplePage = () => {
                             onClick={handleOpenPopup}
                           >
                             <p className="city-slider__image">
-                              <img src={photo.url} alt={photo.title} />
+                              <img
+                                src={`http://localhost:3000${photo.image}`}
+                                alt={photo.title}
+                              />
                             </p>
                           </div>
                         </div>
