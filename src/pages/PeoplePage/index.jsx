@@ -41,11 +41,11 @@ const PeoplePage = () => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
   };
-  const handleOpenPopup1 = (photo) => {
-    document.documentElement.classList.add("fixed");
-    setSelectedPhoto(photo);
-    setActivePopup(true);
-  };
+  // const handleOpenPopup1 = (photo) => {
+  //   document.documentElement.classList.add("fixed");
+  //   setSelectedPhoto(photo);
+  //   setActivePopup(true);
+  // };
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopup(false);
@@ -99,7 +99,7 @@ const PeoplePage = () => {
                         <div className="city-slider__item" key={photo.id}>
                           <div
                             className="city-slider__card"
-                            onClick={handleOpenPopup1(photo)}
+                            onClick={() => handleOpenPopup(photo)}
                           >
                             <p className="city-slider__image">
                               <img
@@ -283,7 +283,7 @@ const PeoplePage = () => {
         setActivePopup={setActivePopup}
         main={true}
         handleClosePopup={handleClosePopup}
-        selectedPhoto={selectedPhoto} // Добавим проп
+        selectedPhoto={selectedPhoto}
       />
       <MobileNav />
     </section>
