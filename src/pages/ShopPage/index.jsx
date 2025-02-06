@@ -26,6 +26,8 @@ const ShopPage = () => {
   //   { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
   //   { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
   // ]);
+  const [items, setItems] = useState([]); // Добавить состояние для оригинального массива
+
   const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const ShopPage = () => {
       try {
         const policeData = await peopleService.getPolicePhotos();
         // const firefighterData = await peopleService.getFirefighterPhotos();
+        setItems(policeData); // Сохраняем оригинальные данные
 
         setFilteredItems(policeData);
         console.log(policeData);
@@ -51,7 +54,7 @@ const ShopPage = () => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
 
-    const filtered = filteredItems.filter((item) =>
+    const filtered = items.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredItems(filtered);
