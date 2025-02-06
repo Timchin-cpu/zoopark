@@ -16,6 +16,7 @@ const ShopPage = () => {
   const [activePopupCarousel, setActivePopupCarousel] = useState(false);
   const [activePopupFilter, setActivePopupFilter] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  console.log(selectedId);
 
   const [searchTerm, setSearchTerm] = useState("");
   // const [items, setItems] = useState([
@@ -58,6 +59,7 @@ const ShopPage = () => {
   const handleOpenPopup = (id) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
+    console.log(id);
     setSelectedId(id);
   };
 
@@ -266,7 +268,7 @@ const ShopPage = () => {
           active={activePopup}
           setActivePopup={setActivePopup}
           handleClosePopup={handleClosePopup}
-          selectedPhoto={selectedId}
+          // selectedPhoto={selectedId}
         />
       )}
       {activePopupCarousel && (

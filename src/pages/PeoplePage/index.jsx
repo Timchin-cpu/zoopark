@@ -44,6 +44,7 @@ const PeoplePage = () => {
 
   const handleOpenPopup = (photo) => {
     document.documentElement.classList.add("fixed");
+    console.log(photo);
     setSelectedPhoto(photo);
 
     setActivePopup(true);
