@@ -254,16 +254,20 @@ const ShopPage = () => {
           </div>
         </div>
       </div>
-      <ShopPopup
-        active={activePopup}
-        setActivePopup={setActivePopup}
-        handleClosePopup={handleClosePopup}
-      />
-      <ShopPopupCarousel
-        active={activePopupCarousel}
-        setActivePopup={setActivePopupCarousel}
-        handleClosePopup={handleClosePopupCarousel}
-      />
+      {activePopup && (
+        <ShopPopup
+          active={activePopup}
+          setActivePopup={setActivePopup}
+          handleClosePopup={handleClosePopup}
+        />
+      )}
+      {activePopupCarousel && (
+        <ShopPopupCarousel
+          active={activePopupCarousel}
+          setActivePopup={setActivePopupCarousel}
+          handleClosePopup={handleClosePopupCarousel}
+        />
+      )}
       <MobileNav />
     </section>
   );
