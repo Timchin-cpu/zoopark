@@ -4,6 +4,7 @@ import "./styles.scss";
 
 import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
+import MainCarousel from "components/MainCarousel";
 
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
@@ -47,14 +48,18 @@ const ShopPopupCarousel = (props) => {
         </button>
         <div className="shop-popup__inner">
           <div className="shop-popup__image">
-            <img
+            <MainCarousel
+              getActiveSlide={0}
+              handleOpenPopup={handleOpenPopup}
+            />
+            {/* <img
               src={
                 props.selectedPhoto
                   ? `http://localhost:3000${props.selectedPhoto.image}`
                   : DefaultImg
               }
               alt={props.selectedPhoto?.title || ""}
-            />{" "}
+            />{" "} */}
           </div>
           <div className="shop-popup__content">
             <h3 className="shop-popup__title">Название карты</h3>
