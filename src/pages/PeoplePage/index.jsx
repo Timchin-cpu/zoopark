@@ -23,6 +23,7 @@ const PeoplePage = () => {
         // const firefighterData = await peopleService.getFirefighterPhotos();
 
         setPolicePhotos(policeData);
+        console.log(policeData);
         // setFirefighterPhotos(firefighterData);
       } catch (error) {
         console.error(error);
