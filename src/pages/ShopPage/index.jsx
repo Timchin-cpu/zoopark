@@ -5,6 +5,7 @@ import MainSection from "components/MainSection";
 
 import DefaultImg from "assets/img/default-img.png";
 import CoinIcon from "assets/img/coin-icon.svg";
+import { peopleService } from "services/api";
 
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
@@ -22,7 +23,7 @@ const ShopPage = () => {
   //   { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
   //   { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
   // ]);
-  const [items, setitems] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -30,7 +31,7 @@ const ShopPage = () => {
         const policeData = await peopleService.getPolicePhotos();
         // const firefighterData = await peopleService.getFirefighterPhotos();
 
-        setitems(policeData);
+        setItems(policeData);
         console.log(policeData);
         // setFirefighterPhotos(firefighterData);
       } catch (error) {
