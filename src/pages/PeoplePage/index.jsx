@@ -14,6 +14,10 @@ const PeoplePage = () => {
   const [policePhotos, setPolicePhotos] = useState([]);
   // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  // const [selectedTitle, setSelectedTitle] = useState(null);
+  // const [selectedDesc, setSelectedDesc] = useState(null);
+  // const [selectedPrice, setSelectedPrice] = useState(null);
+  // const [selectedExperience, setSelectedExperience] = useState(null);
 
   const [activePopup, setActivePopup] = useState(false);
   useEffect(() => {
