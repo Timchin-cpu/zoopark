@@ -89,7 +89,7 @@
   }
 }
 .shop-card__Img {
-  width: 85%;
-  height: 332px;
+  width: 85% !important;
+  height: 332px !important;
   @extend %cover-image;
 }
