@@ -51,7 +51,43 @@ const ShopPage = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopupCarousel(false);
   };
+  // В начале компонента добавить состояния для фильтра
+  const [priceFrom, setPriceFrom] = useState("");
+  const [priceTo, setPriceTo] = useState("");
 
+  // Добавить обработчики изменения полей
+  const handlePriceFromChange = (e) => {
+    setPriceFrom(e.target.value);
+  };
+
+  const handlePriceToChange = (e) => {
+    setPriceTo(e.target.value);
+  };
+
+  // Добавить функцию фильтрации
+  const handleFilter = () => {
+    const filtered = items.filter((item) => {
+      const price = item.price;
+      if (priceFrom && priceTo) {
+        return price >= Number(priceFrom) && price <= Number(priceTo);
+      }
+      if (priceFrom) {
+        return price >= Number(priceFrom);
+      }
+      if (priceTo) {
+        return price <= Number(priceTo);
+      }
+      return true;
+    });
+    setFilteredItems(filtered);
+  };
+
+  // Добавить функцию сброса
+  const handleReset = () => {
+    setPriceFrom("");
+    setPriceTo("");
+    setFilteredItems(items);
+  };
   const filterRef = useRef(null);
 
   useEffect(() => {
@@ -163,20 +199,34 @@ const ShopPage = () => {
           <div className="modal-range f-center-jcsb">
             <div className="modal-range__item">
               <div className="modal-form__input">
-                <input type="number" name="range_start" placeholder="От" />
+                <input
+                  type="number"
+                  value={priceFrom}
+                  onChange={handlePriceFromChange}
+                  placeholder="От"
+                />
               </div>
             </div>
             <div className="modal-range__item">
               <div className="modal-form__input">
-                <input type="number" name="range_start" placeholder="До" />
+                <input
+                  type="number"
+                  value={priceTo}
+                  onChange={handlePriceToChange}
+                  placeholder="До"
+                />
               </div>
             </div>
           </div>
           <div className="modal-nav">
-            <button type="button" className="modal-btn">
+            <button type="button" className="modal-btn" onClick={handleFilter}>
               Показать
             </button>
-            <button type="button" className="modal-btn modal-btn_default">
+            <button
+              type="button"
+              className="modal-btn modal-btn_default"
+              onClick={handleReset}
+            >
               Сбросить
             </button>
           </div>
