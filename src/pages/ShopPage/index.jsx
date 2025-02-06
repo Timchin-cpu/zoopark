@@ -195,10 +195,10 @@ const ShopPage = () => {
                       <div className="shop-list__card">
                         <div
                           className="shop-list__image"
-                          onClick={
+                          onClick={() =>
                             item.title.toLowerCase().includes("набор")
-                              ? handleOpenPopupCarousel
-                              : handleOpenPopup
+                              ? handleOpenPopupCarousel()
+                              : handleOpenPopup(item)
                           }
                         >
                           <img
