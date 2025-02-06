@@ -198,7 +198,7 @@ const ShopPage = () => {
                           onClick={
                             item.title.toLowerCase().includes("набор")
                               ? handleOpenPopupCarousel
-                              : handleOpenPopup(item)
+                              : handleOpenPopup
                           }
                         >
                           <img
