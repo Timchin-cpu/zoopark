@@ -15,6 +15,8 @@ const ShopPage = () => {
   const [activePopup, setActivePopup] = useState(false);
   const [activePopupCarousel, setActivePopupCarousel] = useState(false);
   const [activePopupFilter, setActivePopupFilter] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
   const [searchTerm, setSearchTerm] = useState("");
   // const [items, setItems] = useState([
   //   { id: 1, title: "Набор 10 карт", price: 7000 },
@@ -56,6 +58,7 @@ const ShopPage = () => {
   const handleOpenPopup = (id) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
+    setSelectedId(id);
   };
 
   const handleClosePopup = () => {
@@ -193,7 +196,7 @@ const ShopPage = () => {
                           onClick={
                             item.title.toLowerCase().includes("набор")
                               ? handleOpenPopupCarousel
-                              : handleOpenPopup
+                              : handleOpenPopup(item)
                           }
                         >
                           <img
@@ -263,7 +266,7 @@ const ShopPage = () => {
           active={activePopup}
           setActivePopup={setActivePopup}
           handleClosePopup={handleClosePopup}
-          selectedPhoto={filteredItems}
+          selectedPhoto={selectedId}
         />
       )}
       {activePopupCarousel && (
