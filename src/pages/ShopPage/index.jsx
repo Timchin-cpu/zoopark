@@ -8,7 +8,7 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
-import ShopPopupCarousel from "components/ShopPopupCarousel";
+// import ShopPopupCarousel from "components/ShopPopupCarousel";
 
 const ShopPage = () => {
   const [activePopup, setActivePopup] = useState(false);
@@ -24,15 +24,15 @@ const ShopPage = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopupCarousel(false);
   };
-  const handleOpenPopupCarousel = (id) => {
-    document.documentElement.classList.add("fixed");
-    setActivePopup(true);
-  };
+  // const handleOpenPopupCarousel = (id) => {
+  //   document.documentElement.classList.add("fixed");
+  //   setActivePopup(true);
+  // };
 
-  const handleClosePopupCarousel = () => {
-    document.documentElement.classList.remove("fixed");
-    setActivePopupCarousel(false);
-  };
+  // const handleClosePopupCarousel = () => {
+  //   document.documentElement.classList.remove("fixed");
+  //   setActivePopupCarousel(false);
+  // };
 
   const filterRef = useRef(null);
 
@@ -107,7 +107,7 @@ const ShopPage = () => {
                     <div className="shop-list__card">
                       <div
                         className="shop-list__image"
-                        onClick={() => handleOpenPopupCarousel()}
+                        // onClick={() => handleOpenPopupCarousel()}
                       >
                         <img src={DefaultImg} alt="" />
                         {/* <MainCarousel
@@ -229,11 +229,11 @@ const ShopPage = () => {
         setActivePopup={setActivePopup}
         handleClosePopup={handleClosePopup}
       />
-      <ShopPopupCarousel
+      {/* <ShopPopupCarousel
         active={activePopupCarousel}
         setActivePopup={setActivePopupCarousel}
         handleClosePopup={handleClosePopupCarousel}
-      />
+      /> */}
       <MobileNav />
     </section>
   );
