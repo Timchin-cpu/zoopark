@@ -15,13 +15,32 @@ const ShopPage = () => {
   const [activePopupCarousel, setActivePopupCarousel] = useState(false);
   const [activePopupFilter, setActivePopupFilter] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [items, setItems] = useState([
-    { id: 1, title: "Набор 10 карт", price: 7000 },
-    { id: 2, title: "Название карты в 2-3 строки", price: 3000 },
-    { id: 3, title: "Название карты в 2-3 строки", price: 9000 },
-    { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
-    { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
-  ]);
+  // const [items, setItems] = useState([
+  //   { id: 1, title: "Набор 10 карт", price: 7000 },
+  //   { id: 2, title: "Название карты в 2-3 строки", price: 3000 },
+  //   { id: 3, title: "Название карты в 2-3 строки", price: 9000 },
+  //   { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
+  //   { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
+  // ]);
+  const [items, setitems] = useState([]);
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const policeData = await peopleService.getPolicePhotos();
+        // const firefighterData = await peopleService.getFirefighterPhotos();
+
+        setitems(policeData);
+        console.log(policeData);
+        // setFirefighterPhotos(firefighterData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPhotos();
+  }, []);
+
   console.log(setItems);
   const [filteredItems, setFilteredItems] = useState(items);
   const handleSearch = (e) => {
