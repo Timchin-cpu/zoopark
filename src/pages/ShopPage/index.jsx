@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import routeShop from "./routes";
 import MainSection from "components/MainSection";
-import MainCarousel from "components/MainCarousel";
+// import MainCarousel from "components/MainCarousel";
 
 import DefaultImg from "assets/img/default-img.png";
 import CoinIcon from "assets/img/coin-icon.svg";
 
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
+import ShopPopupCarousel from "components/ShopPopupCarousel";
 
 const ShopPage = () => {
   const [activePopup, setActivePopup] = useState(false);
+  const [activePopupCarousel, setActivePopupCarousel] = useState(false);
   const [activePopupFilter, setActivePopupFilter] = useState(false);
 
   const handleOpenPopup = (id) => {
@@ -20,7 +22,16 @@ const ShopPage = () => {
 
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
-    setActivePopup(false);
+    setActivePopupCarousel(false);
+  };
+  const handleOpenPopupCarousel = (id) => {
+    document.documentElement.classList.add("fixed");
+    setActivePopup(true);
+  };
+
+  const handleClosePopupCarousel = () => {
+    document.documentElement.classList.remove("fixed");
+    setActivePopupCarousel(false);
   };
 
   const filterRef = useRef(null);
@@ -96,13 +107,13 @@ const ShopPage = () => {
                     <div className="shop-list__card">
                       <div
                         className="shop-list__image"
-                        onClick={() => handleOpenPopup()}
+                        onClick={() => handleOpenPopupCarousel()}
                       >
-                        {/* <img src={DefaultImg} alt="" /> */}
-                        <MainCarousel
+                        <img src={DefaultImg} alt="" />
+                        {/* <MainCarousel
                           getActiveSlide={0}
                           handleOpenPopup={handleOpenPopup}
-                        />
+                        /> */}
                       </div>
                       <h3 className="shop-list__title">Набор 10 карт</h3>
                       <div className="shop-list__price f-center">
@@ -217,6 +228,11 @@ const ShopPage = () => {
         active={activePopup}
         setActivePopup={setActivePopup}
         handleClosePopup={handleClosePopup}
+      />
+      <ShopPopupCarousel
+        active={activePopupCarousel}
+        setActivePopup={setActivePopupCarousel}
+        handleClosePopup={handleClosePopupCarousel}
       />
       <MobileNav />
     </section>
