@@ -23,7 +23,7 @@ const ShopPage = () => {
   //   { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
   //   { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
   // ]);
-  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -31,7 +31,7 @@ const ShopPage = () => {
         const policeData = await peopleService.getPolicePhotos();
         // const firefighterData = await peopleService.getFirefighterPhotos();
 
-        setItems(policeData);
+        setFilteredItems(policeData);
         console.log(policeData);
         // setFirefighterPhotos(firefighterData);
       } catch (error) {
@@ -43,7 +43,7 @@ const ShopPage = () => {
   }, []);
 
   console.log(setItems);
-  const [filteredItems, setFilteredItems] = useState(items);
+  // const [filteredItems, setFilteredItems] = useState(items);
   const handleSearch = (e) => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
