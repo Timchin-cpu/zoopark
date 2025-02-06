@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import routeShop from "./routes";
 import MainSection from "components/MainSection";
+import MainCarousel from "components/MainCarousel";
 
 import DefaultImg from "assets/img/default-img.png";
 import CoinIcon from "assets/img/coin-icon.svg";
@@ -97,11 +98,13 @@ const ShopPage = () => {
                         className="shop-list__image"
                         onClick={() => handleOpenPopup()}
                       >
-                        <img src={DefaultImg} alt="" />
+                        {/* <img src={DefaultImg} alt="" /> */}
+                        <MainCarousel
+                          getActiveSlide={0}
+                          handleOpenPopup={handleOpenPopup}
+                        />
                       </div>
-                      <h3 className="shop-list__title">
-                        Название карты в 2-3 строки
-                      </h3>
+                      <h3 className="shop-list__title">Набор 10 карт</h3>
                       <div className="shop-list__price f-center">
                         <img src={CoinIcon} alt="" />
                         7000
