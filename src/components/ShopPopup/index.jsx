@@ -12,7 +12,7 @@ const ShopPopup = (props) => {
   const popupRef = useRef(null);
 
   const { setActivePopup } = props;
-  console.log(setActivePopup);
+  console.log(props);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
