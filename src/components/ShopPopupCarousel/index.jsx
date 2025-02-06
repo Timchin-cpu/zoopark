@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import "./styles.scss";
 
-import DefaultImg from "assets/img/default-img.png";
+// import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
 import MainCarousel from "components/MainCarousel";
 
@@ -11,9 +11,18 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 const ShopPopupCarousel = (props) => {
   const popupRef = useRef(null);
+  //   const [activePopup, setActivePopup] = useState(false);
 
   const { setActivePopup } = props;
+  const handleOpenPopup = (id) => {
+    document.documentElement.classList.add("fixed");
+    setActivePopup(true);
+  };
 
+  //   const handleClosePopup = () => {
+  //     document.documentElement.classList.remove("fixed");
+  //     setActivePopup(false);
+  //   };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -49,7 +58,7 @@ const ShopPopupCarousel = (props) => {
         <div className="shop-popup__inner">
           <div className="shop-popup__image">
             <MainCarousel
-              getActiveSlide={0}
+              getActiveSlide={3}
               handleOpenPopup={handleOpenPopup}
             />
             {/* <img
