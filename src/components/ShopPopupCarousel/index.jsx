@@ -4,7 +4,7 @@ import "./styles.scss";
 
 // import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
-import MainCarousel from "components/MainCarousel";
+import MainCarouselSet from "components/MainCarouselSet";
 
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
@@ -57,8 +57,8 @@ const ShopPopupCarousel = (props) => {
         </button>
         <div className="shop-popup__inner">
           <div className="shop-popup__image">
-            <MainCarousel
-              getActiveSlide={3}
+            <MainCarouselSet
+              getActiveSlide={5}
               handleOpenPopup={handleOpenPopup}
             />
             {/* <img
