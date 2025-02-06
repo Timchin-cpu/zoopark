@@ -93,3 +93,12 @@
     }
   }
 }
+.shop-popup {
+  &__wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
