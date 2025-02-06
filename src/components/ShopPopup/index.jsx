@@ -57,9 +57,11 @@ const ShopPopup = (props) => {
             />{" "}
           </div>
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">{props.selectedPhoto.title}</h3>
+            <h3 className="shop-popup__title">
+              {props.selectedPhoto ? props.selectedPhoto.title : ""}
+            </h3>
             <p className="shop-popup__text">
-              {props.selectedPhoto.description}
+              {props.selectedPhoto ? props.selectedPhoto.description : ""}
             </p>
             <div className="shop-popup__earn">
               <div className="main-params__card f-center-center">
@@ -74,11 +76,11 @@ const ShopPopup = (props) => {
             <ul className="friends-params f-center-center">
               <li className="friends-params__item f-center">
                 <img src={StarIcon} alt="" />
-                {props.selectedPhoto.experience}
+                {props.selectedPhoto ? props.selectedPhoto.experience : ""}
               </li>
               <li className="friends-params__item f-center">
                 <img src={CoinIcon} alt="" />
-                {props.selectedPhoto.price}
+                {props.selectedPhoto ? props.selectedPhoto.price : ""}
               </li>
             </ul>
           </div>
