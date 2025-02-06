@@ -1,91 +1,95 @@
-
 // shop
 
 .shop {
-    &-block {
-        margin-top: 32px;
-        &__title {
-            padding: 0px 24px;
-        }
-        &__nav {
-            margin-top: 19px;
-            padding: 0px 8px;
-            &-btn {
-                margin-left: 24px;
-                flex-shrink: 0;
-                margin-right: 16px;
-                svg {
-                    display: block;
-                }
-            }
-        }
-        &__search {
-            width: 100%;
-            position: relative;
-            &-icon {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 14px;
-                z-index: 1;
-                svg {
-                    display: block;
-                }
-            }
-            input {
-                width: 100%;
-                border-radius: 12px;
-                background: #F5F7FA;
-                backdrop-filter: blur(16px);
-                display: block;
-                padding: 18px 10px;
-                padding-left: 40px;
-            }
-        }
+  &-block {
+    margin-top: 32px;
+    &__title {
+      padding: 0px 24px;
     }
-    &-category {
-        margin-top: 16px;
+    &__nav {
+      margin-top: 19px;
+      padding: 0px 8px;
+      &-btn {
+        margin-left: 24px;
+        flex-shrink: 0;
+        margin-right: 16px;
+        svg {
+          display: block;
+        }
+      }
     }
-    &-list {
-        margin-top: 24px;
-        flex-wrap: wrap;
-        row-gap: 34px;
-        &__item {
-            width: 48%;
+    &__search {
+      width: 100%;
+      position: relative;
+      &-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 14px;
+        z-index: 1;
+        svg {
+          display: block;
         }
-        &__card {
-            width: 100%;
-        }
-        &__image {
-            width: 100%;
-            height: 224px;
-            overflow: hidden;
-            border-radius: 4px;
-            box-shadow: 0px 56px 32px -8px rgba(170, 178, 189, 0.16);
-            img {
-                @extend %cover-image;
-            }
-        }
-        &__title {
-            margin-top: 16px;
-            font-size: 17px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-        }
-        &__price {
-            margin-top: 8px;
-            font-size: 17px;
-            font-style: normal;
-            color: #656D77;
-            font-weight: 500;
-            line-height: normal;
-            img {
-                display: block;
-                flex-shrink: 0;
-                margin-right: 7px;
-                width: 24px;
-            }
-        }
+      }
+      input {
+        width: 100%;
+        border-radius: 12px;
+        background: #f5f7fa;
+        backdrop-filter: blur(16px);
+        display: block;
+        padding: 18px 10px;
+        padding-left: 40px;
+      }
     }
+  }
+  &-category {
+    margin-top: 16px;
+  }
+  &-list {
+    margin-top: 24px;
+    flex-wrap: wrap;
+    row-gap: 34px;
+    &__item {
+      width: 48%;
+    }
+    &__card {
+      width: 100%;
+    }
+    &__image {
+      width: 100%;
+      height: 224px;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0px 56px 32px -8px rgba(170, 178, 189, 0.16);
+      img {
+        @extend %cover-image;
+      }
+    }
+    &__title {
+      margin-top: 16px;
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    &__price {
+      margin-top: 8px;
+      font-size: 17px;
+      font-style: normal;
+      color: #656d77;
+      font-weight: 500;
+      line-height: normal;
+      img {
+        display: block;
+        flex-shrink: 0;
+        margin-right: 7px;
+        width: 24px;
+      }
+    }
+  }
+}
+.shop-card__Img {
+  width: 85%;
+  height: 332px;
+  @extend %cover-image;
 }
