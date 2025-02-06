@@ -56,12 +56,12 @@ const ShopPopupCarousel = (props) => {
           </svg>
         </button>
         <div className="shop-popup__inner">
-          <div className="shop-popup__image">
-            <MainCarouselSet
-              getActiveSlide={5}
-              handleOpenPopup={handleOpenPopup}
-            />
-            {/* <img
+          {/* <div className="shop-popup__image"> */}
+          <MainCarouselSet
+            getActiveSlide={5}
+            handleOpenPopup={handleOpenPopup}
+          />
+          {/* <img
               src={
                 props.selectedPhoto
                   ? `http://localhost:3000${props.selectedPhoto.image}`
@@ -69,7 +69,7 @@ const ShopPopupCarousel = (props) => {
               }
               alt={props.selectedPhoto?.title || ""}
             />{" "} */}
-          </div>
+          {/* </div> */}
           <div className="shop-popup__content">
             <h3 className="shop-popup__title">Название карты</h3>
             <p className="shop-popup__text">
