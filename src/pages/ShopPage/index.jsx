@@ -80,6 +80,7 @@ const ShopPage = () => {
       return true;
     });
     setFilteredItems(filtered);
+    setActivePopupFilter(false);
   };
 
   // Добавить функцию сброса
@@ -87,6 +88,7 @@ const ShopPage = () => {
     setPriceFrom("");
     setPriceTo("");
     setFilteredItems(items);
+    setActivePopupFilter(false);
   };
   const filterRef = useRef(null);
 
