@@ -22,6 +22,7 @@ const ShopPage = () => {
     { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
     { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
   ]);
+  console.log(setItems);
   const [filteredItems, setFilteredItems] = useState(items);
   const handleSearch = (e) => {
     const searchValue = e.target.value;
@@ -131,7 +132,11 @@ const ShopPage = () => {
                       <div className="shop-list__card">
                         <div
                           className="shop-list__image"
-                          onClick={handleOpenPopup}
+                          onClick={
+                            item.title.toLowerCase().includes("набор")
+                              ? handleOpenPopupCarousel
+                              : handleOpenPopup
+                          }
                         >
                           <img src={DefaultImg} alt="" />
                         </div>
