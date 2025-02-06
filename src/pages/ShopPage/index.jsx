@@ -42,13 +42,13 @@ const ShopPage = () => {
     fetchPhotos();
   }, []);
 
-  console.log(setItems);
+  // console.log(setItems);
   // const [filteredItems, setFilteredItems] = useState(items);
   const handleSearch = (e) => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
 
-    const filtered = items.filter((item) =>
+    const filtered = filteredItems.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredItems(filtered);
@@ -86,7 +86,7 @@ const ShopPage = () => {
 
   // Добавить функцию фильтрации
   const handleFilter = () => {
-    const filtered = items.filter((item) => {
+    const filtered = filteredItems.filter((item) => {
       const price = item.price;
       if (priceFrom && priceTo) {
         return price >= Number(priceFrom) && price <= Number(priceTo);
@@ -107,7 +107,7 @@ const ShopPage = () => {
   const handleReset = () => {
     setPriceFrom("");
     setPriceTo("");
-    setFilteredItems(items);
+    setFilteredItems(filteredItems);
     setActivePopupFilter(false);
   };
   const filterRef = useRef(null);
