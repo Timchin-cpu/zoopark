@@ -34,20 +34,24 @@ const ShopPage = () => {
     const fetchPhotos = async () => {
       try {
         const policeData = await peopleService.getPolicePhotos();
-        // const firefighterData = await peopleService.getFirefighterPhotos();
-        setItems(policeData); // Сохраняем оригинальные данные
-
-        setFilteredItems(policeData);
-        console.log(policeData);
-        // setFirefighterPhotos(firefighterData);
+        // Добавляем набор к данным из API
+        const allItems = [
+          ...policeData,
+          {
+            id: "set",
+            title: "набор",
+            price: 456,
+            image: DefaultImg,
+          },
+        ];
+        setItems(allItems);
+        setFilteredItems(allItems);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchPhotos();
   }, []);
-
   // console.log(setItems);
   // const [filteredItems, setFilteredItems] = useState(items);
   const handleSearch = (e) => {
@@ -219,7 +223,7 @@ const ShopPage = () => {
                       </div>
                     </li>
                   ))}{" "}
-                  <li className="shop-list__item">
+                  {/* <li className="shop-list__item">
                     <div className="shop-list__card">
                       <div
                         className="shop-list__image"
@@ -237,7 +241,7 @@ const ShopPage = () => {
                         456
                       </div>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
