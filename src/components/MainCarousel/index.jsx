@@ -17,7 +17,12 @@ import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
-
+const [cardStates, setCardStates] = useState(
+  data.map(() => ({
+    isFlipped: false,
+    selectedPhoto: null,
+  }))
+);
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -96,7 +101,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   };
 
   const handleImageClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
+    setCardStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = {
+        ...newStates[index],
+        isFlipped: !newStates[index].isFlipped,
+        selectedPhoto: photos[Math.floor(Math.random() * photos.length)],
+      };
+      return newStates;
+    });
     handleOpenPopup();
   };
 
@@ -168,12 +181,12 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${selectedId?.image}`}
-                        alt={selectedId?.title || ""}
+                        src={cardStates[i]?.selectedPhoto?.image || DefaultImg}
+                        alt=""
                       />
                     </div>
                   }
-                ></ReactFlipCard>
+                />
               </div>
             </React.Fragment>
           ))}
