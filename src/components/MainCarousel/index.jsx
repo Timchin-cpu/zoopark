@@ -23,6 +23,8 @@ const data = [
   { id: 3, bgColor: "#1597BB", title: "Slide 3" },
 ];
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
+  const [openedCards, setOpenedCards] = useState({});
+
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -60,7 +62,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       }, {});
       setSelectedPhotos(newSelectedPhotos);
     }
-  }, [activeSlide, photos]);
+  }, [photos]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
@@ -103,6 +105,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
+    setOpenedCards({
+      ...openedCards,
+      [index]: selectedPhotos[data[index].id],
+    });
     handleOpenPopup();
   };
 
@@ -175,6 +181,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                     <div className="main-slider__image">
                       <img
                         src={`http://localhost:3000${
+                          openedCards[i]?.image ||
                           selectedPhotos[item.id]?.image
                         }`}
                         alt={selectedPhotos[item.id]?.title || ""}
