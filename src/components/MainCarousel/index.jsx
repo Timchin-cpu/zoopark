@@ -17,17 +17,17 @@ import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
-
+const data = [
+  { id: 1, bgColor: "#F54748", title: "Slide 1" },
+  { id: 2, bgColor: "#7952B3", title: "Slide 2" },
+  { id: 3, bgColor: "#1597BB", title: "Slide 3" },
+];
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
-  const [_selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
 
-  const data = [
-    { id: 1, bgColor: "#F54748", title: "Slide 1" },
-    { id: 2, bgColor: "#7952B3", title: "Slide 2" },
-    { id: 3, bgColor: "#1597BB", title: "Slide 3" },
-  ];
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
