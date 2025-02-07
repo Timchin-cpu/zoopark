@@ -17,24 +17,21 @@ import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
-
+const [cardStates, setCardStates] = useState(
+  data.map(() => ({
+    isFlipped: false,
+    selectedPhoto: null,
+  }))
+);
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
+  const [selectedId, setSelectedId] = useState(null);
+  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
+
   const data = [
     { id: 1, bgColor: "#F54748", title: "Slide 1" },
     { id: 2, bgColor: "#7952B3", title: "Slide 2" },
     { id: 3, bgColor: "#1597BB", title: "Slide 3" },
   ];
-  const [cardStates, setCardStates] = useState(
-    data.map(() => ({
-      isFlipped: false,
-      selectedPhoto: null,
-    }))
-  );
-  const [selectedId, setSelectedId] = useState(null);
-  console.log(selectedId);
-
-  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
-
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -58,7 +55,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   }, []);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
-  setActiveIndex(null);
   useEffect(() => {
     if (photos.length > 0) {
       setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
@@ -185,12 +181,12 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={cardStates[i]?.selectedPhoto?.image || DefaultImg}
-                        alt=""
+                        src={`http://localhost:3000${selectedId?.image}`}
+                        alt={selectedId?.title || ""}
                       />
                     </div>
                   }
-                />
+                ></ReactFlipCard>
               </div>
             </React.Fragment>
           ))}
