@@ -16,7 +16,7 @@ import ReactFlipCard from "reactjs-flip-card";
 import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
-import ProdImg from "assets/img/prod-img.png";
+// import ProdImg from "assets/img/prod-img.png";
 
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [selectedId, setSelectedId] = useState(null);
