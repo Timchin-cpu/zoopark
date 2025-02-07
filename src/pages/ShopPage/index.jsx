@@ -3,7 +3,7 @@ import routeShop from "./routes";
 import MainSection from "components/MainSection";
 // import MainCarousel from "components/MainCarousel";
 
-// import DefaultImg from "assets/img/default-img.png";
+import DefaultImg from "assets/img/default-img.png";
 import CoinIcon from "assets/img/coin-icon.svg";
 import { peopleService } from "services/api";
 
@@ -225,7 +225,7 @@ const ShopPage = () => {
                         onClick={() => handleOpenPopupCarousel()}
                       >
                         <img
-                          src={`http://localhost:3000${item.image}`}
+                          src={DefaultImg}
                           alt=""
                           className="shop-card__Img"
                         />
