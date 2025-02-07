@@ -33,9 +33,12 @@ const MainPage = () => {
   //     }
   //   };
 
-  const handleOpenPopup = () => {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  const handleOpenPopup = (photo) => {
     setTimeout(function () {
       document.documentElement.classList.add("fixed");
+      setSelectedPhoto(photo); // Сохраняем выбранное фото
       setActiveShopPopup(true);
     }, 1000);
   };
@@ -53,7 +56,7 @@ const MainPage = () => {
           <div className="main-game">
             <MainCarousel
               getActiveSlide={3}
-              handleOpenPopup={handleOpenPopup}
+              handleOpenPopup={(photo) => handleOpenPopup(photo)}
             />
           </div>
         </div>
@@ -63,6 +66,7 @@ const MainPage = () => {
         main={true}
         setActivePopup={setActiveShopPopup}
         handleClosePopup={handleClosePopup}
+        selectedPhoto={selectedPhoto} // Передаем фото в ShopPopup
       />
       <MobileNav />
     </section>
