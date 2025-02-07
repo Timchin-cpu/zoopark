@@ -21,6 +21,7 @@ import DefaultImg from "assets/img/default-card.png";
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
+  const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
 
   const data = [
     { id: 1, bgColor: "#F54748", title: "Slide 1" },
@@ -52,7 +53,12 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     if (photos.length > 0) {
-      setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
+      // Генерируем случайное фото для каждой карточки
+      const newSelectedPhotos = data.reduce((acc, item) => {
+        acc[item.id] = photos[Math.floor(Math.random() * photos.length)];
+        return acc;
+      }, {});
+      setSelectedPhotos(newSelectedPhotos);
     }
   }, [activeSlide, photos]);
   const nextSlide = () => {
@@ -168,8 +174,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${selectedId?.image}`}
-                        alt={selectedId?.title || ""}
+                        src={`http://localhost:3000${
+                          selectedPhotos[item.id]?.image
+                        }`}
+                        alt={selectedPhotos[item.id]?.title || ""}
                       />
                     </div>
                   }
