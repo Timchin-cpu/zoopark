@@ -30,7 +30,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       selectedPhoto: null,
     }))
   );
-  // const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  console.log(selectedId);
 
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
 
@@ -42,9 +43,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
         // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
         setPhotos(policeData); // Сохраняем все фото
-        // setSelectedId(
-        //   policeData[Math.floor(Math.random() * policeData.length)]
-        // );
+        setSelectedId(
+          policeData[Math.floor(Math.random() * policeData.length)]
+        );
 
         console.log(policeData);
         // setFirefighterPhotos(firefighterData);
@@ -56,12 +57,13 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     fetchPhotos();
   }, []);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activeIndex] = useState(null);
-  // useEffect(() => {
-  //   if (photos.length > 0) {
-  //     setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
-  //   }
-  // }, [activeSlide, photos]);
+  const [activeIndex, setActiveIndex] = useState(null);
+  setActiveIndex(null);
+  useEffect(() => {
+    if (photos.length > 0) {
+      setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
+    }
+  }, [activeSlide, photos]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
