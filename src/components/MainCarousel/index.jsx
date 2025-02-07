@@ -56,7 +56,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     fetchPhotos();
   }, []);
   const [activeSlide, setActiveSlide] = useState(0);
-  // const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex] = useState(null);
   // useEffect(() => {
   //   if (photos.length > 0) {
   //     setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
