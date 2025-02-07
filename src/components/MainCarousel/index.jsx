@@ -19,7 +19,7 @@ import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
 
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
-  const [selectedId, setSelectedId] = useState(null);
+  const [_selectedId, setSelectedId] = useState(null);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
 
@@ -60,7 +60,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       }, {});
       setSelectedPhotos(newSelectedPhotos);
     }
-  }, [activeSlide, photos]);
+  }, [activeSlide, photos, data]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
