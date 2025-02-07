@@ -17,12 +17,7 @@ import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
-const [cardStates, setCardStates] = useState(
-  data.map(() => ({
-    isFlipped: false,
-    selectedPhoto: null,
-  }))
-);
+
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -101,15 +96,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   };
 
   const handleImageClick = (index) => {
-    setCardStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = {
-        ...newStates[index],
-        isFlipped: !newStates[index].isFlipped,
-        selectedPhoto: photos[Math.floor(Math.random() * photos.length)],
-      };
-      return newStates;
-    });
+    setActiveIndex(index === activeIndex ? null : index);
     handleOpenPopup();
   };
 
