@@ -279,7 +279,6 @@ const ShopPage = () => {
                 {showSets ? "Показать карты" : "Показать наборы"}
               </button>
             </div>
-            // Существующий код поиска...
           </div>
           <h3 className="modal-title">Стоимость карты</h3>
           <div className="modal-range f-center-jcsb">
