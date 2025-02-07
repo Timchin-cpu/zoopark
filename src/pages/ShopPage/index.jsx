@@ -249,6 +249,26 @@ const ShopPage = () => {
         className={`modal shop-filter ${activePopupFilter && "show"}`}
       >
         <div className="modal-wrapper">
+          <div className="modal-filter__type">
+            <button
+              className={`modal-btn ${cardType === "all" ? "active" : ""}`}
+              onClick={() => setCardType("all")}
+            >
+              Все
+            </button>
+            <button
+              className={`modal-btn ${cardType === "set" ? "active" : ""}`}
+              onClick={() => setCardType("set")}
+            >
+              Наборы
+            </button>
+            <button
+              className={`modal-btn ${cardType === "card" ? "active" : ""}`}
+              onClick={() => setCardType("card")}
+            >
+              Карты
+            </button>
+          </div>
           <h3 className="modal-title">Стоимость карты</h3>
           <div className="modal-range f-center-jcsb">
             <div className="modal-range__item">
