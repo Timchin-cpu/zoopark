@@ -60,7 +60,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       }, {});
       setSelectedPhotos(newSelectedPhotos);
     }
-  }, [activeSlide, photos, data]);
+  }, [activeSlide, photos]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
