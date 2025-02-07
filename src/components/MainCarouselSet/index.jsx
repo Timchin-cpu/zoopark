@@ -70,7 +70,29 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
     setActiveIndex(index === activeIndex ? null : index);
     handleOpenPopup();
   };
+  const [photos, setPhotos] = useState([]);
+  const [selectedPhotos, setSelectedPhotos] = useState({});
 
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const policeData = await peopleService.getPolicePhotos();
+        setPhotos(policeData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPhotos();
+  }, []);
+  useEffect(() => {
+    if (photos.length > 0) {
+      const newSelectedPhotos = data.reduce((acc, item) => {
+        acc[item.id] = photos[Math.floor(Math.random() * photos.length)];
+        return acc;
+      }, {});
+      setSelectedPhotos(newSelectedPhotos);
+    }
+  }, [photos]);
   return (
     <div className="main-control">
       <div className="main-control__bg">
@@ -138,7 +160,13 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
                   }
                   backComponent={
                     <div className="main-slider__image">
-                      <img src={ProdImg} alt="" />
+                      <img
+                        src={`http://localhost:3000${
+                          openedCards[i]?.image ||
+                          selectedPhotos[item.id]?.image
+                        }`}
+                        alt={selectedPhotos[item.id]?.title || ""}
+                      />
                     </div>
                   }
                 ></ReactFlipCard>
