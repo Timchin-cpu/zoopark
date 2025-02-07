@@ -12,9 +12,10 @@ import ReactFlipCard from "reactjs-flip-card";
 // import { routeSets } from "pages/SetsPage";
 // import { routeBonus } from "pages/BonusPage";
 // import SettingsPopup from "components/SettingsPopup";
+import { peopleService } from "services/api";
 
 import DefaultImg from "assets/img/default-card.png";
-import ProdImg from "assets/img/prod-img.png";
+// import ProdImg from "assets/img/prod-img.png";
 
 const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
   const data = [
@@ -22,6 +23,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
     { id: 2, bgColor: "#7952B3", title: "Slide 2" },
     { id: 3, bgColor: "#1597BB", title: "Slide 3" },
   ];
+  const [openedCards, setOpenedCards] = useState({});
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
