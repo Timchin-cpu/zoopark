@@ -38,7 +38,7 @@ const MainPage = () => {
   const handleOpenPopup = (photo) => {
     setTimeout(function () {
       document.documentElement.classList.add("fixed");
-      setSelectedPhoto(photo); // Сохраняем выбранное фото
+      setSelectedPhoto(photo);
       setActiveShopPopup(true);
     }, 1000);
   };
@@ -66,7 +66,7 @@ const MainPage = () => {
         main={true}
         setActivePopup={setActiveShopPopup}
         handleClosePopup={handleClosePopup}
-        selectedPhoto={selectedPhoto} // Передаем фото в ShopPopup
+        selectedPhoto={selectedPhoto}
       />
       <MobileNav />
     </section>
