@@ -20,6 +20,7 @@ import DefaultImg from "assets/img/default-card.png";
 
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [selectedId, setSelectedId] = useState(null);
+  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
 
   const data = [
     { id: 1, bgColor: "#F54748", title: "Slide 1" },
@@ -33,6 +34,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         // const firefighterData = await peopleService.getFirefighterPhotos();
 
         // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
+        setPhotos(policeData); // Сохраняем все фото
         setSelectedId(
           policeData[Math.floor(Math.random() * policeData.length)]
         );
@@ -48,7 +50,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   }, []);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
-
+  useEffect(() => {
+    if (photos.length > 0) {
+      setSelectedId(photos[Math.floor(Math.random() * photos.length)]);
+    }
+  }, [activeSlide, photos]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
