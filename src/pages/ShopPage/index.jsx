@@ -239,7 +239,7 @@ const ShopPage = () => {
                         </div>
                       </div>
                     </li>
-                  ))}{" "}
+                  ))}
                   {/* <li className="shop-list__item">
                     <div className="shop-list__card">
                       <div
