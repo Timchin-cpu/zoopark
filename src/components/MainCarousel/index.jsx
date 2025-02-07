@@ -109,7 +109,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
     });
-    handleOpenPopup(openedCards[i] || selectedPhotos[item.id]);
+    handleOpenPopup();
   };
 
   return (
@@ -159,7 +159,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       <div className="main-carousel">
         <div className="slideC">
           {data.map((item, i) => (
-            <React.Fragment key={item.id}>
+            <React.Fragment key={item.i}>
               <div
                 className={`slide ${
                   activeSlide === item.id - 1 ? "active" : ""

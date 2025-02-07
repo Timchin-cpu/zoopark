@@ -33,13 +33,10 @@ const MainPage = () => {
   //     }
   //   };
 
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-  const handleOpenPopup = (photo) => {
+  const handleOpenPopup = () => {
     setTimeout(function () {
       document.documentElement.classList.add("fixed");
       setActiveShopPopup(true);
-      setSelectedPhoto(photo);
     }, 1000);
   };
 
@@ -66,7 +63,6 @@ const MainPage = () => {
         main={true}
         setActivePopup={setActiveShopPopup}
         handleClosePopup={handleClosePopup}
-        selectedPhoto={selectedPhoto}
       />
       <MobileNav />
     </section>
