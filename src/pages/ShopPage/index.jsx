@@ -17,7 +17,7 @@ const ShopPage = () => {
   const [activePopupFilter, setActivePopupFilter] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
-
+  const [cardType, setCardType] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   // const [items, setItems] = useState([
   //   { id: 1, title: "Набор 10 карт", price: 7000 },
@@ -54,9 +54,20 @@ const ShopPage = () => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
 
-    const filtered = items.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    const filtered = items.filter((item) => {
+      const matchesSearch = item.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase());
+
+      if (cardType === "sets") {
+        return matchesSearch && item.title.toLowerCase().includes("набор");
+      } else if (cardType === "cards") {
+        return matchesSearch && !item.title.toLowerCase().includes("набор");
+      }
+
+      return matchesSearch;
+    });
+
     setFilteredItems(filtered);
   };
   const handleOpenPopup = (id) => {
@@ -248,6 +259,29 @@ const ShopPage = () => {
         className={`modal shop-filter ${activePopupFilter && "show"}`}
       >
         <div className="modal-wrapper">
+          <div className="shop-block__nav f-center-jcsb">
+            <div className="shop-block__filter">
+              <button
+                onClick={() => setCardType("all")}
+                className={cardType === "all" ? "active" : ""}
+              >
+                Все
+              </button>
+              <button
+                onClick={() => setCardType("sets")}
+                className={cardType === "sets" ? "active" : ""}
+              >
+                Наборы
+              </button>
+              <button
+                onClick={() => setCardType("cards")}
+                className={cardType === "cards" ? "active" : ""}
+              >
+                Карты
+              </button>
+            </div>
+            {/* существующий код поиска */}
+          </div>
           <h3 className="modal-title">Стоимость карты</h3>
           <div className="modal-range f-center-jcsb">
             <div className="modal-range__item">
