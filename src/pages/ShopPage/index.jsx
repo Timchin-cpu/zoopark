@@ -94,7 +94,8 @@ const ShopPage = () => {
 
   // Добавить функцию фильтрации
   const handleFilter = () => {
-    const filtered = filteredItems.filter((item) => {
+    const filtered = items.filter((item) => {
+      // Используем items вместо filteredItems
       const price = item.price;
       if (priceFrom && priceTo) {
         return price >= Number(priceFrom) && price <= Number(priceTo);
@@ -115,7 +116,7 @@ const ShopPage = () => {
   const handleReset = () => {
     setPriceFrom("");
     setPriceTo("");
-    setFilteredItems(filteredItems);
+    setFilteredItems(items); // Используем оригинальный массив
     setActivePopupFilter(false);
   };
   const filterRef = useRef(null);
