@@ -71,7 +71,9 @@ const ShopPopupCarousel = (props) => {
             />{" "} */}
           {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">Название карты</h3>
+            <h3 className="shop-popup__title">
+              {selectedPhotos[data[activeSlide].id]?.title || "Название карты"}
+            </h3>{" "}
             <p className="shop-popup__text">
               Инвестирование для начинающих как читать торговые графики
             </p>
