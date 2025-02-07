@@ -97,21 +97,25 @@ const ShopPage = () => {
   };
 
   // Добавить функцию фильтрации
+  const [filterType, setFilterType] = useState("all"); // 'all', 'sets', 'cards'
+
+  // Модифицировать функцию фильтрации
   const handleFilter = () => {
     const filtered = items.filter((item) => {
-      // Используем items вместо filteredItems
-      const price = item.price;
-      if (priceFrom && priceTo) {
-        return price >= Number(priceFrom) && price <= Number(priceTo);
-      }
-      if (priceFrom) {
-        return price >= Number(priceFrom);
-      }
-      if (priceTo) {
-        return price <= Number(priceTo);
-      }
-      return true;
+      // Сначала фильтруем по цене
+      const priceMatches =
+        (!priceFrom || item.price >= Number(priceFrom)) &&
+        (!priceTo || item.price <= Number(priceTo));
+
+      // Затем фильтруем по типу
+      const typeMatches =
+        filterType === "all" ||
+        (filterType === "sets" && item.title.toLowerCase().includes("набор")) ||
+        (filterType === "cards" && !item.title.toLowerCase().includes("набор"));
+
+      return priceMatches && typeMatches;
     });
+
     setFilteredItems(filtered);
     setActivePopupFilter(false);
   };
@@ -253,6 +257,31 @@ const ShopPage = () => {
         className={`modal shop-filter ${activePopupFilter && "show"}`}
       >
         <div className="modal-wrapper">
+          <div className="modal-filter__type">
+            <h3 className="modal-title">Тип</h3>
+            <div className="modal-filter__buttons">
+              <button
+                className={`modal-btn ${filterType === "all" ? "active" : ""}`}
+                onClick={() => setFilterType("all")}
+              >
+                Все
+              </button>
+              <button
+                className={`modal-btn ${filterType === "sets" ? "active" : ""}`}
+                onClick={() => setFilterType("sets")}
+              >
+                Наборы
+              </button>
+              <button
+                className={`modal-btn ${
+                  filterType === "cards" ? "active" : ""
+                }`}
+                onClick={() => setFilterType("cards")}
+              >
+                Карты
+              </button>
+            </div>
+          </div>
           <h3 className="modal-title">Стоимость карты</h3>
           <div className="modal-range f-center-jcsb">
             <div className="modal-range__item">
