@@ -32,7 +32,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         const policeData = await peopleService.getPolicePhotos();
         // const firefighterData = await peopleService.getFirefighterPhotos();
 
-        policeData[Math.floor(Math.random() * policeData.length)];
+        // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
+        setSelectedId(
+          policeData[Math.floor(Math.random() * policeData.length)]
+        );
+
         console.log(policeData);
         // setFirefighterPhotos(firefighterData);
       } catch (error) {
