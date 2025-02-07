@@ -217,7 +217,26 @@ const ShopPage = () => {
                         </div>
                       </div>
                     </li>
-                  ))}
+                  ))}{" "}
+                  <li className="shop-list__item">
+                    <div className="shop-list__card">
+                      <div
+                        className="shop-list__image"
+                        onClick={() => handleOpenPopupCarousel()}
+                      >
+                        <img
+                          src={`http://localhost:3000${item.image}`}
+                          alt=""
+                          className="shop-card__Img"
+                        />
+                      </div>
+                      <h3 className="shop-list__title">{набор}</h3>
+                      <div className="shop-list__price f-center">
+                        <img src={CoinIcon} alt="" />
+                        {456}
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
