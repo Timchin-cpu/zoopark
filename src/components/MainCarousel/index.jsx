@@ -109,7 +109,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
     });
-    handleOpenPopup();
+    handleOpenPopup(selectedPhotos[data[index].id]);
   };
 
   return (
