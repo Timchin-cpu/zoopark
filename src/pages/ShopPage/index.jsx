@@ -58,9 +58,18 @@ const ShopPage = () => {
     const searchValue = e.target.value;
     setSearchTerm(searchValue);
 
-    const filtered = items.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    let filtered = items;
+
+    // Фильтрация по типу (наборы/карты)
+    filtered = filterByType(filtered);
+
+    // Фильтрация по поисковому запросу
+    if (searchValue) {
+      filtered = filtered.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+
     setFilteredItems(filtered);
   };
   const handleOpenPopup = (id) => {
@@ -145,7 +154,15 @@ const ShopPage = () => {
     document.documentElement.classList.add("fixed");
     setActivePopupFilter(true);
   };
+  const filterByType = (items) => {
+    return items.filter((item) => {
+      const isSet = item.title.toLowerCase().includes("набор");
+      return isSet ? showSets : !showSets;
+    });
+  };
 
+  // Добавить состояние для переключения между наборами и картами
+  const [showSets, setShowSets] = useState(false);
   return (
     <section className="shop">
       <div className="container">
@@ -253,6 +270,17 @@ const ShopPage = () => {
         className={`modal shop-filter ${activePopupFilter && "show"}`}
       >
         <div className="modal-wrapper">
+          <div className="shop-block__nav f-center-jcsb">
+            <div className="shop-block__filter">
+              <button
+                onClick={() => setShowSets(!showSets)}
+                className={`shop-block__filter-btn ${showSets ? "active" : ""}`}
+              >
+                {showSets ? "Показать карты" : "Показать наборы"}
+              </button>
+            </div>
+            // Существующий код поиска...
+          </div>
           <h3 className="modal-title">Стоимость карты</h3>
           <div className="modal-range f-center-jcsb">
             <div className="modal-range__item">
