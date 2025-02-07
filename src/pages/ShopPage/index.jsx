@@ -230,10 +230,10 @@ const ShopPage = () => {
                           className="shop-card__Img"
                         />
                       </div>
-                      <h3 className="shop-list__title">{набор}</h3>
+                      <h3 className="shop-list__title">набор</h3>
                       <div className="shop-list__price f-center">
                         <img src={CoinIcon} alt="" />
-                        {456}
+                        456
                       </div>
                     </div>
                   </li>
