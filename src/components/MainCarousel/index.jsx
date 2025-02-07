@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactFlipCard from "reactjs-flip-card";
 
 // import Avatar from 'assets/img/avatar.png';
