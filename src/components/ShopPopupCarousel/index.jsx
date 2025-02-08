@@ -11,13 +11,13 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 const ShopPopupCarousel = (props) => {
   const popupRef = useRef(null);
-  //   const [activePopup, setActivePopup] = useState(false);
+  const [nameCard, setNameCard] = useState(false);
 
   const { setActivePopup } = props;
   const handleOpenPopup = (cardData) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
-    console.log(cardData.title);
+    setNameCard(cardData.title);
   };
 
   //   const handleClosePopup = () => {
@@ -72,7 +72,7 @@ const ShopPopupCarousel = (props) => {
             />{" "} */}
           {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">Название карты</h3>{" "}
+            <h3 className="shop-popup__title">{nameCard}</h3>{" "}
             <p className="shop-popup__text">
               Инвестирование для начинающих как читать торговые графики
             </p>
