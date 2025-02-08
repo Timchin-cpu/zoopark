@@ -11,6 +11,7 @@ import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
+  const [showInfo, setShowInfo] = useState(false);
   const [policePhotos, setPolicePhotos] = useState([]);
   // const [firefighterPhotos, setFirefighterPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -72,7 +73,34 @@ const PeoplePage = () => {
                 }`}
                 onClick={() => handleAccordionClick(1)}
               >
-                Полиция
+                Полиция{" "}
+                <div
+                  className="info-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowInfo(!showInfo);
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7.5" stroke="#AAB2BD" />
+                    <text x="8" y="11" textAnchor="middle" fill="#AAB2BD">
+                      ?
+                    </text>
+                  </svg>
+                </div>
+                {showInfo && (
+                  <div className="info-popup">
+                    <div className="info-popup__content">
+                      <p>Информация о полиции</p>
+                      <button
+                        className="info-popup__close"
+                        onClick={() => setShowInfo(false)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <div className="city-list__more f-center">
                   <div className="city-list__count">5 из 12</div>
                   <div className="city-list__arrow">
