@@ -69,7 +69,11 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
 
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    handleOpenPopup();
+    // Передаем данные о карте при открытии попапа
+    handleOpenPopup({
+      title: selectedPhotos[data[index].id]?.title,
+      image: selectedPhotos[data[index].id]?.image,
+    });
   };
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
