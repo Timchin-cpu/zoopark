@@ -14,6 +14,7 @@ const ShopPopupCarousel = (props) => {
   //   const [activePopup, setActivePopup] = useState(false);
 
   const { setActivePopup } = props;
+  console.log(props);
   const handleOpenPopup = (id) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
