@@ -93,7 +93,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     // console.log(selectedPhotos[index].title);
-    console.log(selectedPhotos[data[index].id]);
+    console.log(selectedPhotos[data[index].id].title);
 
     handleOpenPopup();
   };
