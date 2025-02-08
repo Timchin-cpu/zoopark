@@ -12,7 +12,7 @@ import CoinIcon from "assets/img/coin-icon.svg";
 const ShopPopupCarousel = (props) => {
   const popupRef = useRef(null);
   const [nameCard, setNameCard] = useState(false);
-
+  //
   const { setActivePopup } = props;
   const handleOpenPopup = (cardData) => {
     document.documentElement.classList.add("fixed");
