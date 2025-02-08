@@ -12,12 +12,18 @@ import CoinIcon from "assets/img/coin-icon.svg";
 const ShopPopupCarousel = (props) => {
   const popupRef = useRef(null);
   const [nameCard, setNameCard] = useState(false);
+  const [DescrCard, setDescrCard] = useState(false);
+  const [priceCard, setPriceCard] = useState(false);
+  const [expCard, setExpCard] = useState(false);
   //
   const { setActivePopup } = props;
   const handleOpenPopup = (cardData) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
     setNameCard(cardData.title);
+    setDescrCard(cardData.description);
+    setPriceCard(cardData.price);
+    setExpCard(cardData.experience);
   };
 
   //   const handleClosePopup = () => {
@@ -72,10 +78,8 @@ const ShopPopupCarousel = (props) => {
             />{" "} */}
           {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">{nameCard}</h3>{" "}
-            <p className="shop-popup__text">
-              Инвестирование для начинающих как читать торговые графики
-            </p>
+            <h3 className="shop-popup__title">{nameCard ? nameCard : ""}</h3>{" "}
+            <p className="shop-popup__text">{DescrCard ? DescrCard : ""}</p>
             <div className="shop-popup__earn">
               <div className="main-params__card f-center-center">
                 <div className="main-params__icon f-center-center">
@@ -89,11 +93,11 @@ const ShopPopupCarousel = (props) => {
             <ul className="friends-params f-center-center">
               <li className="friends-params__item f-center">
                 <img src={StarIcon} alt="" />
-                500 EXP
+                {expCard ? expCard : ""} EXP
               </li>
               <li className="friends-params__item f-center">
                 <img src={CoinIcon} alt="" />
-                2000
+                {priceCard ? priceCard : ""}
               </li>
             </ul>
           </div>
