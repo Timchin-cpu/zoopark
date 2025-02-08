@@ -14,7 +14,6 @@ const ShopPopupCarousel = (props) => {
   //   const [activePopup, setActivePopup] = useState(false);
 
   const { setActivePopup } = props;
-  console.log(props);
   const handleOpenPopup = (id) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
@@ -72,12 +71,7 @@ const ShopPopupCarousel = (props) => {
             />{" "} */}
           {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">
-              {" "}
-              {props.selectedPhoto
-                ? props.selectedPhoto.title
-                : "Название карты"}
-            </h3>{" "}
+            <h3 className="shop-popup__title">Название карты</h3>{" "}
             <p className="shop-popup__text">
               Инвестирование для начинающих как читать торговые графики
             </p>

@@ -69,8 +69,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
 
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    console.log(data[index].id);
-    handleOpenPopup(selectedPhotos[data[index].id]); // Передаем данные карты
+    handleOpenPopup();
   };
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
