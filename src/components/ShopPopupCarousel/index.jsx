@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import "./styles.scss";
 
@@ -9,11 +9,10 @@ import MainCarouselSet from "components/MainCarouselSet";
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
 
-const ShopPopupCarousel = (selectedCard, ...props) => {
+const ShopPopupCarousel = (props) => {
   const popupRef = useRef(null);
   //   const [activePopup, setActivePopup] = useState(false);
-  const [setSelectedCard] = useState(null);
-  console.log(selectedCard);
+
   const { setActivePopup } = props;
   const handleOpenPopup = (id) => {
     document.documentElement.classList.add("fixed");
@@ -61,7 +60,6 @@ const ShopPopupCarousel = (selectedCard, ...props) => {
           <MainCarouselSet
             getActiveSlide={5}
             handleOpenPopup={handleOpenPopup}
-            onCardSelect={(cardData) => setSelectedCard(cardData)}
           />
           {/* <img
               src={

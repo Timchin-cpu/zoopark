@@ -21,7 +21,7 @@ const data = [
   { id: 2, bgColor: "#7952B3", title: "Slide 2" },
   { id: 3, bgColor: "#1597BB", title: "Slide 3" },
 ];
-const MainCarouselSet = ({ getActiveSlide, handleOpenPopup, onCardSelect }) => {
+const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards] = useState({});
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -68,9 +68,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup, onCardSelect }) => {
   };
 
   const handleImageClick = (index) => {
-    setActiveIndex(index);
-    console.log(data[index].id);
-    onCardSelect(selectedPhotos[data[index].id]); // Передаем выбранную карточку
+    setActiveIndex(index === activeIndex ? null : index);
     handleOpenPopup();
   };
   const [photos, setPhotos] = useState([]);
