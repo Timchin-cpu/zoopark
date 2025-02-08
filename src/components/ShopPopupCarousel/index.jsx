@@ -14,10 +14,10 @@ const ShopPopupCarousel = (props) => {
   //   const [activePopup, setActivePopup] = useState(false);
 
   const { setActivePopup } = props;
-  const handleOpenPopup = (id) => {
+  const handleOpenPopup = (cardData) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
-    console.log(id);
+    console.log(cardData.title);
   };
 
   //   const handleClosePopup = () => {
