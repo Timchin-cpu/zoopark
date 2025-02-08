@@ -67,11 +67,6 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
     }
   };
 
-  const handleImageClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
-    console.log(selectedPhotos[index]);
-    handleOpenPopup();
-  };
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
 
@@ -95,6 +90,11 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
+  const handleImageClick = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+    console.log(selectedPhotos[index]);
+    handleOpenPopup();
+  };
   return (
     <div className="main-control">
       <div className="main-control__bg">
