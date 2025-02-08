@@ -21,7 +21,7 @@ const data = [
   { id: 2, bgColor: "#7952B3", title: "Slide 2" },
   { id: 3, bgColor: "#1597BB", title: "Slide 3" },
 ];
-const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
+const MainCarouselSet = ({ getActiveSlide, handleOpenPopup, onCardSelect }) => {
   const [openedCards] = useState({});
 
   const [activeSlide, setActiveSlide] = useState(0);

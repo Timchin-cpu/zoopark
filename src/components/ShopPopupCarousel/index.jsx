@@ -9,7 +9,7 @@ import MainCarouselSet from "components/MainCarouselSet";
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
 
-const ShopPopupCarousel = (props) => {
+const ShopPopupCarousel = (selectedCard, ...props) => {
   const popupRef = useRef(null);
   //   const [activePopup, setActivePopup] = useState(false);
 
@@ -60,6 +60,7 @@ const ShopPopupCarousel = (props) => {
           <MainCarouselSet
             getActiveSlide={5}
             handleOpenPopup={handleOpenPopup}
+            onCardSelect={(cardData) => setSelectedCard(cardData)}
           />
           {/* <img
               src={
