@@ -56,7 +56,7 @@ const ShopPopup = (props) => {
               }
               alt={props.selectedPhoto?.title || ""}
             /> */}
-            <img
+            {/* <img
               src={
                 // props.selectedPhoto.id === "set" ||
                 // props.selectedPhoto.id === "energy" ||
@@ -66,7 +66,7 @@ const ShopPopup = (props) => {
               }
               alt=""
               className="shop-card__Img"
-            />
+            /> */}
           </div>
           <div className="shop-popup__content">
             <h3 className="shop-popup__title">
