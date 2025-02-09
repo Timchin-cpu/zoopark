@@ -81,7 +81,7 @@ const PeoplePage = () => {
                     setShowInfo(!showInfo);
                   }}
                 >
-                  <img src="src/pages/PeoplePage/icons8-info-48.png" alt="" />
+                  <img src="/icons8-info-48.png" alt="" />
                   {/* <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <circle cx="8" cy="8" r="7.5" stroke="#AAB2BD" />
                     <text x="8" y="11" textAnchor="middle" fill="#AAB2BD">
