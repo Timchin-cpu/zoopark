@@ -4,6 +4,8 @@ import MainSection from "components/MainSection";
 // import MainCarousel from "components/MainCarousel";
 
 import DefaultImg from "assets/img/default-img.png";
+import MoneyImg from "assets/img/money.png";
+import EnergytImg from "assets/img/energy.png";
 import CoinIcon from "assets/img/coin-icon.svg";
 import { peopleService } from "services/api";
 
@@ -42,6 +44,18 @@ const ShopPage = () => {
             title: "набор",
             price: 456,
             image: DefaultImg,
+          },
+          {
+            id: "energy",
+            title: "энергия",
+            price: 456,
+            image: EnergytImg,
+          },
+          {
+            id: "money",
+            title: "монеты",
+            price: 456,
+            image: MoneyImg,
           },
         ];
         setItems(allItems);
