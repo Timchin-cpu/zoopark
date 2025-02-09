@@ -235,7 +235,7 @@ const ShopPage = () => {
                             />
                           ) : (
                             <img
-                              src={`http://localhost:3000${item.image}`}
+                              src={item.image}
                               alt=""
                               className="shop-card__Img"
                             />
