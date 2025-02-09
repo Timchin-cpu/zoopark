@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactFlipCard from "reactjs-flip-card";
 // import styles from 'styles.'
-import styles from "./styles.module.css";
 
 // import Avatar from 'assets/img/avatar.png';
 // import CardsIcon from 'assets/img/cards-icon.png';
@@ -146,7 +145,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
           </defs>
         </svg>
       </div>
-      <div className={styles.mainCarousel}>
+      <div className="main-carousel">
         <div className="main-nav__play" onClick={prevSlide}>
           <svg
             width="24"
