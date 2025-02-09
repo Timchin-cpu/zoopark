@@ -72,7 +72,6 @@ const PeoplePage = () => {
                 className={`city-list__title f-center-jcsb ${
                   openAccordion === 1 ? "active" : ""
                 }`}
-                onClick={() => handleAccordionClick(1)}
               >
                 Полиция{" "}
                 <div
@@ -105,7 +104,10 @@ const PeoplePage = () => {
                 )}
                 <div className="city-list__more f-center">
                   <div className="city-list__count">5 из 12</div>
-                  <div className="city-list__arrow">
+                  <div
+                    className="city-list__arrow"
+                    onClick={() => handleAccordionClick(1)}
+                  >
                     <svg
                       width="15"
                       height="9"
