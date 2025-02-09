@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import "./styles.scss";
 
-// import DefaultImg from "assets/img/default-img.png";
+import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
 
 import StarIcon from "assets/img/star-icon.svg";
