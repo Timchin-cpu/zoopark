@@ -5,6 +5,7 @@ import { peopleService } from "services/api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
+import InfoIcon from "assets/img/icons8-info-48.png";
 
 import DefaultImg from "assets/img/default-img.png";
 import MobileNav from "components/MobileNav";
@@ -81,7 +82,7 @@ const PeoplePage = () => {
                     setShowInfo(!showInfo);
                   }}
                 >
-                  <img src="/icons8-info-48.png" alt="" />
+                  <img src={InfoIcon} alt="" />
                   {/* <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <circle cx="8" cy="8" r="7.5" stroke="#AAB2BD" />
                     <text x="8" y="11" textAnchor="middle" fill="#AAB2BD">
