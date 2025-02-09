@@ -227,11 +227,19 @@ const ShopPage = () => {
                               : handleOpenPopup(item)
                           }
                         >
-                          <img
-                            src={`http://localhost:3000${item.image}`}
-                            alt=""
-                            className="shop-card__Img"
-                          />
+                          {item.image.startsWith("http") ? (
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="shop-card__Img"
+                            />
+                          ) : (
+                            <img
+                              src={`http://localhost:3000${item.image}`}
+                              alt=""
+                              className="shop-card__Img"
+                            />
+                          )}
                         </div>
                         <h3 className="shop-list__title">{item.title}</h3>
                         <div className="shop-list__price f-center">
