@@ -146,7 +146,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
           </defs>
         </svg>
       </div>
-      <div className={styles.main - carousel}>
+      <div className={styles.mainCarousel}>
         <div className="main-nav__play" onClick={prevSlide}>
           <svg
             width="24"
