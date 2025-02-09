@@ -228,7 +228,13 @@ const ShopPage = () => {
                           }
                         >
                           <img
-                            src={`http://localhost:3000${item.image}`}
+                            src={
+                              item.id === "set" ||
+                              item.id === "energy" ||
+                              item.id === "money"
+                                ? item.image
+                                : `http://localhost:3000${item.image}`
+                            }
                             alt=""
                             className="shop-card__Img"
                           />
