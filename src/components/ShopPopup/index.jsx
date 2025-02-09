@@ -50,11 +50,12 @@ const ShopPopup = (props) => {
           <div className="shop-popup__image">
             <img
               src={
-                props.selectedPhoto
-                  ? `http://localhost:3000${props.selectedPhoto.image}`
-                  : DefaultImg
+                item.id === "set" || item.id === "energy" || item.id === "money"
+                  ? item.image
+                  : `http://localhost:3000${item.image}`
               }
-              alt={props.selectedPhoto?.title || ""}
+              alt=""
+              className="shop-card__Img"
             />{" "}
           </div>
           <div className="shop-popup__content">
