@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
+import DefaultImg from "assets/img/default-card.png";
+import Style1CardBack from "assets/img/card1.png";
+import Style2CardBack from "assets/img/card2.png";
 
 import { setTheme } from "../../redux/actions";
 
@@ -12,7 +15,20 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const darkTheme = useSelector((state) => state.theme);
 
   console.log(darkTheme);
-  const cardBackStyles = ["default", "style1", "style2"]; // Добавьте нужные стили
+  const cardBackStyles = [
+    {
+      id: "default",
+      image: DefaultCardBack,
+    },
+    {
+      id: "style1",
+      image: Style1CardBack,
+    },
+    {
+      id: "style2",
+      image: Style2CardBack,
+    },
+  ];
   const [settingsVibration, setSettingsVibration] = useState(false);
   const [settingsNight, setSettingsNight] = useState(darkTheme);
   const [modalStep, setModalStep] = useState(1);
