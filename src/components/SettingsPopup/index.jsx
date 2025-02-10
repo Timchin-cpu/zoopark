@@ -18,7 +18,7 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const cardBackStyles = [
     {
       id: "default",
-      image: DefaultCardBack,
+      image: DefaultImg,
     },
     {
       id: "style1",
