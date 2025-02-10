@@ -12,7 +12,7 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const darkTheme = useSelector((state) => state.theme);
 
   console.log(darkTheme);
-
+  const cardBackStyles = ["default", "style1", "style2"]; // Добавьте нужные стили
   const [settingsVibration, setSettingsVibration] = useState(false);
   const [settingsNight, setSettingsNight] = useState(darkTheme);
   const [modalStep, setModalStep] = useState(1);
