@@ -14,8 +14,15 @@ import ReactFlipCard from "reactjs-flip-card";
 // import { routeBonus } from "pages/BonusPage";
 // import SettingsPopup from "components/SettingsPopup";
 import { peopleService } from "services/api";
+import { useSelector } from "react-redux";
 
-import DefaultImg from "assets/img/default-card.png";
+// Отсутствует определение cardBackStyles
+const cardBackStyles = {
+  default: { image: DefaultImg },
+  style1: { image: Style1CardBack },
+  style2: { image: Style2CardBack },
+};
+// import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
 const data = [
   { id: 1, bgColor: "#F54748", title: "Slide 1" },
