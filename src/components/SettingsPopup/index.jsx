@@ -6,7 +6,7 @@ import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
 import { setTheme, setCardBack } from "../../redux/actions";
 
-import { setTheme } from "../../redux/actions";
+// import { setTheme } from "../../redux/actions";
 
 const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const [cardBackStyle, setCardBackStyle] = useState("default");
