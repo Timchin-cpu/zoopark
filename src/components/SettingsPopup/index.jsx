@@ -12,6 +12,10 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
 
   const dispatch = useDispatch();
 
+  const handleCardBackChange = (style) => {
+    setCardBackStyle(style);
+    dispatch(setCardBack(style));
+  };
   const darkTheme = useSelector((state) => state.theme);
 
   console.log(darkTheme);

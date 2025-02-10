@@ -23,6 +23,8 @@ const data = [
   { id: 3, bgColor: "#1597BB", title: "Slide 3" },
 ];
 const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
+  const cardBackStyle = useSelector((state) => state.cardBack);
+
   const [openedCards] = useState({});
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -181,7 +183,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={DefaultImg} alt="" />
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
                     </div>
                   }
                   backComponent={
