@@ -1,5 +1,6 @@
 const initialState = {
   theme: true,
+  cardBack: "default", // Добавить начальное состояние
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         theme: action.payload,
+      };
+    case "SET_CARD_BACK":
+      return {
+        ...state,
+        cardBack: action.payload,
       };
     default:
       return state;
