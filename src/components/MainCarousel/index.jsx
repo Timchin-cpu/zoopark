@@ -14,8 +14,17 @@ import ReactFlipCard from "reactjs-flip-card";
 // import SettingsPopup from "components/SettingsPopup";
 
 import { peopleService } from "services/api";
-
+import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
+import Style1CardBack from "assets/img/card1.png";
+import Style2CardBack from "assets/img/card2.png";
+// Отсутствует определение cardBackStyles
+const cardBackStyles = {
+  default: { image: DefaultImg },
+  style1: { image: Style1CardBack },
+  style2: { image: Style2CardBack },
+};
+// import DefaultImg from "assets/img/default-card.png";
 // import ProdImg from "assets/img/prod-img.png";
 const data = [
   { id: 1, bgColor: "#F54748", title: "Slide 1" },
@@ -24,6 +33,7 @@ const data = [
 ];
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
+  const cardBackStyle = useSelector((state) => state.cardBack);
 
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
@@ -174,7 +184,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={DefaultImg} alt="" />
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
                     </div>
                   }
                   backComponent={
