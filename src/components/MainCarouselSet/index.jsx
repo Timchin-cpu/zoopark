@@ -33,6 +33,7 @@ const data = [
 ];
 const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
   const cardBackStyle = useSelector((state) => state.cardBack);
+  console.log(cardBackStyle);
 
   const [openedCards] = useState({});
 
