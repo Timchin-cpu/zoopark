@@ -157,7 +157,7 @@ const MainSection = () => {
                 result="shape"
               />
               <feGaussianBlur
-                stdDeviation="100"
+                stdDeviation="70"
                 result="effect1_foregroundBlur_80_14521"
               />
             </filter>
