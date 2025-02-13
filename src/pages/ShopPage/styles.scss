@@ -4,6 +4,7 @@ body::-webkit-scrollbar {
 }
 .modal-filter__buttons div {
   display: flex;
+  justify-content: space-between;
 }
 .shop {
   &-block {

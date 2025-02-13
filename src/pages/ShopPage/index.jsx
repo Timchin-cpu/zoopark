@@ -293,6 +293,7 @@ const ShopPage = () => {
                   }`}
                   style={{
                     marginBottom: "0",
+                    width: 49%
                   }}
                   onClick={() => setFilterType("sets")}
                 >
@@ -301,6 +302,7 @@ const ShopPage = () => {
                 <button
                   style={{
                     marginBottom: "0",
+                    width: 49%
                   }}
                   className={`modal-btn ${
                     filterType === "cards" ? "active" : ""
