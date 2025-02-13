@@ -286,20 +286,24 @@ const ShopPage = () => {
               >
                 Все
               </button>
-              <button
-                className={`modal-btn ${filterType === "sets" ? "active" : ""}`}
-                onClick={() => setFilterType("sets")}
-              >
-                Наборы
-              </button>
-              <button
-                className={`modal-btn ${
-                  filterType === "cards" ? "active" : ""
-                }`}
-                onClick={() => setFilterType("cards")}
-              >
-                Карты
-              </button>
+              <div className="modal-filter__buttons">
+                <button
+                  className={`modal-btn ${
+                    filterType === "sets" ? "active" : ""
+                  }`}
+                  onClick={() => setFilterType("sets")}
+                >
+                  Наборы
+                </button>
+                <button
+                  className={`modal-btn ${
+                    filterType === "cards" ? "active" : ""
+                  }`}
+                  onClick={() => setFilterType("cards")}
+                >
+                  Карты
+                </button>
+              </div>
             </div>
           </div>
           <h3 className="modal-title">Стоимость карты</h3>

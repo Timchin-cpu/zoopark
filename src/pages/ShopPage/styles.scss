@@ -2,6 +2,9 @@
 body::-webkit-scrollbar {
   display: none; /* для Chrome, Safari и Opera */
 }
+.modal-filter__buttons div {
+  display: flex;
+}
 .shop {
   &-block {
     margin-top: 32px;
