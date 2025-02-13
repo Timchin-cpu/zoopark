@@ -287,14 +287,16 @@ const ShopPage = () => {
               }}
             >
               <button
-                className={`modal-btn ${filterType === "all" ? "active" : ""}`}
+                className={`modal-btn-choose ${
+                  filterType === "all" ? "active" : ""
+                }`}
                 onClick={() => setFilterType("all")}
               >
                 Все
               </button>
               <div>
                 <button
-                  className={`modal-btn ${
+                  className={`modal-btn-choose ${
                     filterType === "sets" ? "active" : ""
                   }`}
                   style={{
@@ -310,7 +312,7 @@ const ShopPage = () => {
                     marginBottom: "0",
                     width: "49%",
                   }}
-                  className={`modal-btn ${
+                  className={`modal-btn-choose ${
                     filterType === "cards" ? "active" : ""
                   }`}
                   onClick={() => setFilterType("cards")}
