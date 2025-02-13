@@ -46,6 +46,11 @@
     margin-top: 16px;
   }
   &-list {
+    &::-webkit-scrollbar {
+      display: none; // Hides scrollbar in WebKit browsers
+    }
+    scrollbar-width: none; // Hides scrollbar in Firefox
+    -ms-overflow-style: none; // Hides scrollbar in IE/Edge
     margin-top: 24px;
     flex-wrap: wrap;
     row-gap: 34px;
