@@ -279,20 +279,20 @@ const ShopPage = () => {
         <div className="modal-wrapper">
           <div className="modal-filter__type">
             <h3 className="modal-title">Тип</h3>
-            <div className="modal-filter__buttons">
+            <div
+              className="modal-filter__buttons"
+              style={{
+                marginBottom: "15px",
+                marginTop: "15px",
+              }}
+            >
               <button
                 className={`modal-btn ${filterType === "all" ? "active" : ""}`}
                 onClick={() => setFilterType("all")}
               >
                 Все
               </button>
-              <div
-                className="modal-filter__buttons"
-                style={{
-                  marginBottom: "15px",
-                  marginTop: "15px",
-                }}
-              >
+              <div>
                 <button
                   className={`modal-btn ${
                     filterType === "sets" ? "active" : ""
