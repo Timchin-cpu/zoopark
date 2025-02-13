@@ -10,7 +10,16 @@ body::-webkit-scrollbar {
   background: #f5f7fa; // default gray background
   color: #aab2bd;
   transition: all 0.3s ease;
-
+  border-radius: 12px;
+  /* color: #f5f7fa; */
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 8px;
+  padding: 22px 0;
+  text-align: center;
+  width: 100%;
   &.active {
     background: #71b21d; // green background for active state
     color: #ffffff;
