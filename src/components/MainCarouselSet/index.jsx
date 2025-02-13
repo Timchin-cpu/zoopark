@@ -162,7 +162,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
       <div className="main-carousel">
         <div className="main-nav__play" onClick={prevSlide}>
           <img
-            src={DefaultImg1}
+            src={DefaultImg2}
             alt=""
             style={{
               width: "40px",
@@ -223,7 +223,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
           <img
-            src={DefaultImg2}
+            src={DefaultImg1}
             alt=""
             style={{
               width: "40px",
