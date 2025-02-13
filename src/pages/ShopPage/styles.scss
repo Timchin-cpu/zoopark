@@ -1,13 +1,12 @@
 // shop
-
-.shop {
-  &-inner {
-    &::-webkit-scrollbar {
-      display: none; // Hides scrollbar in WebKit browsers
-    }
-    scrollbar-width: none; // Hides scrollbar in Firefox
-    -ms-overflow-style: none; // Hides scrollbar in IE/Edge
+body {
+  &::-webkit-scrollbar {
+    display: none; // Hides scrollbar in WebKit browsers
   }
+  scrollbar-width: none; // Hides scrollbar in Firefox
+  -ms-overflow-style: none; // Hides scrollbar in IE/Edge
+}
+.shop {
   &-block {
     margin-top: 32px;
     &__title {
