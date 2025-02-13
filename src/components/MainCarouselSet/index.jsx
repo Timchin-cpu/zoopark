@@ -24,7 +24,7 @@ const cardBackStyles = {
   style1: { image: Style1CardBack },
   style2: { image: Style2CardBack },
 };
-// import DefaultImg from "assets/img/default-card.png";
+import DefaultImg1 from "assets/img/4210629.png";
 // import ProdImg from "assets/img/prod-img.png";
 const data = [
   { id: 1, bgColor: "#F54748", title: "Slide 1" },
@@ -159,7 +159,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
       </div>
       <div className="main-carousel">
         <div className="main-nav__play" onClick={prevSlide}>
-          <img src="/free-icon-play-4210629.png" alt="" />
+          <img src={DefaultImg1} alt="" />
           {/* <svg
             width="24"
             height="14"
