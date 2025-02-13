@@ -286,7 +286,13 @@ const ShopPage = () => {
               >
                 Все
               </button>
-              <div className="modal-filter__buttons">
+              <div
+                className="modal-filter__buttons"
+                style={{
+                  marginBottom: "15px",
+                  marginTop: "15px",
+                }}
+              >
                 <button
                   className={`modal-btn ${
                     filterType === "sets" ? "active" : ""
