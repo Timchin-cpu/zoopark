@@ -291,11 +291,17 @@ const ShopPage = () => {
                   className={`modal-btn ${
                     filterType === "sets" ? "active" : ""
                   }`}
+                  style={{
+                    marginBottom: "0",
+                  }}
                   onClick={() => setFilterType("sets")}
                 >
                   Наборы
                 </button>
                 <button
+                  style={{
+                    marginBottom: "0",
+                  }}
                   className={`modal-btn ${
                     filterType === "cards" ? "active" : ""
                   }`}
