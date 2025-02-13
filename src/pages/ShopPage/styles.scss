@@ -1,10 +1,8 @@
 // shop
 body {
-  &::-webkit-scrollbar {
-    display: none; // Hides scrollbar in WebKit browsers
+  ::-webkit-scrollbar-horizontal {
+    height: 0px;
   }
-  scrollbar-width: none; // Hides scrollbar in Firefox
-  -ms-overflow-style: none; // Hides scrollbar in IE/Edge
 }
 .shop {
   &-block {
