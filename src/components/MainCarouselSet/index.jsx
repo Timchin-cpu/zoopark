@@ -19,7 +19,7 @@ import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
 import DefaultImg1 from "assets/img/4210629.png";
-import DefaultImg2 from "assets/img/42106292.png";
+import DefaultImg2 from "assets/img/42106291.png";
 
 // Отсутствует определение cardBackStyles
 const cardBackStyles = {
