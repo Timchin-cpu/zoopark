@@ -11,6 +11,7 @@ const CardManagement = () => {
     const fetchCards = async () => {
       try {
         const response = await cardsService.getAllCards();
+        console.log(response.data);
         setCards(response.data);
       } catch (error) {
         console.error("Error fetching cards:", error);
