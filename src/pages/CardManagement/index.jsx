@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CardManagement.module.css";
 import routeCardManagement from "./route";
 import { cardsService } from "services/api";
