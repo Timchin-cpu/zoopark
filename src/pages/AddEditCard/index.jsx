@@ -37,10 +37,10 @@ const AddEditCard = () => {
     try {
       if (id) {
         // Обновление существующей карточки
-        await axios.put(`/api/cards/${id}`, formData);
+        await axios.put(`/cards/${id}`, formData);
       } else {
         // Создание новой карточки
-        await axios.post("/api/cards", formData);
+        await axios.post("/cards", formData);
       }
       // Редирект на страницу управления картами
       history.push("/cardmanagement");
