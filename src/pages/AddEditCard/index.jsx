@@ -1,6 +1,8 @@
-import React, { useParams } from "react";
+import React from "react";
 import styles from "./AddEditCard.module.css";
 import routeAddEditCard from "./route";
+import { useParams } from "react-router-dom";
+
 const AddEditCard = () => {
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
