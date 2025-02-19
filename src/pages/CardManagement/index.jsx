@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./CardManagement.module.css";
 import routeCardManagement from "./route";
 import { cardsService } from "services/api";
-
+import { NavLink } from "react-router-dom";
+import { routeAddEditCard } from "pages/AddEditCard";
 const CardManagement = () => {
   const [cards, setCards] = useState([]);
 
@@ -30,12 +31,17 @@ const CardManagement = () => {
               />
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <button>Редактировать</button>
+              <NavLink to={routeAddEditCard()}>
+                {" "}
+                <button>Редактировать</button>
+              </NavLink>
             </div>
           ))}
         </div>
         <div className={styles.addCart}>
-          <button>Добавить карту</button>
+          <NavLink to={routeAddEditCard()}>
+            <button>Добавить карту</button>
+          </NavLink>
         </div>
       </div>
     </div>
