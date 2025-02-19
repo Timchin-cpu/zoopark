@@ -10,7 +10,16 @@ const AddEditCard = () => {
     <div className={styles.contents}>
       <div className={styles.mainContent}>
         <div className={styles.content}>
-          <p>Добавление/редактирование карт жители/город и наборов </p>
+          <div>
+            <p>Название</p>
+            <input type="text" name="" id="" />
+            <p>Описание</p>
+            <input type="text" name="" id="" />
+            <p>Вознаграждение</p>
+            <input type="text" name="" id="" />
+            <p>Опыт</p>
+            <input type="text" name="" id="" />
+          </div>
         </div>
       </div>
     </div>
