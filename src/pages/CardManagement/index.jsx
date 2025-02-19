@@ -39,7 +39,7 @@ const CardManagement = () => {
           ))}
         </div>
         <div className={styles.addCart}>
-          <NavLink to={routeAddEditCard()}>
+          <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
             <button>Добавить карту</button>
           </NavLink>
         </div>
