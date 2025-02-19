@@ -4,6 +4,8 @@ import routeAddEditCard from "./route";
 import { useParams } from "react-router-dom";
 
 const AddEditCard = () => {
+  const [cardType, setCardType] = useState("citizen"); // or 'city'
+
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,6 +35,29 @@ const AddEditCard = () => {
             <input type="text" name="" id="" />
             <p>Опыт</p>
             <input type="text" name="" id="" />
+          </div>
+          <div>
+            <p>Тип карты</p>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  value="citizen"
+                  checked={cardType === "citizen"}
+                  onChange={(e) => setCardType(e.target.value)}
+                />{" "}
+                Житель
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="city"
+                  checked={cardType === "city"}
+                  onChange={(e) => setCardType(e.target.value)}
+                />{" "}
+                Город
+              </label>
+            </div>
           </div>
         </div>
       </div>
