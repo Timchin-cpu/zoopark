@@ -34,7 +34,9 @@ const CardManagement = () => {
             </div>
           ))}
         </div>
-        <button>Добавить карту</button>
+        <div className={styles.addCart}>
+          <button>Добавить карту</button>
+        </div>
       </div>
     </div>
   );

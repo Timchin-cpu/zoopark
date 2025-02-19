@@ -13,6 +13,7 @@
 .cardItem {
   flex: 0 0 auto;
   width: 200px;
+  text-align: center;
   /* Добавляем стили для предотвращения наложения текста */
   overflow: hidden; /* Предотвращает выход контента за пределы карточки */
 }
@@ -35,4 +36,31 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+}
+.cardItem button {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: green;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.addCart {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.addCart button {
+  width: 40%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: green;
+  border-radius: 5px;
+  margin-top: 10px;
 }
