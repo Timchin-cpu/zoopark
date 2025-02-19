@@ -4,8 +4,12 @@
   white-space: nowrap;
   gap: 16px;
   padding: 16px 0;
+  -ms-overflow-style: none; /* для IE и Edge */
+  scrollbar-width: none; /* для Firefox */
 }
-
+.cardsList::-webkit-scrollbar {
+  display: none; /* для Chrome, Safari и Opera */
+}
 .cardItem {
   flex: 0 0 auto;
   width: 200px;
