@@ -14,7 +14,7 @@ const AddEditCard = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [experience, setExperience] = useState("");
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
   const [selectedImage, setSelectedImage] = useState(null);
