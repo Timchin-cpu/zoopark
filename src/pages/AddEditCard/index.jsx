@@ -14,6 +14,7 @@ const AddEditCard = () => {
     setSelectedImage(file);
   };
   console.log(selectedImage);
+  console.log(cardType);
   return (
     <div className={styles.contents}>
       <div className={styles.mainContent}>
