@@ -1,4 +1,3 @@
-/* CardManagement.module.css */
 .cardsList {
   display: flex;
   overflow-x: auto;
@@ -9,7 +8,23 @@
 
 .cardItem {
   flex: 0 0 auto;
-  width: 200px; /* фиксированная ширина карточки */
+  width: 200px;
+  /* Добавляем стили для предотвращения наложения текста */
+  overflow: hidden; /* Предотвращает выход контента за пределы карточки */
+}
+
+.cardItem h3 {
+  white-space: normal; /* Позволяет тексту переноситься */
+  margin: 8px 0;
+}
+
+.cardItem p {
+  white-space: normal; /* Позволяет тексту переноситься */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Добавляет многоточие при переполнении */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Ограничивает текст тремя строками */
+  -webkit-box-orient: vertical;
 }
 
 .cardItem img {
