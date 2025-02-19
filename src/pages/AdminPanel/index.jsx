@@ -5,6 +5,6 @@ import routeAdmin from "./route";
 const AdminPanel = () => {
   return <div className={styles.qwa}></div>;
 };
-export { routeAdmin }; // Добавить экспорт routeAdmin
+export { routeAdmin };
 
 export default AdminPanel;
