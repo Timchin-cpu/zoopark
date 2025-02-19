@@ -59,6 +59,7 @@ const AddEditCard = () => {
               </label>
             </div>
           </div>
+          <button>Сохранить</button>
         </div>
       </div>
     </div>
