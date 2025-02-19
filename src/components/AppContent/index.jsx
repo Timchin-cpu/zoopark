@@ -36,6 +36,8 @@ const AppContent = () => {
     <div className={`main-wrapper`}>
       <main className="main-container">
         <Switch>
+          <Route exact path="/addEditCard/:id" component={AddEditCard} />
+
           <Route exact path={routeMainPage()} component={MainPage} />
           <Route exact path={routeCityPage()} component={CityPage} />
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
