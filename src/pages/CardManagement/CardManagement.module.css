@@ -1,15 +1,15 @@
 /* CardManagement.module.css */
 .cardsList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 16px;
+  padding: 16px 0;
 }
 
 .cardItem {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+  width: 200px; /* фиксированная ширина карточки */
 }
 
 .cardItem img {
