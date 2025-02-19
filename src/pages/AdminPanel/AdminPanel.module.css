@@ -1,4 +1,11 @@
 .content {
   background-color: green;
-  color: white;
+  color: #fff;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content p {
+  font-size: 20px;
 }
