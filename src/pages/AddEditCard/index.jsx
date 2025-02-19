@@ -3,8 +3,11 @@ import styles from "./AddEditCard.module.css";
 import routeAddEditCard from "./route";
 import { useParams } from "react-router-dom";
 import axios from "../../axios-controller";
+import { useHistory } from "react-router-dom";
 
 const AddEditCard = () => {
+  const history = useHistory();
+
   const [cardType, setCardType] = useState("citizen"); // or 'city'
   const [cardSection, setCardSection] = useState("");
   const [title, setTitle] = useState("");
