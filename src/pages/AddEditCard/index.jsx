@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 const AddEditCard = () => {
   const [cardType, setCardType] = useState("citizen"); // or 'city'
+  const [cardSection, setCardSection] = useState("");
 
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
@@ -47,7 +48,7 @@ const AddEditCard = () => {
                   value="citizen"
                   checked={cardType === "citizen"}
                   onChange={(e) => setCardType(e.target.value)}
-                />{" "}
+                />
                 Житель
               </label>
               <label>
@@ -56,9 +57,31 @@ const AddEditCard = () => {
                   value="city"
                   checked={cardType === "city"}
                   onChange={(e) => setCardType(e.target.value)}
-                />{" "}
+                />
                 Город
               </label>
+            </div>
+
+            {/* Add section select based on card type */}
+            <div>
+              <p>Раздел карты</p>
+              <select
+                value={cardSection}
+                onChange={(e) => setCardSection(e.target.value)}
+              >
+                <option value="">Выберите раздел</option>
+                {cardType === "citizen" ? (
+                  <>
+                    <option value="police">Полиция</option>
+                    <option value="firefighter">Пожарные</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="culture">Культурные объекты</option>
+                    <option value="trade">Торговые объекты</option>
+                  </>
+                )}
+              </select>
             </div>
           </div>
           <button className={styles.saveButton}>Сохранить</button>
