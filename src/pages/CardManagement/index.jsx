@@ -30,9 +30,11 @@ const CardManagement = () => {
               />
               <h3>{card.title}</h3>
               <p>{card.description}</p>
+              <button>Редактировать</button>
             </div>
           ))}
         </div>
+        <button>Добавить карту</button>
       </div>
     </div>
   );
