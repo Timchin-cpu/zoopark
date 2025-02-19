@@ -6,10 +6,24 @@ import { useParams } from "react-router-dom";
 const AddEditCard = () => {
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+  };
+  console.log(selectedImage);
   return (
     <div className={styles.contents}>
       <div className={styles.mainContent}>
         <div className={styles.content}>
+          <div>
+            <p>Фото</p>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e)}
+            />
+          </div>
           <div>
             <p>Название</p>
             <input type="text" name="" id="" />
