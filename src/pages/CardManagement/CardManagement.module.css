@@ -1,19 +1,28 @@
-/* CardManagement.module.css */
-.cardsList {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  gap: 16px;
-  padding: 16px 0;
+.cardItem {
+  width: 48%; /* Ширина карточки */
+  margin-bottom: 20px;
 }
 
-.cardItem {
-  flex: 0 0 auto;
-  width: 200px; /* фиксированная ширина карточки */
+.cardsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .cardItem img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;
+  border-radius: 4px;
+}
+
+.cardItem h3 {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.cardItem p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #656d77;
 }
