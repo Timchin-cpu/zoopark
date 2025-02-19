@@ -11,6 +11,9 @@ import FriendsPage, {
 } from "pages/FriendsPage";
 import ShopPage, { routeShop as routeShopPage } from "pages/ShopPage";
 import AdminPanel, { routeAdmin as routeAdminPage } from "pages/AdminPanel";
+import CardManagement, {
+  routeCardManagement as routeCardManagementPage,
+} from "pages/CardManagement";
 import TasksPage, { routeTasks as routeTasksPage } from "pages/TasksPage";
 import SetsPage, { routeSets as routeSetsPage } from "pages/SetsPage";
 import BonusPage, { routeBonus as routeBonusPage } from "pages/BonusPage";
@@ -35,6 +38,11 @@ const AppContent = () => {
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
           <Route exact path={routeShopPage()} component={ShopPage} />
           <Route exact path={routeAdminPage()} component={AdminPanel} />
+          <Route
+            exact
+            path={routeCardManagementPage()}
+            component={CardManagement}
+          />
           <Route exact path={routeTasksPage()} component={TasksPage} />
           <Route exact path={routeSetsPage()} component={SetsPage} />
           <Route exact path={routeBonusPage()} component={BonusPage} />
