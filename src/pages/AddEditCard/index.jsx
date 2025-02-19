@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useParams } from "react";
 import styles from "./AddEditCard.module.css";
 import routeAddEditCard from "./route";
 const AddEditCard = () => {
+  const { id } = useParams(); // Добавить импорт useParams из react-router-dom
+  console.log(id);
   return (
     <div className={styles.contents}>
       <div className={styles.mainContent}>

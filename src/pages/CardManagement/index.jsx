@@ -32,8 +32,7 @@ const CardManagement = () => {
               />
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <NavLink to={routeAddEditCard()}>
-                {" "}
+              <NavLink to={routeAddEditCard(card.id)}>
                 <button>Редактировать</button>
               </NavLink>
             </div>
