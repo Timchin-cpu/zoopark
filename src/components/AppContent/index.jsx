@@ -10,6 +10,9 @@ import FriendsPage, {
   routeFriends as routeFriendsPage,
 } from "pages/FriendsPage";
 import ShopPage, { routeShop as routeShopPage } from "pages/ShopPage";
+import AddEditCard, {
+  routeAddEditCard as routeAddEditCard,
+} from "pages/AddEditCard";
 import AdminPanel, { routeAdmin as routeAdminPage } from "pages/AdminPanel";
 import CardManagement, {
   routeCardManagement as routeCardManagementPage,
@@ -37,6 +40,7 @@ const AppContent = () => {
           <Route exact path={routeCityPage()} component={CityPage} />
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
           <Route exact path={routeShopPage()} component={ShopPage} />
+          <Route exact path={routeAddEditCard()} component={AddEditCard} />
           <Route exact path={routeAdminPage()} component={AdminPanel} />
           <Route
             exact
