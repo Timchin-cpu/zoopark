@@ -6,6 +6,7 @@ import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
 import { setTheme, setCardBack } from "../../redux/actions";
 import { routeAdmin } from "pages/AdminPanel";
+import { NavLink } from "react-router-dom";
 
 // import { setTheme } from "../../redux/actions";
 
