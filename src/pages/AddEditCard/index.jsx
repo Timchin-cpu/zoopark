@@ -61,7 +61,7 @@ const AddEditCard = () => {
               </label>
             </div>
           </div>
-          <button>Сохранить</button>
+          <button className={styles.saveButton}>Сохранить</button>
         </div>
       </div>
     </div>
