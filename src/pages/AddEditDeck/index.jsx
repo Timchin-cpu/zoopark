@@ -45,6 +45,15 @@ const AddEditDeck = () => {
   return (
     <div className={styles.contents}>
       <div className={styles.mainContent}>
+        <h3>Карты в наборе:</h3>
+        {existingCards.map((card) => (
+          <div key={card.id} className={styles.cardItem}>
+            <img src={`http://localhost:3000${card.image}`} alt={card.title} />
+            <h3>{card.title}</h3>
+          </div>
+        ))}
+      </div>
+      <div className={styles.mainContent}>
         {cards.map((card) => (
           <div key={card.id} className={styles.cardItem}>
             <img src={`http://localhost:3000${card.image}`} alt={card.title} />
