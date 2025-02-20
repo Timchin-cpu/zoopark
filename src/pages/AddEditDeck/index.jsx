@@ -98,7 +98,7 @@ const AddEditDeck = () => {
     <div className={styles.contents}>
       <h3>Карты в наборе:</h3>
       <div className={styles.mainContent}>
-        {existingCards.map(
+        {cards.map(
           (card) =>
             cardsInSet.has(card.id) && (
               <div key={card.id} className={styles.cardItem}>
@@ -107,10 +107,7 @@ const AddEditDeck = () => {
                   alt={card.title}
                 />
                 <h3>{card.title}</h3>
-                <button
-                  onClick={() => handleRemoveCardFromSet(card.id)}
-                  style={{ background: "red" }}
-                >
+                <button onClick={() => handleRemoveCardFromSet(card.id)}>
                   Удалить
                 </button>
               </div>
