@@ -3,7 +3,7 @@ import styles from "./AddEditDeck.module.css";
 // import routeAdmin from "./route";
 // import { NavLink } from "react-router-dom";
 // import { routeAddEditDeck } from "pages/AddEditDeck";
-import AddEditDeck from "./route";
+import routeAddEditDeck from "./route";
 
 const AddEditDeck = () => {
   return (
