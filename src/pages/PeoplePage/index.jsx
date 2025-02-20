@@ -22,6 +22,19 @@ const PeoplePage = () => {
   // const [selectedExperience, setSelectedExperience] = useState(null);
 
   const [activePopup, setActivePopup] = useState(false);
+  const [userCards, setUserCards] = useState([]);
+
+  useEffect(() => {
+    const fetchUserCards = async () => {
+      try {
+        const response = await userCardsService.getUserCards(1); // ID пользователя
+        setUserCards(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserCards();
+  }, []);
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -135,11 +148,14 @@ const PeoplePage = () => {
                 <div className="city-slider">
                   <Swiper spaceBetween={8} slidesPerView={"auto"}>
                     {policePhotos.map((photo) => (
-                      <SwiperSlide>
-                        <div className="city-slider__item" key={photo.id}>
+                      <SwiperSlide key={photo.id}>
+                        <div className="city-slider__item">
                           <div
                             className="city-slider__card"
                             onClick={() => handleOpenPopup(photo)}
+                            style={{
+                              opacity: userCards.includes(photo.id) ? 1 : 0.5,
+                            }}
                           >
                             <p className="city-slider__image">
                               <img

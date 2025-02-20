@@ -44,6 +44,10 @@ const CardManagement = () => {
           </NavLink>
         </div>
       </div>
+      <div className={styles.mainContent}>
+        <h2>Наборы карт жители</h2>
+        <div className={styles.cardsList}></div>
+      </div>
     </div>
   );
 };
