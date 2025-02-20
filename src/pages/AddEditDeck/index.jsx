@@ -90,18 +90,24 @@ const AddEditDeck = () => {
     <div className={styles.contents}>
       <h3>Карты в наборе:</h3>
       <div className={styles.mainContent}>
-        {existingCards.map((card) => (
-          <div key={card.id} className={styles.cardItem}>
-            <img src={`http://localhost:3000${card.image}`} alt={card.title} />
-            <h3>{card.title}</h3>
-            <button
-              onClick={() => handleRemoveCardFromSet(card.id)}
-              style={{ background: "red" }}
-            >
-              Удалить
-            </button>
-          </div>
-        ))}
+        {existingCards.map(
+          (card) =>
+            cardsInSet.has(card.id) && (
+              <div key={card.id} className={styles.cardItem}>
+                <img
+                  src={`http://localhost:3000${card.image}`}
+                  alt={card.title}
+                />
+                <h3>{card.title}</h3>
+                <button
+                  onClick={() => handleRemoveCardFromSet(card.id)}
+                  style={{ background: "red" }}
+                >
+                  Удалить
+                </button>
+              </div>
+            )
+        )}
       </div>
       <h3>Добавить карты в набор</h3>
       <div className={styles.mainContent}>
