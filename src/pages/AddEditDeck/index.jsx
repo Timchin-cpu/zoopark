@@ -48,7 +48,13 @@ const AddEditDeck = () => {
       ...prev,
       addedCards: prev.addedCards.add(cardId),
     }));
-    // Обновляем только локальное состояние
+
+    // Добавляем карточку также в existingCards
+    const cardToAdd = cards.find((card) => card.id === cardId);
+    if (cardToAdd) {
+      setExistingCards((prev) => [...prev, cardToAdd]);
+    }
+
     setCardsInSet((prev) => new Set([...prev, cardId]));
   };
 
