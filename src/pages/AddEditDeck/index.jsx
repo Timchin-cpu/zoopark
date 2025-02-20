@@ -50,6 +50,16 @@ const AddEditDeck = () => {
       console.error("Error adding card to set:", error);
     }
   };
+  const handleRemoveCardFromSet = async (cardId) => {
+    try {
+      await cardSetsService.removeCardFromSet(id, cardId);
+      // После успешного удаления обновляем список карт
+      const response = await cardSetsService.getSetCards(id);
+      setExistingCards(response.data);
+    } catch (error) {
+      console.error("Error removing card from set:", error);
+    }
+  };
   return (
     <div className={styles.contents}>
       <h3>Карты в наборе:</h3>
@@ -58,6 +68,12 @@ const AddEditDeck = () => {
           <div key={card.id} className={styles.cardItem}>
             <img src={`http://localhost:3000${card.image}`} alt={card.title} />
             <h3>{card.title}</h3>
+            <button
+              onClick={() => handleRemoveCardFromSet(card.id)}
+              style={{ color: "red" }}
+            >
+              Удалить
+            </button>
           </div>
         ))}
       </div>

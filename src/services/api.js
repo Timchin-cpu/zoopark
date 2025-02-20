@@ -15,6 +15,8 @@ export const cardSetsService = {
   addCardToSet: (setId, cardId) =>
     axios.post(`/card-sets/${setId}/cards`, { cardId }),
   getSetCards: (setId) => axios.get(`/card-sets/${setId}/cards`),
+  removeCardFromSet: (setId, cardId) =>
+    axios.delete(`/card-sets/${setId}/cards/${cardId}`),
 };
 export const tasksService = {
   getAllTasks: () => axios.get("/tasks"),
