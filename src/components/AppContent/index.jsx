@@ -40,6 +40,7 @@ const AppContent = () => {
       <main className="main-container">
         <Switch>
           <Route exact path="/addEditCard/:id" component={AddEditCard} />
+          <Route exact path="/AddEditDeck/:id" component={AddEditDeck} />
 
           <Route exact path={routeMainPage()} component={MainPage} />
           <Route exact path={routeAddEditDeckPage()} component={AddEditDeck} />

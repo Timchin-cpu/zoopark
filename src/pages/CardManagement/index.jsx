@@ -4,6 +4,7 @@ import routeCardManagement from "./route";
 import { cardsService } from "services/api";
 import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
+import { routeAddEditDeck } from "pages/AddEditDeck";
 import axios from "../../axios-controller";
 const CardManagement = () => {
   const [cards, setCards] = useState([]);
@@ -64,14 +65,14 @@ const CardManagement = () => {
               <img src={`http://localhost:3000${set.image}`} alt={set.name} />
               <h3>{set.name}</h3>
               <p>{set.description}</p>
-              <NavLink to={routeAddEditCard(set.id)}>
+              <NavLink to={routeAddEditDeck(set.id)}>
                 <button>Редактировать</button>
               </NavLink>
             </div>
           ))}
         </div>
         <div className={styles.addCart}>
-          <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
+          <NavLink to={routeAddEditDeck()} style={{ width: "40%" }}>
             <button>Добавить набор</button>
           </NavLink>
         </div>
