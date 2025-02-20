@@ -9,7 +9,12 @@ const AddEditDeck = () => {
   console.log(id);
   const [cards, setCards] = useState([]);
   const [existingCards, setExistingCards] = useState([]);
+  const [cardsInSet, setCardsInSet] = useState(new Set());
 
+  // Обновляем при загрузке существующих карт
+  useEffect(() => {
+    setCardsInSet(new Set(existingCards.map((card) => card.id)));
+  }, [existingCards]);
   useEffect(() => {
     const fetchExistingCards = async () => {
       if (id) {
@@ -38,6 +43,9 @@ const AddEditDeck = () => {
   const handleAddCardToSet = async (cardId, setId) => {
     try {
       await cardSetsService.addCardToSet(setId, cardId);
+      // После успешного добавления обновляем список карт в наборе
+      const response = await cardSetsService.getSetCards(id);
+      setExistingCards(response.data);
     } catch (error) {
       console.error("Error adding card to set:", error);
     }
@@ -61,11 +69,9 @@ const AddEditDeck = () => {
             <h3>{card.title}</h3>
             <button
               onClick={() => handleAddCardToSet(card.id, id)}
-              disabled={existingCards.some((ec) => ec.id === card.id)}
+              disabled={cardsInSet.has(card.id)}
             >
-              {existingCards.some((ec) => ec.id === card.id)
-                ? "В наборе"
-                : "Добавить в набор"}
+              {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
             </button>
           </div>
         ))}
