@@ -47,7 +47,7 @@ const AddEditDeck = () => {
           <div key={card.id} className={styles.cardItem}>
             <img src={`http://localhost:3000${card.image}`} alt={card.title} />
             <h3>{card.title}</h3>
-            <button onClick={() => handleAddCardToSet(card.id, setId)}>
+            <button onClick={() => handleAddCardToSet(card.id, id)}>
               Добавить в набор
             </button>
           </div>
