@@ -17,11 +17,11 @@ export const tasksService = {
 };
 export const userCardsService = {
   // Получение карточек пользователя
-  getUserCards: (userId) => axios.get(`/api/user/${userId}/cards`),
+  getUserCards: (userId) => axios.get(`/user/${userId}/cards`),
 
   // Добавление карточки пользователю
   addCardToUser: (userId, cardId) =>
-    axios.post(`/api/user/${userId}/cards`, { cardId }),
+    axios.post(`/user/${userId}/cards`, { cardId }),
 };
 export const peopleService = {
   // Получение списка фотографий для полиции
