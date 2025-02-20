@@ -21,9 +21,6 @@ import TasksPage, { routeTasks as routeTasksPage } from "pages/TasksPage";
 import SetsPage, { routeSets as routeSetsPage } from "pages/SetsPage";
 import BonusPage, { routeBonus as routeBonusPage } from "pages/BonusPage";
 import PeoplePage, { routePeople as routePeoplePage } from "pages/PeoplePage";
-import AddEditDeck, {
-  routeAddEditDeck as routeAddEditDeckPage,
-} from "pages/AddEditDeck";
 import { useSelector } from "react-redux";
 
 const AppContent = () => {
@@ -40,10 +37,8 @@ const AppContent = () => {
       <main className="main-container">
         <Switch>
           <Route exact path="/addEditCard/:id" component={AddEditCard} />
-          {/* <Route exact path="/AddEditDeck/:id" component={AddEditDeck} /> */}
 
           <Route exact path={routeMainPage()} component={MainPage} />
-          <Route exact path={routeAddEditDeckPage()} component={AddEditDeck} />
           <Route exact path={routeCityPage()} component={CityPage} />
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
           <Route exact path={routeShopPage()} component={ShopPage} />
