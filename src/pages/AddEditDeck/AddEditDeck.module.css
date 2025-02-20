@@ -11,3 +11,6 @@
   height: 342px;
   object-fit: cover;
 }
+.mainContent button {
+  color: white;
+}

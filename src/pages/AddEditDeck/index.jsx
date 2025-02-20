@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./AddEditDeck.module.css";
 import { useParams } from "react-router-dom";
 import { cardsService, cardSetsService } from "services/api";
-
-// import routeAdmin from "./route";
-// import { NavLink } from "react-router-dom";
-// import { routeAddEditDeck } from "pages/AddEditDeck";
 import routeAddEditDeck from "./route";
-// const [selectedCards, setSelectedCards] = useState([]);
 
 const AddEditDeck = () => {
-  const { id } = useParams(); // Добавить импорт useParams из react-router-dom
+  const { id } = useParams();
   console.log(id);
   const [cards, setCards] = useState([]);
 
@@ -25,14 +20,7 @@ const AddEditDeck = () => {
     };
     fetchCards();
   }, []);
-  // const handleAddCard = async (cardId) => {
-  //   try {
-  //     await cardSetsService.addCardToSet(id, cardId);
-  //     setSelectedCards([...selectedCards, cardId]);
-  //   } catch (error) {
-  //     console.error("Error adding card to set:", error);
-  //   }
-  // };
+
   const handleAddCardToSet = async (cardId, setId) => {
     try {
       await cardSetsService.addCardToSet(setId, cardId);
