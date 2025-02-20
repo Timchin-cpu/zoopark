@@ -1,0 +1,13 @@
+.mainContent {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+.mainContent img {
+  border-style: none;
+  height: 342px;
+  object-fit: cover;
+}
