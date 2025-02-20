@@ -1,43 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddEditDeck.module.css";
 import { useParams } from "react-router-dom";
+import { cardsService, cardSetsService } from "services/api";
 
 // import routeAdmin from "./route";
 // import { NavLink } from "react-router-dom";
 // import { routeAddEditDeck } from "pages/AddEditDeck";
 import routeAddEditDeck from "./route";
 // const [selectedCards, setSelectedCards] = useState([]);
-const { id } = useParams(); // Добавить импорт useParams из react-router-dom
-console.log(id);
-const [cards, setCards] = useState([]);
 
-useEffect(() => {
-  const fetchCards = async () => {
+const AddEditDeck = () => {
+  const { id } = useParams(); // Добавить импорт useParams из react-router-dom
+  console.log(id);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await cardsService.getAllCards();
+        setCards(response.data);
+      } catch (error) {
+        console.error("Error fetching cards:", error);
+      }
+    };
+    fetchCards();
+  }, []);
+  // const handleAddCard = async (cardId) => {
+  //   try {
+  //     await cardSetsService.addCardToSet(id, cardId);
+  //     setSelectedCards([...selectedCards, cardId]);
+  //   } catch (error) {
+  //     console.error("Error adding card to set:", error);
+  //   }
+  // };
+  const handleAddCardToSet = async (cardId, setId) => {
     try {
-      const response = await cardsService.getAllCards();
-      setCards(response.data);
+      await cardSetsService.addCardToSet(setId, cardId);
     } catch (error) {
-      console.error("Error fetching cards:", error);
+      console.error("Error adding card to set:", error);
     }
   };
-  fetchCards();
-}, []);
-// const handleAddCard = async (cardId) => {
-//   try {
-//     await cardSetsService.addCardToSet(id, cardId);
-//     setSelectedCards([...selectedCards, cardId]);
-//   } catch (error) {
-//     console.error("Error adding card to set:", error);
-//   }
-// };
-const handleAddCardToSet = async (cardId, setId) => {
-  try {
-    await cardSetsService.addCardToSet(setId, cardId);
-  } catch (error) {
-    console.error("Error adding card to set:", error);
-  }
-};
-const AddEditDeck = () => {
   return (
     <div className={styles.contents}>
       <div className={styles.mainContent}>
