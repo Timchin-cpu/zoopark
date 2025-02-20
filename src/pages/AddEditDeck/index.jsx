@@ -64,7 +64,6 @@ const AddEditDeck = () => {
       return newSet;
     });
   };
-  jsx;
   const handleSave = async () => {
     try {
       // Применяем все накопленные изменения
