@@ -50,10 +50,10 @@ const AddEditDeck = () => {
     }));
 
     // Добавляем карточку также в existingCards
-    const cardToAdd = cards.find((card) => card.id === cardId);
-    if (cardToAdd) {
-      setExistingCards((prev) => [...prev, cardToAdd]);
-    }
+    // const cardToAdd = cards.find((card) => card.id === cardId);
+    // if (cardToAdd) {
+    //   setExistingCards((prev) => [...prev, cardToAdd]);
+    // }
 
     setCardsInSet((prev) => new Set([...prev, cardId]));
   };
