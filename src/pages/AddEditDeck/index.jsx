@@ -10,7 +10,10 @@ const AddEditDeck = () => {
   const [cards, setCards] = useState([]);
   const [existingCards, setExistingCards] = useState([]);
   const [cardsInSet, setCardsInSet] = useState(new Set());
-
+  const [pendingChanges, setPendingChanges] = useState({
+    addedCards: new Set(),
+    removedCards: new Set(),
+  });
   // Обновляем при загрузке существующих карт
   useEffect(() => {
     setCardsInSet(new Set(existingCards.map((card) => card.id)));
@@ -40,24 +43,49 @@ const AddEditDeck = () => {
     fetchCards();
   }, []);
 
-  const handleAddCardToSet = async (cardId, setId) => {
-    try {
-      await cardSetsService.addCardToSet(setId, cardId);
-      // После успешного добавления обновляем список карт в наборе
-      const response = await cardSetsService.getSetCards(id);
-      setExistingCards(response.data);
-    } catch (error) {
-      console.error("Error adding card to set:", error);
-    }
+  const handleAddCardToSet = (cardId) => {
+    setPendingChanges((prev) => ({
+      ...prev,
+      addedCards: prev.addedCards.add(cardId),
+    }));
+    // Обновляем только локальное состояние
+    setCardsInSet((prev) => new Set([...prev, cardId]));
   };
-  const handleRemoveCardFromSet = async (cardId) => {
+
+  const handleRemoveCardFromSet = (cardId) => {
+    setPendingChanges((prev) => ({
+      ...prev,
+      removedCards: prev.removedCards.add(cardId),
+    }));
+    // Обновляем только локальное состояние
+    setCardsInSet((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(cardId);
+      return newSet;
+    });
+  };
+  jsx;
+  const handleSave = async () => {
     try {
-      await cardSetsService.removeCardFromSet(id, cardId);
-      // После успешного удаления обновляем список карт
+      // Применяем все накопленные изменения
+      for (const cardId of pendingChanges.addedCards) {
+        await cardSetsService.addCardToSet(id, cardId);
+      }
+      for (const cardId of pendingChanges.removedCards) {
+        await cardSetsService.removeCardFromSet(id, cardId);
+      }
+
+      // Обновляем состояние после успешного сохранения
       const response = await cardSetsService.getSetCards(id);
       setExistingCards(response.data);
+
+      // Очищаем pending changes
+      setPendingChanges({
+        addedCards: new Set(),
+        removedCards: new Set(),
+      });
     } catch (error) {
-      console.error("Error removing card from set:", error);
+      console.error("Error saving changes:", error);
     }
   };
   return (
@@ -92,6 +120,9 @@ const AddEditDeck = () => {
           </div>
         ))}
       </div>
+      <button onClick={handleSave} className={styles.saveButton}>
+        Сохранить изменения
+      </button>
     </div>
   );
 };
