@@ -38,5 +38,11 @@
   height: 45px;
   justify-content: center;
   margin-top: 10px;
-  width: 100%;
+  width: 30%;
+}
+.save {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 20px;
 }

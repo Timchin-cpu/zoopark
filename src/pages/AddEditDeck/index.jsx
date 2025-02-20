@@ -126,9 +126,11 @@ const AddEditDeck = () => {
           </div>
         ))}
       </div>
-      <button onClick={handleSave} className={styles.saveButton}>
-        Сохранить изменения
-      </button>
+      <div className={styles.save}>
+        <button onClick={handleSave} className={styles.saveButton}>
+          Сохранить изменения
+        </button>
+      </div>
     </div>
   );
 };
