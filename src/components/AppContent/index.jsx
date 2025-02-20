@@ -13,9 +13,9 @@ import ShopPage, { routeShop as routeShopPage } from "pages/ShopPage";
 import AddEditCard, {
   routeAddEditCard as routeAddEditCardPage,
 } from "pages/AddEditCard";
-import AddEditDeck, {
-  routeAddEditDeck as routeAddEditDeckPage,
-} from "pages/AddEditDeck";
+// import AddEditDeck, {
+//   routeAddEditDeck as routeAddEditDeckPage,
+// } from "pages/AddEditDeck";
 import AdminPanel, { routeAdmin as routeAdminPage } from "pages/AdminPanel";
 import CardManagement, {
   routeCardManagement as routeCardManagementPage,
@@ -41,10 +41,10 @@ const AppContent = () => {
       <main className="main-container">
         <Switch>
           <Route exact path="/addEditCard/:id" component={AddEditCard} />
-          <Route exact path="/addEditDeck/:id" component={AddEditDeck} />
+          {/* <Route exact path="/addEditDeck/:id" component={AddEditDeck} /> */}
 
           <Route exact path={routeMainPage()} component={MainPage} />
-          <Route exact path={routeAddEditDeckPage()} component={AddEditDeck} />
+          {/* <Route exact path={routeAddEditDeckPage()} component={AddEditDeck} /> */}
           <Route exact path={routeCityPage()} component={CityPage} />
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
           <Route exact path={routeShopPage()} component={ShopPage} />
