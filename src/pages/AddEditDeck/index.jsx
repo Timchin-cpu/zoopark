@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./AddEditDeck.module.css";
 // import routeAdmin from "./route";
 // import { NavLink } from "react-router-dom";
-import { routeAddEditDeck } from "pages/AddEditDeck";
+// import { routeAddEditDeck } from "pages/AddEditDeck";
+import AddEditDeck from "./route";
+
 const AddEditDeck = () => {
   return (
     <div className={styles.contents}>
