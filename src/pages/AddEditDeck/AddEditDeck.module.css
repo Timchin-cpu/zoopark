@@ -29,3 +29,14 @@
   padding-left: 16px;
   padding-top: 20px;
 }
+.saveButton {
+  align-items: center;
+  background: green;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  height: 45px;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}

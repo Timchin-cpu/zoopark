@@ -68,16 +68,18 @@ const AddEditDeck = () => {
   };
   const handleSave = async () => {
     try {
-      // Применяем все накопленные изменения включая удаление
+      // Удаление карт
       for (const cardId of pendingChanges.removedCards) {
         await cardSetsService.removeCardFromSet(id, cardId);
       }
 
-      // Обновляем состояние после успешного сохранения
+      // Добавление новых карт
+      for (const cardId of pendingChanges.addedCards) {
+        await cardSetsService.addCardToSet(id, cardId);
+      }
+
       const response = await cardSetsService.getSetCards(id);
       setExistingCards(response.data);
-
-      // Очищаем pending changes
       setPendingChanges({
         addedCards: new Set(),
         removedCards: new Set(),
