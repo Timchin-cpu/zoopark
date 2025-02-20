@@ -8,7 +8,21 @@ const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
   const [cards, setCards] = useState([]);
+  const [existingCards, setExistingCards] = useState([]);
 
+  useEffect(() => {
+    const fetchExistingCards = async () => {
+      if (id) {
+        try {
+          const response = await cardSetsService.getSetCards(id);
+          setExistingCards(response.data);
+        } catch (error) {
+          console.error("Error fetching existing cards:", error);
+        }
+      }
+    };
+    fetchExistingCards();
+  }, [id]);
   useEffect(() => {
     const fetchCards = async () => {
       try {
@@ -35,8 +49,13 @@ const AddEditDeck = () => {
           <div key={card.id} className={styles.cardItem}>
             <img src={`http://localhost:3000${card.image}`} alt={card.title} />
             <h3>{card.title}</h3>
-            <button onClick={() => handleAddCardToSet(card.id, id)}>
-              Добавить в набор
+            <button
+              onClick={() => handleAddCardToSet(card.id, id)}
+              disabled={existingCards.some((ec) => ec.id === card.id)}
+            >
+              {existingCards.some((ec) => ec.id === card.id)
+                ? "В наборе"
+                : "Добавить в набор"}
             </button>
           </div>
         ))}
