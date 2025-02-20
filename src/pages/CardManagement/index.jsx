@@ -6,7 +6,18 @@ import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
 const CardManagement = () => {
   const [cards, setCards] = useState([]);
-
+  const [cardSets, setCardSets] = useState([]);
+  useEffect(() => {
+    const fetchCardSets = async () => {
+      try {
+        const response = await axios.get("/api/card-sets");
+        setCardSets(response.data);
+      } catch (error) {
+        console.error("Error fetching card sets:", error);
+      }
+    };
+    fetchCardSets();
+  }, []);
   useEffect(() => {
     const fetchCards = async () => {
       try {
@@ -46,7 +57,23 @@ const CardManagement = () => {
       </div>
       <div className={styles.mainContent}>
         <h2>Наборы карт жители</h2>
-        <div className={styles.cardsList}></div>
+        <div className={styles.cardsList}>
+          {cardSets.map((set) => (
+            <div key={set.id} className={styles.cardItem}>
+              <img src={`http://localhost:3000${set.image}`} alt={set.name} />
+              <h3>{set.name}</h3>
+              <p>{set.description}</p>
+              <NavLink to={routeAddEditCard(set.id)}>
+                <button>Редактировать</button>
+              </NavLink>
+            </div>
+          ))}
+        </div>
+        <div className={styles.addCart}>
+          <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
+            <button>Добавить набор</button>
+          </NavLink>
+        </div>
       </div>
     </div>
   );
