@@ -53,23 +53,22 @@ const AddEditDeck = () => {
   };
 
   const handleRemoveCardFromSet = (cardId) => {
-    setPendingChanges((prev) => ({
-      ...prev,
-      removedCards: prev.removedCards.add(cardId),
-    }));
-    // Обновляем только локальное состояние
+    // Скрываем карточку визуально
     setCardsInSet((prev) => {
       const newSet = new Set(prev);
       newSet.delete(cardId);
       return newSet;
     });
+
+    // Добавляем в список ожидающих удаления
+    setPendingChanges((prev) => ({
+      ...prev,
+      removedCards: prev.removedCards.add(cardId),
+    }));
   };
   const handleSave = async () => {
     try {
-      // Применяем все накопленные изменения
-      for (const cardId of pendingChanges.addedCards) {
-        await cardSetsService.addCardToSet(id, cardId);
-      }
+      // Применяем все накопленные изменения включая удаление
       for (const cardId of pendingChanges.removedCards) {
         await cardSetsService.removeCardFromSet(id, cardId);
       }
