@@ -107,7 +107,10 @@ const AddEditDeck = () => {
                   alt={card.title}
                 />
                 <h3>{card.title}</h3>
-                <button onClick={() => handleRemoveCardFromSet(card.id)}>
+                <button
+                  onClick={() => handleRemoveCardFromSet(card.id)}
+                  style={{ background: "red" }}
+                >
                   Удалить
                 </button>
               </div>
