@@ -4,6 +4,7 @@ import routeCardManagement from "./route";
 import { cardsService } from "services/api";
 import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
+import axios from "../../axios-controller";
 const CardManagement = () => {
   const [cards, setCards] = useState([]);
   const [cardSets, setCardSets] = useState([]);
