@@ -29,6 +29,7 @@ const PeoplePage = () => {
       try {
         const response = await userCardsService.getUserCards(1); // ID пользователя
         setUserCards(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
