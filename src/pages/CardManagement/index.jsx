@@ -11,7 +11,7 @@ const CardManagement = () => {
   useEffect(() => {
     const fetchCardSets = async () => {
       try {
-        const response = await axios.get("/api/card-sets");
+        const response = await axios.get("/card-sets");
         setCardSets(response.data);
       } catch (error) {
         console.error("Error fetching card sets:", error);
