@@ -76,17 +76,16 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   }, [activeIndex]);
   const handleImageClick = (index) => {
-    // Удаляем изменение activeIndex здесь
-    handleOpenPopup(selectedPhotos[data[index].id]);
-  };
-  const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % data.length);
-    // Добавляем переключение карточки здесь
-    setActiveIndex(activeSlide === activeIndex ? null : activeSlide);
+    setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
-      [activeSlide]: selectedPhotos[data[activeSlide].id],
+      [index]: selectedPhotos[data[index].id],
     });
+    handleOpenPopup(selectedPhotos[data[index].id]);
+  };
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % data.length);
   };
 
   // const prevSlide = () => {
