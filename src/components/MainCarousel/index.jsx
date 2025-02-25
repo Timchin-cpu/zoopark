@@ -40,6 +40,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
+  const [viewedCards, setViewedCards] = useState(new Set());
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -60,7 +61,18 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         const copies = Math.floor(photo.chance);
         return acc.concat(Array(copies).fill(photo));
       }, []);
-      const shuffled = [...weightedPhotos].sort(() => Math.random() - 0.5);
+
+      // Фильтруем фотографии, исключая просмотренные
+      const availablePhotos = weightedPhotos.filter(
+        (photo) => !viewedCards.has(photo.id)
+      );
+
+      // Если все карты просмотрены, сбрасываем список
+      if (availablePhotos.length === 0) {
+        setViewedCards(new Set());
+        availablePhotos.push(...weightedPhotos);
+      }
+      const shuffled = [...availablePhotos].sort(() => Math.random() - 0.5);
       const newSelectedPhotos = data.reduce((acc, item) => {
         const randomIndex = Math.floor(Math.random() * shuffled.length);
         acc[item.id] = shuffled[randomIndex];
@@ -68,32 +80,26 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       }, {});
       setSelectedPhotos(newSelectedPhotos);
     }
-  }, [photos]);
-  // Reset card state when popup closes
+  }, [photos, viewedCards]);
   useEffect(() => {
     if (!activeIndex) {
       setOpenedCards({});
     }
   }, [activeIndex]);
   const handleImageClick = (index) => {
+    const selectedCard = selectedPhotos[data[index].id];
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
-      [index]: selectedPhotos[data[index].id],
+      [index]: selectedCard,
     });
-    handleOpenPopup(selectedPhotos[data[index].id]);
+    setViewedCards((prev) => new Set([...prev, selectedCard.id]));
+    handleOpenPopup(selectedCard);
   };
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
-  useEffect(() => {
-    if (!activeIndex) {
-      // Закрываем карту при закрытии попапа
-      setOpenedCards({});
-      // Показываем следующую карту
-      setActiveSlide((prev) => (prev + 1) % data.length);
-    }
-  }, [activeIndex]);
+
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
