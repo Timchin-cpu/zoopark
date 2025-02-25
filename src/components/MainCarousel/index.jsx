@@ -65,19 +65,21 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     if (photos.length > 0) {
-      // Create weighted array based on chances
-      const weightedPhotos = photos.flatMap((photo) =>
-        // Repeat each photo based on its chance percentage
-        Array(Math.floor(photo.chance)).fill(photo)
-      );
-
-      // Generate random photos considering their chances
+      // Создаем массив карт с учетом их вероятности появления
+      const weightedPhotos = photos.reduce((acc, photo) => {
+        // Количество дубликатов карты пропорционально ее шансу
+        const copies = Math.floor(photo.chance);
+        return acc.concat(Array(copies).fill(photo));
+      }, []);
+      // Перемешиваем массив для случайного порядка
+      const shuffled = [...weightedPhotos].sort(() => Math.random() - 0.5);
+      // Выбираем карты для каждой позиции в карусели
       const newSelectedPhotos = data.reduce((acc, item) => {
-        const randomIndex = Math.floor(Math.random() * weightedPhotos.length);
-        acc[item.id] = weightedPhotos[randomIndex];
+        // Берем случайную карту из перемешанного массива с учетом весов
+        const randomIndex = Math.floor(Math.random() * shuffled.length);
+        acc[item.id] = shuffled[randomIndex];
         return acc;
       }, {});
-
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
