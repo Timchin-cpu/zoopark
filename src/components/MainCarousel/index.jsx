@@ -114,6 +114,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         opacity: 1,
         transform: "translateX(200px) translateZ(-500px) rotateY(-60deg)",
         zIndex: 9,
+        isBackCard: true, // Добавляем флаг для определения задней карты
       };
     } else {
       return {
