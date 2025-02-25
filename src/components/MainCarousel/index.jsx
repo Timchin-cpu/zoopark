@@ -83,6 +83,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
+  useEffect(() => {
+    if (!activeIndex) {
+      setOpenedCards({});
+      const cards = document.querySelectorAll(".ReactFlipCard__flipCard");
+      cards.forEach((card) => {
+        card.classList.remove("ReactFlipCard__rotateY180Deg");
+      });
+    }
+  }, [activeIndex]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
