@@ -123,8 +123,17 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   };
 
+  // const handleImageClick = (index) => {
+  //   setActiveIndex(index === activeIndex ? null : index);
+  // setOpenedCards({
+  //   ...openedCards,
+  //   [index]: selectedPhotos[data[index].id],
+  // });
+  //   handleOpenPopup(selectedPhotos[data[index].id]);
+  // };
   const [flippedCards, setFlippedCards] = useState({}); // Добавляем состояние для перевернутых карт
 
+  // ... существующий код ...
   const resetCards = () => {
     setFlippedCards({});
     setActiveIndex(null);
@@ -135,11 +144,14 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       ...prev,
       [index]: !prev[index],
     }));
+    setOpenedCards({
+      ...openedCards,
+      [index]: selectedPhotos[data[index].id],
+    });
     handleOpenPopup(() => {
       resetCards(); // Сбрасываем состояние карт при закрытии попапа
     });
   };
-
   return (
     <div className="main-control">
       <div className="main-control__bg">
