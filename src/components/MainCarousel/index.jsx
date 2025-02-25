@@ -201,11 +201,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
-                          openedCards[i]?.image ||
-                          selectedPhotos[item.id]?.image
-                        }`}
-                        alt={selectedPhotos[item.id]?.title || ""}
+                        src={
+                          getStyles(i).isBackCard
+                            ? cardBackStyles[cardBackStyle].image
+                            : `http://localhost:3000${
+                                openedCards[i]?.image ||
+                                selectedPhotos[item.id]?.image
+                              }`
+                        }
+                        alt=""
                       />
                     </div>
                   }
