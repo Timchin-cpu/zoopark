@@ -132,10 +132,12 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       [index]: selectedPhotos[data[index].id],
     });
     handleOpenPopup(selectedPhotos[data[index].id]);
-    // Reset card back style when card is closed
-    if (index === activeIndex) {
+
+    // Reset card after delay
+    setTimeout(() => {
+      setActiveIndex(null);
       setOpenedCards({});
-    }
+    }, 1000);
   };
 
   return (
