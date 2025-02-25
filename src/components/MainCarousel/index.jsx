@@ -123,35 +123,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   };
 
-  // const handleImageClick = (index) => {
-  //   setActiveIndex(index === activeIndex ? null : index);
-  // setOpenedCards({
-  //   ...openedCards,
-  //   [index]: selectedPhotos[data[index].id],
-  // });
-  //   handleOpenPopup(selectedPhotos[data[index].id]);
-  // };
-  const [flippedCards, setFlippedCards] = useState({}); // Добавляем состояние для перевернутых карт
-
-  // ... существующий код ...
-  const resetCards = () => {
-    setFlippedCards({});
-    setActiveIndex(null);
-  };
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    setFlippedCards((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
     setOpenedCards({
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
     });
-    handleOpenPopup(() => {
-      resetCards(); // Сбрасываем состояние карт при закрытии попапа
-    });
+    handleOpenPopup(selectedPhotos[data[index].id]);
   };
+
   return (
     <div className="main-control">
       <div className="main-control__bg">
@@ -204,16 +184,17 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 className={`slide ${
                   activeSlide === item.id - 1 ? "active" : ""
                 } ${activeIndex === i ? "open" : ""}`}
-                style={{ ...getStyles(i) }}
+                style={{
+                  ...getStyles(i),
+                }}
               >
                 <ReactFlipCard
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
-                  flipped={flippedCards[i]} // Управляем состоянием переворота
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
                     </div>
                   }
                   backComponent={
