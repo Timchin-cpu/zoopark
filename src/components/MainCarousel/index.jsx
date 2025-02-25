@@ -83,16 +83,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
-
-  useEffect(() => {
-    if (!activeIndex) {
-      setOpenedCards({});
-      const cards = document.querySelectorAll(".ReactFlipCard__flipCard");
-      cards.forEach((card) => {
-        card.classList.remove("ReactFlipCard__rotateY180Deg");
-      });
-    }
-  }, [activeIndex]);
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
@@ -132,17 +122,22 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     }
   };
-  useEffect(() => {
+
+  const [flippedCards, setFlippedCards] = useState({}); // Добавляем состояние для перевернутых карт
+
+  const resetCards = () => {
+    setFlippedCards({});
     setActiveIndex(null);
-    setOpenedCards({});
-  }, [activeSlide]);
+  };
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    setOpenedCards({
-      ...openedCards,
-      [index]: !openedCards[index],
+    setFlippedCards((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+    handleOpenPopup(() => {
+      resetCards(); // Сбрасываем состояние карт при закрытии попапа
     });
-    handleOpenPopup();
   };
 
   return (
@@ -197,15 +192,13 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 className={`slide ${
                   activeSlide === item.id - 1 ? "active" : ""
                 } ${activeIndex === i ? "open" : ""}`}
-                style={{
-                  ...getStyles(i),
-                }}
+                style={{ ...getStyles(i) }}
               >
                 <ReactFlipCard
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
-                  isFlipped={openedCards[i]}
+                  flipped={flippedCards[i]} // Управляем состоянием переворота
                   frontComponent={
                     <div className="main-slider__image">
                       <img src={cardBackStyles[cardBackStyle].image} alt="" />
