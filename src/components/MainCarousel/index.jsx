@@ -126,33 +126,18 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   };
 
   const handleImageClick = (index) => {
-    // Увеличиваем счетчик открытий для карточки
-    const newOpenedCards = {
+    setActiveIndex(index === activeIndex ? null : index);
+    setOpenedCards({
       ...openedCards,
-      [index]: (openedCards[index] || 0) + 1,
-    };
-    setOpenedCards(newOpenedCards);
-
-    // Если карточка открыта 3 раза - обновляем фото и закрываем карточку
-    if (newOpenedCards[index] === 3) {
-      const newPhoto = photos[Math.floor(Math.random() * photos.length)];
-      setSelectedPhotos({
-        ...selectedPhotos,
-        [data[index].id]: newPhoto,
-      });
-      // Сбрасываем счетчик
-      setOpenedCards((prevState) => ({
-        ...prevState,
-        [index]: 0,
-      }));
-      // Закрываем карточку
-      setActiveIndex(null);
-    } else {
-      // Иначе переключаем активность как обычно
-      setActiveIndex(index === activeIndex ? null : index);
-    }
+      [index]: selectedPhotos[data[index].id],
+    });
     handleOpenPopup(selectedPhotos[data[index].id]);
+    // Reset card back style when card is closed
+    if (index === activeIndex) {
+      setOpenedCards({});
+    }
   };
+
   return (
     <div className="main-control">
       <div className="main-control__bg">
