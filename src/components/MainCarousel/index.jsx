@@ -87,6 +87,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     // Закрываем предыдущую открытую карту, если она есть
     if (activeIndex !== null && activeIndex !== index) {
       setOpenedCards({});
+      setActiveIndex(null);
     }
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
