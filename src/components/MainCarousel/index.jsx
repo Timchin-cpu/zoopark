@@ -116,12 +116,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const handleImageClick = (index) => {
     const card = selectedPhotos[data[index].id];
     const chance = card?.chance || 100; // Получаем шанс выпадения карты, по умолчанию 100%
+
     if (Math.random() * 100 <= chance) {
-      // Проверяем, выпала ли карта согласно шансу
+      // Если карта выпала согласно шансу
+      setOpenedCards((prev) => ({ ...prev, [index]: card })); // Сохраняем открытую карту
       setActiveIndex(index === activeIndex ? null : index);
       handleOpenPopup(card);
     }
   };
+
   return (
     <div className="main-control">
       <div className="main-control__bg">
