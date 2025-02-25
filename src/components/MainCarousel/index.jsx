@@ -84,17 +84,22 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   //   handleOpenPopup(selectedPhotos[data[index].id]);
   // };
   const handleImageClick = (index) => {
-    // Закрываем предыдущую открытую карту, если она есть
-    if (activeIndex !== null && activeIndex !== index) {
-      setOpenedCards({});
+    // If clicking the same card that's already open, close it
+    if (index === activeIndex) {
       setActiveIndex(null);
+      setOpenedCards({});
     }
-    setActiveIndex(index === activeIndex ? null : index);
-    setOpenedCards({
-      ...openedCards,
-      [index]: selectedPhotos[data[index].id],
-    });
-    handleOpenPopup(selectedPhotos[data[index].id]);
+    // If clicking a different card, close the previous one and open the new one
+    else {
+      setActiveIndex(index);
+      setOpenedCards({
+        [index]: selectedPhotos[data[index].id],
+      });
+    }
+    // Only trigger popup if opening a card
+    if (index !== activeIndex) {
+      handleOpenPopup(selectedPhotos[data[index].id]);
+    }
   };
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
