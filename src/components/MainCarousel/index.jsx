@@ -93,7 +93,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       // Показываем следующую карту
       setActiveSlide((prev) => (prev + 1) % data.length);
     }
-  }, [activeIndex, data.length]);
+  }, [activeIndex]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
