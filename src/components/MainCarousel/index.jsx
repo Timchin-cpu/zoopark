@@ -122,7 +122,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     }
   };
+  const [flippedCards, setFlippedCards] = useState(new Set());
 
+  useEffect(() => {
+    setFlippedCards(new Set([activeSlide]));
+  }, [activeSlide]);
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
@@ -192,13 +196,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
-                  isFlipped={activeSlide !== i} // Add this line to control card flipping
+                  isFlipped={!flippedCards.has(i)}
                   frontComponent={
-                    <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
-                    </div>
-                  }
-                  backComponent={
                     <div className="main-slider__image">
                       <img
                         src={`http://localhost:3000${
@@ -207,6 +206,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                         }`}
                         alt={selectedPhotos[item.id]?.title || ""}
                       />
+                    </div>
+                  }
+                  backComponent={
+                    <div className="main-slider__image">
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />
                     </div>
                   }
                 ></ReactFlipCard>
