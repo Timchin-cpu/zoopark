@@ -132,8 +132,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       [index]: (openedCards[index] || 0) + 1,
     };
     setOpenedCards(newOpenedCards);
-
-    // Если карточка открыта 3 раза - обновляем фото
+    // Если карточка открыта 3 раза - обновляем фото и закрываем карточку
     if (newOpenedCards[index] === 3) {
       const newPhoto = photos[Math.floor(Math.random() * photos.length)];
       setSelectedPhotos({
@@ -142,11 +141,14 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       });
       // Сбрасываем счетчик
       newOpenedCards[index] = 0;
+      // Закрываем карточку
+      setActiveIndex(null);
+    } else {
+      // Иначе переключаем активность как обычно
+      setActiveIndex(index === activeIndex ? null : index);
     }
-    setActiveIndex(index === activeIndex ? null : index);
     handleOpenPopup(selectedPhotos[data[index].id]);
   };
-
   return (
     <div className="main-control">
       <div className="main-control__bg">
