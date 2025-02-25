@@ -75,7 +75,19 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setOpenedCards({});
     }
   }, [activeIndex]);
+  // const handleImageClick = (index) => {
+  //   setActiveIndex(index === activeIndex ? null : index);
+  //   setOpenedCards({
+  //     ...openedCards,
+  //     [index]: selectedPhotos[data[index].id],
+  //   });
+  //   handleOpenPopup(selectedPhotos[data[index].id]);
+  // };
   const handleImageClick = (index) => {
+    // Закрываем предыдущую открытую карту, если она есть
+    if (activeIndex !== null && activeIndex !== index) {
+      setOpenedCards({});
+    }
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
