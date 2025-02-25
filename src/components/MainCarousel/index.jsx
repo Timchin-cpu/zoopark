@@ -76,14 +76,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   }, [activeIndex]);
   const handleImageClick = (index) => {
-    // Закрываем предыдущую карту, если она есть и это не первая карта
-    if (index > 0) {
-      setOpenedCards((prev) => {
-        const newCards = { ...prev };
-        delete newCards[index - 1];
-        return newCards;
-      });
-    }
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
@@ -200,10 +192,13 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
-                          openedCards[i]?.image ||
-                          selectedPhotos[item.id]?.image
-                        }`}
+                        src={
+                          activeIndex === i
+                            ? `http://localhost:3000${
+                                selectedPhotos[item.id]?.image
+                              }`
+                            : cardBackStyles[cardBackStyle].image
+                        }
                         alt={selectedPhotos[item.id]?.title || ""}
                       />
                     </div>
