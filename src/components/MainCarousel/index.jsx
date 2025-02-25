@@ -126,11 +126,24 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   };
 
   const handleImageClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
-    setOpenedCards({
+    // Увеличиваем счетчик открытий для карточки
+    const newOpenedCards = {
       ...openedCards,
-      [index]: selectedPhotos[data[index].id],
-    });
+      [index]: (openedCards[index] || 0) + 1,
+    };
+    setOpenedCards(newOpenedCards);
+
+    // Если карточка открыта 3 раза - обновляем фото
+    if (newOpenedCards[index] === 3) {
+      const newPhoto = photos[Math.floor(Math.random() * photos.length)];
+      setSelectedPhotos({
+        ...selectedPhotos,
+        [data[index].id]: newPhoto,
+      });
+      // Сбрасываем счетчик
+      newOpenedCards[index] = 0;
+    }
+    setActiveIndex(index === activeIndex ? null : index);
     handleOpenPopup(selectedPhotos[data[index].id]);
   };
 
