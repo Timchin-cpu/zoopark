@@ -86,7 +86,14 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
-
+  useEffect(() => {
+    if (!activeIndex) {
+      // Закрываем карту при закрытии попапа
+      setOpenedCards({});
+      // Показываем следующую карту
+      setActiveSlide((prev) => (prev + 1) % data.length);
+    }
+  }, [activeIndex, data.length]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
