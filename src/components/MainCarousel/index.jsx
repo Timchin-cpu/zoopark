@@ -77,10 +77,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   }, [activeIndex]);
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    setOpenedCards({
+    const newOpenedCards = {
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
-    });
+    };
+    setOpenedCards(newOpenedCards);
     handleOpenPopup(selectedPhotos[data[index].id]);
   };
 
@@ -193,13 +194,11 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                     <div className="main-slider__image">
                       <img
                         src={
-                          activeIndex === i
-                            ? `http://localhost:3000${
-                                selectedPhotos[item.id]?.image
-                              }`
+                          openedCards[i]
+                            ? `http://localhost:3000${openedCards[i].image}`
                             : cardBackStyles[cardBackStyle].image
                         }
-                        alt={selectedPhotos[item.id]?.title || ""}
+                        alt={openedCards[i]?.title || ""}
                       />
                     </div>
                   }
