@@ -65,11 +65,19 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     if (photos.length > 0) {
-      // Генерируем случайное фото для каждой карточки
+      // Create weighted array based on chances
+      const weightedPhotos = photos.flatMap((photo) =>
+        // Repeat each photo based on its chance percentage
+        Array(Math.floor(photo.chance)).fill(photo)
+      );
+
+      // Generate random photos considering their chances
       const newSelectedPhotos = data.reduce((acc, item) => {
-        acc[item.id] = photos[Math.floor(Math.random() * photos.length)];
+        const randomIndex = Math.floor(Math.random() * weightedPhotos.length);
+        acc[item.id] = weightedPhotos[randomIndex];
         return acc;
       }, {});
+
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
