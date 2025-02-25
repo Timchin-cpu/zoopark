@@ -36,11 +36,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const cardBackStyle = useSelector((state) => state.cardBack);
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
-  console.log(selectedId);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
-  const [previousActiveIndex, setPreviousActiveIndex] = useState(null);
-
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
   useEffect(() => {
@@ -79,15 +76,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   }, [activeIndex]);
   const handleImageClick = (index) => {
-    // Закрываем предыдущую открытую карточку
-    if (activeIndex !== null && activeIndex !== index) {
-      setOpenedCards((prev) => {
-        const newState = { ...prev };
-        delete newState[activeIndex];
-        return newState;
-      });
-    }
-
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
@@ -96,13 +84,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     handleOpenPopup(selectedPhotos[data[index].id]);
   };
   const nextSlide = () => {
-    setPreviousActiveIndex(activeIndex);
-    setActiveIndex(null);
-    setActiveSlide((prev) => {
-      const nextSlide = (prev + 1) % data.length;
-      setOpenedCards({}); // Сбрасываем состояние всех карточек
-      return nextSlide;
-    });
+    setActiveSlide((prev) => (prev + 1) % data.length);
   };
 
   // const prevSlide = () => {
@@ -110,37 +92,37 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   // };
 
   const getStyles = (index) => {
-    if (activeSlide === index)
+    const currentIndex = activeSlide % data.length;
+    const prevIndex = (activeSlide - 1 + data.length) % data.length;
+    const nextIndex = (activeSlide + 1) % data.length;
+
+    if (index === currentIndex) {
       return {
         opacity: 1,
-        transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
+        transform: "translateX(0) translateZ(0px) rotateY(0deg)",
         zIndex: 10,
       };
-    else if (index === previousActiveIndex)
-      return {
-        opacity: 0.7,
-        transform: "translateX(-300px) translateZ(-600px) rotateY(60deg)",
-        zIndex: 8,
-      };
-    else if (activeSlide - 1 === index)
+    } else if (index === prevIndex) {
       return {
         opacity: 1,
         transform: "translateX(-200px) translateZ(-500px) rotateY(60deg)",
         zIndex: 9,
       };
-    else if (activeSlide + 1 === index)
+    } else if (index === nextIndex) {
       return {
         opacity: 1,
         transform: "translateX(200px) translateZ(-500px) rotateY(-60deg)",
         zIndex: 9,
       };
-    else
+    } else {
       return {
         opacity: 0,
         transform: "translateX(440px) translateZ(-600px) rotateY(-60deg)",
         zIndex: 7,
       };
+    }
   };
+
   return (
     <div className="main-control">
       <div className="main-control__bg">
