@@ -144,11 +144,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     });
     handleOpenPopup(selectedPhotos[data[index].id]);
 
-    // Reset card after delay
-    setTimeout(() => {
-      setActiveIndex(null);
-      setOpenedCards({});
-    }, 1000);
+    setActiveIndex(null);
+    setOpenedCards({});
   };
 
   return (
