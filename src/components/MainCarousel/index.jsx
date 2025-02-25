@@ -105,9 +105,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
   const getStyles = (index) => {
     const currentIndex = activeSlide % data.length;
-    const prevIndex = (activeSlide - 1 + data.length) % data.length;
-    const nextIndex = (activeSlide + 1) % data.length;
-
+    const prevIndex = (currentIndex - 1 + data.length) % data.length;
+    const nextIndex = (currentIndex + 1) % data.length;
     if (index === currentIndex) {
       return {
         opacity: 1,
@@ -116,22 +115,22 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     } else if (index === prevIndex) {
       return {
-        opacity: 1,
+        opacity: 0.6,
         transform: "translateX(-200px) translateZ(-500px) rotateY(60deg)",
         zIndex: 9,
-        isBackCard: true, // Добавляем флаг для определения задней карты
+        isBackCard: true,
       };
     } else if (index === nextIndex) {
       return {
-        opacity: 1,
+        opacity: 0.6,
         transform: "translateX(200px) translateZ(-500px) rotateY(-60deg)",
         zIndex: 9,
-        isBackCard: true, // Добавляем флаг для определения задней карты
+        isBackCard: true,
       };
     } else {
       return {
         opacity: 0,
-        transform: "translateX(440px) translateZ(-600px) rotateY(-60deg)",
+        transform: "translateX(0) translateZ(-600px) rotateY(0deg)",
         zIndex: 7,
       };
     }
