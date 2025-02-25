@@ -83,6 +83,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
+
   useEffect(() => {
     if (!activeIndex) {
       setOpenedCards({});
@@ -131,14 +132,17 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     }
   };
-
+  useEffect(() => {
+    setActiveIndex(null);
+    setOpenedCards({});
+  }, [activeSlide]);
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
-      [index]: selectedPhotos[data[index].id],
+      [index]: !openedCards[index],
     });
-    handleOpenPopup(selectedPhotos[data[index].id]);
+    handleOpenPopup();
   };
 
   return (
@@ -201,9 +205,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
+                  isFlipped={openedCards[i]}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />
                     </div>
                   }
                   backComponent={
