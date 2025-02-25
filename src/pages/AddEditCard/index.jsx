@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const AddEditCard = () => {
   const history = useHistory();
-
+  const [chance, setChance] = useState("100");
   const [cardType, setCardType] = useState("citizen"); // or 'city'
   const [cardSection, setCardSection] = useState("");
   const [title, setTitle] = useState("");
@@ -27,6 +27,8 @@ const AddEditCard = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("chance", chance);
+
     formData.append("price", price);
     formData.append("experience", experience);
     formData.append("type", cardSection);
@@ -85,6 +87,14 @@ const AddEditCard = () => {
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
             />{" "}
+            <p>Шанс выпадения (%)</p>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={chance}
+              onChange={(e) => setChance(e.target.value)}
+            />
           </div>
           <div>
             <p>Тип карты</p>
