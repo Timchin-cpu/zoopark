@@ -40,7 +40,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [photos, setPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState({});
-  const [viewedCards, setViewedCards] = useState(new Set());
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -61,18 +60,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         const copies = Math.floor(photo.chance);
         return acc.concat(Array(copies).fill(photo));
       }, []);
-
-      // Фильтруем фотографии, исключая просмотренные
-      const availablePhotos = weightedPhotos.filter(
-        (photo) => !viewedCards.has(photo.id)
-      );
-
-      // Если все карты просмотрены, сбрасываем список
-      if (availablePhotos.length === 0) {
-        setViewedCards(new Set());
-        availablePhotos.push(...weightedPhotos);
-      }
-      const shuffled = [...availablePhotos].sort(() => Math.random() - 0.5);
+      const shuffled = [...weightedPhotos].sort(() => Math.random() - 0.5);
       const newSelectedPhotos = data.reduce((acc, item) => {
         const randomIndex = Math.floor(Math.random() * shuffled.length);
         acc[item.id] = shuffled[randomIndex];
@@ -80,21 +68,20 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       }, {});
       setSelectedPhotos(newSelectedPhotos);
     }
-  }, [photos, viewedCards]);
+  }, [photos]);
+  // Reset card state when popup closes
   useEffect(() => {
     if (!activeIndex) {
       setOpenedCards({});
     }
   }, [activeIndex]);
   const handleImageClick = (index) => {
-    const selectedCard = selectedPhotos[data[index].id];
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
       ...openedCards,
-      [index]: selectedCard,
+      [index]: selectedPhotos[data[index].id],
     });
-    setViewedCards((prev) => new Set([...prev, selectedCard.id]));
-    handleOpenPopup(selectedCard);
+    handleOpenPopup(selectedPhotos[data[index].id]);
   };
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
