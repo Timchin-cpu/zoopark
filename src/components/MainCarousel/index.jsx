@@ -84,6 +84,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     handleOpenPopup(selectedPhotos[data[index].id]);
   };
   const nextSlide = () => {
+    if (activeIndex !== null) {
+      setOpenedCards({});
+      setActiveIndex(null);
+    }
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
 
