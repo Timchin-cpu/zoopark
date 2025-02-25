@@ -80,10 +80,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     setActiveIndex(newActiveIndex);
 
     if (newActiveIndex !== null) {
-      setOpenedCards((prev) => ({
-        ...prev,
+      setOpenedCards({
+        ...openedCards,
         [index]: selectedPhotos[data[index].id],
-      }));
+      });
       handleOpenPopup(selectedPhotos[data[index].id]);
     }
   };
