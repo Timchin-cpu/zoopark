@@ -34,38 +34,55 @@ const data = [
   { id: 5, bgColor: "#1597BB", title: "Slide 3" },
   { id: 6, bgColor: "#1597BB", title: "Slide 3" },
   { id: 7, bgColor: "#1597BB", title: "Slide 3" },
+  { id: 8, bgColor: "#1597BB", title: "Slide 3" },
+  { id: 9, bgColor: "#1597BB", title: "Slide 3" },
+  { id: 10, bgColor: "#1597BB", title: "Slide 3" },
 ];
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
+
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [photos, setPhotos] = useState([]);
-  const [selectedPhotos, setSelectedPhotos] = useState({});
+  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
+  const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
+
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
         const policeData = await peopleService.getPolicePhotos();
-        setPhotos(policeData);
+        // const firefighterData = await peopleService.getFirefighterPhotos();
+
+        // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
+        setPhotos(policeData); // Сохраняем все фото
         setSelectedId(
           policeData[Math.floor(Math.random() * policeData.length)]
         );
+
+        console.log(policeData);
+        // setFirefighterPhotos(firefighterData);
       } catch (error) {
         console.error(error);
       }
     };
+
     fetchPhotos();
   }, []);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     if (photos.length > 0) {
+      // Создаем массив карт с учетом их вероятности появления
       const weightedPhotos = photos.reduce((acc, photo) => {
+        // Количество дубликатов карты пропорционально ее шансу
         const copies = Math.floor(photo.chance);
         return acc.concat(Array(copies).fill(photo));
       }, []);
+      // Перемешиваем массив для случайного порядка
       const shuffled = [...weightedPhotos].sort(() => Math.random() - 0.5);
+      // Выбираем карты для каждой позиции в карусели
       const newSelectedPhotos = data.reduce((acc, item) => {
+        // Берем случайную карту из перемешанного массива с учетом весов
         const randomIndex = Math.floor(Math.random() * shuffled.length);
         acc[item.id] = shuffled[randomIndex];
         return acc;
@@ -73,25 +90,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
-  // Reset card state when popup closes
-  useEffect(() => {
-    if (!activeIndex) {
-      setOpenedCards({});
-    }
-  }, [activeIndex]);
-  const handleImageClick = (index) => {
-    const newActiveIndex = index === activeIndex ? null : index;
-    setActiveIndex(newActiveIndex);
-
-    if (newActiveIndex !== null) {
-      setOpenedCards({
-        ...openedCards,
-        [index]: selectedPhotos[data[index].id],
-      });
-      handleOpenPopup(selectedPhotos[data[index].id]);
-    }
-  };
-
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
@@ -130,6 +128,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         zIndex: 7,
       };
     }
+  };
+
+  const handleImageClick = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+    setOpenedCards({
+      ...openedCards,
+      [index]: selectedPhotos[data[index].id],
+    });
+    handleOpenPopup(selectedPhotos[data[index].id]);
   };
 
   return (
