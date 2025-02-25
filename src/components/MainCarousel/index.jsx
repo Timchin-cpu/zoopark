@@ -107,6 +107,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
         opacity: 1,
         transform: "translateX(-200px) translateZ(-500px) rotateY(60deg)",
         zIndex: 9,
+        isBackCard: true, // Добавляем флаг для определения задней карты
       };
     } else if (index === nextIndex) {
       return {
@@ -122,11 +123,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     }
   };
-  const [flippedCards, setFlippedCards] = useState(new Set());
 
-  useEffect(() => {
-    setFlippedCards(new Set([activeSlide]));
-  }, [activeSlide]);
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
@@ -196,8 +193,22 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
-                  isFlipped={!flippedCards.has(i)}
                   frontComponent={
+                    <div className="main-slider__image">
+                      <img
+                        src={
+                          getStyles(i).isBackCard
+                            ? cardBackStyles[cardBackStyle].image
+                            : `http://localhost:3000${
+                                openedCards[i]?.image ||
+                                selectedPhotos[item.id]?.image
+                              }`
+                        }
+                        alt=""
+                      />
+                    </div>
+                  }
+                  backComponent={
                     <div className="main-slider__image">
                       <img
                         src={`http://localhost:3000${
@@ -206,11 +217,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                         }`}
                         alt={selectedPhotos[item.id]?.title || ""}
                       />
-                    </div>
-                  }
-                  backComponent={
-                    <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />
                     </div>
                   }
                 ></ReactFlipCard>
