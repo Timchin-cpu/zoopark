@@ -35,6 +35,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
   const [selectedId, setSelectedId] = useState(null);
+  console.log(selectedId);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
   const [photos, setPhotos] = useState([]);
