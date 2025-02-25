@@ -95,25 +95,22 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     const currentIndex = activeSlide % data.length;
     const prevIndex = (activeSlide - 1 + data.length) % data.length;
     const nextIndex = (activeSlide + 1) % data.length;
-    const baseStyle = {
-      opacity: 1,
-      transition: "all 0.5s ease",
-    };
+
     if (index === currentIndex) {
       return {
-        ...baseStyle,
+        opacity: 1,
         transform: "translateX(0) translateZ(0px) rotateY(0deg)",
         zIndex: 10,
       };
     } else if (index === prevIndex) {
       return {
-        ...baseStyle,
+        opacity: 1,
         transform: "translateX(-200px) translateZ(-500px) rotateY(60deg)",
         zIndex: 9,
       };
     } else if (index === nextIndex) {
       return {
-        ...baseStyle,
+        opacity: 1,
         transform: "translateX(200px) translateZ(-500px) rotateY(-60deg)",
         zIndex: 9,
       };
@@ -125,6 +122,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       };
     }
   };
+
   const handleImageClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
     setOpenedCards({
@@ -194,15 +192,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
+                  isFlipped={activeSlide !== i} // Add this line to control card flipping
                   frontComponent={
                     <div className="main-slider__image">
-                      <img
-                        src={cardBackStyles[cardBackStyle].image}
-                        alt=""
-                        style={{
-                          transition: "opacity 0.3s ease",
-                        }}
-                      />
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
                     </div>
                   }
                   backComponent={
