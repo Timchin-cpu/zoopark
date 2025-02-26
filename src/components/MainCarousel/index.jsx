@@ -212,12 +212,14 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   isFlipped={isFlipped[i]}
                   className="main-slider__card"
                   onClick={() => {
-                    handleFlip(i);
-                    handleImageClick(i);
+                    if (activeSlide === i) {
+                      handleFlip(i);
+                      handleImageClick(i);
+                    }
                   }}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
+                      <img src={cardBackStyles[cardBackStyle].image} alt="" />
                     </div>
                   }
                   backComponent={
