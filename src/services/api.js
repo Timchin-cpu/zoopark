@@ -9,7 +9,7 @@ export const userService = {
 export const userInitService = {
   // Инициализация пользователя
   initUser: (telegram_id, username) =>
-    axios.post("/api/user/init", {
+    axios.post("/user/init", {
       telegram_id,
       username,
       level: 1,
