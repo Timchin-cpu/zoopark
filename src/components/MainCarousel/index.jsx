@@ -110,7 +110,7 @@ const MainCarousel = ({
         setIsFlipped(false);
         setActiveIndex(null);
         setOpenedCards({});
-      }, 1500);
+      }, 500);
       onUpdateComplete();
     }
   }, [shouldUpdate, onUpdateComplete]);
