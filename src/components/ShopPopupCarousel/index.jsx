@@ -1,35 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import ReactFlipCard from "reactjs-flip-card";
 import "./styles.scss";
-
-// import DefaultImg from "assets/img/default-img.png";
+import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
-import MainCarouselSet from "components/MainCarouselSet";
-
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
-
-const ShopPopupCarousel = (props) => {
+const ShopPopup = (props) => {
   const popupRef = useRef(null);
-  const [nameCard, setNameCard] = useState(false);
-  const [DescrCard, setDescrCard] = useState(false);
-  const [priceCard, setPriceCard] = useState(false);
-  const [expCard, setExpCard] = useState(false);
-  //
+  const [isFlipped, setIsFlipped] = useState(false);
   const { setActivePopup } = props;
-  const handleOpenPopup = (cardData) => {
-    document.documentElement.classList.add("fixed");
-    setActivePopup(true);
-    setNameCard(cardData.title);
-    setDescrCard(cardData.description);
-    setPriceCard(cardData.price);
-    setExpCard(cardData.experience);
-  };
-
-  //   const handleClosePopup = () => {
-  //     document.documentElement.classList.remove("fixed");
-  //     setActivePopup(false);
-  //   };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -37,18 +16,22 @@ const ShopPopupCarousel = (props) => {
         setActivePopup(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setActivePopup]);
-
+  const handleClose = () => {
+    setIsFlipped(true);
+    setTimeout(() => {
+      props.handleClosePopup();
+    }, 500);
+  };
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
         <button
           type="button"
           className="shop-popup__close"
-          onClick={props.handleClosePopup}
+          onClick={handleClose}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,23 +46,38 @@ const ShopPopupCarousel = (props) => {
           </svg>
         </button>
         <div className="shop-popup__inner">
-          {/* <div className="shop-popup__image"> */}
-          <MainCarouselSet
-            getActiveSlide={5}
-            handleOpenPopup={handleOpenPopup}
+          <ReactFlipCard
+            flipTrigger="disabled"
+            flipped={isFlipped}
+            frontComponent={
+              <div className="shop-popup__image">
+                <img
+                  src={
+                    props.selectedPhoto
+                      ? props.selectedPhoto.id === "set" ||
+                        props.selectedPhoto.id === "energy" ||
+                        props.selectedPhoto.id === "money"
+                        ? props.selectedPhoto.image
+                        : `http://localhost:3000${props.selectedPhoto.image}`
+                      : DefaultImg
+                  }
+                  alt={props.selectedPhoto?.title || ""}
+                />
+              </div>
+            }
+            backComponent={
+              <div className="shop-popup__image">
+                <img src={DefaultImg} alt="" />
+              </div>
+            }
           />
-          {/* <img
-              src={
-                props.selectedPhoto
-                  ? `http://localhost:3000${props.selectedPhoto.image}`
-                  : DefaultImg
-              }
-              alt={props.selectedPhoto?.title || ""}
-            />{" "} */}
-          {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">{nameCard ? nameCard : ""}</h3>{" "}
-            <p className="shop-popup__text">{DescrCard ? DescrCard : ""}</p>
+            <h3 className="shop-popup__title">
+              {props.selectedPhoto ? props.selectedPhoto.title : ""}
+            </h3>
+            <p className="shop-popup__text">
+              {props.selectedPhoto ? props.selectedPhoto.description : ""}
+            </p>
             <div className="shop-popup__earn">
               <div className="main-params__card f-center-center">
                 <div className="main-params__icon f-center-center">
@@ -93,11 +91,11 @@ const ShopPopupCarousel = (props) => {
             <ul className="friends-params f-center-center">
               <li className="friends-params__item f-center">
                 <img src={StarIcon} alt="" />
-                {expCard ? expCard : ""} EXP
+                {props.selectedPhoto ? props.selectedPhoto.experience : ""}
               </li>
               <li className="friends-params__item f-center">
                 <img src={CoinIcon} alt="" />
-                {priceCard ? priceCard : ""}
+                {props.selectedPhoto ? props.selectedPhoto.price : ""}
               </li>
             </ul>
           </div>
@@ -113,5 +111,4 @@ const ShopPopupCarousel = (props) => {
     </div>
   );
 };
-
-export default ShopPopupCarousel;
+export default ShopPopup;
