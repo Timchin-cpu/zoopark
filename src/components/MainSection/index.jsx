@@ -169,7 +169,7 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={MoneyIcon} alt="" />
                 </div>
-                <p className="main-params__title">80 451 133</p>
+                <p className="main-params__title">{coins}</p>
               </div>
             </li>
           </ul>
