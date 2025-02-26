@@ -11,7 +11,7 @@ import CoinIcon from "assets/img/coin-icon.svg";
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
 
-  const { setActivePopup } = props;
+  const { setActivePopup, onButtonClick } = props; // Добавляем onButtonClick в props
   console.log(props);
 
   useEffect(() => {
@@ -25,14 +25,21 @@ const ShopPopup = (props) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setActivePopup]);
-
+  const handleButtonClick = () => {
+    if (props.handleClosePopup) {
+      props.handleClosePopup();
+    }
+    if (onButtonClick) {
+      onButtonClick(); // Вызываем callback при клике на кнопку
+    }
+  };
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
         <button
           type="button"
           className="shop-popup__close"
-          onClick={props.handleClosePopup}
+          onClick={handleButtonClick}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

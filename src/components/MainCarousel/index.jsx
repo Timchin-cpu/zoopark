@@ -43,7 +43,12 @@ const data = [
   { id: 14, bgColor: "#7952B3", title: "Slide 2" },
   { id: 15, bgColor: "#1597BB", title: "Slide 3" },
 ];
-const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
+const MainCarousel = ({
+  getActiveSlide,
+  handleOpenPopup,
+  shouldUpdate,
+  onUpdateComplete,
+}) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
 
@@ -98,7 +103,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % data.length);
   };
-
+  useEffect(() => {
+    if (shouldUpdate) {
+      // Обновляем состояние карусели
+      setIsFlipped(false);
+      setActiveIndex(null);
+      setOpenedCards({});
+      onUpdateComplete();
+    }
+  }, [shouldUpdate, onUpdateComplete]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };

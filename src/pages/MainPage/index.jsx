@@ -34,6 +34,7 @@ const MainPage = () => {
   //   };
 
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [shouldUpdateCarousel, setShouldUpdateCarousel] = useState(false);
 
   const handleOpenPopup = (photo) => {
     setTimeout(function () {
@@ -47,7 +48,9 @@ const MainPage = () => {
     document.documentElement.classList.remove("fixed");
     setActiveShopPopup(false);
   };
-
+  const handlePopupButtonClick = () => {
+    setShouldUpdateCarousel(true); // Устанавливаем флаг для обновления карусели
+  };
   return (
     <section className="main">
       <div className="container">
@@ -57,6 +60,8 @@ const MainPage = () => {
             <MainCarousel
               getActiveSlide={3}
               handleOpenPopup={(photo) => handleOpenPopup(photo)}
+              shouldUpdate={shouldUpdateCarousel}
+              onUpdateComplete={() => setShouldUpdateCarousel(false)}
             />
           </div>
         </div>
@@ -67,6 +72,7 @@ const MainPage = () => {
         setActivePopup={setActiveShopPopup}
         handleClosePopup={handleClosePopup}
         selectedPhoto={selectedPhoto}
+        onButtonClick={handlePopupButtonClick}
       />
       <MobileNav />
     </section>
