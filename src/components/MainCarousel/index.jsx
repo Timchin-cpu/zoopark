@@ -143,10 +143,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       [index]: selectedPhotos[data[index].id],
     });
     handleOpenPopup(selectedPhotos[data[index].id]);
-
-    setActiveIndex(null);
-    setOpenedCards({});
-    setIsFlipped(true);
+    setTimeout(() => {
+      setIsFlipped(false);
+    }, 10000); // 1.5 секунды
   };
 
   return (
