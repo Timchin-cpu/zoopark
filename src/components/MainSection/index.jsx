@@ -15,7 +15,14 @@ import { userService } from "services/api";
 
 const MainSection = () => {
   const [activePopup, setActivePopup] = useState(false);
-
+  const [username, setUsername] = useState(""); // Добавляем состояние для username
+  useEffect(() => {
+    // Получаем данные пользователя из Telegram WebApp
+    const tg = window.Telegram.WebApp;
+    if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      setUsername(tg.initDataUnsafe.user.username || "Пользователь");
+    }
+  }, []);
   const handleOpenSettings = () => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
@@ -44,7 +51,7 @@ const MainSection = () => {
               </div>
               <div className="main-head__content">
                 <div className="main-head__user">
-                  Bigbaddaboom <span>/ Мэр</span>
+                  {username} <span>/ Мэр</span>
                 </div>
                 <p className="main-head__level">Уровень города 12</p>
                 <div className="main-head__progress">
