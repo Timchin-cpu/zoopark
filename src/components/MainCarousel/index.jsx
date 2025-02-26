@@ -205,10 +205,10 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 }}
               >
                 <ReactFlipCard
-                  flipped={isFlipped}
-                  flipTrigger={"onClick"}
+                  direction="horizontal"
+                  flipTrigger="hover"
                   className="main-slider__card"
-                  onClick={() => handleImageClick(i)}
+                  onFlip={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
                       <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
@@ -217,19 +217,15 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={
-                          getStyles(i).isBackCard
-                            ? cardBackStyles[cardBackStyle].image
-                            : `http://localhost:3000${
-                                openedCards[i]?.image ||
-                                selectedPhotos[item.id]?.image
-                              }`
-                        }
-                        alt=""
+                        src={`http://localhost:3000${
+                          openedCards[i]?.image ||
+                          selectedPhotos[item.id]?.image
+                        }`}
+                        alt={selectedPhotos[item.id]?.title || ""}
                       />
                     </div>
                   }
-                ></ReactFlipCard>
+                />
               </div>
             </React.Fragment>
           ))}
