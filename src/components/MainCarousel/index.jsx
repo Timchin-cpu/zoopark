@@ -46,7 +46,7 @@ const data = [
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-
+  const [isFlipped, setIsFlipped] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -146,6 +146,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
     setActiveIndex(null);
     setOpenedCards({});
+    setIsFlipped(!isFlipped);
   };
 
   return (
@@ -205,6 +206,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 }}
               >
                 <ReactFlipCard
+                  flipped={isFlipped}
                   flipTrigger={"onClick"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
