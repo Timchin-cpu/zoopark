@@ -136,16 +136,21 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
     }
   };
 
+  const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
+    setIsFlipped(true);
     setOpenedCards({
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
     });
+
     handleOpenPopup(selectedPhotos[data[index].id]);
 
-    setActiveIndex(null);
-    setOpenedCards({});
+    setTimeout(() => {
+      setIsFlipped(false);
+      setActiveIndex(null);
+      setOpenedCards({});
+    }, 1500);
   };
 
   return (
@@ -205,7 +210,8 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 }}
               >
                 <ReactFlipCard
-                  flipTrigger={"onClick"}
+                  flipTrigger="disabled"
+                  flipByProp={isFlipped}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
                   frontComponent={
