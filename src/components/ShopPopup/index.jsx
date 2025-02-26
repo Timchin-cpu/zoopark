@@ -10,34 +10,29 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
-  const { setActivePopup, setIsFlipped, setActiveIndex, setOpenedCards } =
-    props;
+
+  const { setActivePopup } = props;
+  console.log(props);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
         document.documentElement.classList.remove("fixed");
         setActivePopup(false);
-        if (setIsFlipped) setIsFlipped(false);
-        if (setActiveIndex) setActiveIndex(null);
-        if (setOpenedCards) setOpenedCards({});
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setActivePopup, setIsFlipped, setActiveIndex, setOpenedCards]);
-  const handleCloseClick = () => {
-    props.handleClosePopup();
-    if (setIsFlipped) setIsFlipped(false);
-    if (setActiveIndex) setActiveIndex(null);
-    if (setOpenedCards) setOpenedCards({});
-  };
+  }, [setActivePopup]);
+
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
         <button
           type="button"
           className="shop-popup__close"
-          onClick={handleCloseClick}
+          onClick={props.handleClosePopup}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
