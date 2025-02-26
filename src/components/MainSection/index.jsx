@@ -15,6 +15,8 @@ import { userService } from "services/api";
 import { userInitService } from "services/api";
 
 const MainSection = () => {
+  const [coins, setCoins] = useState(0); // Добавляем состояние для coins
+
   const [activePopup, setActivePopup] = useState(false);
   const [username, setUsername] = useState(""); // Добавляем состояние для username
   useEffect(() => {
@@ -56,6 +58,9 @@ const MainSection = () => {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getUser(telegram_id);
           console.log(response);
+          if (response.data && response.data.coins) {
+            setCoins(response.data.coins);
+          }
           // Обработка данных пользователя
         } catch (error) {
           console.error("Error fetching user:", error);
