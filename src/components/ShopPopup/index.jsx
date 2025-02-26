@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+import ReactFlipCard from "reactjs-flip-card";
 import "./styles.scss";
 
 import DefaultImg from "assets/img/default-img.png";
