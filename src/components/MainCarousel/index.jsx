@@ -161,6 +161,8 @@ const MainCarousel = ({
     });
     try {
       // Добавляем карточку пользователю (используем id=1 как пример)
+      const selectedCard = selectedPhotos[data[index].id];
+
       await userCardsService.addCardToUser(1, selectedCard.id);
       console.log("Card added to user successfully");
     } catch (error) {
