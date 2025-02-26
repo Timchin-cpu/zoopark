@@ -151,6 +151,7 @@ const MainCarousel = ({
       };
     }
   };
+
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
     setIsFlipped(true);
@@ -160,7 +161,7 @@ const MainCarousel = ({
     });
     try {
       // Добавляем карточку пользователю (используем id=1 как пример)
-      await userCardsService.addCardToUser(1, selectedPhotos[data[index].id]);
+      await userCardsService.addCardToUser(1, selectedCard.id);
       console.log("Card added to user successfully");
     } catch (error) {
       console.error("Error adding card to user:", error);
