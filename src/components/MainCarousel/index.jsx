@@ -95,9 +95,6 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       setSelectedPhotos(newSelectedPhotos);
     }
   }, [photos]);
-  const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % data.length);
-  };
 
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
@@ -146,13 +143,18 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
     handleOpenPopup(selectedPhotos[data[index].id]);
 
-    setTimeout(() => {
-      setIsFlipped(false);
-      setActiveIndex(null);
-      setOpenedCards({});
-    }, 1500);
+    // setTimeout(() => {
+    //   setIsFlipped(false);
+    //   setActiveIndex(null);
+    //   setOpenedCards({});
+    // }, 1500);
   };
-
+  const nextSlide = () => {
+    setIsFlipped(false);
+    setActiveIndex(null);
+    setOpenedCards({});
+    setActiveSlide((prev) => (prev + 1) % data.length);
+  };
   return (
     <div className="main-control">
       <div className="main-control__bg">
