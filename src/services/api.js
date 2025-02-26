@@ -9,10 +9,19 @@ export const userService = {
 export const userInitService = {
   // Инициализация пользователя
   initUser: (telegram_id, username) =>
-    axios.post("/api/user/init", { telegram_id, username }),
+    axios.post("/api/user/init", {
+      telegram_id,
+      username,
+      level: 1,
+      experience: 0,
+      coins: 0,
+      vibration: true,
+      darkTheme: false,
+      language: "ru",
+    }),
 
   // Получение данных пользователя по telegram_id
-  getUser: (telegram_id) => axios.get(`/api/user/${telegram_id}`),
+  getUser: (telegram_id) => axios.get(`/user/${telegram_id}`),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),

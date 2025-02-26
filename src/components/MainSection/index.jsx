@@ -31,8 +31,14 @@ const MainSection = () => {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const username = tg.initDataUnsafe.user.username || "Пользователь";
+          // Сначала пробуем получить существующего пользователя
+          const existingUser = await userInitService.getUser(telegram_id);
 
-          await userInitService.initUser(telegram_id, username);
+          if (!existingUser.data) {
+            // Если пользователь не найден - создаем нового
+            await userInitService.initUser(telegram_id, username);
+          }
+
           setUsername(username);
         } catch (error) {
           console.error("Error initializing user:", error);
