@@ -6,7 +6,14 @@ export const userService = {
   updateSettings: (userId, settings) =>
     axios.put("/user/settings", { userId, settings }),
 };
+export const userInitService = {
+  // Инициализация пользователя
+  initUser: (telegram_id, username) =>
+    axios.post("/api/user/init", { telegram_id, username }),
 
+  // Получение данных пользователя по telegram_id
+  getUser: (telegram_id) => axios.get(`/api/user/${telegram_id}`),
+};
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
   getCardsByType: (type) => axios.get(`/cards/${type}`),

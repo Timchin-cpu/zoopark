@@ -12,6 +12,7 @@ import { routeSets } from "pages/SetsPage";
 import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
 import { userService } from "services/api";
+import { userInitService } from "services/api";
 
 const MainSection = () => {
   const [activePopup, setActivePopup] = useState(false);
@@ -22,6 +23,40 @@ const MainSection = () => {
     if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
       setUsername(tg.initDataUnsafe.user.username || "Пользователь");
     }
+  }, []);
+  useEffect(() => {
+    const initializeUser = async () => {
+      const tg = window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        try {
+          const telegram_id = tg.initDataUnsafe.user.id;
+          const username = tg.initDataUnsafe.user.username || "Пользователь";
+
+          await userInitService.initUser(telegram_id, username);
+          setUsername(username);
+        } catch (error) {
+          console.error("Error initializing user:", error);
+          setUsername("Пользователь");
+        }
+      }
+    };
+    initializeUser();
+  }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const tg = window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        try {
+          const telegram_id = tg.initDataUnsafe.user.id;
+          const response = await userInitService.getUser(telegram_id);
+          console.log(response);
+          // Обработка данных пользователя
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
+      }
+    };
+    fetchUser();
   }, []);
   const handleOpenSettings = () => {
     document.documentElement.classList.add("fixed");
