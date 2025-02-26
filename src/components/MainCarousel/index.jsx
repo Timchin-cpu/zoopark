@@ -46,7 +46,7 @@ const data = [
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-  const [isFlipped, setIsFlipped] = useState(false);
+  // const [isFlipped, setIsFlipped] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -143,9 +143,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       [index]: selectedPhotos[data[index].id],
     });
     handleOpenPopup(selectedPhotos[data[index].id]);
-    setTimeout(() => {
-      setIsFlipped(false);
-    }, 10000); // 1.5 секунды
+    // setTimeout(() => {
+    //   setIsFlipped(false);
+    // }, 10000); // 1.5 секунды
   };
 
   return (
