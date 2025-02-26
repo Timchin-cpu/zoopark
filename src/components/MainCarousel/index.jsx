@@ -46,7 +46,7 @@ const data = [
 const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-  // const [isFlipped, setIsFlipped] = useState(false);
+
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
@@ -143,9 +143,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
       [index]: selectedPhotos[data[index].id],
     });
     handleOpenPopup(selectedPhotos[data[index].id]);
-    // setTimeout(() => {
-    //   setIsFlipped(false);
-    // }, 10000); // 1.5 секунды
+
+    setActiveIndex(null);
+    setOpenedCards({});
   };
 
   return (
@@ -205,10 +205,9 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 }}
               >
                 <ReactFlipCard
-                  direction="horizontal"
-                  flipTrigger="hover"
+                  flipTrigger={"onClick"}
                   className="main-slider__card"
-                  onFlip={() => handleImageClick(i)}
+                  onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
                       <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
@@ -217,15 +216,19 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
-                          openedCards[i]?.image ||
-                          selectedPhotos[item.id]?.image
-                        }`}
-                        alt={selectedPhotos[item.id]?.title || ""}
+                        src={
+                          getStyles(i).isBackCard
+                            ? cardBackStyles[cardBackStyle].image
+                            : `http://localhost:3000${
+                                openedCards[i]?.image ||
+                                selectedPhotos[item.id]?.image
+                              }`
+                        }
+                        alt=""
                       />
                     </div>
                   }
-                />
+                ></ReactFlipCard>
               </div>
             </React.Fragment>
           ))}
