@@ -146,7 +146,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
 
     setActiveIndex(null);
     setOpenedCards({});
-    setIsFlipped(false);
+    setIsFlipped(true);
   };
 
   return (
