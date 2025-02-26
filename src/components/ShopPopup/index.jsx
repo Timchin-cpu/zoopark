@@ -10,34 +10,34 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
-
-  const { setActivePopup } = props;
-  console.log(props);
-
+  const { setActivePopup, setIsFlipped, setActiveIndex, setOpenedCards } =
+    props;
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
         document.documentElement.classList.remove("fixed");
         setActivePopup(false);
+        if (setIsFlipped) setIsFlipped(false);
+        if (setActiveIndex) setActiveIndex(null);
+        if (setOpenedCards) setOpenedCards({});
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setActivePopup]);
-
+  }, [setActivePopup, setIsFlipped, setActiveIndex, setOpenedCards]);
+  const handleCloseClick = () => {
+    props.handleClosePopup();
+    if (setIsFlipped) setIsFlipped(false);
+    if (setActiveIndex) setActiveIndex(null);
+    if (setOpenedCards) setOpenedCards({});
+  };
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
         <button
           type="button"
           className="shop-popup__close"
-          onClick={() => {
-            props.handleClosePopup();
-            setIsFlipped(false);
-            setActiveIndex(null);
-            setOpenedCards({});
-          }}
+          onClick={handleCloseClick}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

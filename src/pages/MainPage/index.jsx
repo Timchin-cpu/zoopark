@@ -66,7 +66,9 @@ const MainPage = () => {
         main={true}
         setActivePopup={setActiveShopPopup}
         handleClosePopup={handleClosePopup}
-        selectedPhoto={selectedPhoto}
+        setIsFlipped={setIsFlipped}
+        setActiveIndex={setActiveIndex}
+        setOpenedCards={setOpenedCards}
       />
       <MobileNav />
     </section>
