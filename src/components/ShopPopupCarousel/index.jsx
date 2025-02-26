@@ -15,9 +15,8 @@ const ShopPopupCarousel = (props) => {
   const [DescrCard, setDescrCard] = useState(false);
   const [priceCard, setPriceCard] = useState(false);
   const [expCard, setExpCard] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
+  //
   const { setActivePopup } = props;
-
   const handleOpenPopup = (cardData) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
@@ -26,9 +25,11 @@ const ShopPopupCarousel = (props) => {
     setPriceCard(cardData.price);
     setExpCard(cardData.experience);
   };
-  const handleFlipCard = () => {
-    setIsFlipped(!isFlipped);
-  };
+
+  //   const handleClosePopup = () => {
+  //     document.documentElement.classList.remove("fixed");
+  //     setActivePopup(false);
+  //   };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -36,9 +37,11 @@ const ShopPopupCarousel = (props) => {
         setActivePopup(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setActivePopup]);
+
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
@@ -60,14 +63,22 @@ const ShopPopupCarousel = (props) => {
           </svg>
         </button>
         <div className="shop-popup__inner">
+          {/* <div className="shop-popup__image"> */}
           <MainCarouselSet
             getActiveSlide={5}
             handleOpenPopup={handleOpenPopup}
-            isFlipped={isFlipped}
-            onFlip={handleFlipCard}
           />
+          {/* <img
+              src={
+                props.selectedPhoto
+                  ? `http://localhost:3000${props.selectedPhoto.image}`
+                  : DefaultImg
+              }
+              alt={props.selectedPhoto?.title || ""}
+            />{" "} */}
+          {/* </div> */}
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">{nameCard ? nameCard : ""}</h3>
+            <h3 className="shop-popup__title">{nameCard ? nameCard : ""}</h3>{" "}
             <p className="shop-popup__text">{DescrCard ? DescrCard : ""}</p>
             <div className="shop-popup__earn">
               <div className="main-params__card f-center-center">
@@ -93,11 +104,9 @@ const ShopPopupCarousel = (props) => {
           <button
             type="button"
             className="shop-popup__btn"
-            onClick={handleFlipCard}
+            onClick={props.handleClosePopup}
           >
-            {isFlipped
-              ? "Показать переднюю сторону"
-              : "Показать заднюю сторону"}
+            {!props.main ? "Купить" : "Ок"}
           </button>
         </div>
       </div>
