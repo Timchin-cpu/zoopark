@@ -151,7 +151,6 @@ const MainCarousel = ({
       };
     }
   };
-
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
     setIsFlipped(true);
