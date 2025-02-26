@@ -211,7 +211,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
               >
                 <ReactFlipCard
                   flipTrigger="disabled"
-                  flipByProp={isFlipped}
+                  flipByProp={activeSlide === i && isFlipped}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
                   frontComponent={
