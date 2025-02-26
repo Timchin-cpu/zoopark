@@ -160,10 +160,14 @@ const MainCarousel = ({
       [index]: selectedPhotos[data[index].id],
     });
     try {
-      // Добавляем карточку пользователю (используем id=1 как пример)
       const selectedCard = selectedPhotos[data[index].id];
-
-      await userCardsService.addCardToUser(1, selectedCard.id);
+      const tg = window.Telegram.WebApp;
+      const telegram_id = tg.initDataUnsafe?.user?.id;
+      if (!telegram_id) {
+        console.error("Telegram ID not found");
+        return;
+      }
+      await userCardsService.addCardToUser(telegram_id, selectedCard.id);
       console.log("Card added to user successfully");
     } catch (error) {
       console.error("Error adding card to user:", error);
