@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import ReactFlipCard from "reactjs-flip-card";
+import React, { useEffect, useRef } from "react";
+
 import "./styles.scss";
 
 import DefaultImg from "assets/img/default-img.png";
@@ -10,8 +10,10 @@ import CoinIcon from "assets/img/coin-icon.svg";
 
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
-  const [isFlipped, setIsFlipped] = useState(false);
+
   const { setActivePopup } = props;
+  console.log(props);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -19,22 +21,18 @@ const ShopPopup = (props) => {
         setActivePopup(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setActivePopup]);
-  const handleClose = () => {
-    setIsFlipped(!isFlipped);
-    setTimeout(() => {
-      props.handleClosePopup();
-    }, 500); // Задержка перед закрытием попапа
-  };
+
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
         <button
           type="button"
           className="shop-popup__close"
-          onClick={handleClose}
+          onClick={props.handleClosePopup}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,31 +47,37 @@ const ShopPopup = (props) => {
           </svg>
         </button>
         <div className="shop-popup__inner">
-          <ReactFlipCard
-            isFlipped={isFlipped}
-            flipTrigger="disabled"
-            frontComponent={
-              <div className="shop-popup__image">
-                <img
-                  src={
-                    props.selectedPhoto
-                      ? props.selectedPhoto.id === "set" ||
-                        props.selectedPhoto.id === "energy" ||
-                        props.selectedPhoto.id === "money"
-                        ? props.selectedPhoto.image
-                        : `http://localhost:3000${props.selectedPhoto.image}`
-                      : DefaultImg
-                  }
-                  alt={props.selectedPhoto?.title || ""}
-                />
-              </div>
-            }
-            backComponent={
-              <div className="shop-popup__image">
-                <img src={DefaultImg} alt="Card Back" />
-              </div>
-            }
-          />
+          <div className="shop-popup__image">
+            {/* <img
+              src={
+                props.selectedPhoto
+                  ? `http://localhost:3000${props.selectedPhoto.image}`
+                  : DefaultImg
+              }
+              alt={props.selectedPhoto?.title || ""}
+            /> */}
+            {/* <img
+              src={
+                item.id === "set" || item.id === "energy" || item.id === "money"
+                  ? item.image
+                  : `http://localhost:3000${item.image}`
+              }
+              alt=""
+              className="shop-card__Img"
+            /> */}
+            <img
+              src={
+                props.selectedPhoto
+                  ? props.selectedPhoto.id === "set" ||
+                    props.selectedPhoto.id === "energy" ||
+                    props.selectedPhoto.id === "money"
+                    ? props.selectedPhoto.image
+                    : `http://localhost:3000${props.selectedPhoto.image}`
+                  : DefaultImg
+              }
+              alt={props.selectedPhoto?.title || ""}
+            />
+          </div>
           <div className="shop-popup__content">
             <h3 className="shop-popup__title">
               {props.selectedPhoto ? props.selectedPhoto.title : ""}

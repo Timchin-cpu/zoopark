@@ -205,7 +205,7 @@ const MainCarousel = ({ getActiveSlide, handleOpenPopup }) => {
                 }}
               >
                 <ReactFlipCard
-                  flipTrigger={"onClick"}
+                  flipTrigger={"manual"}
                   className="main-slider__card"
                   onClick={() => handleImageClick(i)}
                   frontComponent={
