@@ -14,6 +14,7 @@ import ReactFlipCard from "reactjs-flip-card";
 // import SettingsPopup from "components/SettingsPopup";
 
 import { peopleService } from "services/api";
+import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
@@ -152,20 +153,20 @@ const MainCarousel = ({
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
-  const handleImageClick = (index) => {
+  const handleImageClick = async (index) => {
     setIsFlipped(true);
     setOpenedCards({
       ...openedCards,
       [index]: selectedPhotos[data[index].id],
     });
-
+    try {
+      // Добавляем карточку пользователю (используем id=1 как пример)
+      await userCardsService.addCardToUser(1, selectedPhotos[data[index].id]);
+      console.log("Card added to user successfully");
+    } catch (error) {
+      console.error("Error adding card to user:", error);
+    }
     handleOpenPopup(selectedPhotos[data[index].id]);
-
-    // setTimeout(() => {
-    //   setIsFlipped(false);
-    //   setActiveIndex(null);
-    //   setOpenedCards({});
-    // }, 1500);
   };
 
   return (
