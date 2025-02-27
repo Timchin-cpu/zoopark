@@ -81,18 +81,25 @@ const MainCarousel = ({
     fetchEnergy();
   }, []);
   const updateRemainingTime = (lastUpdate) => {
+    console.log(lastUpdate);
+    if (!lastUpdate) {
+      setRemainingTime("00:00:00");
+      return;
+    }
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-
-      // Предполагаем, что энергия восстанавливается каждый час
+      // Проверяем, что lastUpdateTime валидное значение
+      if (isNaN(lastUpdateTime)) {
+        setRemainingTime("00:00:00");
+        return;
+      }
+      // Энергия восстанавливается каждый час
       const remainingMs = 3600000 - (timeDiff % 3600000);
-
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
-
       setRemainingTime(
         `${hours.toString().padStart(2, "0")}:${minutes
           .toString()
