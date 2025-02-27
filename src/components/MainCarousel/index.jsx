@@ -207,7 +207,6 @@ const MainCarousel = ({
   const handleImageClick = async (index) => {
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
-
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
@@ -216,13 +215,17 @@ const MainCarousel = ({
       // Not enough energy
       return;
     }
+    // Проверяем, была ли карта уже открыта
+    if (openedCards[index]) {
+      setIsFlipped(true);
+      handleOpenPopup(selectedPhotos[data[index].id]);
+      return;
+    }
     try {
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
-
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
-
       setIsFlipped(true);
       setOpenedCards({
         ...openedCards,
