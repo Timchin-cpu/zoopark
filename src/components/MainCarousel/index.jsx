@@ -195,14 +195,14 @@ const MainCarousel = ({
         opacity: 0.6,
         transform: "translateX(-200px) translateZ(-500px) rotateY(60deg)",
         zIndex: 9,
-        isBackCard: true,
+        // isBackCard: true,
       };
     } else if (index === nextIndex) {
       return {
         opacity: 0.6,
         transform: "translateX(200px) translateZ(-500px) rotateY(-60deg)",
         zIndex: 9,
-        isBackCard: true,
+        // isBackCard: true,
       };
     } else {
       return {
