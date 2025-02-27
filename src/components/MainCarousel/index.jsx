@@ -172,7 +172,7 @@ const MainCarousel = ({
           }, {});
           setSelectedPhotos(newSelectedPhotos);
         }
-      }, 500);
+      }, 1500);
       onUpdateComplete();
     }
   }, [shouldUpdate, onUpdateComplete, photos]);
