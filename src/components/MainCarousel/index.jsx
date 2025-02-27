@@ -207,6 +207,7 @@ const MainCarousel = ({
   const handleImageClick = async (index) => {
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
+
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
@@ -216,39 +217,20 @@ const MainCarousel = ({
       return;
     }
     try {
-      const selectedCard = selectedPhotos[data[index].id];
-
-      // Проверяем, открыта ли уже эта карточка
-      if (openedCards[index]) {
-        handleOpenPopup(selectedCard);
-        return;
-      }
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
 
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
+
       setIsFlipped(true);
-      // Добавляем карточку в состояние открытых
       setOpenedCards({
         ...openedCards,
-        [index]: selectedCard,
+        [index]: selectedPhotos[data[index].id],
       });
-      // Проверяем, есть ли уже эта карта у пользователя
-      try {
-        const userCards = await userCardsService.getUserCards(telegram_id);
-        const cardExists = userCards.data.some(
-          (card) => card.id === selectedCard.id
-        );
-
-        if (!cardExists) {
-          // Добавляем карточку только если её еще нет
-          await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-        }
-      } catch (error) {
-        console.error("Error checking user cards:", error);
-      }
-      handleOpenPopup(selectedCard);
+      const selectedCard = selectedPhotos[data[index].id];
+      await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+      handleOpenPopup(selectedPhotos[data[index].id]);
     } catch (error) {
       console.error("Error updating energy:", error);
     }
