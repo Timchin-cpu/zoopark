@@ -45,9 +45,6 @@ export const userCardsService = {
   addCardToUser: (userId, cardId) =>
     axios.post(`/user/${userId}/cards`, { cardId }),
 };
-export const incomeService = {
-  getHourlyIncome: (userId) => axios.get(`/hourly-income/${userId}`),
-};
 export const peopleService = {
   // Получение списка фотографий для полиции
   async getPolicePhotos() {

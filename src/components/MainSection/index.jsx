@@ -12,11 +12,10 @@ import { routeSets } from "pages/SetsPage";
 import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
 import { userService } from "services/api";
-import { userInitService, incomeService } from "services/api";
+import { userInitService } from "services/api";
 
 const MainSection = () => {
   const [coins, setCoins] = useState(0); // Добавляем состояние для coins
-  const [hourlyIncome, setHourlyIncome] = useState(0);
 
   const [activePopup, setActivePopup] = useState(false);
   const [username, setUsername] = useState(""); // Добавляем состояние для username
@@ -52,29 +51,23 @@ const MainSection = () => {
     initializeUser();
   }, []);
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUser = async () => {
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getUser(telegram_id);
+          console.log(response);
           if (response.data && response.data.coins) {
             setCoins(response.data.coins);
           }
-
-          // Получаем почасовой доход
-          const incomeResponse = await incomeService.getHourlyIncome(
-            telegram_id
-          );
-          if (incomeResponse.data && incomeResponse.data.hourly_income) {
-            setHourlyIncome(incomeResponse.data.hourly_income);
-          }
+          // Обработка данных пользователя
         } catch (error) {
-          console.error("Error fetching user");
+          console.error("Error fetching user:", error);
         }
       }
     };
-    fetchUserData();
+    fetchUser();
   }, []);
   const handleOpenSettings = () => {
     document.documentElement.classList.add("fixed");
@@ -168,7 +161,7 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={TimeIcon} alt="" />
                 </div>
-                <p className="main-params__title">{hourlyIncome} K/H</p>
+                <p className="main-params__title">18,09 K/H</p>
               </div>
             </li>
             <li className="main-params__item">
