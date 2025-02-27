@@ -215,25 +215,28 @@ const MainCarousel = ({
       // Not enough energy
       return;
     }
-    // Проверяем, была ли карта уже открыта
-    if (openedCards[index]) {
-      setIsFlipped(true);
-      handleOpenPopup(selectedPhotos[data[index].id]);
-      return;
-    }
     try {
+      const selectedCard = selectedPhotos[data[index].id];
+
+      // Проверяем, открыта ли уже эта карточка
+      if (openedCards[index]) {
+        handleOpenPopup(selectedCard);
+        return;
+      }
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
       setIsFlipped(true);
+
+      // Добавляем карточку в состояние открытых
       setOpenedCards({
         ...openedCards,
-        [index]: selectedPhotos[data[index].id],
+        [index]: selectedCard,
       });
-      const selectedCard = selectedPhotos[data[index].id];
+      // Добавляем карточку пользователю только если она еще не была добавлена
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-      handleOpenPopup(selectedPhotos[data[index].id]);
+      handleOpenPopup(selectedCard);
     } catch (error) {
       console.error("Error updating energy:", error);
     }
