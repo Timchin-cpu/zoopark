@@ -162,10 +162,20 @@ const MainCarousel = ({
         setIsFlipped(false);
         setActiveIndex(null);
         setOpenedCards({});
+        // Перемешиваем карты
+        if (photos.length > 0) {
+          const shuffled = [...photos].sort(() => Math.random() - 0.5);
+          const newSelectedPhotos = data.reduce((acc, item) => {
+            const randomIndex = Math.floor(Math.random() * shuffled.length);
+            acc[item.id] = shuffled[randomIndex];
+            return acc;
+          }, {});
+          setSelectedPhotos(newSelectedPhotos);
+        }
       }, 500);
       onUpdateComplete();
     }
-  }, [shouldUpdate, onUpdateComplete]);
+  }, [shouldUpdate, onUpdateComplete, photos, data]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
