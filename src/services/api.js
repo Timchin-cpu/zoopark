@@ -45,6 +45,17 @@ export const userCardsService = {
   addCardToUser: (userId, cardId) =>
     axios.post(`/user/${userId}/cards`, { cardId }),
 };
+export const incomeService = {
+  getHourlyIncome: async () => {
+    try {
+      const response = await axios.get("/hourly-income");
+      return response.data.hourly_income;
+    } catch (error) {
+      console.error("Error fetching hourly income:", error);
+      throw error;
+    }
+  },
+};
 export const peopleService = {
   // Получение списка фотографий для полиции
   async getPolicePhotos() {

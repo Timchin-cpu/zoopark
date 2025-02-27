@@ -19,6 +19,22 @@ const MainSection = () => {
 
   const [activePopup, setActivePopup] = useState(false);
   const [username, setUsername] = useState(""); // Добавляем состояние для username
+  const [hourlyIncome, setHourlyIncome] = useState(0);
+
+  const formatIncome = (value) => {
+    return (value / 1000).toFixed(2) + " K/H";
+  };
+  useEffect(() => {
+    const fetchHourlyIncome = async () => {
+      try {
+        const income = await incomeService.getHourlyIncome();
+        setHourlyIncome(income);
+      } catch (error) {
+        console.error("Error fetching hourly income:", error);
+      }
+    };
+    fetchHourlyIncome();
+  }, []);
   useEffect(() => {
     // Получаем данные пользователя из Telegram WebApp
     const tg = window.Telegram.WebApp;
@@ -161,7 +177,9 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={TimeIcon} alt="" />
                 </div>
-                <p className="main-params__title">18,09 K/H</p>
+                <p className="main-params__title">
+                  {formatIncome(hourlyIncome)}
+                </p>
               </div>
             </li>
             <li className="main-params__item">
