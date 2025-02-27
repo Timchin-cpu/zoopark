@@ -157,25 +157,26 @@ const MainCarousel = ({
   };
   useEffect(() => {
     if (shouldUpdate) {
-      // Обновляем состояние карусели
+      // Сначала переворачиваем карту обратно
+      setIsFlipped(false);
+      setActiveIndex(null);
+      setOpenedCards({});
+
+      // Ждем завершения анимации переворота перед обновлением карт
       setTimeout(() => {
-        setIsFlipped(false);
-        setActiveIndex(null);
-        setOpenedCards({});
-        // Перемешиваем карты
-      }, 500);
-      onUpdateComplete();
-      if (photos.length > 0) {
-        const shuffled = [...photos].sort(() => Math.random() - 0.5);
-        const newSelectedPhotos = data.reduce((acc, item) => {
-          const randomIndex = Math.floor(Math.random() * shuffled.length);
-          acc[item.id] = shuffled[randomIndex];
-          return acc;
-        }, {});
-        setSelectedPhotos(newSelectedPhotos);
-      }
+        if (photos.length > 0) {
+          const shuffled = [...photos].sort(() => Math.random() - 0.5);
+          const newSelectedPhotos = data.reduce((acc, item) => {
+            const randomIndex = Math.floor(Math.random() * shuffled.length);
+            acc[item.id] = shuffled[randomIndex];
+            return acc;
+          }, {});
+          setSelectedPhotos(newSelectedPhotos);
+        }
+        onUpdateComplete();
+      }, 500); // Задержка соответствует длительности анимации переворота
     }
-  }, [shouldUpdate, onUpdateComplete, photos]);
+  }, [shouldUpdate, photos, onUpdateComplete, data]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
