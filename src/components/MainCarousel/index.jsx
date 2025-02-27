@@ -158,11 +158,10 @@ const MainCarousel = ({
   useEffect(() => {
     if (shouldUpdate) {
       // Сначала переворачиваем карту обратно
-      setTimeout(() => {
-        setIsFlipped(false);
-        setActiveIndex(null);
-        setOpenedCards({});
-      }, 500);
+
+      setIsFlipped(false);
+      setActiveIndex(null);
+      setOpenedCards({});
 
       // Ждем завершения анимации переворота перед обновлением карт
       setTimeout(() => {
