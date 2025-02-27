@@ -27,7 +27,13 @@ const PeoplePage = () => {
   useEffect(() => {
     const fetchUserCards = async () => {
       try {
-        const response = await userCardsService.getUserCards(1); // ID пользователя
+        const tg = window.Telegram.WebApp;
+        const telegram_id = tg.initDataUnsafe?.user?.id;
+        if (!telegram_id) {
+          console.error("Telegram ID not found");
+          return;
+        }
+        const response = await userCardsService.getUserCards(telegram_id); // ID пользователя
         setUserCards(response.data);
         console.log(response.data);
       } catch (error) {
