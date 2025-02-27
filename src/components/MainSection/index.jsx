@@ -16,6 +16,7 @@ import { userInitService } from "services/api";
 
 const MainSection = () => {
   const [coins, setCoins] = useState(0); // Добавляем состояние для coins
+  const [hourlyIncome, setHourlyIncome] = useState(0);
 
   const [activePopup, setActivePopup] = useState(false);
   const [username, setUsername] = useState(""); // Добавляем состояние для username
@@ -51,23 +52,29 @@ const MainSection = () => {
     initializeUser();
   }, []);
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserData = async () => {
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getUser(telegram_id);
-          console.log(response);
           if (response.data && response.data.coins) {
             setCoins(response.data.coins);
           }
-          // Обработка данных пользователя
+
+          // Получаем почасовой доход
+          const incomeResponse = await incomeService.getHourlyIncome(
+            telegram_id
+          );
+          if (incomeResponse.data && incomeResponse.data.hourly_income) {
+            setHourlyIncome(incomeResponse.data.hourly_income);
+          }
         } catch (error) {
-          console.error("Error fetching user:", error);
+          console.error("Error fetching user");
         }
       }
     };
-    fetchUser();
+    fetchUserData();
   }, []);
   const handleOpenSettings = () => {
     document.documentElement.classList.add("fixed");
