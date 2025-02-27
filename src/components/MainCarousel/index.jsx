@@ -176,7 +176,7 @@ const MainCarousel = ({
         onUpdateComplete();
       }, 500); // Задержка соответствует длительности анимации переворота
     }
-  }, [shouldUpdate, photos, onUpdateComplete, data]);
+  }, [shouldUpdate, photos, onUpdateComplete]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
