@@ -173,31 +173,38 @@ const MainCarousel = ({
 
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
-    if (energy < 10) {
-      // Not enough energy
-      return;
-    }
-    setEnergy((prev) => Math.max(0, prev - 10)); // Decrease energy by 10
-    setIsFlipped(true);
-    setIsFlipped(true);
-    setOpenedCards({
-      ...openedCards,
-      [index]: selectedPhotos[data[index].id],
-    });
     try {
-      const selectedCard = selectedPhotos[data[index].id];
       const tg = window.Telegram.WebApp;
-      const telegram_id = tg.initDataUnsafe?.user?.id;
-      if (!telegram_id) {
+      if (!tg?.initDataUnsafe?.user?.id) {
         console.error("Telegram ID not found");
         return;
       }
+
+      const telegram_id = tg.initDataUnsafe.user.id;
+
+      // Check energy before proceeding
+      const energyResponse = await userInitService.checkEnergy(telegram_id);
+      if (!energyResponse.data.sufficient) {
+        console.log("Insufficient energy");
+        return;
+      }
+      // Decrease energy by 10
+      await userInitService.updateEnergy(telegram_id, -10);
+      setEnergy((prev) => Math.max(0, prev - 10));
+      setIsFlipped(true);
+      setOpenedCards({
+        ...openedCards,
+        [index]: selectedPhotos[data[index].id],
+      });
+      // Add card to user
+      const selectedCard = selectedPhotos[data[index].id];
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
       console.log("Card added to user successfully");
+
+      handleOpenPopup(selectedPhotos[data[index].id]);
     } catch (error) {
-      console.error("Error adding card to user:", error);
+      console.error("Error:", error);
     }
-    handleOpenPopup(selectedPhotos[data[index].id]);
   };
 
   return (
