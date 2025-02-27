@@ -54,8 +54,8 @@ const MainCarousel = ({
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
 
-  const [selectedId, setSelectedId] = useState(null);
-  console.log(selectedId);
+  // const [selectedId, setSelectedId] = useState(null);
+  // console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
@@ -117,9 +117,9 @@ const MainCarousel = ({
 
         // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
         setPhotos(policeData); // Сохраняем все фото
-        setSelectedId(
-          policeData[Math.floor(Math.random() * policeData.length)]
-        );
+        // setSelectedId(
+        //   policeData[Math.floor(Math.random() * policeData.length)]
+        // );
 
         console.log(policeData);
         // setFirefighterPhotos(firefighterData);
