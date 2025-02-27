@@ -29,10 +29,10 @@ export const userInitService = {
       energy,
       lastUpdate: new Date(),
     }),
-  getUserLevel: (telegram_id) => axios.get(`/api/user/${telegram_id}/level`),
+  getUserLevel: (telegram_id) => axios.get(`/user/${telegram_id}/level`),
 
   updateExperience: (telegram_id, experience) =>
-    axios.put(`/api/user/${telegram_id}/experience`, { experience }),
+    axios.put(`/user/${telegram_id}/experience`, { experience }),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
