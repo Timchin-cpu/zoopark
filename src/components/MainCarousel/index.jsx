@@ -175,7 +175,7 @@ const MainCarousel = ({
       }, 500);
       onUpdateComplete();
     }
-  }, [shouldUpdate, onUpdateComplete, photos, data]);
+  }, [shouldUpdate, onUpdateComplete, photos]);
   // const prevSlide = () => {
   //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
   // };
