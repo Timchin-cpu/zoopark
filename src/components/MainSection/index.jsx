@@ -12,7 +12,7 @@ import { routeSets } from "pages/SetsPage";
 import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
 import { userService } from "services/api";
-import { userInitService } from "services/api";
+import { userInitService, incomeService } from "services/api";
 
 const MainSection = () => {
   const [coins, setCoins] = useState(0); // Добавляем состояние для coins
@@ -168,7 +168,7 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={TimeIcon} alt="" />
                 </div>
-                <p className="main-params__title">18,09 K/H</p>
+                <p className="main-params__title">{hourlyIncome} K/H</p>
               </div>
             </li>
             <li className="main-params__item">
