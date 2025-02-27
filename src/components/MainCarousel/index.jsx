@@ -207,30 +207,39 @@ const MainCarousel = ({
   const handleImageClick = async (index) => {
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
+
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
     }
-    if (energy < 10) {
-      // Not enough energy
-      return;
-    }
     // Проверяем, была ли уже открыта эта карта
     if (openedCards[index]) {
+      console.log("Карта уже открыта");
+      return;
+    }
+    // Проверяем достаточно ли энергии
+    if (energy < 10) {
+      console.log("Недостаточно энергии");
       return;
     }
     try {
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
+
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
       setIsFlipped(true);
+
+      // Сохраняем открытую карту
       setOpenedCards({
         ...openedCards,
         [index]: selectedPhotos[data[index].id],
       });
+      // Добавляем карту пользователю
       const selectedCard = selectedPhotos[data[index].id];
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+
+      // Открываем попап с информацией о карте
       handleOpenPopup(selectedPhotos[data[index].id]);
     } catch (error) {
       console.error("Error updating energy:", error);
