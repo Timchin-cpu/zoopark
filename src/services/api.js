@@ -22,6 +22,8 @@ export const userInitService = {
 
   // Получение данных пользователя по telegram_id
   getUser: (telegram_id) => axios.get(`/user/${telegram_id}`),
+  getHourlyIncome: (telegram_id) =>
+    axios.get(`/api/hourly-income/${telegram_id}`),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
@@ -45,6 +47,7 @@ export const userCardsService = {
   addCardToUser: (userId, cardId) =>
     axios.post(`/user/${userId}/cards`, { cardId }),
 };
+
 export const peopleService = {
   // Получение списка фотографий для полиции
   async getPolicePhotos() {
