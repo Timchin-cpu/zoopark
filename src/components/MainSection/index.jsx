@@ -32,7 +32,7 @@ const MainSection = () => {
           console.log(response.data);
           setLevel(response.data.level);
           setCurrentExp(response.data.currentExperience);
-          setExpForNextLevel(response.data.experienceForNextLevel);
+          setExpForNextLevel(response.data.experienceToNextLevel);
         } catch (error) {
           console.error("Error fetching user level:", error);
         }
