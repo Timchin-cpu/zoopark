@@ -59,6 +59,7 @@ const MainCarousel = ({
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
+  const [remainingTime, setRemainingTime] = useState("00:00:00");
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -68,7 +69,9 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            console.log(response.data.energy);
+            // Получаем время последнего обновления энергии
+            const lastUpdate = response.data.lastEnergyUpdate;
+            updateRemainingTime(lastUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -77,6 +80,27 @@ const MainCarousel = ({
     };
     fetchEnergy();
   }, []);
+  const updateRemainingTime = (lastUpdate) => {
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const lastUpdateTime = new Date(lastUpdate).getTime();
+      const timeDiff = now - lastUpdateTime;
+
+      // Предполагаем, что энергия восстанавливается каждый час
+      const remainingMs = 3600000 - (timeDiff % 3600000);
+
+      const hours = Math.floor(remainingMs / 3600000);
+      const minutes = Math.floor((remainingMs % 3600000) / 60000);
+      const seconds = Math.floor((remainingMs % 60000) / 1000);
+
+      setRemainingTime(
+        `${hours.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  };
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -326,7 +350,7 @@ const MainCarousel = ({
                 fill="#AAB2BD"
               />
             </svg>
-            56:23:55
+            {remainingTime}
           </div>
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
