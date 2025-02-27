@@ -19,6 +19,27 @@ const MainSection = () => {
   const [hourlyIncome, setHourlyIncome] = useState(0);
   const [activePopup, setActivePopup] = useState(false);
   const [username, setUsername] = useState(""); // Добавляем состояние для username
+  const [level, setLevel] = useState(1);
+  const [currentExp, setCurrentExp] = useState(0);
+  const [expForNextLevel, setExpForNextLevel] = useState(1000);
+  useEffect(() => {
+    const fetchUserLevel = async () => {
+      const tg = window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        try {
+          const telegram_id = tg.initDataUnsafe.user.id;
+          const response = await userInitService.getUserLevel(telegram_id);
+          setLevel(response.data.level);
+          setCurrentExp(response.data.currentExperience);
+          setExpForNextLevel(response.data.experienceForNextLevel);
+        } catch (error) {
+          console.error("Error fetching user level:", error);
+        }
+      }
+    };
+
+    fetchUserLevel();
+  }, []);
   useEffect(() => {
     // Получаем данные пользователя из Telegram WebApp
     const tg = window.Telegram.WebApp;
@@ -26,6 +47,7 @@ const MainSection = () => {
       setUsername(tg.initDataUnsafe.user.username || "Пользователь");
     }
   }, []);
+
   useEffect(() => {
     const initializeUser = async () => {
       const tg = window.Telegram.WebApp;
@@ -107,11 +129,13 @@ const MainSection = () => {
                 <div className="main-head__user">
                   {username} <span>/ Мэр</span>
                 </div>
-                <p className="main-head__level">Уровень города 12</p>
+                <p className="main-head__level">Уровень города {level}</p>
                 <div className="main-head__progress">
                   <div
                     className="main-head__progress-bar"
-                    style={{ width: "70%" }}
+                    style={{
+                      width: `${(currentExp / expForNextLevel) * 100}%`,
+                    }}
                   ></div>
                 </div>
               </div>
