@@ -225,17 +225,29 @@ const MainCarousel = ({
       }
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
+
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
       setIsFlipped(true);
-
       // Добавляем карточку в состояние открытых
       setOpenedCards({
         ...openedCards,
         [index]: selectedCard,
       });
-      // Добавляем карточку пользователю только если она еще не была добавлена
-      await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+      // Проверяем, есть ли уже эта карта у пользователя
+      try {
+        const userCards = await userCardsService.getUserCards(telegram_id);
+        const cardExists = userCards.data.some(
+          (card) => card.id === selectedCard.id
+        );
+
+        if (!cardExists) {
+          // Добавляем карточку только если её еще нет
+          await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+        }
+      } catch (error) {
+        console.error("Error checking user cards:", error);
+      }
       handleOpenPopup(selectedCard);
     } catch (error) {
       console.error("Error updating energy:", error);
