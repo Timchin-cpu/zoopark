@@ -24,6 +24,8 @@ export const userInitService = {
   getUser: (telegram_id) => axios.get(`/user/${telegram_id}`),
   getHourlyIncome: (telegram_id) => axios.get(`/hourly-income/${telegram_id}`),
   getEnergy: (telegram_id) => axios.get(`/user/${telegram_id}/energy`),
+  updateEnergy: (telegram_id, energy) =>
+    axios.put(`/user/${telegram_id}/energy`, { energy }),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
