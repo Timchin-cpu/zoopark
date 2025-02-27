@@ -12,6 +12,7 @@ import ReactFlipCard from "reactjs-flip-card";
 // import { routeSets } from "pages/SetsPage";
 // import { routeBonus } from "pages/BonusPage";
 // import SettingsPopup from "components/SettingsPopup";
+import { userInitService } from "services/api";
 
 import { peopleService } from "services/api";
 import { userCardsService } from "services/api";
