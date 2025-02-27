@@ -52,13 +52,29 @@ const MainCarousel = ({
 }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-  const [energy, setEnergy] = useState(100); // Add energy state
 
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
-
+  const [energy, setEnergy] = useState(100); // Initial energy state
+  useEffect(() => {
+    const fetchEnergy = async () => {
+      const tg = window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        try {
+          const telegram_id = tg.initDataUnsafe.user.id;
+          const response = await userInitService.getEnergy(telegram_id);
+          if (response.data && response.data.energy) {
+            setEnergy(response.data.energy);
+          }
+        } catch (error) {
+          console.error("Error fetching energy:", error);
+        }
+      }
+    };
+    fetchEnergy();
+  }, []);
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
