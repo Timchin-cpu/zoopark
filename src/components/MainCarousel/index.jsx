@@ -68,6 +68,7 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
+            console.log(response.data.energy);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
