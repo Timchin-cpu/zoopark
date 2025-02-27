@@ -212,14 +212,8 @@ const MainCarousel = ({
       console.error("Telegram ID not found");
       return;
     }
-    // Проверяем, была ли уже открыта эта карта
-    if (openedCards[index]) {
-      console.log("Карта уже открыта");
-      return;
-    }
-    // Проверяем достаточно ли энергии
     if (energy < 10) {
-      console.log("Недостаточно энергии");
+      // Not enough energy
       return;
     }
     try {
@@ -228,18 +222,14 @@ const MainCarousel = ({
 
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
-      setIsFlipped(true);
 
-      // Сохраняем открытую карту
+      setIsFlipped(true);
       setOpenedCards({
         ...openedCards,
         [index]: selectedPhotos[data[index].id],
       });
-      // Добавляем карту пользователю
       const selectedCard = selectedPhotos[data[index].id];
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-
-      // Открываем попап с информацией о карте
       handleOpenPopup(selectedPhotos[data[index].id]);
     } catch (error) {
       console.error("Error updating energy:", error);
