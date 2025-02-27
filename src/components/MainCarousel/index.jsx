@@ -52,6 +52,7 @@ const MainCarousel = ({
 }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
+  const [energy, setEnergy] = useState(100); // Add energy state
 
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
@@ -154,6 +155,12 @@ const MainCarousel = ({
 
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
+    if (energy < 10) {
+      // Not enough energy
+      return;
+    }
+    setEnergy((prev) => Math.max(0, prev - 10)); // Decrease energy by 10
+    setIsFlipped(true);
     setIsFlipped(true);
     setOpenedCards({
       ...openedCards,
@@ -279,7 +286,10 @@ const MainCarousel = ({
             </svg>
           </div>
           <div className="main-nav__progress">
-            <div className="main-nav__progress-bar"></div>
+            <div
+              className="main-nav__progress-bar"
+              style={{ width: `${energy}%` }}
+            ></div>
           </div>
           <div className="main-nav__clock f-center">
             <svg
