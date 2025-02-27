@@ -66,9 +66,9 @@ const MainSection = () => {
           );
           if (
             hourlyIncomeResponse.data &&
-            hourlyIncomeResponse.data.hourlyIncome
+            hourlyIncomeResponse.data.hourly_income
           ) {
-            setHourlyIncome(hourlyIncomeResponse.data.hourlyIncome);
+            setHourlyIncome(hourlyIncomeResponse.data.hourly_income);
           }
         } catch (error) {
           console.error("Error fetching");
