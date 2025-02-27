@@ -69,7 +69,7 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            console.log(response.data);
+            // console.log(response.data);
             // Получаем время последнего обновления энергии
             const lastUpdate = response.data.lastEnergyUpdate;
             updateRemainingTime(lastUpdate);
@@ -82,7 +82,7 @@ const MainCarousel = ({
     fetchEnergy();
   }, []);
   const updateRemainingTime = (lastUpdate) => {
-    console.log(lastUpdate);
+    // console.log(lastUpdate);
     if (!lastUpdate) {
       setRemainingTime("00:00:00");
       return;
@@ -121,7 +121,7 @@ const MainCarousel = ({
         //   policeData[Math.floor(Math.random() * policeData.length)]
         // );
 
-        console.log(policeData);
+        // console.log(policeData);
         // setFirefighterPhotos(firefighterData);
       } catch (error) {
         console.error(error);
