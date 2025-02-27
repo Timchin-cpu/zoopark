@@ -22,8 +22,7 @@ export const userInitService = {
 
   // Получение данных пользователя по telegram_id
   getUser: (telegram_id) => axios.get(`/user/${telegram_id}`),
-  getHourlyIncome: (telegram_id) =>
-    axios.get(`/api/hourly-income/${telegram_id}`),
+  getHourlyIncome: (telegram_id) => axios.get(`/hourly-income/${telegram_id}`),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
