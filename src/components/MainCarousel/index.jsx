@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactFlipCard from "reactjs-flip-card";
 import { userInitService } from "services/api";
-import { peopleService } from "services/api";
+import { cardsService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
@@ -92,9 +92,8 @@ const MainCarousel = ({
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const policeData = await peopleService.getPolicePhotos();
-        setPhotos(policeData);
-        console.log(policeData);
+        const response = await cardsService.getAllCards();
+        setPhotos(response.data);
       } catch (error) {
         console.error(error);
       }
