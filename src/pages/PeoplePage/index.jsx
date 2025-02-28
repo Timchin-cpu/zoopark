@@ -67,8 +67,12 @@ const PeoplePage = () => {
   const handleOpenPopup = (photo) => {
     document.documentElement.classList.add("fixed");
     console.log(photo);
-    setSelectedPhoto(photo);
-
+    setSelectedPhoto({
+      ...photo,
+      image: userCards.some((card) => card.id === photo.id)
+        ? photo.image
+        : QuestionMarkImg,
+    });
     setActivePopup(true);
   };
   // const handleOpenPopup1 = (photo) => {
