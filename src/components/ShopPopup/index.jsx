@@ -4,6 +4,7 @@ import "./styles.scss";
 
 import DefaultImg from "assets/img/default-img.png";
 import TimeIcon from "assets/img/time-icon.svg";
+import QuestionMarkImg from "assets/img/question-mark.png";
 
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
@@ -33,6 +34,11 @@ const ShopPopup = (props) => {
       onButtonClick(); // Вызываем callback при клике на кнопку
     }
   };
+  useEffect(() => {
+    if (props.selectedPhoto && props.selectedPhoto.image === QuestionMarkImg) {
+      console.log("Image matches QuestionMarkImg");
+    }
+  }, [props.selectedPhoto]);
   return (
     <div ref={popupRef} className={`shop-popup ${props.active ? "show" : ""}`}>
       <div className="shop-popup__wrapper">
