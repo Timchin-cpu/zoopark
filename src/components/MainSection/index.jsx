@@ -22,6 +22,15 @@ const MainSection = () => {
   const [level, setLevel] = useState(1);
   const [currentExp, setCurrentExp] = useState(0);
   const [expForNextLevel, setExpForNextLevel] = useState(1000);
+  const [showAchievement, setShowAchievement] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAchievement(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     const fetchUserLevel = async () => {
       const tg = window.Telegram.WebApp;
@@ -130,7 +139,10 @@ const MainSection = () => {
                 <div className="main-head__user">
                   {username} <span>/ Мэр</span>
                 </div>
-                <p className="main-head__level">Уровень города {level}</p>
+
+                <p className="main-head__level">
+                  Уровень города {showAchievement && { level }}
+                </p>
                 <div className="main-head__progress">
                   <div
                     className="main-head__progress-bar"
