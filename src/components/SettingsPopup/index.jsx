@@ -377,7 +377,6 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
               style={{
                 overflowX: "auto",
                 scrollbarWidth: "none",
-                scrollbarWidth: "none",
                 whiteSpace: "nowrap",
               }}
             >
