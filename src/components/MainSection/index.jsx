@@ -144,12 +144,14 @@ const MainSection = () => {
                   Уровень города {showAchievement && level}
                 </p>
                 <div className="main-head__progress">
-                  <div
-                    className="main-head__progress-bar"
-                    style={{
-                      width: `${(currentExp / expForNextLevel) * 100}%`,
-                    }}
-                  ></div>
+                  {showAchievement && (
+                    <div
+                      className="main-head__progress-bar"
+                      style={{
+                        width: `${(currentExp / expForNextLevel) * 100}%`,
+                      }}
+                    ></div>
+                  )}
                 </div>
               </div>
             </div>
@@ -206,9 +208,11 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={TimeIcon} alt="" />
                 </div>
-                <p className="main-params__title">
-                  {hourlyIncome.toFixed(2)} K/H
-                </p>
+                {showAchievement && (
+                  <p className="main-params__title">
+                    {hourlyIncome.toFixed(2)} K/H
+                  </p>
+                )}
               </div>
             </li>
             <li className="main-params__item">
@@ -216,7 +220,9 @@ const MainSection = () => {
                 <div className="main-params__icon f-center-center">
                   <img src={MoneyIcon} alt="" />
                 </div>
-                <p className="main-params__title">{coins}</p>
+                {showAchievement && (
+                  <p className="main-params__title">{coins}</p>
+                )}
               </div>
             </li>
           </ul>
