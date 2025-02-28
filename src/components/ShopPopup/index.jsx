@@ -7,7 +7,7 @@ import TimeIcon from "assets/img/time-icon.svg";
 
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
-import QuestionMarkImg from "assets/img/question-mark.png";
+// import QuestionMarkImg from "assets/img/question-mark.png";
 
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
