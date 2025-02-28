@@ -95,33 +95,43 @@ const ShopPopup = (props) => {
             />
           </div>
           <div className="shop-popup__content">
-            <h3 className="shop-popup__title">
-              {props.selectedPhoto ? props.selectedPhoto.title : ""}
-            </h3>
-            <p className="shop-popup__text">
-              {props.selectedPhoto ? props.selectedPhoto.description : ""}
-            </p>
-            <div className="shop-popup__earn">
-              <div className="main-params__card f-center-center">
-                <div className="main-params__icon f-center-center">
-                  <img src={TimeIcon} alt="" />
+            {props.selectedPhoto &&
+            props.selectedPhoto.image === QuestionMarkImg ? (
+              <h3 className="shop-popup__title">Карта не открыта</h3>
+            ) : (
+              <>
+                <h3 className="shop-popup__title">
+                  {props.selectedPhoto ? props.selectedPhoto.title : ""}
+                </h3>
+                <p className="shop-popup__text">
+                  {props.selectedPhoto ? props.selectedPhoto.description : ""}
+                </p>
+                <div className="shop-popup__earn">
+                  <div className="main-params__card f-center-center">
+                    <div className="main-params__icon f-center-center">
+                      <img src={TimeIcon} alt="" />
+                    </div>
+                    <p className="main-params__title">18,09 K/H</p>
+                  </div>
                 </div>
-                <p className="main-params__title">18,09 K/H</p>
+              </>
+            )}
+          </div>
+          {props.selectedPhoto &&
+            props.selectedPhoto.image !== QuestionMarkImg && (
+              <div className="shop-popup__params">
+                <ul className="friends-params f-center-center">
+                  <li className="friends-params__item f-center">
+                    <img src={StarIcon} alt="" />
+                    {props.selectedPhoto ? props.selectedPhoto.experience : ""}
+                  </li>
+                  <li className="friends-params__item f-center">
+                    <img src={CoinIcon} alt="" />
+                    {props.selectedPhoto ? props.selectedPhoto.price : ""}
+                  </li>
+                </ul>
               </div>
-            </div>
-          </div>
-          <div className="shop-popup__params">
-            <ul className="friends-params f-center-center">
-              <li className="friends-params__item f-center">
-                <img src={StarIcon} alt="" />
-                {props.selectedPhoto ? props.selectedPhoto.experience : ""}
-              </li>
-              <li className="friends-params__item f-center">
-                <img src={CoinIcon} alt="" />
-                {props.selectedPhoto ? props.selectedPhoto.price : ""}
-              </li>
-            </ul>
-          </div>
+            )}
           <button
             type="button"
             className="shop-popup__btn"
