@@ -6,7 +6,7 @@ import { peopleService, userCardsService } from "services/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 import InfoIcon from "assets/img/icons8-info-48.png";
-
+import QuestionMarkImg from "assets/img/question-mark.png";
 import DefaultImg from "assets/img/default-img.png";
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
@@ -170,7 +170,11 @@ const PeoplePage = () => {
                           >
                             <p className="city-slider__image">
                               <img
-                                src={`http://localhost:3000${photo.image}`}
+                                src={
+                                  userCards.some((card) => card.id === photo.id)
+                                    ? `http://localhost:3000${photo.image}`
+                                    : "path/to/question-mark-image.png"
+                                }
                                 alt={photo.title}
                               />
                             </p>
