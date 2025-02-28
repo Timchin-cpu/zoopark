@@ -173,7 +173,7 @@ const PeoplePage = () => {
                                 src={
                                   userCards.some((card) => card.id === photo.id)
                                     ? `http://localhost:3000${photo.image}`
-                                    : "path/to/question-mark-image.png"
+                                    : QuestionMarkImg
                                 }
                                 alt={photo.title}
                               />
