@@ -27,7 +27,7 @@ const MainSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAchievement(true);
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
