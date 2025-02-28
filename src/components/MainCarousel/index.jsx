@@ -1,33 +1,18 @@
 import React, { useState, useEffect } from "react";
 import ReactFlipCard from "reactjs-flip-card";
-
-// import Avatar from 'assets/img/avatar.png';
-// import CardsIcon from 'assets/img/cards-icon.png';
-// import TaskIcon from 'assets/img/task-icon.png';
-// import BonusIcon from 'assets/img/bonus-icon.png';
-// import TimeIcon from 'assets/img/time-icon.svg';
-// import MoneyIcon from 'assets/img/money-icon.svg';
-// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-// import { routeTasks } from "pages/TasksPage";
-// import { routeSets } from "pages/SetsPage";
-// import { routeBonus } from "pages/BonusPage";
-// import SettingsPopup from "components/SettingsPopup";
 import { userInitService } from "services/api";
-
 import { peopleService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
-// Отсутствует определение cardBackStyles
 const cardBackStyles = {
   default: { image: DefaultImg },
   style1: { image: Style1CardBack },
   style2: { image: Style2CardBack },
 };
-// import DefaultImg from "assets/img/default-card.png";
-// import ProdImg from "assets/img/prod-img.png";
+
 const data = [
   { id: 1, bgColor: "#F54748", title: "Slide 1" },
   { id: 2, bgColor: "#7952B3", title: "Slide 2" },
@@ -53,12 +38,9 @@ const MainCarousel = ({
 }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-
-  // const [selectedId, setSelectedId] = useState(null);
-  // console.log(selectedId);
-  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
-  const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
-  const [energy, setEnergy] = useState(100); // Initial energy state
+  const [photos, setPhotos] = useState([]);
+  const [selectedPhotos, setSelectedPhotos] = useState({});
+  const [energy, setEnergy] = useState(100);
   const [remainingTime, setRemainingTime] = useState("00:00:00");
   useEffect(() => {
     const fetchEnergy = async () => {
@@ -70,7 +52,6 @@ const MainCarousel = ({
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
             console.log(response.data);
-            // Получаем время последнего обновления энергии
             const lastUpdate = response.data.lastEnergyUpdate;
             updateRemainingTime(lastUpdate);
           }
@@ -91,12 +72,10 @@ const MainCarousel = ({
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-      // Проверяем, что lastUpdateTime валидное значение
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
       }
-      // Энергия восстанавливается каждый час
       const remainingMs = 3600000 - (timeDiff % 3600000);
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
@@ -112,39 +91,25 @@ const MainCarousel = ({
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const policeData = await peopleService.getPolicePhotos();
-        // const firefighterData = await peopleService.getFirefighterPhotos();
-
-        // const randomPolice = policeData[Math.floor(Math.random() * policeData.length)];
-        setPhotos(policeData); // Сохраняем все фото
-        // setSelectedId(
-        //   policeData[Math.floor(Math.random() * policeData.length)]
-        // );
-
-        console.log(policeData);
-        // setFirefighterPhotos(firefighterData);
+        const allData = await peopleService.getAllCards();
+        setPhotos(allData);
+        console.log(allData);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchPhotos();
   }, []);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     if (photos.length > 0) {
-      // Создаем массив карт с учетом их вероятности появления
       const weightedPhotos = photos.reduce((acc, photo) => {
-        // Количество дубликатов карты пропорционально ее шансу
         const copies = Math.floor(photo.chance);
         return acc.concat(Array(copies).fill(photo));
       }, []);
-      // Перемешиваем массив для случайного порядка
       const shuffled = [...weightedPhotos].sort(() => Math.random() - 0.5);
-      // Выбираем карты для каждой позиции в карусели
       const newSelectedPhotos = data.reduce((acc, item) => {
-        // Берем случайную карту из перемешанного массива с учетом весов
         const randomIndex = Math.floor(Math.random() * shuffled.length);
         acc[item.id] = shuffled[randomIndex];
         return acc;
@@ -157,13 +122,9 @@ const MainCarousel = ({
   };
   useEffect(() => {
     if (shouldUpdate) {
-      // Сначала переворачиваем карту обратно
-
       setIsFlipped(false);
       setActiveIndex(null);
       setOpenedCards({});
-
-      // Ждем завершения анимации переворота перед обновлением карт
       setTimeout(() => {
         if (photos.length > 0) {
           const shuffled = [...photos].sort(() => Math.random() - 0.5);
@@ -175,12 +136,9 @@ const MainCarousel = ({
           setSelectedPhotos(newSelectedPhotos);
         }
         onUpdateComplete();
-      }, 500); // Задержка соответствует длительности анимации переворота
+      }, 500);
     }
   }, [shouldUpdate, photos, onUpdateComplete]);
-  // const prevSlide = () => {
-  //   setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
-  // };
 
   const getStyles = (index) => {
     const currentIndex = activeSlide % data.length;
