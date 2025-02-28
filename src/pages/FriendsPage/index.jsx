@@ -173,31 +173,34 @@ const FriendsPage = () => {
               </li>
             </ul> */}
             <ul className="friends-list">
-              {referrals.map((referral) => (
-                <li key={referral.id} className="friends-list__item">
-                  <div className="friends-list__card block-style flex">
-                    <div className="friends-list__image">
-                      <img src={DefaultImg} alt="" />
+              {Array.isArray(referrals) &&
+                referrals.map((referral) => (
+                  <li key={referral.id} className="friends-list__item">
+                    <div className="friends-list__card block-style flex">
+                      <div className="friends-list__image">
+                        <img src={DefaultImg} alt="" />
+                      </div>
+                      <div className="friends-list__content">
+                        <h3 className="friends-list__title">
+                          {referral.username}
+                        </h3>
+                        <p className="friends-list__date">
+                          {referral.joinDate}
+                        </p>
+                        <ul className="friends-params f-center">
+                          <li className="friends-params__item f-center">
+                            <img src={StarIcon} alt="" />
+                            200 EXP
+                          </li>
+                          <li className="friends-params__item f-center">
+                            <img src={CoinIcon} alt="" />
+                            50
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                    <div className="friends-list__content">
-                      <h3 className="friends-list__title">
-                        {referral.username}
-                      </h3>
-                      <p className="friends-list__date">{referral.joinDate}</p>
-                      <ul className="friends-params f-center">
-                        <li className="friends-params__item f-center">
-                          <img src={StarIcon} alt="" />
-                          200 EXP
-                        </li>
-                        <li className="friends-params__item f-center">
-                          <img src={CoinIcon} alt="" />
-                          50
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
