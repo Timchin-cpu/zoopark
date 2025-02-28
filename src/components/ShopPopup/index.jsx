@@ -37,6 +37,8 @@ const ShopPopup = (props) => {
   useEffect(() => {
     if (props.selectedPhoto && props.selectedPhoto.image === QuestionMarkImg) {
       console.log("Image matches QuestionMarkImg");
+      console.log(props.selectedPhoto.image);
+      console.log(QuestionMarkImg);
     }
   }, [props.selectedPhoto]);
   return (
