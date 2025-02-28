@@ -143,16 +143,16 @@ const MainSection = () => {
                 <p className="main-head__level">
                   Уровень города {showAchievement && level}
                 </p>
-                <div className="main-head__progress">
-                  {showAchievement && (
+                {showAchievement && (
+                  <div className="main-head__progress">
                     <div
                       className="main-head__progress-bar"
                       style={{
                         width: `${(currentExp / expForNextLevel) * 100}%`,
                       }}
                     ></div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="main-head__settings" onClick={handleOpenSettings}>
