@@ -27,7 +27,7 @@ const MainSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAchievement(true);
-    }, 100);
+    }, 50);
 
     return () => clearTimeout(timer);
   }, []);
@@ -143,16 +143,17 @@ const MainSection = () => {
                 <p className="main-head__level">
                   Уровень города {showAchievement && level}
                 </p>
-                {showAchievement && (
-                  <div className="main-head__progress">
+
+                <div className="main-head__progress">
+                  {showAchievement && (
                     <div
                       className="main-head__progress-bar"
                       style={{
                         width: `${(currentExp / expForNextLevel) * 100}%`,
                       }}
                     ></div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
             <div className="main-head__settings" onClick={handleOpenSettings}>
