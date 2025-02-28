@@ -24,11 +24,18 @@ export const userInitService = {
   getUser: (telegram_id) => axios.get(`/user/${telegram_id}`),
   getHourlyIncome: (telegram_id) => axios.get(`/hourly-income/${telegram_id}`),
   getEnergy: (telegram_id) => axios.get(`/user/${telegram_id}/energy`),
-  updateEnergy: (telegram_id, energy) =>
-    axios.put(`/user/${telegram_id}/energy`, {
-      energy,
-      lastUpdate: new Date(),
-    }),
+  updateEnergy: async (telegram_id, energy) => {
+    try {
+      const response = await axios.put(`/user/${telegram_id}/energy`, {
+        energy,
+        lastUpdate: new Date().toISOString(),
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error updating energy:", error);
+      throw error;
+    }
+  },
   getUserLevel: (telegram_id) => axios.get(`/user/${telegram_id}/level`),
 
   updateExperience: (telegram_id, experience) =>
