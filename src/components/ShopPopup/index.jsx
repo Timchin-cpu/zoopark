@@ -7,7 +7,6 @@ import TimeIcon from "assets/img/time-icon.svg";
 
 import StarIcon from "assets/img/star-icon.svg";
 import CoinIcon from "assets/img/coin-icon.svg";
-// import QuestionMarkImg from "assets/img/question-mark.png";
 
 const ShopPopup = (props) => {
   const popupRef = useRef(null);
@@ -78,8 +77,7 @@ const ShopPopup = (props) => {
                 props.selectedPhoto
                   ? props.selectedPhoto.id === "set" ||
                     props.selectedPhoto.id === "energy" ||
-                    props.selectedPhoto.id === "money" ||
-                    props.selectedPhoto.image === "assets/img/question-mark.png"
+                    props.selectedPhoto.id === "money"
                     ? props.selectedPhoto.image
                     : `http://localhost:3000${props.selectedPhoto.image}`
                   : DefaultImg
