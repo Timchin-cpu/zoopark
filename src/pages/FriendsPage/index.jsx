@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { userInitService } from "services/api";
 import routeFriends from "./routes";
 import MainSection from "components/MainSection";
 
