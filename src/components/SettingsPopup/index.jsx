@@ -389,7 +389,14 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
                   }`}
                   onClick={() => handleCardBackChange(style.id)}
                 >
-                  <img src={style.image} alt={style.name} />
+                  <img
+                    src={style.image}
+                    alt={style.name}
+                    style={{
+                      marginRight: "20px",
+                      height: "245px",
+                    }}
+                  />
                 </div>
               ))}
             </div>
