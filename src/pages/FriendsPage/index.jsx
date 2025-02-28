@@ -29,6 +29,8 @@ const FriendsPage = () => {
           const referralsResponse = await userInitService.getReferrals(
             telegram_id
           );
+          console.log(referralsResponse);
+          console.log(referralsResponse.data);
           setReferrals(referralsResponse.data);
         }
       } catch (error) {
