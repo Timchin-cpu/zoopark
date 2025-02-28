@@ -10,6 +10,33 @@ import MobileNav from "components/MobileNav";
 
 const FriendsPage = () => {
   // copy text
+  const [referralCode, setReferralCode] = useState("");
+  const [referrals, setReferrals] = useState([]);
+  useEffect(() => {
+    const fetchReferralData = async () => {
+      try {
+        const tg = window.Telegram.WebApp;
+        if (tg && tg.initDataUnsafe?.user?.id) {
+          const telegram_id = tg.initDataUnsafe.user.id;
+
+          // Get referral code
+          const codeResponse = await userInitService.getReferralCode(
+            telegram_id
+          );
+          setReferralCode(codeResponse.data.code);
+          // Get referrals list
+          const referralsResponse = await userInitService.getReferrals(
+            telegram_id
+          );
+          setReferrals(referralsResponse.data);
+        }
+      } catch (error) {
+        console.error("Error fetching error");
+      }
+    };
+    fetchReferralData();
+  }, []);
+
   const copyToClipboard = () => {
     const referalUrl = `t.me/zoooparkweb_bot?start=`;
 
@@ -40,7 +67,7 @@ const FriendsPage = () => {
               <input
                 type="text"
                 name="url"
-                value="t.me/zoooparkweb_bot?start="
+                value={`t.me/zoooparkweb_bot?start=${referralCode}`}
                 readOnly
               />
               <button
@@ -73,76 +100,103 @@ const FriendsPage = () => {
               <h2 className="section-content__title">Ваши друзья</h2>
               <div className="friends-block__head-more">Смотреть всех</div>
             </div>
+            {/* <ul className="friends-list">
+              <li className="friends-list__item">
+                <div className="friends-list__card block-style flex">
+                  <div className="friends-list__image">
+                    <img src={DefaultImg} alt="" />
+                  </div>
+                  <div className="friends-list__content">
+                    <h3 className="friends-list__title">
+                      Ko****ntin Konstant****olsky
+                    </h3>
+                    <p className="friends-list__date">23 апреля, 2024</p>
+                    <ul className="friends-params f-center">
+                      <li className="friends-params__item f-center">
+                        <img src={StarIcon} alt="" />
+                        500 EXP
+                      </li>
+                      <li className="friends-params__item f-center">
+                        <img src={CoinIcon} alt="" />
+                        2000
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="friends-list__item">
+                <div className="friends-list__card block-style flex">
+                  <div className="friends-list__image">
+                    <img src={DefaultImg} alt="" />
+                  </div>
+                  <div className="friends-list__content">
+                    <h3 className="friends-list__title">
+                      Ko****ntin Konstant****olsky
+                    </h3>
+                    <p className="friends-list__date">23 апреля, 2024</p>
+                    <ul className="friends-params f-center">
+                      <li className="friends-params__item f-center">
+                        <img src={StarIcon} alt="" />
+                        500 EXP
+                      </li>
+                      <li className="friends-params__item f-center">
+                        <img src={CoinIcon} alt="" />
+                        2000
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="friends-list__item">
+                <div className="friends-list__card block-style flex">
+                  <div className="friends-list__image">
+                    <img src={DefaultImg} alt="" />
+                  </div>
+                  <div className="friends-list__content">
+                    <h3 className="friends-list__title">
+                      Ko****ntin Konstant****olsky
+                    </h3>
+                    <p className="friends-list__date">23 апреля, 2024</p>
+                    <ul className="friends-params f-center">
+                      <li className="friends-params__item f-center">
+                        <img src={StarIcon} alt="" />
+                        500 EXP
+                      </li>
+                      <li className="friends-params__item f-center">
+                        <img src={CoinIcon} alt="" />
+                        2000
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul> */}
             <ul className="friends-list">
-              <li className="friends-list__item">
-                <div className="friends-list__card block-style flex">
-                  <div className="friends-list__image">
-                    <img src={DefaultImg} alt="" />
+              {referrals.map((referral) => (
+                <li key={referral.id} className="friends-list__item">
+                  <div className="friends-list__card block-style flex">
+                    <div className="friends-list__image">
+                      <img src={DefaultImg} alt="" />
+                    </div>
+                    <div className="friends-list__content">
+                      <h3 className="friends-list__title">
+                        {referral.username}
+                      </h3>
+                      <p className="friends-list__date">{referral.joinDate}</p>
+                      <ul className="friends-params f-center">
+                        <li className="friends-params__item f-center">
+                          <img src={StarIcon} alt="" />
+                          200 EXP
+                        </li>
+                        <li className="friends-params__item f-center">
+                          <img src={CoinIcon} alt="" />
+                          50
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div className="friends-list__content">
-                    <h3 className="friends-list__title">
-                      Ko****ntin Konstant****olsky
-                    </h3>
-                    <p className="friends-list__date">23 апреля, 2024</p>
-                    <ul className="friends-params f-center">
-                      <li className="friends-params__item f-center">
-                        <img src={StarIcon} alt="" />
-                        500 EXP
-                      </li>
-                      <li className="friends-params__item f-center">
-                        <img src={CoinIcon} alt="" />
-                        2000
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li className="friends-list__item">
-                <div className="friends-list__card block-style flex">
-                  <div className="friends-list__image">
-                    <img src={DefaultImg} alt="" />
-                  </div>
-                  <div className="friends-list__content">
-                    <h3 className="friends-list__title">
-                      Ko****ntin Konstant****olsky
-                    </h3>
-                    <p className="friends-list__date">23 апреля, 2024</p>
-                    <ul className="friends-params f-center">
-                      <li className="friends-params__item f-center">
-                        <img src={StarIcon} alt="" />
-                        500 EXP
-                      </li>
-                      <li className="friends-params__item f-center">
-                        <img src={CoinIcon} alt="" />
-                        2000
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li className="friends-list__item">
-                <div className="friends-list__card block-style flex">
-                  <div className="friends-list__image">
-                    <img src={DefaultImg} alt="" />
-                  </div>
-                  <div className="friends-list__content">
-                    <h3 className="friends-list__title">
-                      Ko****ntin Konstant****olsky
-                    </h3>
-                    <p className="friends-list__date">23 апреля, 2024</p>
-                    <ul className="friends-params f-center">
-                      <li className="friends-params__item f-center">
-                        <img src={StarIcon} alt="" />
-                        500 EXP
-                      </li>
-                      <li className="friends-params__item f-center">
-                        <img src={CoinIcon} alt="" />
-                        2000
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

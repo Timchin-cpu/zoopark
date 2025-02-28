@@ -40,6 +40,9 @@ export const userInitService = {
 
   updateExperience: (telegram_id, experience) =>
     axios.put(`/user/${telegram_id}/experience`, { experience }),
+  getReferralCode: (telegram_id) =>
+    axios.get(`/user/${telegram_id}/referral-code`),
+  getReferrals: (telegram_id) => axios.get(`/user/${telegram_id}/referrals`),
 };
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
