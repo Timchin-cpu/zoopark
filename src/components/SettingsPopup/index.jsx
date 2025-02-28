@@ -372,7 +372,15 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
         {modalStep === 4 && (
           <>
             <h3 className="modal-title">Выбор рубашки</h3>
-            <div className="modal-cardback">
+            <div
+              className="modal-cardback"
+              style={{
+                overflowX: "auto",
+                scrollbarWidth: "none",
+                scrollbarWidth: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
               {cardBackStyles.map((style) => (
                 <div
                   key={style.id}
