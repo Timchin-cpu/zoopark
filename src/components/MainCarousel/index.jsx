@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ReactFlipCard from "reactjs-flip-card";
 import { userInitService } from "services/api";
-import { cardsService } from "services/api";
+import { peopleService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
+// Отсутствует определение cardBackStyles
 const cardBackStyles = {
   default: { image: DefaultImg },
   style1: { image: Style1CardBack },
@@ -38,9 +39,9 @@ const MainCarousel = ({
 }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
-  const [photos, setPhotos] = useState([]);
-  const [selectedPhotos, setSelectedPhotos] = useState({});
-  const [energy, setEnergy] = useState(100);
+  const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
+  const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
+  const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
   useEffect(() => {
     const fetchEnergy = async () => {
@@ -91,7 +92,7 @@ const MainCarousel = ({
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const policeData = await cardsService.getAllCards();
+        const policeData = await peopleService.getPolicePhotos();
         setPhotos(policeData);
         console.log(policeData);
       } catch (error) {
