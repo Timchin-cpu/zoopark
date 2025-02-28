@@ -169,9 +169,7 @@ const PeoplePage = () => {
                               <img
                                 src={
                                   userCards.some((card) => card.id === photo.id)
-                                    ? photo.image === QuestionMarkImg
-                                      ? QuestionMarkImg
-                                      : `http://localhost:3000${photo.image}`
+                                    ? `http://localhost:3000${photo.image}`
                                     : QuestionMarkImg
                                 }
                                 alt={photo.title}
