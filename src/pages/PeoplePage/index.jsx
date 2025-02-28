@@ -160,13 +160,6 @@ const PeoplePage = () => {
                           <div
                             className="city-slider__card"
                             onClick={() => handleOpenPopup(photo)}
-                            style={{
-                              opacity: userCards.some(
-                                (card) => card.id === photo.id
-                              )
-                                ? 1
-                                : 0.5,
-                            }}
                           >
                             <p className="city-slider__image">
                               <img
