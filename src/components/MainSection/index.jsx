@@ -23,7 +23,7 @@ const MainSection = () => {
   const [currentExp, setCurrentExp] = useState(0);
   const [expForNextLevel, setExpForNextLevel] = useState(1000);
   const [showAchievement, setShowAchievement] = useState(false);
-
+  const [avatar, setAvatar] = useState(Avatar); // Импортированное дефолтное изображение
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAchievement(true);
@@ -65,15 +65,19 @@ const MainSection = () => {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const username = tg.initDataUnsafe.user.username || "Пользователь";
+          const userPhoto = tg.initDataUnsafe.user.photo_url; // Получаем URL аватара
+
           // Сначала пробуем получить существующего пользователя
           const existingUser = await userInitService.getUser(telegram_id);
-
           if (!existingUser.data) {
             // Если пользователь не найден - создаем нового
             await userInitService.initUser(telegram_id, username);
           }
-
           setUsername(username);
+          if (userPhoto) {
+            // Если есть аватар - используем его
+            setAvatar(userPhoto);
+          }
         } catch (error) {
           console.error("Error initializing user:", error);
           setUsername("Пользователь");
@@ -133,7 +137,7 @@ const MainSection = () => {
           <div className="main-head f-jcsb block-style">
             <div className="main-head__offer flex">
               <div className="main-head__avatar">
-                <img src={Avatar} alt="" />
+                <img src={avatar} alt="" />
               </div>
               <div className="main-head__content">
                 <div className="main-head__user">
