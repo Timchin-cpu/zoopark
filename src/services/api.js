@@ -48,6 +48,14 @@ export const cardsService = {
   getAllCards: () => axios.get("/cards"),
   getCardsByType: (type) => axios.get(`/cards/${type}`),
 };
+export const cardBackService = {
+  // Получение всех доступных рубашек карт
+  getAllCardBacks: () => axios.get("/card-backs"),
+
+  // Обновление выбранной рубашки для пользователя
+  updateUserCardBack: (userId, cardBackId) =>
+    axios.put(`/user/${userId}/card-back`, { cardBackId }),
+};
 export const cardSetsService = {
   addCardToSet: (setId, cardId) =>
     axios.post(`/card-sets/${setId}/cards`, { cardId }),

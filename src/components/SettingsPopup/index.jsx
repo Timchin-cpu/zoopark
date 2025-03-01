@@ -12,12 +12,36 @@ import { NavLink } from "react-router-dom";
 
 const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const [cardBackStyle, setCardBackStyle] = useState("default");
+  const [cardBacks, setCardBacks] = useState([]);
 
+  useEffect(() => {
+    const fetchCardBacks = async () => {
+      try {
+        const response = await cardBackService.getAllCardBacks();
+        setCardBacks(response.data);
+      } catch (error) {
+        console.error("Error fetching card backs:", error);
+      }
+    };
+
+    fetchCardBacks();
+  }, []);
   const dispatch = useDispatch();
+  const handleCardBackChange = async (style) => {
+    try {
+      setCardBackStyle(style);
+      dispatch(setCardBack(style));
 
-  const handleCardBackChange = (style) => {
-    setCardBackStyle(style);
-    dispatch(setCardBack(style));
+      const tg = window.Telegram.WebApp;
+      if (tg?.initDataUnsafe?.user?.id) {
+        await cardBackService.updateUserCardBack(
+          tg.initDataUnsafe.user.id,
+          style
+        );
+      }
+    } catch (error) {
+      console.error("Error updating card back:", error);
+    }
   };
   const darkTheme = useSelector((state) => state.theme);
 
@@ -380,17 +404,17 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {cardBackStyles.map((style) => (
+              {cardBacks.map((cardBack) => (
                 <div
-                  key={style.id}
+                  key={cardBack.id}
                   className={`modal-cardback__item ${
-                    cardBackStyle === style.id ? "active" : ""
+                    cardBackStyle === cardBack.id ? "active" : ""
                   }`}
-                  onClick={() => handleCardBackChange(style.id)}
+                  onClick={() => handleCardBackChange(cardBack.id)}
                 >
                   <img
-                    src={style.image}
-                    alt={style.name}
+                    src={`http://localhost:3000${cardBack.image}`}
+                    alt={cardBack.name}
                     style={{
                       marginRight: "20px",
                       height: "245px",
