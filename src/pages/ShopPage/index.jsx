@@ -18,7 +18,7 @@ const ShopPage = () => {
   const [activePopupCarousel, setActivePopupCarousel] = useState(false);
   const [activePopupFilter, setActivePopupFilter] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  console.log(selectedId);
+  console.log(setSelectedId);
 
   // const [searchTerm, setSearchTerm] = useState("");
 
