@@ -24,7 +24,8 @@ const ShopPage = () => {
 
   const [items, setItems] = useState([]); // Добавить состояние для оригинального массива
 
-  // const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  console.log(filteredItems);
 
   useEffect(() => {
     const fetchPhotos = async () => {
