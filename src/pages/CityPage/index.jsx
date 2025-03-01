@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import routeCity from "./routes";
 import MainSection from "components/MainSection";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/scss";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/scss";
 
-import DefaultImg from "assets/img/default-img.png";
+// import DefaultImg from "assets/img/default-img.png";
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
