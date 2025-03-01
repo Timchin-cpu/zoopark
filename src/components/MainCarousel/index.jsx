@@ -188,10 +188,13 @@ const MainCarousel = ({
     }
     try {
       // Обновляем энергию на сервере
-      await userInitService.updateEnergy(telegram_id, energy - 10);
+      const response = await userInitService.updateEnergy(
+        telegram_id,
+        energy - 10
+      );
 
       // Обновляем локальное состояние
-      setEnergy((prev) => Math.max(0, prev - 10));
+      // setEnergy((prev) => Math.max(0, prev - 10));
       if (response.status === 200) {
         setEnergy((prev) => Math.max(0, prev - 10));
       }
