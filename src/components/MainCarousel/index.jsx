@@ -275,7 +275,8 @@ const MainCarousel = ({
                     <div className="main-slider__image">
                       <img
                         src={`http://localhost:3000${
-                          cardBackStyles[cardBackStyle || "default"].image
+                          cardBackStyles[cardBackStyle || "default"]?.image ||
+                          cardBackStyles.default.image
                         }`}
                         alt=""
                       />

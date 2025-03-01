@@ -228,11 +228,10 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
           <img
-            src={DefaultImg1}
-            alt=""
-            style={{
-              width: "40px",
-            }}
+            src={`http://localhost:3000${
+              cardBackStyles[cardBackStyle || "default"]?.image ||
+              cardBackStyles.default.image
+            }`}
           />
         </div>
       </div>
