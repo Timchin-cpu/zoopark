@@ -1,43 +1,48 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import routeCity from "./routes";
 import MainSection from "components/MainSection";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/scss';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/scss";
 
-import DefaultImg from 'assets/img/default-img.png';
+import DefaultImg from "assets/img/default-img.png";
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
 const CityPage = () => {
+  const [activePopup, setActivePopup] = useState(false);
 
-    const [activePopup, setActivePopup] = useState(false);
+  // open popup and add fixed to html
+  // const handleOpenPopup = (id) => {
+  //     document.documentElement.classList.add('fixed');
+  //     setActivePopup(true);
+  // }
 
-    // open popup and add fixed to html
-    const handleOpenPopup = (id) => {
-        document.documentElement.classList.add('fixed');
-        setActivePopup(true);
-    }
+  // close popup and remove fixed to html
+  const handleClosePopup = () => {
+    document.documentElement.classList.remove("fixed");
+    setActivePopup(false);
+  };
 
-    // close popup and remove fixed to html
-    const handleClosePopup = () => {
-        document.documentElement.classList.remove('fixed');
-        setActivePopup(false);
-    }
+  const [openAccordion, setOpenAccordion] = useState(null);
 
-    const [openAccordion, setOpenAccordion] = useState(null);
+  // accordion
+  // const handleAccordionClick = (id) => {
+  //     setOpenAccordion(openAccordion === id ? null : id);
+  // };
 
-    // accordion
-    const handleAccordionClick = (id) => {
-        setOpenAccordion(openAccordion === id ? null : id);
-    };
-
-    return(
-        <section className="city">
-            <div className="container">
-                <div className="city-inner">
-                    <MainSection />
-                    <ul className="city-list">
+  return (
+    <section className="city">
+      <div className="container">
+        <div className="city-inner">
+          <MainSection />
+          <div
+            className="block-style"
+            style={{ textAlign: "center", padding: "20px" }}
+          >
+            Скоро
+          </div>
+          {/* <ul className="city-list">
                         <li className="city-list__item block-style">
                             <div className={`city-list__title f-center-jcsb ${openAccordion === 1 ? 'active' : ''}`} onClick={()=> handleAccordionClick(1)}>
                                 Культурные объекты
@@ -265,15 +270,20 @@ const CityPage = () => {
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-            <ShopPopup active={activePopup} setActivePopup={setActivePopup} main={true} handleClosePopup={handleClosePopup} />
-            <MobileNav />
-        </section>
-    )
+                    </ul> */}
+        </div>
+      </div>
+      <ShopPopup
+        active={activePopup}
+        setActivePopup={setActivePopup}
+        main={true}
+        handleClosePopup={handleClosePopup}
+      />
+      <MobileNav />
+    </section>
+  );
 };
 
-export {routeCity};
+export { routeCity };
 
 export default CityPage;
