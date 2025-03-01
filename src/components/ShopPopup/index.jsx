@@ -111,7 +111,13 @@ const ShopPopup = (props) => {
                     <div className="main-params__icon f-center-center">
                       <img src={TimeIcon} alt="" />
                     </div>
-                    <p className="main-params__title">18,09 K/H</p>
+                    <p className="main-params__title">
+                      {" "}
+                      {props.selectedPhoto
+                        ? props.selectedPhoto.hourly_income
+                        : ""}
+                      K/H
+                    </p>
                   </div>
                 </div>
               </>
