@@ -2,20 +2,25 @@ import React from "react";
 import routeBonus from "./routes";
 import MainSection from "components/MainSection";
 
-import DefaultImg from 'assets/img/default-img.png';
-import CoinIcon from 'assets/img/coin-icon.svg';
-import StarIcon from 'assets/img/star-icon.svg';
+// import DefaultImg from 'assets/img/default-img.png';
+// import CoinIcon from 'assets/img/coin-icon.svg';
+// import StarIcon from 'assets/img/star-icon.svg';
 
 import MobileNav from "components/MobileNav";
 
 const BonusPage = () => {
-
-    return(
-        <section className="bonus">
-            <div className="container">
-                <div className="tasks-inner">
-                    <MainSection />
-                    <div className="bonus-wrap">
+  return (
+    <section className="bonus">
+      <div className="container">
+        <div className="tasks-inner">
+          <MainSection />
+          <div
+            className="block-style"
+            style={{ textAlign: "center", padding: "20px" }}
+          >
+            Скоро
+          </div>
+          {/* <div className="bonus-wrap">
                         <div className="bonus-promo block-style">
                             <div className="section-content">
                                 <h2 className="section-content__title">
@@ -122,14 +127,14 @@ const BonusPage = () => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <MobileNav />
-        </section>
-    )
+                    </div> */}
+        </div>
+      </div>
+      <MobileNav />
+    </section>
+  );
 };
 
-export {routeBonus};
+export { routeBonus };
 
 export default BonusPage;
