@@ -177,7 +177,6 @@ const MainCarousel = ({
   const handleImageClick = async (index) => {
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
-
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
@@ -189,18 +188,26 @@ const MainCarousel = ({
     try {
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
-
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
-
       setIsFlipped(true);
+      const selectedCard = selectedPhotos[data[index].id];
       setOpenedCards({
         ...openedCards,
-        [index]: selectedPhotos[data[index].id],
+        [index]: selectedCard,
       });
-      const selectedCard = selectedPhotos[data[index].id];
-      await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-      handleOpenPopup(selectedPhotos[data[index].id]);
+
+      // Добавляем карту пользователю и получаем обновленные данные
+      const response = await userCardsService.addCardToUser(
+        telegram_id,
+        selectedCard.id
+      );
+
+      // Если это карта энергии, обновляем состояние энергии
+      if (selectedCard.type === "energy_boost") {
+        setEnergy((prev) => Math.min(prev + 100, 100));
+      }
+      handleOpenPopup(selectedCard);
     } catch (error) {
       console.error("Error updating energy:", error);
     }
