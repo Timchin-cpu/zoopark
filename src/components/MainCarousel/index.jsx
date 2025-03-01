@@ -192,7 +192,9 @@ const MainCarousel = ({
 
       // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
-
+      if (response.status === 200) {
+        setEnergy((prev) => Math.max(0, prev - 10));
+      }
       setIsFlipped(true);
       setOpenedCards({
         ...openedCards,
