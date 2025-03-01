@@ -232,6 +232,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
               cardBackStyles[cardBackStyle || "default"]?.image ||
               cardBackStyles.default.image
             }`}
+            alt="Card back style"
           />
         </div>
       </div>
