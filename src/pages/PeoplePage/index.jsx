@@ -100,6 +100,7 @@ const PeoplePage = () => {
                 Полиция{" "}
                 <div
                   className="info-icon"
+                  style={{ display: "flex" }}
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowInfo(!showInfo);
