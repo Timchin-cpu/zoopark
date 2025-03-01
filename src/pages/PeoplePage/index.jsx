@@ -127,7 +127,14 @@ const PeoplePage = () => {
                   </div>
                 )}
                 <div className="city-list__more f-center">
-                  <div className="city-list__count">5 из 12</div>
+                  <div className="city-list__count">
+                    {
+                      userCards.filter((card) =>
+                        policePhotos.some((photo) => photo.id === card.id)
+                      ).length
+                    }{" "}
+                    из {policePhotos.length}
+                  </div>{" "}
                   <div
                     className="city-list__arrow"
                     onClick={() => handleAccordionClick(1)}
