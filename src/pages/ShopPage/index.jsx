@@ -6,7 +6,7 @@ import MainSection from "components/MainSection";
 import DefaultImg from "assets/img/default-img.png";
 import MoneyImg from "assets/img/money.png";
 import EnergytImg from "assets/img/energy.png";
-import CoinIcon from "assets/img/coin-icon.svg";
+// import CoinIcon from "assets/img/coin-icon.svg";
 import { peopleService } from "services/api";
 
 import MobileNav from "components/MobileNav";
@@ -20,17 +20,11 @@ const ShopPage = () => {
   const [selectedId, setSelectedId] = useState(null);
   console.log(selectedId);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  // const [items, setItems] = useState([
-  //   { id: 1, title: "Набор 10 карт", price: 7000 },
-  //   { id: 2, title: "Название карты в 2-3 строки", price: 3000 },
-  //   { id: 3, title: "Название карты в 2-3 строки", price: 9000 },
-  //   { id: 4, title: "Название карты в 2-3 строки", price: 1000 },
-  //   { id: 5, title: "Название карты в 2-3 строки", price: 7000 },
-  // ]);
+  // const [searchTerm, setSearchTerm] = useState("");
+
   const [items, setItems] = useState([]); // Добавить состояние для оригинального массива
 
-  const [filteredItems, setFilteredItems] = useState([]);
+  // const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -67,31 +61,30 @@ const ShopPage = () => {
     fetchPhotos();
   }, []);
   // console.log(setItems);
-  // const [filteredItems, setFilteredItems] = useState(items);
-  const handleSearch = (e) => {
-    const searchValue = e.target.value;
-    setSearchTerm(searchValue);
+  // const handleSearch = (e) => {
+  //   const searchValue = e.target.value;
+  //   setSearchTerm(searchValue);
 
-    const filtered = items.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setFilteredItems(filtered);
-  };
-  const handleOpenPopup = (id) => {
-    document.documentElement.classList.add("fixed");
-    setActivePopup(true);
-    console.log(id);
-    setSelectedId(id);
-  };
+  //   const filtered = items.filter((item) =>
+  //     item.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+  //   setFilteredItems(filtered);
+  // };
+  // const handleOpenPopup = (id) => {
+  //   document.documentElement.classList.add("fixed");
+  //   setActivePopup(true);
+  //   console.log(id);
+  //   setSelectedId(id);
+  // };
 
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopup(false);
   };
-  const handleOpenPopupCarousel = (id) => {
-    document.documentElement.classList.add("fixed");
-    setActivePopupCarousel(true);
-  };
+  // const handleOpenPopupCarousel = (id) => {
+  //   document.documentElement.classList.add("fixed");
+  //   setActivePopupCarousel(true);
+  // };
 
   const handleClosePopupCarousel = () => {
     document.documentElement.classList.remove("fixed");
@@ -159,10 +152,10 @@ const ShopPage = () => {
     };
   }, []);
 
-  const handleOpenFilter = () => {
-    document.documentElement.classList.add("fixed");
-    setActivePopupFilter(true);
-  };
+  // const handleOpenFilter = () => {
+  //   document.documentElement.classList.add("fixed");
+  //   setActivePopupFilter(true);
+  // };
 
   return (
     <section className="shop">
@@ -173,7 +166,13 @@ const ShopPage = () => {
             <h2 className="section-content__title shop-block__title">
               Магазин
             </h2>
-            <div className="shop-block__nav f-center-jcsb">
+            <div
+              className="block-style"
+              style={{ textAlign: "center", padding: "20px" }}
+            >
+              Скоро
+            </div>
+            {/* <div className="shop-block__nav f-center-jcsb">
               <div className="shop-block__search">
                 <div className="shop-block__search-icon">
                   <svg
@@ -247,28 +246,10 @@ const ShopPage = () => {
                       </div>
                     </li>
                   ))}{" "}
-                  {/* <li className="shop-list__item">
-                    <div className="shop-list__card">
-                      <div
-                        className="shop-list__image"
-                        onClick={() => handleOpenPopupCarousel()}
-                      >
-                        <img
-                          src={DefaultImg}
-                          alt=""
-                          className="shop-card__Img"
-                        />
-                      </div>
-                      <h3 className="shop-list__title">набор</h3>
-                      <div className="shop-list__price f-center">
-                        <img src={CoinIcon} alt="" />
-                        456
-                      </div>
-                    </div>
-                  </li> */}
+
                 </ul>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
