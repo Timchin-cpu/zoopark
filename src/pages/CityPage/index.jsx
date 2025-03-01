@@ -24,7 +24,7 @@ const CityPage = () => {
     setActivePopup(false);
   };
 
-  const [openAccordion, setOpenAccordion] = useState(null);
+  //   const [openAccordion, setOpenAccordion] = useState(null);
 
   // accordion
   // const handleAccordionClick = (id) => {
