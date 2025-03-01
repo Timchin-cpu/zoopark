@@ -203,7 +203,9 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
                   frontComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${cardBackStyles[cardBackStyle].image}`}
+                        src={`http://localhost:3000${
+                          cardBackStyles[cardBackStyle || "default"].image
+                        }`}
                         alt=""
                       />
                     </div>
