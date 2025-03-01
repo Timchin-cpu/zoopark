@@ -198,10 +198,7 @@ const MainCarousel = ({
       });
 
       // Добавляем карту пользователю и получаем обновленные данные
-      const response = await userCardsService.addCardToUser(
-        telegram_id,
-        selectedCard.id
-      );
+      await userCardsService.addCardToUser(telegram_id, selectedCard.id);
 
       // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
