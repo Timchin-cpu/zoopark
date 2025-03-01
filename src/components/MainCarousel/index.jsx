@@ -273,7 +273,10 @@ const MainCarousel = ({
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img src={cardBackStyles[cardBackStyle].image} alt="" />{" "}
+                      <img
+                        src={`http://localhost:3000${cardBackStyles[cardBackStyle].image}`}
+                        alt=""
+                      />
                     </div>
                   }
                   backComponent={
