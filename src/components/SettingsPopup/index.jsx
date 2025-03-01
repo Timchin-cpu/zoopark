@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import DefaultImg from "assets/img/default-card.png";
-import Style1CardBack from "assets/img/card1.png";
-import Style2CardBack from "assets/img/card2.png";
+// import DefaultImg from "assets/img/default-card.png";
+// import Style1CardBack from "assets/img/card1.png";
+// import Style2CardBack from "assets/img/card2.png";
 import { setTheme, setCardBack } from "../../redux/actions";
 import { routeAdmin } from "pages/AdminPanel";
 import { NavLink } from "react-router-dom";
+import { cardBackService } from "services/api";
 
 // import { setTheme } from "../../redux/actions";
 
@@ -46,20 +47,20 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const darkTheme = useSelector((state) => state.theme);
 
   console.log(darkTheme);
-  const cardBackStyles = [
-    {
-      id: "default",
-      image: DefaultImg,
-    },
-    {
-      id: "style1",
-      image: Style1CardBack,
-    },
-    {
-      id: "style2",
-      image: Style2CardBack,
-    },
-  ];
+  // const cardBackStyles = [
+  //   {
+  //     id: "default",
+  //     image: DefaultImg,
+  //   },
+  //   {
+  //     id: "style1",
+  //     image: Style1CardBack,
+  //   },
+  //   {
+  //     id: "style2",
+  //     image: Style2CardBack,
+  //   },
+  // ];
   const [settingsVibration, setSettingsVibration] = useState(false);
   const [settingsNight, setSettingsNight] = useState(darkTheme);
   const [modalStep, setModalStep] = useState(1);
