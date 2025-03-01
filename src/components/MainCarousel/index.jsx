@@ -192,14 +192,20 @@ const MainCarousel = ({
         energy - 10
       );
       if (result && result.energy !== undefined) {
+        // Сначала обновляем состояние энергии
         setEnergy(result.energy);
+
+        // Затем обновляем остальные состояния
         setIsFlipped(true);
         setOpenedCards({
           ...openedCards,
           [index]: selectedPhotos[data[index].id],
         });
+
         const selectedCard = selectedPhotos[data[index].id];
         await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+
+        // В конце открываем попап
         handleOpenPopup(selectedPhotos[data[index].id]);
       }
     } catch (error) {
