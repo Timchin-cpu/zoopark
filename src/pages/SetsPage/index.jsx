@@ -1,31 +1,36 @@
-import React, {useState} from "react";
+import React from "react";
 import routeSets from "./routes";
 import MainSection from "components/MainSection";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/scss';
+// import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/scss";
 
-import DefaultImg from 'assets/img/default-img.png';
-import CoinIcon from 'assets/img/coin-icon.svg';
-import StarIcon from 'assets/img/star-icon.svg';
+// import DefaultImg from "assets/img/default-img.png";
+// import CoinIcon from "assets/img/coin-icon.svg";
+// import StarIcon from "assets/img/star-icon.svg";
 
 import MobileNav from "components/MobileNav";
 
 const SetsPage = () => {
+  //   const [openAccordion, setOpenAccordion] = useState(null);
 
-    const [openAccordion, setOpenAccordion] = useState(null);
+  //   const handleAccordionClick = (id) => {
+  //     // Открываем выбранный аккордеон, а остальные закрываем
+  //     setOpenAccordion(openAccordion === id ? null : id);
+  //   };
 
-    const handleAccordionClick = (id) => {
-        // Открываем выбранный аккордеон, а остальные закрываем
-        setOpenAccordion(openAccordion === id ? null : id);
-    };
-
-    return(
-        <section className="sets">
-            <div className="container">
-                <div className="tasks-inner">
-                    <MainSection />
-                    <ul className="city-list">
+  return (
+    <section className="sets">
+      <div className="container">
+        <div className="tasks-inner">
+          <MainSection />
+          <div
+            className="block-style"
+            style={{ textAlign: "center", padding: "20px" }}
+          >
+            Скоро
+          </div>
+          {/* <ul className="city-list">
                         <li className="city-list__item block-style">
                             <div className={`city-list__title f-jcsb ${openAccordion === 1 ? 'active' : ''}`} onClick={()=> handleAccordionClick(1)}>
                                 <div className="sets-offer">
@@ -277,14 +282,14 @@ const SetsPage = () => {
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-            <MobileNav />
-        </section>
-    )
+                    </ul> */}
+        </div>
+      </div>
+      <MobileNav />
+    </section>
+  );
 };
 
-export {routeSets};
+export { routeSets };
 
 export default SetsPage;
