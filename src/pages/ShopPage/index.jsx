@@ -169,7 +169,7 @@ const ShopPage = () => {
             </h2>
             <div
               className="block-style"
-              style={{ textAlign: "center", padding: "20px" }}
+              style={{ textAlign: "center", padding: "20px", marginTop: "6px" }}
             >
               Скоро
             </div>
