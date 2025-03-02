@@ -78,6 +78,11 @@ const CardManagement = () => {
           </NavLink>
         </div>
       </div>
+      <div className={styles.mainContent}>
+        <h2>Рубашки карт</h2>
+        <div className={styles.cardsList}></div>
+        <div className={styles.addCart}></div>
+      </div>
     </div>
   );
 };
