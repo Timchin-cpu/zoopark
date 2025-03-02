@@ -57,6 +57,7 @@ export const cardBackService = {
   // Обновление выбранной рубашки для пользователя
   updateUserCardBack: (userId, cardBackId) =>
     axios.put(`/user/${userId}/card-back`, { cardBackId }),
+  addCardBack: (formData) => axios.post("/card-backs/add", formData),
 };
 export const cardSetsService = {
   addCardToSet: (setId, cardId) =>
