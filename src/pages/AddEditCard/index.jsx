@@ -24,14 +24,14 @@ const AddEditCard = () => {
         try {
           const response = await cardsService.getCard(id);
           const card = response.data;
-
-          setTitle(card.title);
-          setDescription(card.description);
-          setChance(card.chance);
-          setPrice(card.price);
-          setExperience(card.experience);
-          setCardType(card.type);
-          setCardSection(card.section);
+          // Устанавливаем все поля формы из полученных данных
+          setTitle(card.title || "");
+          setDescription(card.description || "");
+          setChance(card.chance || "100");
+          setPrice(card.price || "");
+          setExperience(card.experience || "");
+          setCardType(card.type || "citizen");
+          setCardSection(card.section || "");
         } catch (error) {
           console.error("Error fetching card:", error);
         }
