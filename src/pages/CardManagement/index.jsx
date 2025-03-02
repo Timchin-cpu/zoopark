@@ -54,10 +54,14 @@ const CardManagement = () => {
         <div className={styles.cardsList}>
           {cards.map((card) => (
             <div key={card.id} className={styles.cardItem}>
-              <img
-                src={`http://localhost:3000${card.image}`}
-                alt={card.title}
-              />
+              <div className={styles.cardItemImg}>
+                {" "}
+                <img
+                  src={`http://localhost:3000${card.image}`}
+                  alt={card.title}
+                />
+              </div>
+
               <h3>{card.title}</h3>
               <p>{card.description}</p>
               <NavLink to={routeAddEditCard(card.id)}>
@@ -77,7 +81,10 @@ const CardManagement = () => {
         <div className={styles.cardsList}>
           {cardSets.map((set) => (
             <div key={set.id} className={styles.cardItem}>
-              <img src={`http://localhost:3000${set.image}`} alt={set.name} />
+              <div className={styles.cardItemImg}>
+                <img src={`http://localhost:3000${set.image}`} alt={set.name} />
+              </div>
+
               <h3>{set.name}</h3>
               <p>{set.description}</p>
               <NavLink to={routeAddEditDeck(set.id)}>
@@ -98,7 +105,10 @@ const CardManagement = () => {
         <div className={styles.cardsList}>
           {cardBacks.map((cardBack) => (
             <div key={cardBack.id} className={styles.cardItem}>
-              <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+              <div className={styles.cardItemImg}>
+                <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+              </div>
+
               <button
                 style={{ background: "red" }}
                 onClick={async () => {
