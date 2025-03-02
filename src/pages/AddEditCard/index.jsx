@@ -24,6 +24,8 @@ const AddEditCard = () => {
         try {
           const response = await cardsService.getCard(id);
           const card = response.data;
+          console.log(card);
+          console.log(response);
           // Устанавливаем все поля формы из полученных данных
           setTitle(card.title || "");
           setDescription(card.description || "");
