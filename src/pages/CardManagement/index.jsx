@@ -6,6 +6,7 @@ import { cardBackService } from "services/api";
 import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
 import { routeAddEditDeck } from "pages/AddEditDeck";
+import { routeAddEditCardBack } from "pages/AddEditCardBack";
 // import { routeAddEditDeck } from "pages/AddEditCard";
 import axios from "../../axios-controller";
 const CardManagement = () => {
@@ -100,6 +101,11 @@ const CardManagement = () => {
               <img src={`http://localhost:3000${cardBack.image}`} alt="" />
             </div>
           ))}
+        </div>
+        <div className={styles.addCart}>
+          <NavLink to={routeAddEditCardBack()} style={{ width: "40%" }}>
+            <button>Добавить рубашку</button>
+          </NavLink>
         </div>
       </div>
     </div>
