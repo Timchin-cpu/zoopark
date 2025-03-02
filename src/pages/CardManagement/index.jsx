@@ -91,13 +91,16 @@ const CardManagement = () => {
           </NavLink>
         </div>
       </div>
-      <h2>Рубашки карт</h2>
-      <div className={styles.cardsList}>
-        {cardBacks.map((cardBack) => (
-          <div key={cardBack.id} className={styles.cardItem}>
-            <img src={`http://localhost:3000${cardBack.image}`} alt="" />
-          </div>
-        ))}
+      <div className={styles.mainContent}>
+        {" "}
+        <h2>Рубашки карт</h2>
+        <div className={styles.cardsList}>
+          {cardBacks.map((cardBack) => (
+            <div key={cardBack.id} className={styles.cardItem}>
+              <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
