@@ -180,7 +180,7 @@ const FriendsPage = () => {
                   <li key={referral.id} className="friends-list__item">
                     <div className="friends-list__card block-style flex">
                       <div className="friends-list__image">
-                        <img src={DefaultImg} alt="" />
+                        <img src={referral.photo_url || DefaultImg} alt="" />
                       </div>
                       <div className="friends-list__content">
                         <h3 className="friends-list__title">
