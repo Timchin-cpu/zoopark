@@ -47,6 +47,7 @@ export const userInitService = {
 export const cardsService = {
   getAllCards: () => axios.get("/cards"),
   getCardsByType: (type) => axios.get(`/cards/${type}`),
+  getCard: (id) => axios.get(`/cards/${id}`),
 };
 export const cardBackService = {
   // Получение всех доступных рубашек карт

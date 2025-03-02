@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddEditCard.module.css";
 import routeAddEditCard from "./route";
+import { cardsService } from "services/api";
 import { useParams } from "react-router-dom";
 import axios from "../../axios-controller";
 import { useHistory } from "react-router-dom";
@@ -17,6 +18,27 @@ const AddEditCard = () => {
   // const [image, setImage] = useState(null);
   const { id } = useParams(); // Добавить импорт useParams из react-router-dom
   console.log(id);
+  useEffect(() => {
+    const fetchCardData = async () => {
+      if (id) {
+        try {
+          const response = await cardsService.getCard(id);
+          const card = response.data;
+
+          setTitle(card.title);
+          setDescription(card.description);
+          setChance(card.chance);
+          setPrice(card.price);
+          setExperience(card.experience);
+          setCardType(card.type);
+          setCardSection(card.section);
+        } catch (error) {
+          console.error("Error fetching card:", error);
+        }
+      }
+    };
+    fetchCardData();
+  }, [id]);
   const [selectedImage, setSelectedImage] = useState(null);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
