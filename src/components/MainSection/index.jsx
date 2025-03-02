@@ -65,18 +65,30 @@ const MainSection = () => {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const username = tg.initDataUnsafe.user.username || "Пользователь";
-          const userPhoto = tg.initDataUnsafe.user.photo_url; // Получаем URL аватара
-
-          // Сначала пробуем получить существующего пользователя
+          const userPhoto = tg.initDataUnsafe.user.photo_url;
+          // Получаем существующего пользователя
           const existingUser = await userInitService.getUser(telegram_id);
           if (!existingUser.data) {
-            // Если пользователь не найден - создаем нового
             await userInitService.initUser(telegram_id, username);
           }
+
           setUsername(username);
-          if (userPhoto) {
-            // Если есть аватар - используем его
-            setAvatar(userPhoto);
+
+          // Проверяем время последнего обновления фото
+          const lastPhotoUpdate = existingUser.data?.last_photo_update;
+          const now = new Date();
+          const lastUpdate = new Date(lastPhotoUpdate);
+          const timeDiff = now - lastUpdate;
+          const twoDaysInMs = 2 * 24 * 60 * 60 * 1000;
+          if (!lastPhotoUpdate || timeDiff >= twoDaysInMs) {
+            // Если прошло больше 2 дней, обновляем фото
+            if (userPhoto) {
+              await userInitService.updateUserPhoto(telegram_id, userPhoto);
+              setAvatar(userPhoto);
+            }
+          } else {
+            // Используем существующее фото
+            setAvatar(existingUser.data.photo_url || Avatar);
           }
         } catch (error) {
           console.error("Error initializing user:", error);

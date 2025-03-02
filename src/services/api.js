@@ -37,7 +37,8 @@ export const userInitService = {
     }
   },
   getUserLevel: (telegram_id) => axios.get(`/user/${telegram_id}/level`),
-
+  updateUserPhoto: (telegram_id, photo_url) =>
+    axios.put(`/user/${telegram_id}/photo`, { photo_url }),
   updateExperience: (telegram_id, experience) =>
     axios.put(`/user/${telegram_id}/experience`, { experience }),
   getReferralCode: (telegram_id) =>
