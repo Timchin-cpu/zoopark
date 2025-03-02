@@ -3,8 +3,6 @@ import styles from "./AddEditCardBack.module.css";
 import routeAddEditCardBack from "./route";
 
 const AddEditCardBack = () => {
-  const [title, setTitle] = useState("");
-
   // const [image, setImage] = useState(null);
 
   return (
@@ -17,7 +15,7 @@ const AddEditCardBack = () => {
           </div>
           <div>
             <p>Название</p>
-            <input type="text" value={title} />{" "}
+            <input type="text" />{" "}
           </div>
           <button className={styles.saveButton}>Сохранить</button>{" "}
         </div>
