@@ -71,8 +71,10 @@ const MainPage = () => {
       setActiveShopPopup(true);
       // Update hourly income and coins when card is opened
       if (photo) {
-        setHourlyIncome((prev) => prev + (photo.hourly_income || 0));
-        const newCoins = photo.price || 0;
+        setHourlyIncome((prevIncome) => {
+          const newIncome = prevIncome + (photo.hourly_income || 0);
+          return parseFloat(newIncome.toFixed(2)); // Round to 2 decimal places
+        });
         setCoins((prevCoins) => {
           const updatedCoins = prevCoins + newCoins;
           return updatedCoins;
