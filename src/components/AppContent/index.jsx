@@ -13,6 +13,9 @@ import ShopPage, { routeShop as routeShopPage } from "pages/ShopPage";
 import AddEditCard, {
   routeAddEditCard as routeAddEditCardPage,
 } from "pages/AddEditCard";
+import AddEditCardBack, {
+  routeAddEditCardBack as routeAddEditCardBackPage,
+} from "pages/AddEditCardBack";
 import AddEditDeck, {
   routeAddEditDeck as routeAddEditDeckPage,
 } from "pages/AddEditDeck";
@@ -49,6 +52,11 @@ const AppContent = () => {
           <Route exact path={routeFriendsPage()} component={FriendsPage} />
           <Route exact path={routeShopPage()} component={ShopPage} />
           <Route exact path={routeAddEditCardPage()} component={AddEditCard} />
+          <Route
+            exact
+            path={routeAddEditCardBackPage()}
+            component={AddEditCardBack}
+          />
           <Route exact path={routeAdminPage()} component={AdminPanel} />
           <Route
             exact
