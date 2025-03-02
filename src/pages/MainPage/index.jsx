@@ -48,11 +48,16 @@ const MainPage = () => {
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getUser(telegram_id);
-          if (response.data && response.data.coins) {
-            setCoins(response.data.coins);
+          if (response.data) {
+            if (response.data.coins) {
+              setCoins(response.data.coins);
+            }
+            if (response.data.hourly_income) {
+              setHourlyIncome(response.data.hourly_income);
+            }
           }
         } catch (error) {
-          console.error("Error fetching user coins:", error);
+          console.error("Error fetching user data:", error);
         }
       }
     };
