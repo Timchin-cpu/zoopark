@@ -37,6 +37,7 @@ const MainPage = () => {
   const [shouldUpdateCarousel, setShouldUpdateCarousel] = useState(false);
   const [hourlyIncome, setHourlyIncome] = useState(0);
   const [coins, setCoins] = useState(0);
+  console.log(coins);
   // const [accumulatedCoins, setAccumulatedCoins] = useState(0);
   const handleOpenPopup = (photo) => {
     setTimeout(function () {
