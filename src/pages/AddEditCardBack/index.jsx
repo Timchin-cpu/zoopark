@@ -1,4 +1,3 @@
-jsx;
 import React, { useState } from "react";
 import styles from "./AddEditCardBack.module.css";
 import routeAddEditCardBack from "./route";
