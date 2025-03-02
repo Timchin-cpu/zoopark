@@ -48,8 +48,10 @@ const MainPage = () => {
       if (photo) {
         setHourlyIncome((prev) => prev + (photo.hourly_income || 0));
         const newCoins = photo.price || 0;
-        // setAccumulatedCoins(prev => prev + newCoins);
-        setCoins((prev) => prev + newCoins);
+        setCoins((prevCoins) => {
+          const updatedCoins = prevCoins + newCoins;
+          return updatedCoins;
+        });
       }
     }, 1000);
   };
