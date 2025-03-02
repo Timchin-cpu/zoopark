@@ -52,7 +52,15 @@ const MainPage = () => {
             if (response.data.coins) {
               setCoins(response.data.coins);
             }
-            setHourlyIncome(hourlyIncomeResponse.data.hourly_income || 0);
+          }
+          const hourlyIncomeResponse = await userInitService.getHourlyIncome(
+            telegram_id
+          );
+          if (
+            hourlyIncomeResponse.data &&
+            hourlyIncomeResponse.data.hourly_income
+          ) {
+            setHourlyIncome(hourlyIncomeResponse.data.hourly_income);
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
