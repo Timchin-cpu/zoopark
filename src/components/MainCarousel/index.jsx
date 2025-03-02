@@ -275,9 +275,11 @@ const MainCarousel = ({
                   frontComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
-                          cardBackStyle || cardBackStyles.default.image
-                        }`}
+                        src={
+                          cardBackStyle
+                            ? `http://localhost:3000${cardBackStyle}`
+                            : cardBackStyles.default.image
+                        }
                         alt=""
                       />
                     </div>
