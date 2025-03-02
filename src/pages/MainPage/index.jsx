@@ -75,6 +75,7 @@ const MainPage = () => {
           const newIncome = prevIncome + (photo.hourly_income || 0);
           return parseFloat(newIncome.toFixed(2)); // Round to 2 decimal places
         });
+        const newCoins = photo.price || 0;
         setCoins((prevCoins) => {
           const updatedCoins = prevCoins + newCoins;
           return updatedCoins;
