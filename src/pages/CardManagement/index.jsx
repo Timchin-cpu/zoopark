@@ -99,6 +99,7 @@ const CardManagement = () => {
           {cardBacks.map((cardBack) => (
             <div key={cardBack.id} className={styles.cardItem}>
               <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+              <button>Удалить</button>
             </div>
           ))}
         </div>
