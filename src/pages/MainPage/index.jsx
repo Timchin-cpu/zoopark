@@ -52,9 +52,7 @@ const MainPage = () => {
             if (response.data.coins) {
               setCoins(response.data.coins);
             }
-            if (response.data.hourly_income) {
-              setHourlyIncome(response.data.hourly_income);
-            }
+            setHourlyIncome(hourlyIncomeResponse.data.hourly_income || 0);
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
