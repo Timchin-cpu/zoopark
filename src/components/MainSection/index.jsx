@@ -232,7 +232,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
                 </div>
                 {showAchievement && (
                   <p className="main-params__title">
-                    {hourlyIncome.toFixed(2)} K/H
+                    {hourlyIncome ? hourlyIncome.toFixed(2) : "0.00"} K/H
                   </p>
                 )}
               </div>

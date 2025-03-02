@@ -37,6 +37,7 @@ const MainPage = () => {
   const [shouldUpdateCarousel, setShouldUpdateCarousel] = useState(false);
   const [hourlyIncome, setHourlyIncome] = useState(0);
   const [coins, setCoins] = useState(0);
+  // const [accumulatedCoins, setAccumulatedCoins] = useState(0);
   const handleOpenPopup = (photo) => {
     setTimeout(function () {
       document.documentElement.classList.add("fixed");
@@ -45,7 +46,9 @@ const MainPage = () => {
       // Update hourly income and coins when card is opened
       if (photo) {
         setHourlyIncome((prev) => prev + (photo.hourly_income || 0));
-        setCoins((prev) => prev + (photo.price || 0));
+        const newCoins = photo.price || 0;
+        // setAccumulatedCoins(prev => prev + newCoins);
+        setCoins((prev) => prev + newCoins);
       }
     }, 1000);
   };
