@@ -51,13 +51,11 @@ export const cardsService = {
   getCard: (id) => axios.get(`/cards/${id}`),
 };
 export const cardBackService = {
-  // Получение всех доступных рубашек карт
   getAllCardBacks: () => axios.get("/card-backs"),
-
-  // Обновление выбранной рубашки для пользователя
   updateUserCardBack: (userId, cardBackId) =>
     axios.put(`/user/${userId}/card-back`, { cardBackId }),
   addCardBack: (formData) => axios.post("/card-backs/add", formData),
+  deleteCardBack: (id) => axios.delete(`/card-backs/${id}`),
 };
 export const cardSetsService = {
   addCardToSet: (setId, cardId) =>

@@ -95,14 +95,23 @@ const CardManagement = () => {
       <div className={styles.mainContent}>
         {" "}
         <h2>Рубашки карт</h2>
-        <div className={styles.cardsList}>
-          {cardBacks.map((cardBack) => (
-            <div key={cardBack.id} className={styles.cardItem}>
-              <img src={`http://localhost:3000${cardBack.image}`} alt="" />
-              <button>Удалить</button>
-            </div>
-          ))}
-        </div>
+        {cardBacks.map((cardBack) => (
+          <div key={cardBack.id} className={styles.cardItem}>
+            <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+            <button
+              onClick={async () => {
+                try {
+                  await cardBackService.deleteCardBack(cardBack.id);
+                  setCardBacks(cardBacks.filter((cb) => cb.id !== cardBack.id));
+                } catch (error) {
+                  console.error("Error deleting card back:", error);
+                }
+              }}
+            >
+              Удалить
+            </button>
+          </div>
+        ))}
         <div className={styles.addCart}>
           <NavLink to={routeAddEditCardBack()} style={{ width: "40%" }}>
             <button>Добавить рубашку</button>
