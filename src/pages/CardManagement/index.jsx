@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./CardManagement.module.css";
 import routeCardManagement from "./route";
 import { cardsService } from "services/api";
+import { cardBackService } from "services/api";
 import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
 import { routeAddEditDeck } from "pages/AddEditDeck";
