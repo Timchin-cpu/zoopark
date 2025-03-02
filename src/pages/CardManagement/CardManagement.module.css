@@ -14,14 +14,14 @@
   display: none; /* для Chrome, Safari и Opera */
 }
 .cardItem {
+  display: flex;
   flex: 0 0 auto;
+  flex-direction: column;
+  height: 341px;
+  justify-content: space-around;
   overflow: hidden;
   text-align: center;
-  width: 200px;
-  height: 341px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  width: 170px;
 }
 
 .cardItem h3 {
@@ -39,7 +39,7 @@
 }
 
 .cardItem img {
-  height: 191px;
+  height: 165px;
   object-fit: cover;
   width: 60%;
 }

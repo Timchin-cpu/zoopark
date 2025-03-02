@@ -104,7 +104,11 @@ const CardManagement = () => {
         <h2>Рубашки карт</h2>
         <div className={styles.cardsList}>
           {cardBacks.map((cardBack) => (
-            <div key={cardBack.id} className={styles.cardItem}>
+            <div
+              key={cardBack.id}
+              className={styles.cardItem}
+              style={{ height: "228px" }}
+            >
               <div className={styles.cardItemImg}>
                 <img src={`http://localhost:3000${cardBack.image}`} alt="" />
               </div>
