@@ -37,7 +37,25 @@ const MainPage = () => {
   const [shouldUpdateCarousel, setShouldUpdateCarousel] = useState(false);
   const [hourlyIncome, setHourlyIncome] = useState(0);
   const [coins, setCoins] = useState(0);
-  console.log(coins);
+
+  // Fetch initial coin count from user data
+  useEffect(() => {
+    const fetchUserCoins = async () => {
+      const tg = window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        try {
+          const telegram_id = tg.initDataUnsafe.user.id;
+          const response = await userInitService.getUser(telegram_id);
+          if (response.data && response.data.coins) {
+            setCoins(response.data.coins);
+          }
+        } catch (error) {
+          console.error("Error fetching user coins:", error);
+        }
+      }
+    };
+    fetchUserCoins();
+  }, []);
   // const [accumulatedCoins, setAccumulatedCoins] = useState(0);
   const handleOpenPopup = (photo) => {
     setTimeout(function () {

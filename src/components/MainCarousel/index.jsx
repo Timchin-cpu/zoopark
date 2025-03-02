@@ -189,7 +189,7 @@ const MainCarousel = ({
     try {
       // Обновляем энергию на сервере
       await userInitService.updateEnergy(telegram_id, energy - 10);
-      // Обновляем локальное состояние энергии
+      // Обновляем локальное состояние
       setEnergy((prev) => Math.max(0, prev - 10));
       setIsFlipped(true);
       const selectedCard = selectedPhotos[data[index].id];
@@ -197,24 +197,17 @@ const MainCarousel = ({
         ...openedCards,
         [index]: selectedCard,
       });
-      // Получаем текущие монеты пользователя перед обновлением
-      const userResponse = await userInitService.getUser(telegram_id);
-      const currentCoins = userResponse.data.coins || 0;
 
       // Добавляем карту пользователю и получаем обновленные данные
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
+
       // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
         setEnergy((prev) => Math.min(prev + 100, 100));
       }
-      // Обновляем монеты пользователя (добавляем награду к текущему количеству)
-      if (selectedCard.price) {
-        const newCoins = currentCoins + selectedCard.price;
-        await userInitService.updateCoins(telegram_id, newCoins);
-      }
       handleOpenPopup(selectedCard);
     } catch (error) {
-      console.error("Error updating user data:", error);
+      console.error("Error updating energy:", error);
     }
   };
 
