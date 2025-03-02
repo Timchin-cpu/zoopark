@@ -35,27 +35,33 @@ const MainPage = () => {
 
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [shouldUpdateCarousel, setShouldUpdateCarousel] = useState(false);
-
+  const [hourlyIncome, setHourlyIncome] = useState(0);
+  const [coins, setCoins] = useState(0);
   const handleOpenPopup = (photo) => {
     setTimeout(function () {
       document.documentElement.classList.add("fixed");
       setSelectedPhoto(photo);
       setActiveShopPopup(true);
+      // Update hourly income and coins when card is opened
+      if (photo) {
+        setHourlyIncome((prev) => prev + (photo.hourly_income || 0));
+        setCoins((prev) => prev + (photo.price || 0));
+      }
     }, 1000);
   };
-
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
     setActiveShopPopup(false);
   };
+
   const handlePopupButtonClick = () => {
-    setShouldUpdateCarousel(true); // Устанавливаем флаг для обновления карусели
+    setShouldUpdateCarousel(true);
   };
   return (
     <section className="main">
       <div className="container">
         <div className="friends-inner">
-          <MainSection />
+          <MainSection hourlyIncome={hourlyIncome} coins={coins} />
           <div className="main-game">
             <MainCarousel
               getActiveSlide={3}

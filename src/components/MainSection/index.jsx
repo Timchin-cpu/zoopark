@@ -14,11 +14,11 @@ import SettingsPopup from "components/SettingsPopup";
 import { userService } from "services/api";
 import { userInitService } from "services/api";
 
-const MainSection = () => {
-  const [coins, setCoins] = useState(0); // Добавляем состояние для coins
-  const [hourlyIncome, setHourlyIncome] = useState(0);
+const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
+  const [coins, setCoins] = useState(propCoins || 0);
+  const [hourlyIncome, setHourlyIncome] = useState(propHourlyIncome || 0);
   const [activePopup, setActivePopup] = useState(false);
-  const [username, setUsername] = useState(""); // Добавляем состояние для username
+  const [username, setUsername] = useState("");
   const [level, setLevel] = useState(1);
   const [currentExp, setCurrentExp] = useState(0);
   const [expForNextLevel, setExpForNextLevel] = useState(1000);
@@ -99,6 +99,12 @@ const MainSection = () => {
     initializeUser();
   }, []);
   useEffect(() => {
+    setHourlyIncome(propHourlyIncome);
+  }, [propHourlyIncome]);
+  useEffect(() => {
+    setCoins(propCoins);
+  }, [propCoins]);
+  useEffect(() => {
     const fetchUserData = async () => {
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
@@ -108,7 +114,6 @@ const MainSection = () => {
           if (response.data && response.data.coins) {
             setCoins(response.data.coins);
           }
-          // Fetch hourly income
           const hourlyIncomeResponse = await userInitService.getHourlyIncome(
             telegram_id
           );
