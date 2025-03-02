@@ -8,8 +8,20 @@ import { routeAddEditDeck } from "pages/AddEditDeck";
 // import { routeAddEditDeck } from "pages/AddEditCard";
 import axios from "../../axios-controller";
 const CardManagement = () => {
+  const [cardBacks, setCardBacks] = useState([]);
   const [cards, setCards] = useState([]);
   const [cardSets, setCardSets] = useState([]);
+  useEffect(() => {
+    const fetchCardBacks = async () => {
+      try {
+        const response = await cardBackService.getAllCardBacks();
+        setCardBacks(response.data);
+      } catch (error) {
+        console.error("Error fetching card backs:", error);
+      }
+    };
+    fetchCardBacks();
+  }, []);
   useEffect(() => {
     const fetchCardSets = async () => {
       try {
@@ -78,10 +90,13 @@ const CardManagement = () => {
           </NavLink>
         </div>
       </div>
-      <div className={styles.mainContent}>
-        <h2>Рубашки карт</h2>
-        <div className={styles.cardsList}></div>
-        <div className={styles.addCart}></div>
+      <h2>Рубашки карт</h2>
+      <div className={styles.cardsList}>
+        {cardBacks.map((cardBack) => (
+          <div key={cardBack.id} className={styles.cardItem}>
+            <img src={`http://localhost:3000${cardBack.image}`} alt="" />
+          </div>
+        ))}
       </div>
     </div>
   );
