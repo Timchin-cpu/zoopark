@@ -30,7 +30,7 @@ const FriendsPage = () => {
             telegram_id
           );
           // console.log(referralsResponse);
-          // console.log(referralsResponse.data);
+          console.log(referralsResponse.data);
           setReferrals(referralsResponse.data.referrals);
         }
       } catch (error) {
