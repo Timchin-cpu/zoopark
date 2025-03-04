@@ -104,21 +104,21 @@ label {
   margin-bottom: 10px;
 }
 .inputCard {
-  width: 235px;
+  width: 265px;
   height: 40px;
   border-radius: 10px !important;
   padding: 10px;
   margin-bottom: 10px;
 }
 .describedCard {
-  width: 235px;
+  width: 265px;
   height: 120px;
   border-radius: 10px !important;
-  padding: 10px;  margin-bottom: 10px;
-
+  padding: 10px;
+  margin-bottom: 10px;
 }
 .chooseChapter {
-  width: 235px;
+  width: 265px;
   height: 40px;
   border-radius: 10px;
   padding: 10px;
