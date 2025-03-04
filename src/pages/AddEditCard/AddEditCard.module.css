@@ -34,7 +34,7 @@ label {
   cursor: pointer;
 }
 .saveButton {
-  width: 30%;
+  width: 100%;
   height: 45px;
   display: flex;
   align-items: center;
@@ -67,14 +67,18 @@ label {
 .mainContent {
   background: #dcdcdc;
   border-radius: 5px;
+  height: 100%;
   overflow-y: auto;
   padding: 14px;
-  height: 100%;
-}
-.content {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.content {
+  align-items: center;
+  display: flex;
   justify-content: space-between;
+  width: 67%;
 }
 .title {
   font-size: 25px;
