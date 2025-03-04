@@ -13,6 +13,7 @@ const CardManagement = () => {
   const [cardBacks, setCardBacks] = useState([]);
   const [cards, setCards] = useState([]);
   const [cardSets, setCardSets] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     const fetchCardBacks = async () => {
       try {
