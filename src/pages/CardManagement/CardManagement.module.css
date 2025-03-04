@@ -75,3 +75,8 @@
   align-items: center;
   justify-content: center;
 }
+.contents {
+  background: white;
+  width: 100vw;
+  height: 100vh;
+}

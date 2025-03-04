@@ -9,3 +9,8 @@
 .content p {
   font-size: 20px;
 }
+.contents {
+  background: white;
+  width: 100vw;
+  height: 100vh;
+}

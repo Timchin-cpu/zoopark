@@ -44,3 +44,8 @@ label {
   border-radius: 5px;
   margin-top: 10px;
 }
+.contents {
+  background: white;
+  width: 100vw;
+  height: 100vh;
+}
