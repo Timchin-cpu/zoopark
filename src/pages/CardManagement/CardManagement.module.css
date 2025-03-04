@@ -1,5 +1,9 @@
 .mainContent {
   padding: 14px;
+  background: #dcdcdc;
+  margin: 10px;
+  border-radius: 5px;
+  overflow-y: auto;
 }
 .cardsList {
   display: flex;

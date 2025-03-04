@@ -61,9 +61,12 @@ const CardManagement = () => {
                   alt={card.title}
                 />
               </div>
+              <div className={styles.cardInfo}>
+                {" "}
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>{" "}
+              </div>
 
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
               <NavLink to={routeAddEditCard(card.id)}>
                 <button>Редактировать</button>
               </NavLink>
