@@ -183,6 +183,30 @@ const PeoplePage = () => {
                                 }
                                 alt={photo.title}
                               />
+                              {userCards.filter((card) => card.id === photo.id)
+                                .length > 1 && (
+                                <span
+                                  className="card-count"
+                                  style={{
+                                    position: "absolute",
+                                    bottom: "10px",
+                                    right: "10px",
+                                    background: " rgba(0, 0, 0, 0.7)",
+                                    color: "white",
+                                    padding: "4px 8px",
+                                    borderRadius: "12px",
+                                    fontSize: "14px",
+                                    fontWeight: "500",
+                                  }}
+                                >
+                                  ×
+                                  {
+                                    userCards.filter(
+                                      (card) => card.id === photo.id
+                                    ).length
+                                  }
+                                </span>
+                              )}
                             </p>
                           </div>
                         </div>
