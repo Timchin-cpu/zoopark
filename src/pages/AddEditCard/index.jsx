@@ -42,9 +42,11 @@ const AddEditCard = () => {
     fetchCardData();
   }, [id]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
   console.log(selectedImage);
   const handleSubmit = async () => {
@@ -80,11 +82,27 @@ const AddEditCard = () => {
         <div className={styles.content}>
           <div>
             <p>Фото</p>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e)}
-            />
+            {imagePreview ? (
+              <div className={styles.imagePreview}>
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  style={{ maxWidth: "200px" }}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ marginTop: "10px" }}
+                />
+              </div>
+            ) : (
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            )}
           </div>
           <div>
             <p>Название</p>
