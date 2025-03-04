@@ -89,19 +89,35 @@ const AddEditCard = () => {
                   alt="Preview"
                   style={{ maxWidth: "200px" }}
                 />
+                <div className={styles.uploadButton}>
+                  <label
+                    htmlFor="fileInput"
+                    className={styles.customFileButton}
+                  >
+                    Изменить фото
+                  </label>
+                  <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    style={{ display: "none" }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className={styles.uploadButton}>
+                <label htmlFor="fileInput" className={styles.customFileButton}>
+                  Добавить фото
+                </label>
                 <input
+                  id="fileInput"
                   type="file"
                   accept="image/*"
                   onChange={handleImageUpload}
-                  style={{ marginTop: "10px" }}
+                  style={{ display: "none" }}
                 />
               </div>
-            ) : (
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
             )}
           </div>
           <div>
