@@ -162,7 +162,7 @@ const AddEditCard = () => {
             />
           </div>
           <div>
-            <p>Тип карты</p>
+            <h2 className={styles.title}>Тип карты</h2>
             <div>
               <label>
                 <input
@@ -185,7 +185,7 @@ const AddEditCard = () => {
             </div>
             {/* Add section select based on card type */}
             <div>
-              <p>Раздел карты</p>
+              <h2 className={styles.title}>Раздел карты</h2>
               <select
                 className={styles.chooseChapter}
                 value={cardSection}
