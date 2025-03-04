@@ -7,30 +7,27 @@ import { routeFriends } from "pages/FriendsPage";
 import { routeShop } from "pages/ShopPage";
 import { routePeople } from "pages/PeoplePage";
 
-import GameDefaultWhite from "assets/img/game-default.svg";
-import GameActiveWhite from "assets/img/game-active.svg";
-import GameDefaultDark from "assets/img/game-default-dark.svg";
-import GameActiveDark from "assets/img/game-active-dark.svg";
-
-import CityDefaultWhite from "assets/img/city-default.svg";
-import CityActiveWhite from "assets/img/city-active.svg";
-import CityDefaultDark from "assets/img/city-default-dark.svg";
-import CityActiveDark from "assets/img/city-active-dark.svg";
-
-import PeopleDefaultWhite from "assets/img/people-default.svg";
-import PeopleActiveWhite from "assets/img/people-active.svg";
-import PeopleDefaultDark from "assets/img/people-default-dark.svg";
-import PeopleActiveDark from "assets/img/people-active-dark.svg";
-
-import FriendsDefaultWhite from "assets/img/friends-default.svg";
-import FriendsActiveWhite from "assets/img/friends-active.svg";
-import FriendsDefaultDark from "assets/img/friends-default-dark.svg";
-import FriendsActiveDark from "assets/img/friends-active-dark.svg";
-
-import ShopDefaultWhite from "assets/img/shop-default.svg";
-import ShopActiveWhite from "assets/img/shop-active.svg";
-import ShopDefaultDark from "assets/img/shop-default-dark.svg";
-import ShopActiveDark from "assets/img/shop-active-dark.svg";
+// Импортируем как React компоненты
+import { ReactComponent as GameDefaultWhite } from "assets/img/game-default.svg";
+import { ReactComponent as GameActiveWhite } from "assets/img/game-active.svg";
+import { ReactComponent as GameDefaultDark } from "assets/img/game-default-dark.svg";
+import { ReactComponent as GameActiveDark } from "assets/img/game-active-dark.svg";
+import { ReactComponent as CityDefaultWhite } from "assets/img/city-default.svg";
+import { ReactComponent as CityActiveWhite } from "assets/img/city-active.svg";
+import { ReactComponent as CityDefaultDark } from "assets/img/city-default-dark.svg";
+import { ReactComponent as CityActiveDark } from "assets/img/city-active-dark.svg";
+import { ReactComponent as PeopleDefaultWhite } from "assets/img/people-default.svg";
+import { ReactComponent as PeopleActiveWhite } from "assets/img/people-active.svg";
+import { ReactComponent as PeopleDefaultDark } from "assets/img/people-default-dark.svg";
+import { ReactComponent as PeopleActiveDark } from "assets/img/people-active-dark.svg";
+import { ReactComponent as FriendsDefaultWhite } from "assets/img/friends-default.svg";
+import { ReactComponent as FriendsActiveWhite } from "assets/img/friends-active.svg";
+import { ReactComponent as FriendsDefaultDark } from "assets/img/friends-default-dark.svg";
+import { ReactComponent as FriendsActiveDark } from "assets/img/friends-active-dark.svg";
+import { ReactComponent as ShopDefaultWhite } from "assets/img/shop-default.svg";
+import { ReactComponent as ShopActiveWhite } from "assets/img/shop-active.svg";
+import { ReactComponent as ShopDefaultDark } from "assets/img/shop-default-dark.svg";
+import { ReactComponent as ShopActiveDark } from "assets/img/shop-active-dark.svg";
 
 const MobileNav = () => {
   return (
@@ -44,25 +41,15 @@ const MobileNav = () => {
           >
             <div className="mobile-menu__icon f-center-center">
               <div className="mobile-menu__icon_white">
-                <img
-                  src={GameDefaultWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-default"
-                />
-                <img
-                  src={GameActiveWhite}
+                <GameDefaultWhite className="mobile-menu__icon_white-default" />
+                <GameActiveWhite
                   alt=""
                   className="mobile-menu__icon_white-active"
                 />
               </div>
               <div className="mobile-menu__icon_dark">
-                <img
-                  src={GameDefaultDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-default"
-                />
-                <img
-                  src={GameActiveDark}
+                <GameDefaultDark className="mobile-menu__icon_dark-default" />
+                <GameActiveDark
                   alt=""
                   className="mobile-menu__icon_dark-active"
                 />
@@ -76,28 +63,12 @@ const MobileNav = () => {
             <div className="mobile-menu__icon f-center-center">
               <div className="mobile-menu__icon f-center-center">
                 <div className="mobile-menu__icon_white">
-                  <img
-                    src={CityDefaultWhite}
-                    alt=""
-                    className="mobile-menu__icon_white-default"
-                  />
-                  <img
-                    src={CityActiveWhite}
-                    alt=""
-                    className="mobile-menu__icon_white-active"
-                  />
+                  <CityDefaultWhite className="mobile-menu__icon_white-default" />
+                  <CityActiveWhite className="mobile-menu__icon_white-active" />
                 </div>
                 <div className="mobile-menu__icon_dark">
-                  <img
-                    src={CityDefaultDark}
-                    alt=""
-                    className="mobile-menu__icon_dark-default"
-                  />
-                  <img
-                    src={CityActiveDark}
-                    alt=""
-                    className="mobile-menu__icon_dark-active"
-                  />
+                  <CityDefaultDark className="mobile-menu__icon_dark-default" />
+                  <CityActiveDark className="mobile-menu__icon_dark-active" />
                 </div>
               </div>
             </div>
@@ -108,28 +79,12 @@ const MobileNav = () => {
           <NavLink to={routePeople()} className="mobile-menu__card">
             <div className="mobile-menu__icon f-center-center">
               <div className="mobile-menu__icon_white">
-                <img
-                  src={PeopleDefaultWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-default"
-                />
-                <img
-                  src={PeopleActiveWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-active"
-                />
+                <PeopleDefaultWhite className="mobile-menu__icon_white-default" />
+                <PeopleActiveWhite className="mobile-menu__icon_white-active" />
               </div>
               <div className="mobile-menu__icon_dark">
-                <img
-                  src={PeopleDefaultDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-default"
-                />
-                <img
-                  src={PeopleActiveDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-active"
-                />
+                <PeopleDefaultDark className="mobile-menu__icon_dark-default" />
+                <PeopleActiveDark className="mobile-menu__icon_dark-active" />
               </div>
             </div>
             <p className="mobile-menu__title">Жители</p>
@@ -139,28 +94,12 @@ const MobileNav = () => {
           <NavLink to={routeFriends()} className="mobile-menu__card">
             <div className="mobile-menu__icon f-center-center">
               <div className="mobile-menu__icon_white">
-                <img
-                  src={FriendsDefaultWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-default"
-                />
-                <img
-                  src={FriendsActiveWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-active"
-                />
+                <FriendsDefaultWhite className="mobile-menu__icon_white-default" />
+                <FriendsActiveWhite className="mobile-menu__icon_white-active" />
               </div>
               <div className="mobile-menu__icon_dark">
-                <img
-                  src={FriendsDefaultDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-default"
-                />
-                <img
-                  src={FriendsActiveDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-active"
-                />
+                <FriendsDefaultDark className="mobile-menu__icon_dark-default" />
+                <FriendsActiveDark className="mobile-menu__icon_dark-active" />
               </div>
             </div>
             <p className="mobile-menu__title">Друзья</p>
@@ -170,28 +109,12 @@ const MobileNav = () => {
           <NavLink to={routeShop()} className="mobile-menu__card">
             <div className="mobile-menu__icon f-center-center">
               <div className="mobile-menu__icon_white">
-                <img
-                  src={ShopDefaultWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-default"
-                />
-                <img
-                  src={ShopActiveWhite}
-                  alt=""
-                  className="mobile-menu__icon_white-active"
-                />
+                <ShopDefaultWhite className="mobile-menu__icon_white-default" />
+                <ShopActiveWhite className="mobile-menu__icon_white-active" />
               </div>
               <div className="mobile-menu__icon_dark">
-                <img
-                  src={ShopDefaultDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-default"
-                />
-                <img
-                  src={ShopActiveDark}
-                  alt=""
-                  className="mobile-menu__icon_dark-active"
-                />
+                <ShopDefaultDark className="mobile-menu__icon_dark-default" />
+                <ShopActiveDark className="mobile-menu__icon_dark-active" />
               </div>
             </div>
             <p className="mobile-menu__title">Магазин</p>
