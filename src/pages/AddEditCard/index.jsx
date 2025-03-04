@@ -123,31 +123,31 @@ const AddEditCard = () => {
             )}
           </div>
           <div>
-            <p>Название</p>
+            <h2 className={styles.title}>Название</h2>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />{" "}
-            <p>Описание</p>
+            <h2 className={styles.title}>Описание</h2>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />{" "}
-            <p>Вознаграждение</p>
+            <h2 className={styles.title}>Вознаграждение</h2>
             <input
               type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />{" "}
-            <p>Опыт</p>
+            <h2 className={styles.title}>Опыт</h2>
             <input
               type="number"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
             />{" "}
-            <p>Шанс выпадения (%)</p>
+            <h2 className={styles.title}>Шанс выпадения (%)</h2>
             <input
               type="number"
               min="0"

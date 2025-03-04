@@ -76,3 +76,6 @@ label {
   align-items: center;
   justify-content: space-between;
 }
+.title {
+  font-size: 25px;
+}
