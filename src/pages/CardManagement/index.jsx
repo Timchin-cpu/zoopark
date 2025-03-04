@@ -78,7 +78,7 @@ const CardManagement = () => {
               </div>
             ))}
         </div>
-        <div>
+        <div className={styles.settings}>
           <div className={styles.searchContainer}>
             <input
               type="text"
@@ -88,15 +88,33 @@ const CardManagement = () => {
               className={styles.searchInput}
             />
             <button
+              style={{
+                background: "green",
+                border: "none",
+                borderRadius: "4px",
+                color: "#fff",
+                cursor: "pointer",
+                padding: "8px 16px",
+              }}
               onClick={() => setSearchQuery(searchQuery)}
-              className={styles.searchButton}
             >
               Поиск
             </button>
           </div>{" "}
           <div className={styles.addCart}>
             <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
-              <button>Добавить карту</button>
+              <button
+                style={{
+                  background: "green",
+                  border: "none",
+                  borderRadius: "4px",
+                  color: "#fff",
+                  cursor: "pointer",
+                  padding: "8px 16px",
+                }}
+              >
+                Добавить карту
+              </button>
             </NavLink>
           </div>
         </div>
