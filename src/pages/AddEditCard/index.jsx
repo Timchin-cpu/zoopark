@@ -5,6 +5,7 @@ import { cardsService } from "services/api";
 import { useParams } from "react-router-dom";
 import axios from "../../axios-controller";
 import { useHistory } from "react-router-dom";
+import addimg from "assets/img/addimg.png";
 
 const AddEditCard = () => {
   const history = useHistory();
