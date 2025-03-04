@@ -106,9 +106,8 @@ const AddEditCard = () => {
               <div className={styles.uploadButton}>
                 <label htmlFor="fileInput" className={styles.customFileButton}>
                   <div>
-                    <img src="" alt="" />
+                    <img src="/addimg.png" alt="#" />
                   </div>
-                  Добавить фото
                 </label>
                 <input
                   id="fileInput"
