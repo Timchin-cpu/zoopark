@@ -41,9 +41,14 @@
   -webkit-box-orient: vertical;
 }
 .cardInfo {
-  background: white;
-  padding-bottom: 10px;
+  background: #fff;
   border-radius: 8px;
+  padding-bottom: 10px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .cardItem img {
   height: 284px;
