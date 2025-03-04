@@ -106,7 +106,7 @@ label {
 .inputCard {
   width: 235px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 10px !important;
   padding: 10px;
 }
 .chooseChapter {
