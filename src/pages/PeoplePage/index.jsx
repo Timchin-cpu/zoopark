@@ -189,8 +189,8 @@ const PeoplePage = () => {
                                   className="card-count"
                                   style={{
                                     position: "absolute",
-                                    bottom: "10px",
-                                    right: "10px",
+                                    top: "2px",
+                                    right: "2px",
                                     background: " rgba(0, 0, 0, 0.7)",
                                     color: "white",
                                     padding: "4px 8px",
@@ -199,7 +199,6 @@ const PeoplePage = () => {
                                     fontWeight: "500",
                                   }}
                                 >
-                                  ×
                                   {
                                     userCards.filter(
                                       (card) => card.id === photo.id
