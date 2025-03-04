@@ -21,11 +21,10 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  height: 341px;
-  justify-content: space-around;
+  height: 438px;
   overflow: hidden;
   text-align: center;
-  width: 170px;
+  width: 178px;
 }
 
 .cardItem h3 {
@@ -41,22 +40,27 @@
   -webkit-line-clamp: 3; /* Ограничивает текст тремя строками */
   -webkit-box-orient: vertical;
 }
-
+.cardInfo {
+  background: white;
+  padding-bottom: 10px;
+  border-radius: 8px;
+}
 .cardItem img {
-  height: 165px;
+  height: 284px;
   object-fit: cover;
-  width: 60%;
+  width: 99%;
+  border-radius: 8px;
 }
 .cardItem button {
-  width: 100%;
-  height: 45px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
   background: green;
   border-radius: 5px;
-  margin-top: 10px;
+  color: #fff;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  /* margin-top: 10px; */
+  width: 100%;
 }
 .addCart {
   display: flex;
