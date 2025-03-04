@@ -91,7 +91,7 @@ const AddEditCard = () => {
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    style={{ maxWidth: "320px", borderRadius: "8px" }}
+                    style={{ maxWidth: "265px", borderRadius: "8px" }}
                   />
                 </div>
                 <input

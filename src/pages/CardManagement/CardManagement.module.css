@@ -4,6 +4,7 @@
   margin: 10px;
   border-radius: 5px;
   overflow-y: auto;
+  padding-right: 0;
 }
 .cardsList {
   display: flex;
