@@ -105,7 +105,7 @@ const CardManagement = () => {
           <div>
             <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
               <button
-                className={addCard}
+                className={styles.addCard}
                 style={{
                   background: "green",
                   border: "none",
