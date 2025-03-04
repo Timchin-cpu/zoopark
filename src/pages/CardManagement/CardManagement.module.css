@@ -95,3 +95,26 @@
   overflow-y: auto;
   color: black;
 }
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.searchInput {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.searchButton {
+  padding: 8px 16px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.searchButton:hover {
+  background: darkgreen;
+}

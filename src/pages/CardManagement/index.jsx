@@ -52,31 +52,52 @@ const CardManagement = () => {
       <div className={styles.mainContent}>
         <h2>Карты жителей</h2>
         <div className={styles.cardsList}>
-          {cards.map((card) => (
-            <div key={card.id} className={styles.cardItem}>
-              <div className={styles.cardItemImg}>
-                {" "}
-                <img
-                  src={`http://localhost:3000${card.image}`}
-                  alt={card.title}
-                />
-              </div>
-              <div className={styles.cardInfo}>
-                {" "}
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>{" "}
-              </div>
+          {cards
+            .filter((card) =>
+              card.title.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+            .map((card) => (
+              <div key={card.id} className={styles.cardItem}>
+                <div className={styles.cardItemImg}>
+                  {" "}
+                  <img
+                    src={`http://localhost:3000${card.image}`}
+                    alt={card.title}
+                  />
+                </div>
+                <div className={styles.cardInfo}>
+                  {" "}
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>{" "}
+                </div>
 
-              <NavLink to={routeAddEditCard(card.id)}>
-                <button>Редактировать</button>
-              </NavLink>
-            </div>
-          ))}
+                <NavLink to={routeAddEditCard(card.id)}>
+                  <button>Редактировать</button>
+                </NavLink>
+              </div>
+            ))}
         </div>
-        <div className={styles.addCart}>
-          <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
-            <button>Добавить карту</button>
-          </NavLink>
+        <div>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Поиск по названию карты"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.searchInput}
+            />
+            <button
+              onClick={() => setSearchQuery(searchQuery)}
+              className={styles.searchButton}
+            >
+              Поиск
+            </button>
+          </div>{" "}
+          <div className={styles.addCart}>
+            <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
+              <button>Добавить карту</button>
+            </NavLink>
+          </div>
         </div>
       </div>
       <div className={styles.mainContent}>
