@@ -82,7 +82,6 @@ const AddEditCard = () => {
       <div className={styles.mainContent}>
         <div className={styles.content}>
           <div>
-            <p>Фото</p>
             {imagePreview ? (
               <div className={styles.imagePreview}>
                 <div
@@ -106,8 +105,8 @@ const AddEditCard = () => {
             ) : (
               <div className={styles.uploadButton}>
                 <label htmlFor="fileInput" className={styles.customFileButton}>
-                  <div>
-                    <div>
+                  <div className={styles.whiteBox}>
+                    <div className={styles.whiteBoxImg}>
                       <img src={addimg} alt="#" />
                       <p>Добавьте изображене</p>
                     </div>
