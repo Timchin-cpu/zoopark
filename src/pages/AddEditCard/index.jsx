@@ -178,7 +178,6 @@ const AddEditCard = () => {
                 Город
               </label>
             </div>
-
             {/* Add section select based on card type */}
             <div>
               <p>Раздел карты</p>
@@ -200,10 +199,10 @@ const AddEditCard = () => {
                 )}
               </select>
             </div>
+            <button className={styles.saveButton} onClick={handleSubmit}>
+              Сохранить
+            </button>{" "}
           </div>
-          <button className={styles.saveButton} onClick={handleSubmit}>
-            Сохранить
-          </button>{" "}
         </div>
       </div>
     </div>
