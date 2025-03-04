@@ -187,6 +187,7 @@ const AddEditCard = () => {
             <div>
               <p>Раздел карты</p>
               <select
+                className={styles.chooseChapter}
                 value={cardSection}
                 onChange={(e) => setCardSection(e.target.value)}
               >
