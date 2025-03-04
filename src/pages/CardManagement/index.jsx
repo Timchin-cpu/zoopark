@@ -88,6 +88,7 @@ const CardManagement = () => {
               className={styles.searchInput}
             />
             <button
+              className={styles.searchButton}
               style={{
                 background: "green",
                 border: "none",
@@ -104,6 +105,7 @@ const CardManagement = () => {
           <div>
             <NavLink to={routeAddEditCard()} style={{ width: "40%" }}>
               <button
+                className={addCard}
                 style={{
                   background: "green",
                   border: "none",

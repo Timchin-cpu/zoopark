@@ -106,7 +106,7 @@
   border-radius: 4px;
   font-size: 14px;
 }
-.searchButton {
+/* .searchButton {
   padding: 8px 16px;
   background: green;
   color: white;
@@ -116,9 +116,27 @@
 }
 .searchButton:hover {
   background: darkgreen;
-}
+} */
 .settings {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+@media (max-width: 1024px) {
+  .searchContainer {
+    width: 185px;
+    height: 40px;
+  }
+  .searchInput {
+    width: 140px;
+  }
+  .searchButton {
+    width: 45px;
+    padding: 0;
+  }
+  .addCard {
+    padding: 0;
+    width: 90px;
+    height: 40px;
+  }
 }
