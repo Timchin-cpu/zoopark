@@ -129,12 +129,17 @@ const PeoplePage = () => {
                 )}
                 <div className="city-list__more f-center">
                   <div className="city-list__count">
-                    {
+                    {Math.min(
                       userCards.filter((card) =>
                         policePhotos.some((photo) => photo.id === card.id)
-                      ).length
-                    }{" "}
+                      ).length,
+                      policePhotos.length
+                    )}{" "}
                     из {policePhotos.length}
+                    {policePhotos.some(
+                      (photo) =>
+                        policePhotos.filter((p) => p.id === photo.id).length > 1
+                    ) && " (есть дубликаты)"}
                   </div>{" "}
                   <div
                     className="city-list__arrow"
