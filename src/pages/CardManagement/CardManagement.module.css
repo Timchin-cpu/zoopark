@@ -132,10 +132,10 @@
   }
   .searchButton {
     width: 45px;
-    padding: 0;
+    padding: 0 !important;
   }
   .addCard {
-    padding: 0;
+    padding: 0 !important;
     width: 90px;
     height: 40px;
   }
