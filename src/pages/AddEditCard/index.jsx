@@ -130,13 +130,6 @@ const AddEditCard = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />{" "}
-            <h2 className={styles.title}>Описание</h2>
-            <input
-              className={styles.inputCard}
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />{" "}
             <h2 className={styles.title}>Вознаграждение</h2>
             <input
               className={styles.inputCard}
@@ -162,6 +155,13 @@ const AddEditCard = () => {
             />
           </div>
           <div>
+            <h2 className={styles.title}>Описание</h2>
+            <input
+              className={styles.describedCard}
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />{" "}
             <h2 className={styles.title}>Тип карты</h2>
             <div>
               <label>

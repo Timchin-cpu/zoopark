@@ -109,6 +109,12 @@ label {
   border-radius: 10px !important;
   padding: 10px;
 }
+.describedCard {
+  width: 235px;
+  height: 120px;
+  border-radius: 10px !important;
+  padding: 10px;
+}
 .chooseChapter {
   width: 235px;
   height: 40px;
