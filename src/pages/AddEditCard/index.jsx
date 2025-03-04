@@ -156,12 +156,12 @@ const AddEditCard = () => {
           </div>
           <div>
             <h2 className={styles.title}>Описание</h2>
-            <input
+            <textarea
               className={styles.describedCard}
-              type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            />{" "}
+              placeholder="Введите описание"
+            />
             <h2 className={styles.title}>Тип карты</h2>
             <div>
               <label>
