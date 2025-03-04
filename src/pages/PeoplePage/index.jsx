@@ -136,10 +136,6 @@ const PeoplePage = () => {
                       policePhotos.length
                     )}{" "}
                     из {policePhotos.length}
-                    {policePhotos.some(
-                      (photo) =>
-                        policePhotos.filter((p) => p.id === photo.id).length > 1
-                    ) && " (есть дубликаты)"}
                   </div>{" "}
                   <div
                     className="city-list__arrow"
