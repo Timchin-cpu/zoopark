@@ -109,7 +109,9 @@ const AddEditDeck = () => {
           <img
             src={left}
             className={styles.navArrow}
-            onClick={() => handleRemoveCardFromSet(card.id)}
+            onClick={() =>
+              currentIndex > 0 && setCurrentIndex(currentIndex - 1)
+            }
             alt="Previous"
           />
           {cards.slice(currentIndex, currentIndex + 3).map(
@@ -138,7 +140,10 @@ const AddEditDeck = () => {
           <img
             src={right}
             className={styles.navArrow}
-            onClick={() => handleAddCardToSet(card.id)}
+            onClick={() =>
+              currentIndex < cards.length - 3 &&
+              setCurrentIndex(currentIndex + 1)
+            }
             alt="Next"
           />
           <div
