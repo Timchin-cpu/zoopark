@@ -34,6 +34,7 @@ const PeoplePage = () => {
         for (const set of response.data) {
           const cardsResponse = await cardSetsService.getSetCards(set.id);
           setData[set.id] = cardsResponse.data;
+          console.log(cardsResponse.data);
 
           // Check completion status for each set
           if (telegram_id) {
