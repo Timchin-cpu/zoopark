@@ -69,8 +69,6 @@ export const cardSetsService = {
   checkSetCompletion: (setId, telegram_id) =>
     axios.post(`/card-sets/${setId}/check-completion`, { telegram_id }),
   // Проверка завершения набора
-  checkSetCompletion: (setId, telegram_id) =>
-    axios.post(`/card-sets/${setId}/check-completion`, { telegram_id }),
 };
 export const tasksService = {
   getAllTasks: () => axios.get("/tasks"),

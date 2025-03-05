@@ -28,7 +28,6 @@ const PeoplePage = () => {
         setCardSets(response.data);
         // Fetch cards for each set
         const setData = {};
-        const completionData = {};
 
         const tg = window.Telegram.WebApp;
         const telegram_id = tg.initDataUnsafe?.user?.id;
