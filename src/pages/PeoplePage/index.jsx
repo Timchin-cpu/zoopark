@@ -29,17 +29,17 @@ const PeoplePage = () => {
         // Fetch cards for each set
         const setData = {};
 
-        // const tg = window.Telegram.WebApp;
-        // const telegram_id = tg.initDataUnsafe?.user?.id;
+        const tg = window.Telegram.WebApp;
+        const telegram_id = tg.initDataUnsafe?.user?.id;
         for (const set of response.data) {
           const cardsResponse = await cardSetsService.getSetCards(set.id);
           setData[set.id] = cardsResponse.data;
           console.log(cardsResponse.data);
 
           // Check completion status for each set
-          // if (telegram_id) {
-          //   await cardSetsService.checkSetCompletion(set.id, telegram_id);
-          // }
+          if (telegram_id) {
+            await cardSetsService.checkSetCompletion(set.id, telegram_id);
+          }
         }
         setCardSetData(setData);
         console.log(setData);
