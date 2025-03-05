@@ -25,7 +25,14 @@ const PeoplePage = () => {
       try {
         const response = await cardSetsService.getAllCardSets();
         setCardSets(response.data);
-        console.log(response.data);
+
+        // Fetch cards for each set
+        const setData = {};
+        for (const set of response.data) {
+          const cardsResponse = await cardSetsService.getSetCards(set.id);
+          setData[set.id] = cardsResponse.data;
+        }
+        setCardSetData(setData);
       } catch (error) {
         console.error("Error fetching card sets:", error);
       }
@@ -369,7 +376,43 @@ const PeoplePage = () => {
                   </Swiper>
                 </div>
               </div>
-            </li>
+            </li>{" "}
+            {cardSets.map((set) => (
+              <li key={set.id} className="city-list__item block-style">
+                <div
+                  className={`city-list__title f-center-jcsb ${
+                    openAccordion === set.id ? "active" : ""
+                  }`}
+                >
+                  {set.name}
+                  <div className="city-list__more f-center">
+                    <div className="city-list__count">
+                      {cardSetData[set.id]
+                        ? `${Math.min(
+                            userCards.filter((card) =>
+                              cardSetData[set.id].some(
+                                (setCard) => setCard.id === card.id
+                              )
+                            ).length,
+                            cardSetData[set.id].length
+                          )} из ${cardSetData[set.id].length}`
+                        : "0 из 0"}
+                    </div>
+                    <div
+                      className="city-list__arrow"
+                      onClick={() => handleAccordionClick(set.id)}
+                    >
+                      <svg width="15" height="9" viewBox="0 0 15 9" fill="none">
+                        <path
+                          d="M14.6592 1.56103L8.23438 8.13525C8.08496 8.29297 7.88574 8.38428 7.66992 8.38428C7.4624 8.38428 7.25488 8.29297 7.11377 8.13525L0.688966 1.56103C0.547853 1.42822 0.464845 1.2373 0.464845 1.02148C0.464845 0.589842 0.788575 0.266112 1.22022 0.266112C1.42774 0.266112 1.62695 0.340819 1.75977 0.481932L7.66992 6.5249L13.5884 0.481933C13.7129 0.34082 13.9121 0.266113 14.1279 0.266113C14.5596 0.266113 14.8833 0.589844 14.8833 1.02148C14.8833 1.2373 14.8003 1.42822 14.6592 1.56103Z"
+                          fill="#AAB2BD"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
