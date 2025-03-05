@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import routePeople from "./routes";
 import MainSection from "components/MainSection";
-import { peopleService, userCardsService } from "services/api";
+import { peopleService, userCardsService, cardSetsService } from "services/api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
