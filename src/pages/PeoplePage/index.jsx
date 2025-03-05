@@ -129,14 +129,17 @@ const PeoplePage = () => {
                   <div className="city-list__more f-center">
                     <div className="city-list__count">
                       {cardSetData[set.id]
-                        ? `${Math.min(
-                            userCards.filter((card) =>
-                              cardSetData[set.id].some(
-                                (setCard) => setCard.id === card.id
-                              )
-                            ).length,
-                            cardSetData[set.id].length
-                          )} из ${cardSetData[set.id].length}`
+                        ? `${
+                            new Set(
+                              userCards
+                                .filter((card) =>
+                                  cardSetData[set.id].some(
+                                    (setCard) => setCard.id === card.id
+                                  )
+                                )
+                                .map((card) => card.id)
+                            ).size
+                          } из ${cardSetData[set.id].length}`
                         : "0 из 0"}
                     </div>
                     <div
