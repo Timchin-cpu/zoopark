@@ -110,7 +110,7 @@ const AddEditDeck = () => {
         <div className={styles.mainContent}>
           <img
             src={left}
-            style={{ height: "64px" }}
+            className={styles.arrow}
             onClick={() => {
               // const filteredCards = cards.filter((card) =>
               //   cardsInSet.has(card.id)
@@ -153,7 +153,7 @@ const AddEditDeck = () => {
           </div>
           <img
             src={right}
-            style={{ height: "64px" }}
+            className={styles.arrow}
             onClick={() => {
               const filteredCards = cards.filter((card) =>
                 cardsInSet.has(card.id)
@@ -170,7 +170,7 @@ const AddEditDeck = () => {
             <div className={styles.mainContent}>
               <img
                 src={left}
-                style={{ height: "64px" }}
+                className={styles.arrow}
                 onClick={() => {
                   // const filteredCards = cards.filter(
                   //   (card) => !cardsInSet.has(card.id)
@@ -210,7 +210,7 @@ const AddEditDeck = () => {
                 ))}
               <img
                 src={right}
-                style={{ height: "64px" }}
+                className={styles.arrow}
                 onClick={() => {
                   const filteredCards = cards.filter(
                     (card) => !cardsInSet.has(card.id)
