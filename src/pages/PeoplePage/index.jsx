@@ -102,7 +102,7 @@ const PeoplePage = () => {
                     openAccordion === set.id ? "active" : ""
                   }`}
                 >
-                  {set.name}
+                  <p>{set.name}</p>
                   <div
                     className="info-icon"
                     style={{ display: "flex" }}
