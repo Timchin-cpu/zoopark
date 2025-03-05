@@ -96,46 +96,51 @@ const AddEditDeck = () => {
   };
   return (
     <div className={styles.contents}>
-      <h3>Карты в наборе:</h3>
-      <div className={styles.mainContent}>
-        {cards.map(
-          (card) =>
-            cardsInSet.has(card.id) && (
-              <div key={card.id} className={styles.cardItem}>
-                <img
-                  src={`http://localhost:3000${card.image}`}
-                  alt={card.title}
-                />
-                <h3>{card.title}</h3>
-                <button
-                  onClick={() => handleRemoveCardFromSet(card.id)}
-                  style={{ background: "red" }}
-                >
-                  Удалить
-                </button>
-              </div>
-            )
-        )}
-      </div>
-      <h3>Добавить карты в набор</h3>
-      <div className={styles.mainContent}>
-        {cards.map((card) => (
-          <div key={card.id} className={styles.cardItem}>
-            <img src={`http://localhost:3000${card.image}`} alt={card.title} />
-            <h3>{card.title}</h3>
-            <button
-              onClick={() => handleAddCardToSet(card.id, id)}
-              disabled={cardsInSet.has(card.id)}
-            >
-              {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
-            </button>
-          </div>
-        ))}
-      </div>
-      <div className={styles.save}>
-        <button onClick={handleSave} className={styles.saveButton}>
-          Сохранить изменения
-        </button>
+      <div className={styles.content}>
+        <h3>Карты в наборе:</h3>
+        <div className={styles.mainContent}>
+          {cards.map(
+            (card) =>
+              cardsInSet.has(card.id) && (
+                <div key={card.id} className={styles.cardItem}>
+                  <img
+                    src={`http://localhost:3000${card.image}`}
+                    alt={card.title}
+                  />
+                  <h3>{card.title}</h3>
+                  <button
+                    onClick={() => handleRemoveCardFromSet(card.id)}
+                    style={{ background: "red" }}
+                  >
+                    Удалить
+                  </button>
+                </div>
+              )
+          )}
+        </div>
+        <h3>Добавить карты в набор</h3>
+        <div className={styles.mainContent}>
+          {cards.map((card) => (
+            <div key={card.id} className={styles.cardItem}>
+              <img
+                src={`http://localhost:3000${card.image}`}
+                alt={card.title}
+              />
+              <h3>{card.title}</h3>
+              <button
+                onClick={() => handleAddCardToSet(card.id, id)}
+                disabled={cardsInSet.has(card.id)}
+              >
+                {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className={styles.save}>
+          <button onClick={handleSave} className={styles.saveButton}>
+            Сохранить изменения
+          </button>
+        </div>
       </div>
     </div>
   );
