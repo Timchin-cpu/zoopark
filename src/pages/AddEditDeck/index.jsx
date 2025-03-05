@@ -245,7 +245,7 @@ const AddEditDeck = () => {
             </div>
           )}
         </div>
-        <div>
+        <div className={styles.inputContainer}>
           <input type="text" />
           <input type="text" />
           <input type="text" />

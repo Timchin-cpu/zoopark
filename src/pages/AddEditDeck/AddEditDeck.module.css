@@ -133,3 +133,8 @@
     height: 25px !important;
   }
 }
+.inputContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
