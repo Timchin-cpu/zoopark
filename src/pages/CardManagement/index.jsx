@@ -129,19 +129,47 @@ const CardManagement = () => {
               <div className={styles.cardItemImg}>
                 <img src={`http://localhost:3000${set.image}`} alt={set.name} />
               </div>
+              <div className={styles.cardInfo}>
+                {" "}
+                <h3>{set.name}</h3>
+                <p>{set.description}</p>
+              </div>
 
-              <h3>{set.name}</h3>
-              <p>{set.description}</p>
               <NavLink to={routeAddEditDeck(set.id)}>
                 <button>Редактировать</button>
               </NavLink>
             </div>
           ))}
         </div>
-        <div className={styles.addCart}>
-          <NavLink to={routeAddEditDeck()} style={{ width: "40%" }}>
-            <button>Добавить набор</button>
-          </NavLink>
+        <div className={styles.settings}>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Поиск по названию карты"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.searchInput}
+            />
+            <button
+              className={styles.searchButton}
+              style={{
+                background: "green",
+                border: "none",
+                borderRadius: "4px",
+                color: "#fff",
+                cursor: "pointer",
+                padding: "8px 16px",
+              }}
+              onClick={() => setSearchQuery(searchQuery)}
+            >
+              Поиск
+            </button>
+          </div>{" "}
+          <div>
+            <NavLink to={routeAddEditDeck()} style={{ width: "40%" }}>
+              <button>Добавить набор</button>
+            </NavLink>
+          </div>
         </div>
       </div>
       <div className={styles.mainContent}>
