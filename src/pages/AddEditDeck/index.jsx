@@ -106,140 +106,152 @@ const AddEditDeck = () => {
   return (
     <div className={styles.contents}>
       <div className={styles.content}>
-        <h3>Карты в наборе:</h3>
-        <div className={styles.mainContent}>
-          <img
-            src={left}
-            className={styles.arrow}
-            onClick={() => {
-              // const filteredCards = cards.filter((card) =>
-              //   cardsInSet.has(card.id)
-              // );
-              currentSetIndex > 0 && setCurrentSetIndex(currentSetIndex - 1);
-            }}
-            alt="Previous"
-          />
-          {cards
-            .filter((card) => cardsInSet.has(card.id))
-            .slice(currentSetIndex, currentSetIndex + 3)
-            .map((card) => (
-              <div key={card.id} className={styles.cardItem}>
-                <div className={styles.cardItemImg}>
-                  <img
-                    src={`http://localhost:3000${card.image}`}
-                    alt={card.title}
-                  />
-                </div>
-                <div className={styles.cardInfo}>
-                  <h3>{card.title}</h3>
-                </div>
-                <button
-                  onClick={() => handleRemoveCardFromSet(card.id)}
-                  style={{ background: "red" }}
-                >
-                  Удалить
-                </button>
-              </div>
-            ))}
-
-          <div
-            className={styles.whiteBox}
-            onClick={() => setShowAddCards(!showAddCards)}
-          >
-            <div className={styles.whiteBoxImg}>
-              <img src={addimg} alt="#" style={{ height: "64px" }} />
-              <p
-                style={{
-                  wordBreak: "break-word",
-                  whiteSpace: "normal",
-                  hyphens: "auto",
-                }}
-              >
-                Добавьте изображение
-              </p>
-            </div>
-          </div>
-          <img
-            src={right}
-            className={styles.arrow}
-            onClick={() => {
-              const filteredCards = cards.filter((card) =>
-                cardsInSet.has(card.id)
-              );
-              currentSetIndex < filteredCards.length - 3 &&
-                setCurrentSetIndex(currentSetIndex + 1);
-            }}
-            alt="Next"
-          />
-        </div>
-        {showAddCards && (
-          <div>
-            <h3>Добавить карты в набор</h3>
-            <div className={styles.mainContent}>
-              <img
-                src={left}
-                className={styles.arrow}
-                onClick={() => {
-                  // const filteredCards = cards.filter(
-                  //   (card) => !cardsInSet.has(card.id)
-                  // );
-                  currentAvailableIndex > 0 &&
-                    setCurrentAvailableIndex(currentAvailableIndex - 1);
-                }}
-                alt="Previous"
-              />
-              {cards
-                .filter(
-                  (card) =>
-                    !cardsInSet.has(card.id) &&
-                    card.title.toLowerCase().includes(searchQuery.toLowerCase())
-                )
-                .slice(currentAvailableIndex, currentAvailableIndex + 3)
-                .map((card) => (
-                  <div key={card.id} className={styles.cardItem}>
-                    <div className={styles.cardItemImg}>
-                      <img
-                        src={`http://localhost:3000${card.image}`}
-                        alt={card.title}
-                      />
-                    </div>
-                    <div className={styles.cardInfo}>
-                      <h3>{card.title}</h3>
-                    </div>
-                    <button
-                      onClick={() => handleAddCardToSet(card.id)}
-                      disabled={cardsInSet.has(card.id)}
-                    >
-                      {cardsInSet.has(card.id)
-                        ? "В наборе"
-                        : "Добавить в набор"}
-                    </button>
+        <div>
+          {" "}
+          <h3>Карты в наборе:</h3>
+          <div className={styles.mainContent}>
+            <img
+              src={left}
+              className={styles.arrow}
+              onClick={() => {
+                // const filteredCards = cards.filter((card) =>
+                //   cardsInSet.has(card.id)
+                // );
+                currentSetIndex > 0 && setCurrentSetIndex(currentSetIndex - 1);
+              }}
+              alt="Previous"
+            />
+            {cards
+              .filter((card) => cardsInSet.has(card.id))
+              .slice(currentSetIndex, currentSetIndex + 3)
+              .map((card) => (
+                <div key={card.id} className={styles.cardItem}>
+                  <div className={styles.cardItemImg}>
+                    <img
+                      src={`http://localhost:3000${card.image}`}
+                      alt={card.title}
+                    />
                   </div>
-                ))}
-              <img
-                src={right}
-                className={styles.arrow}
-                onClick={() => {
-                  const filteredCards = cards.filter(
-                    (card) => !cardsInSet.has(card.id)
-                  );
-                  currentAvailableIndex < filteredCards.length - 3 &&
-                    setCurrentAvailableIndex(currentAvailableIndex + 1);
-                }}
-                alt="Next"
-              />
+                  <div className={styles.cardInfo}>
+                    <h3>{card.title}</h3>
+                  </div>
+                  <button
+                    onClick={() => handleRemoveCardFromSet(card.id)}
+                    style={{ background: "red" }}
+                  >
+                    Удалить
+                  </button>
+                </div>
+              ))}
+
+            <div
+              className={styles.whiteBox}
+              onClick={() => setShowAddCards(!showAddCards)}
+            >
+              <div className={styles.whiteBoxImg}>
+                <img src={addimg} alt="#" style={{ height: "64px" }} />
+                <p
+                  style={{
+                    wordBreak: "break-word",
+                    whiteSpace: "normal",
+                    hyphens: "auto",
+                  }}
+                >
+                  Добавьте изображение
+                </p>
+              </div>
             </div>
-            <div className={styles.searchContainer}>
-              <input
-                type="text"
-                placeholder="Поиск по названию"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className={styles.searchInput}
-              />
-            </div>
+            <img
+              src={right}
+              className={styles.arrow}
+              onClick={() => {
+                const filteredCards = cards.filter((card) =>
+                  cardsInSet.has(card.id)
+                );
+                currentSetIndex < filteredCards.length - 3 &&
+                  setCurrentSetIndex(currentSetIndex + 1);
+              }}
+              alt="Next"
+            />
           </div>
-        )}
+          {showAddCards && (
+            <div>
+              <h3>Добавить карты в набор</h3>
+              <div className={styles.mainContent}>
+                <img
+                  src={left}
+                  className={styles.arrow}
+                  onClick={() => {
+                    // const filteredCards = cards.filter(
+                    //   (card) => !cardsInSet.has(card.id)
+                    // );
+                    currentAvailableIndex > 0 &&
+                      setCurrentAvailableIndex(currentAvailableIndex - 1);
+                  }}
+                  alt="Previous"
+                />
+                {cards
+                  .filter(
+                    (card) =>
+                      !cardsInSet.has(card.id) &&
+                      card.title
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                  )
+                  .slice(currentAvailableIndex, currentAvailableIndex + 3)
+                  .map((card) => (
+                    <div key={card.id} className={styles.cardItem}>
+                      <div className={styles.cardItemImg}>
+                        <img
+                          src={`http://localhost:3000${card.image}`}
+                          alt={card.title}
+                        />
+                      </div>
+                      <div className={styles.cardInfo}>
+                        <h3>{card.title}</h3>
+                      </div>
+                      <button
+                        onClick={() => handleAddCardToSet(card.id)}
+                        disabled={cardsInSet.has(card.id)}
+                      >
+                        {cardsInSet.has(card.id)
+                          ? "В наборе"
+                          : "Добавить в набор"}
+                      </button>
+                    </div>
+                  ))}
+                <img
+                  src={right}
+                  className={styles.arrow}
+                  onClick={() => {
+                    const filteredCards = cards.filter(
+                      (card) => !cardsInSet.has(card.id)
+                    );
+                    currentAvailableIndex < filteredCards.length - 3 &&
+                      setCurrentAvailableIndex(currentAvailableIndex + 1);
+                  }}
+                  alt="Next"
+                />
+              </div>
+              <div className={styles.searchContainer}>
+                <input
+                  type="text"
+                  placeholder="Поиск по названию"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={styles.searchInput}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div>
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+        </div>
+
         <div className={styles.save}>
           <button onClick={handleSave} className={styles.saveButton}>
             Сохранить изменения
