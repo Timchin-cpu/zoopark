@@ -10,7 +10,7 @@ import right from "assets/img/right.png";
 const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [currentAvailableIndex, setCurrentAvailableIndex] = useState(0);
 
   const [cards, setCards] = useState([]);
