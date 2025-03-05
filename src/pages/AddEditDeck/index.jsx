@@ -111,9 +111,9 @@ const AddEditDeck = () => {
             src={left}
             style={{ height: "64px" }}
             onClick={() => {
-              const filteredCards = cards.filter((card) =>
-                cardsInSet.has(card.id)
-              );
+              // const filteredCards = cards.filter((card) =>
+              //   cardsInSet.has(card.id)
+              // );
               currentSetIndex > 0 && setCurrentSetIndex(currentSetIndex - 1);
             }}
             alt="Previous"
@@ -171,9 +171,9 @@ const AddEditDeck = () => {
                 src={left}
                 style={{ height: "64px" }}
                 onClick={() => {
-                  const filteredCards = cards.filter(
-                    (card) => !cardsInSet.has(card.id)
-                  );
+                  // const filteredCards = cards.filter(
+                  //   (card) => !cardsInSet.has(card.id)
+                  // );
                   currentAvailableIndex > 0 &&
                     setCurrentAvailableIndex(currentAvailableIndex - 1);
                 }}
