@@ -125,7 +125,7 @@ const AddEditDeck = () => {
           )}
           <div className={styles.whiteBox}>
             <div className={styles.whiteBoxImg}>
-              <img src={addimg} alt="#" />
+              <img src={addimg} alt="#" style={{ height: "64px" }} />
               <p>Добавьте изображене</p>
             </div>
           </div>
