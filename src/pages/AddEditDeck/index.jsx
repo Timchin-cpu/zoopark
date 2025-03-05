@@ -103,10 +103,13 @@ const AddEditDeck = () => {
             (card) =>
               cardsInSet.has(card.id) && (
                 <div key={card.id} className={styles.cardItem}>
-                  <img
-                    src={`http://localhost:3000${card.image}`}
-                    alt={card.title}
-                  />
+                  <div className={styles.cardItemImg}>
+                    <img
+                      src={`http://localhost:3000${card.image}`}
+                      alt={card.title}
+                    />{" "}
+                  </div>
+
                   <h3>{card.title}</h3>
                   <button
                     onClick={() => handleRemoveCardFromSet(card.id)}
@@ -122,10 +125,13 @@ const AddEditDeck = () => {
         <div className={styles.mainContent}>
           {cards.map((card) => (
             <div key={card.id} className={styles.cardItem}>
-              <img
-                src={`http://localhost:3000${card.image}`}
-                alt={card.title}
-              />
+              {" "}
+              <div className={styles.cardItemImg}>
+                <img
+                  src={`http://localhost:3000${card.image}`}
+                  alt={card.title}
+                />{" "}
+              </div>
               <h3>{card.title}</h3>
               <button
                 onClick={() => handleAddCardToSet(card.id, id)}
