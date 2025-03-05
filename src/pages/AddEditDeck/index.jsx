@@ -136,16 +136,8 @@ const AddEditDeck = () => {
                   </button>
                 </div>
               )
-          )}{" "}
-          <img
-            src={right}
-            style={{ height: "64px" }}
-            onClick={() =>
-              currentIndex < cards.length - 3 &&
-              setCurrentIndex(currentIndex + 1)
-            }
-            alt="Next"
-          />
+          )}
+
           <div
             className={styles.whiteBox}
             onClick={() => setShowAddCards(!showAddCards)}
@@ -155,6 +147,15 @@ const AddEditDeck = () => {
               <p>Добавьте изображене</p>
             </div>
           </div>
+          <img
+            src={right}
+            style={{ height: "64px" }}
+            onClick={() =>
+              currentIndex < cards.length - 3 &&
+              setCurrentIndex(currentIndex + 1)
+            }
+            alt="Next"
+          />
         </div>
         {showAddCards && (
           <div>
