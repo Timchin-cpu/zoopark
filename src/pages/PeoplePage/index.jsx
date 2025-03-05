@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 import InfoIcon from "assets/img/icons8-info-48.png";
 import QuestionMarkImg from "assets/img/question-mark.png";
-import DefaultImg from "assets/img/default-img.png";
+// import DefaultImg from "assets/img/default-img.png";
 import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
