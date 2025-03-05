@@ -64,7 +64,7 @@ const PeoplePage = () => {
     const fetchPhotos = async () => {
       try {
         const policeData = await peopleService.getPolicePhotos();
-        setPolicePhotos(policeData);
+        // setPolicePhotos(policeData);
       } catch (error) {
         console.error(error);
       }
