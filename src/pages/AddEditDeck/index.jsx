@@ -4,10 +4,14 @@ import { useParams } from "react-router-dom";
 import { cardsService, cardSetsService } from "services/api";
 import routeAddEditDeck from "./route";
 import addimg from "assets/img/addimg.png";
+import left from "assets/img/left.png";
+import right from "assets/img/right.png";
 
 const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const [cards, setCards] = useState([]);
   const [existingCards, setExistingCards] = useState([]);
   const [cardsInSet, setCardsInSet] = useState(new Set());
@@ -102,7 +106,13 @@ const AddEditDeck = () => {
       <div className={styles.content}>
         <h3>Карты в наборе:</h3>
         <div className={styles.mainContent}>
-          {cards.map(
+          <img
+            src={left}
+            className={styles.navArrow}
+            onClick={() => handleRemoveCardFromSet(card.id)}
+            alt="Previous"
+          />
+          {cards.slice(currentIndex, currentIndex + 3).map(
             (card) =>
               cardsInSet.has(card.id) && (
                 <div key={card.id} className={styles.cardItem}>
@@ -124,7 +134,13 @@ const AddEditDeck = () => {
                   </button>
                 </div>
               )
-          )}
+          )}{" "}
+          <img
+            src={right}
+            className={styles.navArrow}
+            onClick={() => handleAddCardToSet(card.id)}
+            alt="Next"
+          />
           <div
             className={styles.whiteBox}
             onClick={() => setShowAddCards(!showAddCards)}
