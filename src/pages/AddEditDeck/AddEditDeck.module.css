@@ -94,9 +94,11 @@
   justify-content: center;
 }
 .whiteBoxImg {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
+  width: 169px;
+  text-align: center;
 }
 .searchContainer {
   align-items: center;

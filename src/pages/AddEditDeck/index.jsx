@@ -148,7 +148,15 @@ const AddEditDeck = () => {
           >
             <div className={styles.whiteBoxImg}>
               <img src={addimg} alt="#" style={{ height: "64px" }} />
-              <p>Добавьте изображене</p>
+              <p
+                style={{
+                  wordBreak: "break-word",
+                  whiteSpace: "normal",
+                  hyphens: "auto",
+                }}
+              >
+                Добавьте изображение
+              </p>
             </div>
           </div>
           <img
