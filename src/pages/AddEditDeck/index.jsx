@@ -3,6 +3,7 @@ import styles from "./AddEditDeck.module.css";
 import { useParams } from "react-router-dom";
 import { cardsService, cardSetsService } from "services/api";
 import routeAddEditDeck from "./route";
+import addimg from "assets/img/addimg.png";
 
 const AddEditDeck = () => {
   const { id } = useParams();
