@@ -19,7 +19,6 @@
   display: flex;
   height: 45px;
   justify-content: center;
-  margin-top: 10px;
   width: 100%;
 }
 .cardItem {
@@ -31,10 +30,7 @@
   text-align: center;
   width: 178px;
 }
-.contents h3 {
-  padding-left: 16px;
-  padding-top: 20px;
-}
+
 .saveButton {
   align-items: center;
   background: green;
@@ -80,10 +76,9 @@
 .cardInfo {
   background: #fff;
   border-radius: 8px;
-  padding-bottom: 10px;
-  min-height: 110px;
-  display: flex;
   flex-direction: column;
+  min-height: 55px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
