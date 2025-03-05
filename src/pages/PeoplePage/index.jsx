@@ -37,9 +37,9 @@ const PeoplePage = () => {
           console.log(cardsResponse.data);
 
           // Check completion status for each set
-          if (telegram_id) {
-            await cardSetsService.checkSetCompletion(set.id, telegram_id);
-          }
+          // if (telegram_id) {
+          //   await cardSetsService.checkSetCompletion(set.id, telegram_id);
+          // }
         }
         setCardSetData(setData);
         console.log(setData);
