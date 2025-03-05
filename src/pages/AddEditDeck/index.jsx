@@ -114,29 +114,28 @@ const AddEditDeck = () => {
             }
             alt="Previous"
           />
-          {cards.slice(currentIndex, currentIndex + 3).map(
-            (card) =>
-              cardsInSet.has(card.id) && (
-                <div key={card.id} className={styles.cardItem}>
-                  <div className={styles.cardItemImg}>
-                    <img
-                      src={`http://localhost:3000${card.image}`}
-                      alt={card.title}
-                    />{" "}
-                  </div>
-                  <div className={styles.cardInfo}>
-                    <h3>{card.title}</h3>{" "}
-                  </div>
-
-                  <button
-                    onClick={() => handleRemoveCardFromSet(card.id)}
-                    style={{ background: "red" }}
-                  >
-                    Удалить
-                  </button>
+          {cards
+            .filter((card) => cardsInSet.has(card.id))
+            .slice(currentIndex, currentIndex + 3)
+            .map((card) => (
+              <div key={card.id} className={styles.cardItem}>
+                <div className={styles.cardItemImg}>
+                  <img
+                    src={`http://localhost:3000${card.image}`}
+                    alt={card.title}
+                  />
                 </div>
-              )
-          )}
+                <div className={styles.cardInfo}>
+                  <h3>{card.title}</h3>
+                </div>
+                <button
+                  onClick={() => handleRemoveCardFromSet(card.id)}
+                  style={{ background: "red" }}
+                >
+                  Удалить
+                </button>
+              </div>
+            ))}
 
           <div
             className={styles.whiteBox}
@@ -150,10 +149,13 @@ const AddEditDeck = () => {
           <img
             src={right}
             style={{ height: "64px" }}
-            onClick={() =>
-              currentIndex < cards.length - 3 &&
-              setCurrentIndex(currentIndex + 1)
-            }
+            onClick={() => {
+              const filteredCards = cards.filter((card) =>
+                cardsInSet.has(card.id)
+              );
+              currentIndex < filteredCards.length - 3 &&
+                setCurrentIndex(currentIndex + 1);
+            }}
             alt="Next"
           />
         </div>
