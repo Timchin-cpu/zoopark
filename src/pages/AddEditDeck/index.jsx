@@ -108,7 +108,7 @@ const AddEditDeck = () => {
         <div className={styles.mainContent}>
           <img
             src={left}
-            className={styles.navArrow}
+            style={{ height: "64px" }}
             onClick={() =>
               currentIndex > 0 && setCurrentIndex(currentIndex - 1)
             }
@@ -139,7 +139,7 @@ const AddEditDeck = () => {
           )}{" "}
           <img
             src={right}
-            className={styles.navArrow}
+            style={{ height: "64px" }}
             onClick={() =>
               currentIndex < cards.length - 3 &&
               setCurrentIndex(currentIndex + 1)
