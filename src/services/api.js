@@ -66,9 +66,23 @@ export const cardSetsService = {
   getAllCardSets: () => axios.get("/card-sets"),
 
   // Получение карт конкретного набора
-  checkSetCompletion: (setId, telegram_id) =>
-    axios.get(`/card-sets/${setId}/check-completion/${telegram_id}`),
-
+  checkSetCompletion: async (setId, telegram_id) => {
+    try {
+      const response = await axios.get(
+        `/card-sets/${setId}/check-completion/${telegram_id}`
+      );
+      if (response.data.alreadyClaimed) {
+        return {
+          claimed: true,
+          message: "Reward already claimed for this set",
+        };
+      }
+      return response.data;
+    } catch (error) {
+      console.error("Error checking set completion:", error);
+      throw error;
+    }
+  },
   // Проверка завершения набора
 };
 export const tasksService = {
