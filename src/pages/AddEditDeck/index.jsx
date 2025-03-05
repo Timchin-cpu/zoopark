@@ -163,26 +163,50 @@ const AddEditDeck = () => {
           <div>
             <h3>Добавить карты в набор</h3>
             <div className={styles.mainContent}>
-              {cards.map((card) => (
-                <div key={card.id} className={styles.cardItem}>
-                  {" "}
-                  <div className={styles.cardItemImg}>
-                    <img
-                      src={`http://localhost:3000${card.image}`}
-                      alt={card.title}
-                    />{" "}
+              <img
+                src={left}
+                style={{ height: "64px" }}
+                onClick={() =>
+                  currentIndex > 0 && setCurrentIndex(currentIndex - 1)
+                }
+                alt="Previous"
+              />
+              {cards
+                .filter((card) => !cardsInSet.has(card.id))
+                .slice(currentIndex, currentIndex + 3)
+                .map((card) => (
+                  <div key={card.id} className={styles.cardItem}>
+                    <div className={styles.cardItemImg}>
+                      <img
+                        src={`http://localhost:3000${card.image}`}
+                        alt={card.title}
+                      />
+                    </div>
+                    <div className={styles.cardInfo}>
+                      <h3>{card.title}</h3>
+                    </div>
+                    <button
+                      onClick={() => handleAddCardToSet(card.id)}
+                      disabled={cardsInSet.has(card.id)}
+                    >
+                      {cardsInSet.has(card.id)
+                        ? "В наборе"
+                        : "Добавить в набор"}
+                    </button>
                   </div>
-                  <div className={styles.cardInfo}>
-                    <h3>{card.title}</h3>{" "}
-                  </div>
-                  <button
-                    onClick={() => handleAddCardToSet(card.id, id)}
-                    disabled={cardsInSet.has(card.id)}
-                  >
-                    {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
-                  </button>
-                </div>
-              ))}
+                ))}
+              <img
+                src={right}
+                style={{ height: "64px" }}
+                onClick={() => {
+                  const filteredCards = cards.filter(
+                    (card) => !cardsInSet.has(card.id)
+                  );
+                  currentIndex < filteredCards.length - 3 &&
+                    setCurrentIndex(currentIndex + 1);
+                }}
+                alt="Next"
+              />
             </div>
           </div>
         )}
