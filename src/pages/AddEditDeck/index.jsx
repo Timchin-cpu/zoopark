@@ -11,6 +11,8 @@ const AddEditDeck = () => {
   const [cards, setCards] = useState([]);
   const [existingCards, setExistingCards] = useState([]);
   const [cardsInSet, setCardsInSet] = useState(new Set());
+  const [showAddCards, setShowAddCards] = useState(false);
+
   const [pendingChanges, setPendingChanges] = useState({
     addedCards: new Set(),
     removedCards: new Set(),
@@ -123,36 +125,43 @@ const AddEditDeck = () => {
                 </div>
               )
           )}
-          <div className={styles.whiteBox}>
+          <div
+            className={styles.whiteBox}
+            onClick={() => setShowAddCards(!showAddCards)}
+          >
             <div className={styles.whiteBoxImg}>
               <img src={addimg} alt="#" style={{ height: "64px" }} />
               <p>Добавьте изображене</p>
             </div>
           </div>
         </div>
-        <h3>Добавить карты в набор</h3>
-        <div className={styles.mainContent}>
-          {cards.map((card) => (
-            <div key={card.id} className={styles.cardItem}>
-              {" "}
-              <div className={styles.cardItemImg}>
-                <img
-                  src={`http://localhost:3000${card.image}`}
-                  alt={card.title}
-                />{" "}
-              </div>
-              <div className={styles.cardInfo}>
-                <h3>{card.title}</h3>{" "}
-              </div>
-              <button
-                onClick={() => handleAddCardToSet(card.id, id)}
-                disabled={cardsInSet.has(card.id)}
-              >
-                {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
-              </button>
+        {showAddCards && (
+          <div>
+            <h3>Добавить карты в набор</h3>
+            <div className={styles.mainContent}>
+              {cards.map((card) => (
+                <div key={card.id} className={styles.cardItem}>
+                  {" "}
+                  <div className={styles.cardItemImg}>
+                    <img
+                      src={`http://localhost:3000${card.image}`}
+                      alt={card.title}
+                    />{" "}
+                  </div>
+                  <div className={styles.cardInfo}>
+                    <h3>{card.title}</h3>{" "}
+                  </div>
+                  <button
+                    onClick={() => handleAddCardToSet(card.id, id)}
+                    disabled={cardsInSet.has(card.id)}
+                  >
+                    {cardsInSet.has(card.id) ? "В наборе" : "Добавить в набор"}
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
         <div className={styles.save}>
           <button onClick={handleSave} className={styles.saveButton}>
             Сохранить изменения
