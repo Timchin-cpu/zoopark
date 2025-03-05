@@ -11,6 +11,7 @@ const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentAvailableIndex, setCurrentAvailableIndex] = useState(0);
 
   const [cards, setCards] = useState([]);
   const [existingCards, setExistingCards] = useState([]);
@@ -109,14 +110,17 @@ const AddEditDeck = () => {
           <img
             src={left}
             style={{ height: "64px" }}
-            onClick={() =>
-              currentIndex > 0 && setCurrentIndex(currentIndex - 1)
-            }
+            onClick={() => {
+              const filteredCards = cards.filter((card) =>
+                cardsInSet.has(card.id)
+              );
+              currentSetIndex > 0 && setCurrentSetIndex(currentSetIndex - 1);
+            }}
             alt="Previous"
           />
           {cards
             .filter((card) => cardsInSet.has(card.id))
-            .slice(currentIndex, currentIndex + 3)
+            .slice(currentSetIndex, currentSetIndex + 3)
             .map((card) => (
               <div key={card.id} className={styles.cardItem}>
                 <div className={styles.cardItemImg}>
@@ -153,8 +157,8 @@ const AddEditDeck = () => {
               const filteredCards = cards.filter((card) =>
                 cardsInSet.has(card.id)
               );
-              currentIndex < filteredCards.length - 3 &&
-                setCurrentIndex(currentIndex + 1);
+              currentSetIndex < filteredCards.length - 3 &&
+                setCurrentSetIndex(currentSetIndex + 1);
             }}
             alt="Next"
           />
@@ -166,14 +170,18 @@ const AddEditDeck = () => {
               <img
                 src={left}
                 style={{ height: "64px" }}
-                onClick={() =>
-                  currentIndex > 0 && setCurrentIndex(currentIndex - 1)
-                }
+                onClick={() => {
+                  const filteredCards = cards.filter(
+                    (card) => !cardsInSet.has(card.id)
+                  );
+                  currentAvailableIndex > 0 &&
+                    setCurrentAvailableIndex(currentAvailableIndex - 1);
+                }}
                 alt="Previous"
               />
               {cards
                 .filter((card) => !cardsInSet.has(card.id))
-                .slice(currentIndex, currentIndex + 3)
+                .slice(currentAvailableIndex, currentAvailableIndex + 3)
                 .map((card) => (
                   <div key={card.id} className={styles.cardItem}>
                     <div className={styles.cardItemImg}>
@@ -202,8 +210,8 @@ const AddEditDeck = () => {
                   const filteredCards = cards.filter(
                     (card) => !cardsInSet.has(card.id)
                   );
-                  currentIndex < filteredCards.length - 3 &&
-                    setCurrentIndex(currentIndex + 1);
+                  currentAvailableIndex < filteredCards.length - 3 &&
+                    setCurrentAvailableIndex(currentAvailableIndex + 1);
                 }}
                 alt="Next"
               />
