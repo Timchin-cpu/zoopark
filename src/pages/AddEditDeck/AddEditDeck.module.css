@@ -63,6 +63,7 @@
   overflow-y: auto;
   padding: 14px 0 14px 14px;
   height: 97%;
+  display: flex;
 }
 .cardItem img {
   height: 284px;
