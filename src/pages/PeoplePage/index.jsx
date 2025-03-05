@@ -12,8 +12,7 @@ import MobileNav from "components/MobileNav";
 import ShopPopup from "components/ShopPopup";
 
 const PeoplePage = () => {
-  const [showInfo, setShowInfo] = useState(false);
-  // const [policePhotos, setPolicePhotos] = useState([]);
+  const [showInfo, setShowInfo] = useState({}); // const [policePhotos, setPolicePhotos] = useState([]);
   const [cardSets, setCardSets] = useState([]);
   console.log(cardSets);
   const [cardSetData, setCardSetData] = useState({}); // Store cards for each set
@@ -108,12 +107,15 @@ const PeoplePage = () => {
                     style={{ display: "flex" }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setShowInfo(!showInfo);
+                      setShowInfo((prev) => ({
+                        ...prev,
+                        [set.id]: !prev[set.id],
+                      }));
                     }}
                   >
                     <img src={InfoIcon} alt="" className="infoIcon" />
                   </div>
-                  {showInfo && (
+                  {showInfo[set.id] && (
                     <div className="info-popup">
                       <div className="info-popup__content">
                         <p>Информация о {set.name}</p>
