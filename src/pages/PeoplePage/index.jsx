@@ -387,6 +387,29 @@ const PeoplePage = () => {
                   }`}
                 >
                   {set.name}
+                  <div
+                    className="info-icon"
+                    style={{ display: "flex" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowInfo(!showInfo);
+                    }}
+                  >
+                    <img src={InfoIcon} alt="" className="infoIcon" />
+                  </div>
+                  {showInfo && (
+                    <div className="info-popup">
+                      <div className="info-popup__content">
+                        <p>Информация о {set.name}</p>
+                        <button
+                          className="info-popup__close"
+                          onClick={() => setShowInfo(false)}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   <div className="city-list__more f-center">
                     <div className="city-list__count">
                       {cardSetData[set.id]
@@ -411,6 +434,66 @@ const PeoplePage = () => {
                         />
                       </svg>
                     </div>
+                  </div>
+                </div>
+                <div
+                  className="city-list__content"
+                  style={{
+                    maxHeight: openAccordion === set.id ? "500px" : "0px",
+                    paddingTop: openAccordion === set.id ? "24px" : "0px",
+                    paddingBottom: openAccordion === set.id ? "10px" : "0px",
+                  }}
+                >
+                  <div className="city-slider">
+                    <Swiper spaceBetween={8} slidesPerView={"auto"}>
+                      {cardSetData[set.id]?.map((card) => (
+                        <SwiperSlide key={card.id}>
+                          <div className="city-slider__item">
+                            <div
+                              className="city-slider__card"
+                              onClick={() => handleOpenPopup(card)}
+                            >
+                              <p className="city-slider__image">
+                                <img
+                                  src={
+                                    userCards.some(
+                                      (userCard) => userCard.id === card.id
+                                    )
+                                      ? `http://localhost:3000${card.image}`
+                                      : QuestionMarkImg
+                                  }
+                                  alt={card.title}
+                                />
+                                {userCards.filter(
+                                  (userCard) => userCard.id === card.id
+                                ).length > 1 && (
+                                  <span
+                                    className="card-count"
+                                    style={{
+                                      position: "absolute",
+                                      top: "2px",
+                                      right: "2px",
+                                      background: "rgba(0, 0, 0, 0.7)",
+                                      color: "white",
+                                      padding: "4px 8px",
+                                      borderRadius: "12px",
+                                      fontSize: "14px",
+                                      fontWeight: "500",
+                                    }}
+                                  >
+                                    {
+                                      userCards.filter(
+                                        (userCard) => userCard.id === card.id
+                                      ).length
+                                    }
+                                  </span>
+                                )}
+                              </p>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
                   </div>
                 </div>
               </li>
