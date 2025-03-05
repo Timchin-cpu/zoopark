@@ -129,6 +129,6 @@
 }
 @media (max-width: 999px) {
   .arrow {
-    display: none !important;
+    height: 25px !important;
   }
 }
