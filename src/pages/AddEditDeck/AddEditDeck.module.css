@@ -41,7 +41,7 @@
   height: 45px;
   justify-content: center;
   margin-top: 10px;
-  width: 30%;
+  width: 200px;
 }
 .save {
   display: flex;
@@ -111,8 +111,9 @@
   flex: 1;
   padding: 8px 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px !important;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 .searchButton {
   padding: 8px 16px;
