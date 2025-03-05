@@ -98,3 +98,27 @@
   align-items: center;
   flex-direction: column;
 }
+.searchContainer {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.searchInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.searchButton {
+  padding: 8px 16px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.searchButton:hover {
+  background: darkgreen;
+}

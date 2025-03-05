@@ -17,6 +17,7 @@ const AddEditDeck = () => {
   const [existingCards, setExistingCards] = useState([]);
   const [cardsInSet, setCardsInSet] = useState(new Set());
   const [showAddCards, setShowAddCards] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [pendingChanges, setPendingChanges] = useState({
     addedCards: new Set(),
@@ -180,7 +181,11 @@ const AddEditDeck = () => {
                 alt="Previous"
               />
               {cards
-                .filter((card) => !cardsInSet.has(card.id))
+                .filter(
+                  (card) =>
+                    !cardsInSet.has(card.id) &&
+                    card.title.toLowerCase().includes(searchQuery.toLowerCase())
+                )
                 .slice(currentAvailableIndex, currentAvailableIndex + 3)
                 .map((card) => (
                   <div key={card.id} className={styles.cardItem}>
@@ -214,6 +219,15 @@ const AddEditDeck = () => {
                     setCurrentAvailableIndex(currentAvailableIndex + 1);
                 }}
                 alt="Next"
+              />
+            </div>
+            <div className={styles.searchContainer}>
+              <input
+                type="text"
+                placeholder="Поиск по названию"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={styles.searchInput}
               />
             </div>
           </div>
