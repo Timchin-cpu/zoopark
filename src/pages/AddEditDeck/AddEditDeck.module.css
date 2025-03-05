@@ -125,7 +125,7 @@
   background: darkgreen;
 }
 .arrow {
-  height: 64px;
+  height: 64px !important;
 }
 @media (max-width: 999px) {
   .arrow {
