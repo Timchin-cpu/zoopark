@@ -99,10 +99,10 @@
   flex-direction: column;
 }
 .searchContainer {
-  margin: 20px 0;
-  display: flex;
   align-items: center;
-  gap: 10px;
+  display: flex;
+  margin: -5px;
+  width: 60%;
 }
 .searchInput {
   flex: 1;
@@ -121,4 +121,13 @@
 }
 .searchButton:hover {
   background: darkgreen;
+}
+.arrow {
+  height: 64px;
+}
+@media (max-width: 999px) {
+  .mainContent img[src*="left"],
+  .mainContent img[src*="right"] {
+    display: none;
+  }
 }
