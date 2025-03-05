@@ -109,8 +109,10 @@ const AddEditDeck = () => {
                       alt={card.title}
                     />{" "}
                   </div>
+                  <div className={styles.cardInfo}>
+                    <h3>{card.title}</h3>{" "}
+                  </div>
 
-                  <h3>{card.title}</h3>
                   <button
                     onClick={() => handleRemoveCardFromSet(card.id)}
                     style={{ background: "red" }}
@@ -132,7 +134,9 @@ const AddEditDeck = () => {
                   alt={card.title}
                 />{" "}
               </div>
-              <h3>{card.title}</h3>
+              <div className={styles.cardInfo}>
+                <h3>{card.title}</h3>{" "}
+              </div>
               <button
                 onClick={() => handleAddCardToSet(card.id, id)}
                 disabled={cardsInSet.has(card.id)}
