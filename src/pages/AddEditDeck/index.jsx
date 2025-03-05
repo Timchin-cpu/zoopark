@@ -122,6 +122,12 @@ const AddEditDeck = () => {
                 </div>
               )
           )}
+          <div className={styles.whiteBox}>
+            <div className={styles.whiteBoxImg}>
+              <img src={addimg} alt="#" />
+              <p>Добавьте изображене</p>
+            </div>
+          </div>
         </div>
         <h3>Добавить карты в набор</h3>
         <div className={styles.mainContent}>
