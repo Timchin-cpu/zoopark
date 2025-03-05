@@ -24,6 +24,7 @@ const PeoplePage = () => {
       try {
         const response = await cardSetsService.getAllCardSets();
         setCardSets(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching card sets:", error);
       }
@@ -67,9 +68,10 @@ const PeoplePage = () => {
     document.documentElement.classList.add("fixed");
     setSelectedPhoto({
       ...photo,
-      image: userCards.some((card) => card.id === photo.id)
-        ? photo.image
-        : QuestionMarkImg,
+      image:
+        userCards && userCards.some((card) => card.id === photo.id)
+          ? photo.image
+          : QuestionMarkImg,
     });
     setActivePopup(true);
   };
