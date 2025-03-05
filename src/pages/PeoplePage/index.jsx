@@ -41,6 +41,7 @@ const PeoplePage = () => {
           }
         }
         setCardSetData(setData);
+        console.log(setData);
       } catch (error) {
         console.error("Error fetching card sets:", error);
       }
