@@ -26,12 +26,20 @@ const PeoplePage = () => {
       try {
         const response = await cardSetsService.getAllCardSets();
         setCardSets(response.data);
-
         // Fetch cards for each set
         const setData = {};
+        const completionData = {};
+
+        const tg = window.Telegram.WebApp;
+        const telegram_id = tg.initDataUnsafe?.user?.id;
         for (const set of response.data) {
           const cardsResponse = await cardSetsService.getSetCards(set.id);
           setData[set.id] = cardsResponse.data;
+
+          // Check completion status for each set
+          if (telegram_id) {
+            await cardSetsService.checkSetCompletion(set.id, telegram_id);
+          }
         }
         setCardSetData(setData);
       } catch (error) {
@@ -56,6 +64,7 @@ const PeoplePage = () => {
         console.error(error);
       }
     };
+
     fetchUserCards();
   }, []);
   // Получение фотографий полиции

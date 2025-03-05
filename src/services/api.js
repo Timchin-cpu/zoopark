@@ -66,7 +66,8 @@ export const cardSetsService = {
   getAllCardSets: () => axios.get("/card-sets"),
 
   // Получение карт конкретного набора
-
+  checkSetCompletion: (setId, telegram_id) =>
+    axios.post(`/card-sets/${setId}/check-completion`, { telegram_id }),
   // Проверка завершения набора
   checkSetCompletion: (setId, telegram_id) =>
     axios.post(`/card-sets/${setId}/check-completion`, { telegram_id }),
