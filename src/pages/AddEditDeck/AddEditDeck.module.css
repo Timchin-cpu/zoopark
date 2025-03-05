@@ -53,3 +53,10 @@
   color: black;
   overflow-y: auto;
 }
+.content {
+  background: #dcdcdc;
+  border-radius: 5px;
+  margin: 10px;
+  overflow-y: auto;
+  padding: 14px 0 14px 14px;
+}
