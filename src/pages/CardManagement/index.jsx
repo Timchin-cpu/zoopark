@@ -167,7 +167,19 @@ const CardManagement = () => {
           </div>{" "}
           <div>
             <NavLink to={routeAddEditDeck()} style={{ width: "40%" }}>
-              <button>Добавить набор</button>
+              <button
+                className={styles.addCard}
+                style={{
+                  background: "green",
+                  border: "none",
+                  borderRadius: "4px",
+                  color: "#fff",
+                  cursor: "pointer",
+                  padding: "8px 16px",
+                }}
+              >
+                Добавить набор
+              </button>
             </NavLink>
           </div>
         </div>
