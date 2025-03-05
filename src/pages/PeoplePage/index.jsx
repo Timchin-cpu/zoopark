@@ -16,6 +16,8 @@ const PeoplePage = () => {
   const [policePhotos, setPolicePhotos] = useState([]);
   const [cardSets, setCardSets] = useState([]);
   console.log(cardSets);
+  const [cardSetData, setCardSetData] = useState({}); // Store cards for each set
+
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [activePopup, setActivePopup] = useState(false);
   const [userCards, setUserCards] = useState([]);
