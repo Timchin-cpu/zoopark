@@ -44,10 +44,10 @@ const AddEditDeck = () => {
           setName(data.title || "");
           setDescription(data.description || "");
           setRewards([
-            { type: "experience", value: 0 },
-            { type: "hourly_income", value: 0 },
-            { type: "coins", value: 0 },
-            { type: "card", value: 0 },
+            { type: "hourly_income", value: data.rewards?.hourly_income || 0 },
+            { type: "coins", value: data.rewards?.coins || 0 },
+            { type: "experience", value: data.rewards?.experience || 0 },
+            { type: "card", value: data.rewards?.cardId || 0 },
           ]);
         } catch (error) {
           console.error("Error fetching set rewards:", error);
