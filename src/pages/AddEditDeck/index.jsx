@@ -75,7 +75,7 @@ const AddEditDeck = () => {
       }
     };
     fetchSetData();
-  }, [id]);
+  }, [id, cards]);
   // Обновляем при загрузке существующих карт
   useEffect(() => {
     setCardsInSet(new Set(existingCards.map((card) => card.id)));
