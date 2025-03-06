@@ -10,7 +10,25 @@
   font-size: 20px;
 }
 .contents {
-  background: white;
-  width: 100vw;
+  background: #fff;
   height: 100vh;
+  width: 100vw;
+}
+.mainContents {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+.mainContent {
+  background-color: green;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  align-items: center;
+  padding: 15px;
 }

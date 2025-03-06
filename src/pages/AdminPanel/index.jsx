@@ -7,7 +7,6 @@ const AdminPanel = () => {
   return (
     <div className={styles.contents}>
       <div className={styles.mainContents}>
-        {" "}
         <div className={styles.mainContent}>
           <NavLink to={routeCardManagement()}>
             <div className={styles.content}>
