@@ -378,8 +378,14 @@ const AddEditDeck = () => {
             <div className={styles.autocompleteContainer}>
               <input
                 type="text"
-                value={cardReward}
-                onChange={handleCardRewardChange}
+                value={rewards.find((r) => r.type === "card")?.value || ""}
+                onChange={(e) => {
+                  const newRewards = rewards.map((r) =>
+                    r.type === "card" ? { ...r, value: e.target.value } : r
+                  );
+                  setRewards(newRewards);
+                  handleCardRewardChange(e);
+                }}
                 placeholder="Введите название карты"
               />
               {showSuggestions && suggestions.length > 0 && (
@@ -388,7 +394,13 @@ const AddEditDeck = () => {
                     <div
                       key={card.id}
                       className={styles.suggestionItem}
-                      onClick={() => handleSuggestionClick(card)}
+                      onClick={() => {
+                        handleSuggestionClick(card);
+                        const newRewards = rewards.map((r) =>
+                          r.type === "card" ? { ...r, value: card.id } : r
+                        );
+                        setRewards(newRewards);
+                      }}
                     >
                       {card.title}
                     </div>
