@@ -134,28 +134,28 @@ const AddEditDeck = () => {
       removedCards: prev.removedCards.add(cardId),
     }));
   };
-  const handleSave = async () => {
-    try {
-      // Удаление карт
-      for (const cardId of pendingChanges.removedCards) {
-        await cardSetsService.removeCardFromSet(id, cardId);
-      }
+  // const handleSave = async () => {
+  //   try {
+  //     // Удаление карт
+  //     for (const cardId of pendingChanges.removedCards) {
+  //       await cardSetsService.removeCardFromSet(id, cardId);
+  //     }
 
-      // Добавление новых карт
-      for (const cardId of pendingChanges.addedCards) {
-        await cardSetsService.addCardToSet(id, cardId);
-      }
+  //     // Добавление новых карт
+  //     for (const cardId of pendingChanges.addedCards) {
+  //       await cardSetsService.addCardToSet(id, cardId);
+  //     }
 
-      const response = await cardSetsService.getSetCards(id);
-      setExistingCards(response.data);
-      setPendingChanges({
-        addedCards: new Set(),
-        removedCards: new Set(),
-      });
-    } catch (error) {
-      console.error("Error saving changes:", error);
-    }
-  };
+  //     const response = await cardSetsService.getSetCards(id);
+  //     setExistingCards(response.data);
+  //     setPendingChanges({
+  //       addedCards: new Set(),
+  //       removedCards: new Set(),
+  //     });
+  //   } catch (error) {
+  //     console.error("Error saving changes:", error);
+  //   }
+  // };
   const handleCardRewardChange = async (e) => {
     const value = e.target.value;
     setCardReward(value);
