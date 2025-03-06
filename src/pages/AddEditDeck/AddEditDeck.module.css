@@ -139,14 +139,14 @@
   margin-right: 10px;
 }
 .inputContainer input {
-  margin-top: 39px;
+  /* margin-top: 39px; */
   border-radius: 10px !important;
   padding: 10px;
   width: 265px;
 }
 .title {
   font-size: 22px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 10px;
 }
 .describedCard {

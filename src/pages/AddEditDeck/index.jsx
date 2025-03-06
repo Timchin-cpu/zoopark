@@ -270,7 +270,7 @@ const AddEditDeck = () => {
           )}
         </div>
         <div className={styles.inputContainer}>
-          <div style={{ marginRight: "10px" }}>
+          <div style={{ marginRight: "20px" }}>
             <h2 className={styles.title}>Название</h2>
 
             <input type="text" />
@@ -282,7 +282,7 @@ const AddEditDeck = () => {
             <h2 className={styles.title}>Вознаграждение </h2>
             <input type="text" />
           </div>
-          <div style={{ marginRight: "10px" }}>
+          <div style={{ marginRight: "20px" }}>
             {" "}
             <h2 className={styles.title}>Опыт</h2>
             <input type="text" />
