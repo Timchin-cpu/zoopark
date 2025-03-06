@@ -41,15 +41,30 @@ const AddEditDeck = () => {
         try {
           const response = await cardSetsService.getSetRewards(id);
           const data = response.data;
-          console.log(data);
+          console.log("Received data:", data);
+
           setName(data.title || "");
           setDescription(data.description || "");
-          setRewards([
-            { type: "hourly_income", value: data.rewards?.hourly_income || 0 },
-            { type: "coins", value: data.rewards?.coins || 0 },
-            { type: "experience", value: data.rewards?.experience || 0 },
-            { type: "card", value: data.rewards?.cardId || 0 },
-          ]);
+
+          // Создаем новый массив rewards с правильной структурой
+          const newRewards = [
+            { type: "experience", value: 0 },
+            { type: "hourly_income", value: 0 },
+            { type: "coins", value: 0 },
+            { type: "card", value: "" },
+          ];
+          // Обновляем значения из полученных данных
+          if (data.rewards) {
+            data.rewards.forEach((reward) => {
+              const existingReward = newRewards.find(
+                (r) => r.type === reward.type
+              );
+              if (existingReward) {
+                existingReward.value = reward.value;
+              }
+            });
+          }
+          setRewards(newRewards);
         } catch (error) {
           console.error("Error fetching set rewards:", error);
         }
