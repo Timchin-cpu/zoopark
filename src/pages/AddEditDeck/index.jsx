@@ -12,8 +12,13 @@ const AddEditDeck = () => {
   console.log(id);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [experience, setExperience] = useState("");
-  const [hourlyReward, setHourlyReward] = useState("");
+  const [rewards, setRewards] = useState([
+    { type: "experience", value: 0 },
+    { type: "hourly_income", value: 0 },
+    { type: "coins", value: 0 },
+    { type: "card", value: "" },
+  ]);
+
   const [cardReward, setCardReward] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -36,11 +41,14 @@ const AddEditDeck = () => {
         try {
           const response = await cardSetsService.getSetRewards(id);
           const data = response.data;
-          setName(data.name || "");
+          setName(data.title || "");
           setDescription(data.description || "");
-          setExperience(data.rewards.experience || "");
-          setHourlyReward(data.rewards.hourlyIncome || "");
-          setCardReward(data.rewards.cardId || "");
+          setRewards([
+            { type: "experience", value: 0 },
+            { type: "hourly_income", value: 0 },
+            { type: "coins", value: 0 },
+            { type: "card", value: 0 },
+          ]);
         } catch (error) {
           console.error("Error fetching set rewards:", error);
         }
@@ -307,21 +315,48 @@ const AddEditDeck = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
             <h2 className={styles.title}>Вознаграждение </h2>
-            <input type="text" />
+            <input
+              type="text"
+              value={rewards.find((r) => r.type === "coins")?.value || ""}
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "coins"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
+              }}
+            />
           </div>
           <div style={{ marginRight: "20px" }}>
             {" "}
             <h2 className={styles.title}>Опыт</h2>
             <input
               type="text"
-              value={experience}
-              onChange={(e) => setExperience(e.target.value)}
+              value={rewards.find((r) => r.type === "experience")?.value || ""}
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "experience"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
+              }}
             />{" "}
             <h2 className={styles.title}>Вознаграждение в час</h2>
             <input
               type="text"
-              value={hourlyReward}
-              onChange={(e) => setHourlyReward(e.target.value)}
+              value={
+                rewards.find((r) => r.type === "hourly_income")?.value || ""
+              }
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "hourly_income"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
+              }}
             />{" "}
             <h2 className={styles.title}>Вознаграждение картой</h2>
             <div className={styles.autocompleteContainer}>
