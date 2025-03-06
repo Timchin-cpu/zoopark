@@ -41,6 +41,7 @@ const AddEditDeck = () => {
         try {
           const response = await cardSetsService.getSetRewards(id);
           const data = response.data;
+          console.log(data);
           setName(data.title || "");
           setDescription(data.description || "");
           setRewards([
