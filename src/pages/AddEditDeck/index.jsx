@@ -156,17 +156,14 @@ const AddEditDeck = () => {
   const handleCardRewardChange = async (e) => {
     const value = e.target.value;
     setCardReward(value);
+
     if (value.length > 0) {
+      // Фильтруем карты по введенному значению
       const filteredCards = cards.filter((card) =>
         card.title.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filteredCards);
       setShowSuggestions(true);
-      // Update rewards with display value
-      const newRewards = rewards.map((r) =>
-        r.type === "card" ? { ...r, value: "", displayValue: value } : r
-      );
-      setRewards(newRewards);
     } else {
       setSuggestions([]);
       setShowSuggestions(false);
@@ -174,10 +171,6 @@ const AddEditDeck = () => {
   };
   const handleSuggestionClick = (card) => {
     setCardReward(card.title);
-    const newRewards = rewards.map((r) =>
-      r.type === "card" ? { ...r, value: card.id, displayValue: card.title } : r
-    );
-    setRewards(newRewards);
     setSuggestions([]);
     setShowSuggestions(false);
   };
@@ -386,10 +379,12 @@ const AddEditDeck = () => {
             <div className={styles.autocompleteContainer}>
               <input
                 type="text"
-                value={
-                  rewards.find((r) => r.type === "card")?.displayValue || ""
-                }
+                value={rewards.find((r) => r.type === "card")?.value || ""}
                 onChange={(e) => {
+                  const newRewards = rewards.map((r) =>
+                    r.type === "card" ? { ...r, value: e.target.value } : r
+                  );
+                  setRewards(newRewards);
                   handleCardRewardChange(e);
                 }}
                 placeholder="Введите название карты"
@@ -403,7 +398,7 @@ const AddEditDeck = () => {
                       onClick={() => {
                         handleSuggestionClick(card);
                         const newRewards = rewards.map((r) =>
-                          r.type === "card" ? { ...r, value: card.id } : r
+                          r.type === "card" ? { ...r, value: card.title } : r
                         );
                         setRewards(newRewards);
                       }}
