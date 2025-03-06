@@ -270,24 +270,24 @@ const AddEditDeck = () => {
           )}
         </div>
         <div className={styles.inputContainer}>
-          <h2 className={styles.title}>Название</h2>
+          <div>
+            <h2 className={styles.title}>Название</h2>
 
-          <input type="text" />
-          <h2 className={styles.title}>Описание</h2>
-          <textarea
-            className={styles.describedCard}
-            placeholder="Введите описание"
-          />
-          <h2 className={styles.title}>Вознаграждение </h2>
-
-          <input type="text" />
-          <h2 className={styles.title}>Опыт</h2>
-
-          <input type="text" />
-          <h2 className={styles.title}>Вознаграждение в час</h2>
-
-          <input type="text" />
-          <div className={styles.inputContainer}>
+            <input type="text" />
+            <h2 className={styles.title}>Описание</h2>
+            <textarea
+              className={styles.describedCard}
+              placeholder="Введите описание"
+            />
+            <h2 className={styles.title}>Вознаграждение </h2>
+          </div>
+          <div>
+            {" "}
+            <input type="text" />
+            <h2 className={styles.title}>Опыт</h2>
+            <input type="text" />
+            <h2 className={styles.title}>Вознаграждение в час</h2>
+            <input type="text" />
             <h2 className={styles.title}>Вознаграждение картой</h2>
             <div className={styles.autocompleteContainer}>
               <input
