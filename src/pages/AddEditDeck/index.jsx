@@ -270,7 +270,7 @@ const AddEditDeck = () => {
           )}
         </div>
         <div className={styles.inputContainer}>
-          <div>
+          <div style={{ marginRight: "10px" }}>
             <h2 className={styles.title}>Название</h2>
 
             <input type="text" />
@@ -280,10 +280,10 @@ const AddEditDeck = () => {
               placeholder="Введите описание"
             />
             <h2 className={styles.title}>Вознаграждение </h2>
-          </div>
-          <div>
-            {" "}
             <input type="text" />
+          </div>
+          <div style={{ marginRight: "10px" }}>
+            {" "}
             <h2 className={styles.title}>Опыт</h2>
             <input type="text" />
             <h2 className={styles.title}>Вознаграждение в час</h2>
@@ -310,12 +310,11 @@ const AddEditDeck = () => {
                 </div>
               )}
             </div>
-          </div>
-
-          <div className={styles.save}>
-            <button onClick={handleSave} className={styles.saveButton}>
-              Сохранить изменения
-            </button>
+            <div className={styles.save}>
+              <button onClick={handleSave} className={styles.saveButton}>
+                Сохранить изменения
+              </button>
+            </div>
           </div>
         </div>
       </div>
