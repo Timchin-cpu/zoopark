@@ -10,6 +10,10 @@ import right from "assets/img/right.png";
 const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [experience, setExperience] = useState("");
+  const [hourlyReward, setHourlyReward] = useState("");
   const [cardReward, setCardReward] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -26,6 +30,24 @@ const AddEditDeck = () => {
     addedCards: new Set(),
     removedCards: new Set(),
   });
+  useEffect(() => {
+    const fetchSetData = async () => {
+      if (id) {
+        try {
+          const response = await cardSetsService.getSetRewards(id);
+          const data = response.data;
+          setName(data.name || "");
+          setDescription(data.description || "");
+          setExperience(data.rewards.experience || "");
+          setHourlyReward(data.rewards.hourlyIncome || "");
+          setCardReward(data.rewards.cardId || "");
+        } catch (error) {
+          console.error("Error fetching set rewards:", error);
+        }
+      }
+    };
+    fetchSetData();
+  }, [id]);
   // Обновляем при загрузке существующих карт
   useEffect(() => {
     setCardsInSet(new Set(existingCards.map((card) => card.id)));
@@ -272,12 +294,17 @@ const AddEditDeck = () => {
         <div className={styles.inputContainer}>
           <div style={{ marginRight: "20px" }}>
             <h2 className={styles.title}>Название</h2>
-
-            <input type="text" />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <h2 className={styles.title}>Описание</h2>
             <textarea
               className={styles.describedCard}
               placeholder="Введите описание"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
             <h2 className={styles.title}>Вознаграждение </h2>
             <input type="text" />
@@ -285,9 +312,17 @@ const AddEditDeck = () => {
           <div style={{ marginRight: "20px" }}>
             {" "}
             <h2 className={styles.title}>Опыт</h2>
-            <input type="text" />
+            <input
+              type="text"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+            />{" "}
             <h2 className={styles.title}>Вознаграждение в час</h2>
-            <input type="text" />
+            <input
+              type="text"
+              value={hourlyReward}
+              onChange={(e) => setHourlyReward(e.target.value)}
+            />{" "}
             <h2 className={styles.title}>Вознаграждение картой</h2>
             <div className={styles.autocompleteContainer}>
               <input

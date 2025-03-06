@@ -64,6 +64,7 @@ export const cardSetsService = {
   removeCardFromSet: (setId, cardId) =>
     axios.delete(`/card-sets/${setId}/cards/${cardId}`),
   getAllCardSets: () => axios.get("/card-sets"),
+  getSetRewards: (setId) => axios.get(`/card-sets/${setId}/rewards`),
 
   // Получение карт конкретного набора
   checkSetCompletion: (setId, telegram_id) =>
