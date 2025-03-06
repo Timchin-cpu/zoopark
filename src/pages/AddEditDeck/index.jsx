@@ -10,6 +10,9 @@ import right from "assets/img/right.png";
 const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
+  const [cardReward, setCardReward] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [currentAvailableIndex, setCurrentAvailableIndex] = useState(0);
 
@@ -102,6 +105,27 @@ const AddEditDeck = () => {
     } catch (error) {
       console.error("Error saving changes:", error);
     }
+  };
+  const handleCardRewardChange = async (e) => {
+    const value = e.target.value;
+    setCardReward(value);
+
+    if (value.length > 0) {
+      // Фильтруем карты по введенному значению
+      const filteredCards = cards.filter((card) =>
+        card.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filteredCards);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+  const handleSuggestionClick = (card) => {
+    setCardReward(card.title);
+    setSuggestions([]);
+    setShowSuggestions(false);
   };
   return (
     <div className={styles.contents}>
@@ -263,6 +287,30 @@ const AddEditDeck = () => {
           <h2 className={styles.title}>Вознаграждение в час</h2>
 
           <input type="text" />
+          <div className={styles.inputContainer}>
+            <h2 className={styles.title}>Вознаграждение картой</h2>
+            <div className={styles.autocompleteContainer}>
+              <input
+                type="text"
+                value={cardReward}
+                onChange={handleCardRewardChange}
+                placeholder="Введите название карты"
+              />
+              {showSuggestions && suggestions.length > 0 && (
+                <div className={styles.suggestionsList}>
+                  {suggestions.map((card) => (
+                    <div
+                      key={card.id}
+                      className={styles.suggestionItem}
+                      onClick={() => handleSuggestionClick(card)}
+                    >
+                      {card.title}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
 
           <div className={styles.save}>
             <button onClick={handleSave} className={styles.saveButton}>
