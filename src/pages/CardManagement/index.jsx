@@ -14,6 +14,8 @@ const CardManagement = () => {
   const [cards, setCards] = useState([]);
   const [cardSets, setCardSets] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [setsSearchQuery, setSetsSearchQuery] = useState("");
+
   useEffect(() => {
     const fetchCardBacks = async () => {
       try {
@@ -124,30 +126,37 @@ const CardManagement = () => {
       <div className={styles.mainContent}>
         <h2>Наборы карт жители</h2>
         <div className={styles.cardsList}>
-          {cardSets.map((set) => (
-            <div key={set.id} className={styles.cardItem}>
-              <div className={styles.cardItemImg}>
-                <img src={`http://localhost:3000${set.image}`} alt={set.name} />
-              </div>
-              <div className={styles.cardInfo}>
-                {" "}
-                <h3>{set.name}</h3>
-                <p>{set.description}</p>
-              </div>
+          {cardSets
+            .filter((set) =>
+              set.name.toLowerCase().includes(setsSearchQuery.toLowerCase())
+            )
+            .map((set) => (
+              <div key={set.id} className={styles.cardItem}>
+                <div className={styles.cardItemImg}>
+                  <img
+                    src={`http://localhost:3000${set.image}`}
+                    alt={set.name}
+                  />
+                </div>
+                <div className={styles.cardInfo}>
+                  {" "}
+                  <h3>{set.name}</h3>
+                  <p>{set.description}</p>
+                </div>
 
-              <NavLink to={routeAddEditDeck(set.id)}>
-                <button>Редактировать</button>
-              </NavLink>
-            </div>
-          ))}
+                <NavLink to={routeAddEditDeck(set.id)}>
+                  <button>Редактировать</button>
+                </NavLink>
+              </div>
+            ))}
         </div>
         <div className={styles.settings}>
           <div className={styles.searchContainer}>
             <input
               type="text"
               placeholder="Поиск по названию карты"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={setsSearchQuery}
+              onChange={(e) => setSetsSearchQuery(e.target.value)}
               className={styles.searchInput}
             />
             <button
