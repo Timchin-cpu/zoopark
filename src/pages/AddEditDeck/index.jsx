@@ -177,6 +177,41 @@ const AddEditDeck = () => {
     setSuggestions([]);
     setShowSuggestions(false);
   };
+  const handleSave = async () => {
+    try {
+      // Update set data and rewards
+      await cardSetsService.updateSetRewards(id, {
+        title: name,
+        description: description,
+        rewards: rewards.map((reward) => ({
+          type: reward.type,
+          value:
+            reward.type === "card"
+              ? cards.find((c) => c.title === reward.value)?.id || reward.value
+              : reward.value,
+        })),
+      });
+      // Remove cards
+      for (const cardId of pendingChanges.removedCards) {
+        await cardSetsService.removeCardFromSet(id, cardId);
+      }
+      // Add new cards
+      for (const cardId of pendingChanges.addedCards) {
+        await cardSetsService.addCardToSet(id, cardId);
+      }
+      // Refresh cards data
+      const response = await cardSetsService.getSetCards(id);
+      setExistingCards(response.data);
+
+      // Reset pending changes
+      setPendingChanges({
+        addedCards: new Set(),
+        removedCards: new Set(),
+      });
+    } catch (error) {
+      console.error("Error saving changes:", error);
+    }
+  };
   return (
     <div className={styles.contents}>
       <div className={styles.content}>
