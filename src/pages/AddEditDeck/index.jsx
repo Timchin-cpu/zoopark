@@ -42,13 +42,12 @@ const AddEditDeck = () => {
         try {
           const response = await cardSetsService.getSetRewards(id);
           const data = response.data;
-          console.log("Receive
           setName(data.title || "");
           setDescription(data.description || "");
           // Создаем новый массив rewards с правильной структурой
           const newRewards = [
             { type: "experience", value: 0 },
-            { type: "hourly_income", value: 0 }, 
+            { type: "hourly_income", value: 0 },
             { type: "coins", value: 0 },
             { type: "card", value: "" },
           ];
@@ -61,7 +60,7 @@ const AddEditDeck = () => {
               if (existingReward) {
                 if (reward.type === "card") {
                   // Находим карту по ID и устанавливаем её название
-                  const card = cards.find(c => c.id === reward.value);
+                  const card = cards.find((c) => c.id === reward.value);
                   existingReward.value = card ? card.title : reward.value;
                 } else {
                   existingReward.value = reward.value;
