@@ -20,6 +20,7 @@ const AddEditDeck = () => {
   ]);
 
   const [cardReward, setCardReward] = useState("");
+  console.log(cardReward);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
