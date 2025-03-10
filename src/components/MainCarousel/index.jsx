@@ -44,6 +44,7 @@ const MainCarousel = ({
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
+  const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -53,9 +54,10 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            console.log(response.data);
-            const lastUpdate = response.data.lastEnergyUpdate;
-            updateRemainingTime(lastUpdate);
+            // Обновляем таймер только если это первая загрузка или получена карта энергии
+            if (!lastUpdate || response.data.lastEnergyUpdate !== lastUpdate) {
+              updateRemainingTime(response.data.lastEnergyUpdate);
+            }
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -63,7 +65,7 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-  }, [energy]);
+  }, [lastUpdate]);
   const updateRemainingTime = (lastUpdate) => {
     console.log(lastUpdate);
     if (!lastUpdate) {
@@ -204,6 +206,7 @@ const MainCarousel = ({
       // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
         setEnergy((prev) => Math.min(prev + 100, 100));
+        setLastUpdate(new Date().toISOString());
       }
       handleOpenPopup(selectedCard);
     } catch (error) {
