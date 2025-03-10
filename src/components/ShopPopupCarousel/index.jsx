@@ -71,7 +71,7 @@ const ShopPopupCarousel = (props) => {
           {/* <img
               src={
                 props.selectedPhoto
-                  ? `http://localhost:3000${props.selectedPhoto.image}`
+                  ? `${props.selectedPhoto.image}`
                   : DefaultImg
               }
               alt={props.selectedPhoto?.title || ""}

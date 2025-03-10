@@ -414,7 +414,7 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
                   onClick={() => handleCardBackChange(cardBack.image)}
                 >
                   <img
-                    src={`http://localhost:3000${cardBack.image}`}
+                    src={`${cardBack.image}`}
                     alt={cardBack.name}
                     style={{
                       marginRight: "20px",

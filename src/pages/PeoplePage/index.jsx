@@ -190,7 +190,7 @@ const PeoplePage = () => {
                                     userCards.some(
                                       (userCard) => userCard.id === card.id
                                     )
-                                      ? `http://localhost:3000${card.image}`
+                                      ? `${card.image}`
                                       : QuestionMarkImg
                                   }
                                   alt={card.title}

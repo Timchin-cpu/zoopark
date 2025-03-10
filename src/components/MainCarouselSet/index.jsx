@@ -203,7 +203,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
                   frontComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
+                        src={`${
                           cardBackStyles[cardBackStyle || "default"].image
                         }`}
                         alt=""
@@ -213,7 +213,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
                   backComponent={
                     <div className="main-slider__image">
                       <img
-                        src={`http://localhost:3000${
+                        src={`${
                           openedCards[i]?.image ||
                           selectedPhotos[item.id]?.image
                         }`}
@@ -228,7 +228,7 @@ const MainCarouselSet = ({ getActiveSlide, handleOpenPopup }) => {
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
           <img
-            src={`http://localhost:3000${
+            src={`${
               cardBackStyles[cardBackStyle || "default"]?.image ||
               cardBackStyles.default.image
             }`}

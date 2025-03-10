@@ -233,7 +233,7 @@ const ShopPage = () => {
                               item.id === "energy" ||
                               item.id === "money"
                                 ? item.image
-                                : `http://localhost:3000${item.image}`
+                                : `${item.image}`
                             }
                             alt=""
                             className="shop-card__Img"

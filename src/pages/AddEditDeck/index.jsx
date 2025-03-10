@@ -236,10 +236,7 @@ const AddEditDeck = () => {
               .map((card) => (
                 <div key={card.id} className={styles.cardItem}>
                   <div className={styles.cardItemImg}>
-                    <img
-                      src={`http://localhost:3000${card.image}`}
-                      alt={card.title}
-                    />
+                    <img src={`${card.image}`} alt={card.title} />
                   </div>
                   <div className={styles.cardInfo}>
                     <h3>{card.title}</h3>
@@ -311,10 +308,7 @@ const AddEditDeck = () => {
                   .map((card) => (
                     <div key={card.id} className={styles.cardItem}>
                       <div className={styles.cardItemImg}>
-                        <img
-                          src={`http://localhost:3000${card.image}`}
-                          alt={card.title}
-                        />
+                        <img src={`${card.image}`} alt={card.title} />
                       </div>
                       <div className={styles.cardInfo}>
                         <h3>{card.title}</h3>

@@ -66,7 +66,7 @@ const ShopPopup = (props) => {
             {/* <img
               src={
                 props.selectedPhoto
-                  ? `http://localhost:3000${props.selectedPhoto.image}`
+                  ? `${props.selectedPhoto.image}`
                   : DefaultImg
               }
               alt={props.selectedPhoto?.title || ""}
@@ -75,7 +75,7 @@ const ShopPopup = (props) => {
               src={
                 item.id === "set" || item.id === "energy" || item.id === "money"
                   ? item.image
-                  : `http://localhost:3000${item.image}`
+                  : `${item.image}`
               }
               alt=""
               className="shop-card__Img"
