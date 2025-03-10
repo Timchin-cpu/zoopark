@@ -52,11 +52,17 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
+
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            // Обновляем таймер только если это первая загрузка или получена карта энергии
-            if (!lastUpdate || response.data.lastEnergyUpdate !== lastUpdate) {
-              updateRemainingTime(response.data.lastEnergyUpdate);
+
+            // Получаем сохраненное время из localStorage
+            const savedLastUpdate = localStorage.getItem("lastEnergyUpdate");
+            const lastUpdateToUse =
+              savedLastUpdate || response.data.lastEnergyUpdate;
+
+            if (!lastUpdate || lastUpdateToUse !== lastUpdate) {
+              updateRemainingTime(lastUpdateToUse);
             }
           }
         } catch (error) {
@@ -72,10 +78,13 @@ const MainCarousel = ({
       setRemainingTime("00:00:00");
       return;
     }
+    // Сохраняем время последнего обновления в localStorage
+    localStorage.setItem("lastEnergyUpdate", lastUpdate);
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
+
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
