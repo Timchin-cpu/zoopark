@@ -48,7 +48,7 @@ const MainCarousel = ({
   const [remainingTime, setRemainingTime] = useState("00:00:00");
 
   const dispatch = useDispatch();
-  const storedEnergy = useSelector((state) => state.energy);
+  // const storedEnergy = useSelector((state) => state.energy);
   const lastUpdate = useSelector((state) => state.lastEnergyUpdate);
   useEffect(() => {
     const fetchEnergy = async () => {
@@ -73,37 +73,32 @@ const MainCarousel = ({
   }, [dispatch]);
   useEffect(() => {
     if (!lastUpdate) return;
-
     const updateTimer = () => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-
-      // Check if enough time has passed to add energy
+      // Проверяем, прошло ли достаточно времени для добавления энергии
       if (timeDiff >= 3600000) {
-        // 1 hour in milliseconds
+        // 1 час в миллисекундах
         const hoursToAdd = Math.floor(timeDiff / 3600000);
-        const newEnergy = Math.min(storedEnergy + hoursToAdd * 10, 100);
-
-        // Update Redux state
-        dispatch(setEnergy(newEnergy));
-        dispatch(setLastEnergyUpdate(new Date().toISOString()));
-
-        // Update local state
+        const newEnergy = Math.min(energy + hoursToAdd * 10, 100);
+        // Обновляем состояние энергии
         setEnergy(newEnergy);
 
-        // Sync with server
+        // Синхронизируем с Redux
+        dispatch(setEnergy(newEnergy));
+        dispatch(setLastEnergyUpdate(new Date().toISOString()));
+        // Синхронизируем с сервером
         const tg = window.Telegram.WebApp;
         if (tg?.initDataUnsafe?.user?.id) {
           userInitService.updateEnergy(tg.initDataUnsafe.user.id, newEnergy);
         }
       }
-      // Calculate remaining time until next energy update
+      // Вычисляем оставшееся время до следующего обновления энергии
       const remainingMs = 3600000 - (timeDiff % 3600000);
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
-
       setRemainingTime(
         `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
           2,
@@ -111,11 +106,11 @@ const MainCarousel = ({
         )}:${String(seconds).padStart(2, "0")}`
       );
     };
+    // Запускаем таймер и обновляем каждую секунду
+    updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer(); // Initial call
-
     return () => clearInterval(timerInterval);
-  }, [lastUpdate, storedEnergy, dispatch]);
+  }, [lastUpdate, energy, dispatch]);
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
