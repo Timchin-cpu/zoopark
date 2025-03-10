@@ -51,9 +51,11 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy) {
-            setEnergy(response.data.energy);
-            console.log(response.data);
+          if (response.data && response.data.energy !== undefined) {
+            // Проверяем, изменилась ли энергия
+            if (energy !== response.data.energy) {
+              setEnergy(response.data.energy);
+            }
             const lastUpdate = response.data.lastEnergyUpdate;
             updateRemainingTime(lastUpdate);
           }
@@ -63,7 +65,7 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-  }, []);
+  }, [energy]);
   const updateRemainingTime = (lastUpdate) => {
     console.log(lastUpdate);
     if (!lastUpdate) {
