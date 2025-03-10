@@ -4,7 +4,7 @@ import { userInitService } from "services/api";
 import { cardsService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector, useDispatch } from "react-redux";
-import { setEnergy, setLastEnergyUpdate } from "../../redux/actions";
+import { setLastEnergyUpdate } from "../../redux/actions";
 import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
