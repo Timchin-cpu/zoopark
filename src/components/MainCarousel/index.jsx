@@ -44,6 +44,7 @@ const MainCarousel = ({
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
+  const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -51,11 +52,10 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy) {
+          if (response.data && response.data.energy !== undefined) {
             setEnergy(response.data.energy);
-            console.log(response.data);
-            const lastUpdate = response.data.lastEnergyUpdate;
-            updateRemainingTime(lastUpdate);
+            setLastUpdate(response.data.lastEnergyUpdate);
+            updateRemainingTime(response.data.lastEnergyUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -64,17 +64,17 @@ const MainCarousel = ({
     };
     fetchEnergy();
   }, []);
-  const updateRemainingTime = (lastUpdate) => {
-    console.log(lastUpdate);
-    if (!lastUpdate) {
+  const updateRemainingTime = (lastUpdateTime) => {
+    if (!lastUpdateTime) {
       setRemainingTime("00:00:00");
       return;
     }
-    const interval = setInterval(() => {
+    const updateTimer = () => {
       const now = new Date().getTime();
-      const lastUpdateTime = new Date(lastUpdate).getTime();
-      const timeDiff = now - lastUpdateTime;
-      if (isNaN(lastUpdateTime)) {
+      const lastUpdateMs = new Date(lastUpdateTime).getTime();
+      const timeDiff = now - lastUpdateMs;
+
+      if (isNaN(lastUpdateMs)) {
         setRemainingTime("00:00:00");
         return;
       }
@@ -87,7 +87,14 @@ const MainCarousel = ({
           .toString()
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-    }, 1000);
+    };
+    // Initial update
+    updateTimer();
+
+    // Set up interval
+    const interval = setInterval(updateTimer, 1000);
+
+    // Cleanup interval on unmount
     return () => clearInterval(interval);
   };
   useEffect(() => {
@@ -182,28 +189,33 @@ const MainCarousel = ({
       console.error("Telegram ID not found");
       return;
     }
+
     if (energy < 10) {
-      // Not enough energy
       return;
     }
     try {
+      const newEnergy = Math.max(0, energy - 10);
+
       // Обновляем энергию на сервере
-      await userInitService.updateEnergy(telegram_id, energy - 10);
+      await userInitService.updateEnergy(telegram_id, newEnergy);
+
       // Обновляем локальное состояние
-      setEnergy((prev) => Math.max(0, prev - 10));
+      setEnergy(newEnergy);
+      setLastUpdate(new Date().toISOString());
+
       setIsFlipped(true);
       const selectedCard = selectedPhotos[data[index].id];
       setOpenedCards({
         ...openedCards,
         [index]: selectedCard,
       });
-
-      // Добавляем карту пользователю и получаем обновленные данные
+      // Добавляем карту пользователю
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-
-      // Если это карта энергии, обновляем состояние энергии
+      // Обработка специальных карт
       if (selectedCard.type === "energy_boost") {
-        setEnergy((prev) => Math.min(prev + 100, 100));
+        const boostedEnergy = Math.min(newEnergy + 100, 100);
+        await userInitService.updateEnergy(telegram_id, boostedEnergy);
+        setEnergy(boostedEnergy);
       }
       handleOpenPopup(selectedCard);
     } catch (error) {
