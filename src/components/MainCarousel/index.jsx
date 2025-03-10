@@ -276,14 +276,11 @@ const MainCarousel = ({
                     <div className="main-slider__image">
                       <img
                         src={
-                          openedCards[i]?.image ||
-                          selectedPhotos[item.id]?.image ||
-                          cardBackStyles.default.image
+                          cardBackStyle === "default"
+                            ? cardBackStyles.default.image
+                            : `${cardBackStyle}`
                         }
                         alt=""
-                        onError={(e) => {
-                          e.target.src = cardBackStyles.default.image;
-                        }}
                       />
                     </div>
                   }
