@@ -47,7 +47,8 @@ const MainCarousel = ({
   const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     if (lastUpdate) {
-      updateRemainingTime(lastUpdate);
+      const cleanup = updateRemainingTime(lastUpdate);
+      return cleanup;
     }
   }, [lastUpdate]);
   useEffect(() => {
@@ -74,11 +75,14 @@ const MainCarousel = ({
       setRemainingTime("00:00:00");
       return;
     }
+    // Очищаем предыдущий таймер перед созданием нового
+    if (window.timerInterval) {
+      clearInterval(window.timerInterval);
+    }
     const updateTimer = () => {
       const now = new Date().getTime();
       const lastUpdateMs = new Date(lastUpdateTime).getTime();
       const timeDiff = now - lastUpdateMs;
-
       if (isNaN(lastUpdateMs)) {
         setRemainingTime("00:00:00");
         return;
@@ -95,12 +99,14 @@ const MainCarousel = ({
     };
     // Initial update
     updateTimer();
-
-    // Set up interval
-    const interval = setInterval(updateTimer, 1000);
-
+    // Set up interval and store reference
+    window.timerInterval = setInterval(updateTimer, 1000);
     // Cleanup interval on unmount
-    return () => clearInterval(interval);
+    return () => {
+      if (window.timerInterval) {
+        clearInterval(window.timerInterval);
+      }
+    };
   };
   useEffect(() => {
     const fetchPhotos = async () => {
