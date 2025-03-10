@@ -44,13 +44,6 @@ const MainCarousel = ({
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
-  const [lastUpdate, setLastUpdate] = useState(null);
-  useEffect(() => {
-    if (lastUpdate) {
-      const cleanup = updateRemainingTime(lastUpdate);
-      return cleanup;
-    }
-  }, [lastUpdate]);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -58,10 +51,11 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy !== undefined) {
+          if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            setLastUpdate(response.data.lastEnergyUpdate);
-            updateRemainingTime(response.data.lastEnergyUpdate);
+            console.log(response.data);
+            const lastUpdate = response.data.lastEnergyUpdate;
+            updateRemainingTime(lastUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -70,20 +64,17 @@ const MainCarousel = ({
     };
     fetchEnergy();
   }, []);
-  const updateRemainingTime = (lastUpdateTime) => {
-    if (!lastUpdateTime) {
+  const updateRemainingTime = (lastUpdate) => {
+    console.log(lastUpdate);
+    if (!lastUpdate) {
       setRemainingTime("00:00:00");
       return;
     }
-    // Очищаем предыдущий таймер перед созданием нового
-    if (window.timerInterval) {
-      clearInterval(window.timerInterval);
-    }
-    const updateTimer = () => {
+    const interval = setInterval(() => {
       const now = new Date().getTime();
-      const lastUpdateMs = new Date(lastUpdateTime).getTime();
-      const timeDiff = now - lastUpdateMs;
-      if (isNaN(lastUpdateMs)) {
+      const lastUpdateTime = new Date(lastUpdate).getTime();
+      const timeDiff = now - lastUpdateTime;
+      if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
       }
@@ -96,17 +87,8 @@ const MainCarousel = ({
           .toString()
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-    };
-    // Initial update
-    updateTimer();
-    // Set up interval and store reference
-    window.timerInterval = setInterval(updateTimer, 1000);
-    // Cleanup interval on unmount
-    return () => {
-      if (window.timerInterval) {
-        clearInterval(window.timerInterval);
-      }
-    };
+    }, 1000);
+    return () => clearInterval(interval);
   };
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -200,33 +182,28 @@ const MainCarousel = ({
       console.error("Telegram ID not found");
       return;
     }
-
     if (energy < 10) {
+      // Not enough energy
       return;
     }
     try {
-      const newEnergy = Math.max(0, energy - 10);
-
       // Обновляем энергию на сервере
-      await userInitService.updateEnergy(telegram_id, newEnergy);
-
+      await userInitService.updateEnergy(telegram_id, energy - 10);
       // Обновляем локальное состояние
-      setEnergy(newEnergy);
-      setLastUpdate(new Date().toISOString());
-
+      setEnergy((prev) => Math.max(0, prev - 10));
       setIsFlipped(true);
       const selectedCard = selectedPhotos[data[index].id];
       setOpenedCards({
         ...openedCards,
         [index]: selectedCard,
       });
-      // Добавляем карту пользователю
+
+      // Добавляем карту пользователю и получаем обновленные данные
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-      // Обработка специальных карт
+
+      // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
-        const boostedEnergy = Math.min(newEnergy + 100, 100);
-        await userInitService.updateEnergy(telegram_id, boostedEnergy);
-        setEnergy(boostedEnergy);
+        setEnergy((prev) => Math.min(prev + 100, 100));
       }
       handleOpenPopup(selectedCard);
     } catch (error) {
