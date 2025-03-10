@@ -42,7 +42,9 @@ const MainCarousel = ({
   console.log(cardBackStyle);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
-  const [energy, setEnergy] = useState(100); // Initial energy state
+
+  const [energy, setEnergy] = useState(100);
+  const [lastUpdate, setLastUpdate] = useState(null);
   const [remainingTime, setRemainingTime] = useState("00:00:00");
   useEffect(() => {
     const fetchEnergy = async () => {
@@ -51,45 +53,51 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy) {
+          if (response.data) {
             setEnergy(response.data.energy);
-            console.log(response.data);
-            const lastUpdate = response.data.lastEnergyUpdate;
-            updateRemainingTime(lastUpdate);
+            setLastUpdate(response.data.lastEnergyUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
         }
       }
     };
+
     fetchEnergy();
+
+    // Обновляем энергию каждую минуту
+    const energyInterval = setInterval(fetchEnergy, 60000);
+
+    return () => clearInterval(energyInterval);
   }, []);
-  const updateRemainingTime = (lastUpdate) => {
-    console.log(lastUpdate);
-    if (!lastUpdate) {
-      setRemainingTime("00:00:00");
-      return;
-    }
-    const interval = setInterval(() => {
+  useEffect(() => {
+    if (!lastUpdate) return;
+    const updateTimer = () => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-      if (isNaN(lastUpdateTime)) {
-        setRemainingTime("00:00:00");
-        return;
+
+      if (timeDiff >= 3600000) {
+        // Прошел час или больше
+        const hoursToAdd = Math.floor(timeDiff / 3600000);
+        const newEnergy = Math.min(energy + hoursToAdd * 10, 100);
+        setEnergy(newEnergy);
+        setLastUpdate(new Date().toISOString());
       }
       const remainingMs = 3600000 - (timeDiff % 3600000);
-      const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
+
       setRemainingTime(
-        `${hours.toString().padStart(2, "0")}:${minutes
-          .toString()
-          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+        `${String(Math.floor(remainingMs / 3600000)).padStart(2, "0")}:${String(
+          minutes
+        ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
       );
-    }, 1000);
-    return () => clearInterval(interval);
-  };
+    };
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer(); // Первоначальное обновление
+    return () => clearInterval(timerInterval);
+  }, [lastUpdate, energy]);
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
