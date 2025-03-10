@@ -278,7 +278,7 @@ const MainCarousel = ({
                         src={
                           cardBackStyle === "default"
                             ? cardBackStyles.default.image
-                            : `${cardBackStyle}`
+                            : `http://109.73.206.80:3000${cardBackStyle}`
                         }
                         alt=""
                       />
@@ -290,7 +290,7 @@ const MainCarousel = ({
                         src={
                           getStyles(i).isBackCard
                             ? cardBackStyles[cardBackStyle].image
-                            : `${
+                            : `http://109.73.206.80:3000${
                                 openedCards[i]?.image ||
                                 selectedPhotos[item.id]?.image
                               }`
