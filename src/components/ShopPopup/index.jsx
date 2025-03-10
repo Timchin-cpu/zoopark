@@ -88,7 +88,7 @@ const ShopPopup = (props) => {
                     props.selectedPhoto.id === "money" ||
                     props.selectedPhoto.image === QuestionMarkImg
                     ? props.selectedPhoto.image
-                    : `http://localhost:3000${props.selectedPhoto.image}`
+                    : `${props.selectedPhoto.image}`
                   : DefaultImg
               }
               alt={props.selectedPhoto?.title || ""}
