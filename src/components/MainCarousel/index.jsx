@@ -51,8 +51,9 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy !== undefined) {
+          if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
+            console.log(response.data);
             const lastUpdate = response.data.lastEnergyUpdate;
             updateRemainingTime(lastUpdate);
           }
@@ -62,36 +63,30 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-    // Добавляем интервал для периодического обновления энергии
-    const energyInterval = setInterval(fetchEnergy, 60000); // Обновляем каждую минуту
-    return () => clearInterval(energyInterval);
   }, []);
   const updateRemainingTime = (lastUpdate) => {
+    console.log(lastUpdate);
     if (!lastUpdate) {
       setRemainingTime("00:00:00");
       return;
     }
-    const calculateTime = () => {
+    const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
-
+      const timeDiff = now - lastUpdateTime;
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
       }
-      const timeDiff = now - lastUpdateTime;
       const remainingMs = 3600000 - (timeDiff % 3600000);
-
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
-      return `${hours.toString().padStart(2, "0")}:${minutes
-        .toString()
-        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    };
-    setRemainingTime(calculateTime());
-    const interval = setInterval(() => {
-      setRemainingTime(calculateTime());
+      setRemainingTime(
+        `${hours.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+      );
     }, 1000);
     return () => clearInterval(interval);
   };
