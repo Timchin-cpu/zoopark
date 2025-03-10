@@ -4,9 +4,9 @@ import { userInitService } from "services/api";
 import { cardsService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
-import DefaultImg from "assets/img/default-card.png";
-import Style1CardBack from "assets/img/card1.png";
-import Style2CardBack from "assets/img/card2.png";
+import DefaultImg from "../../assets/img/default-card.png";
+import Style1CardBack from "../../assets/img/card1.png";
+import Style2CardBack from "../../assets/img/card2.png";
 // Отсутствует определение cardBackStyles
 const cardBackStyles = {
   default: { image: DefaultImg },
