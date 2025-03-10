@@ -73,18 +73,25 @@ const MainCarousel = ({
   }, [dispatch]);
   useEffect(() => {
     if (!lastUpdate) return;
+
     const updateTimer = () => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
+
       // Check if enough time has passed to add energy
       if (timeDiff >= 3600000) {
         // 1 hour in milliseconds
         const hoursToAdd = Math.floor(timeDiff / 3600000);
         const newEnergy = Math.min(storedEnergy + hoursToAdd * 10, 100);
+
         // Update Redux state
         dispatch(setEnergy(newEnergy));
         dispatch(setLastEnergyUpdate(new Date().toISOString()));
+
+        // Update local state
+        setEnergy(newEnergy);
+
         // Sync with server
         const tg = window.Telegram.WebApp;
         if (tg?.initDataUnsafe?.user?.id) {
@@ -96,6 +103,7 @@ const MainCarousel = ({
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
+
       setRemainingTime(
         `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
           2,
@@ -105,6 +113,7 @@ const MainCarousel = ({
     };
     const timerInterval = setInterval(updateTimer, 1000);
     updateTimer(); // Initial call
+
     return () => clearInterval(timerInterval);
   }, [lastUpdate, storedEnergy, dispatch]);
   useEffect(() => {
@@ -341,7 +350,10 @@ const MainCarousel = ({
           <div className="main-nav__progress">
             <div
               className="main-nav__progress-bar"
-              style={{ width: `${energy}%` }}
+              style={{
+                width: `${energy}%`,
+                transition: "width 0.3s ease-in-out",
+              }}
             ></div>
           </div>
           <div className="main-nav__clock f-center">
