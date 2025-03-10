@@ -4,9 +4,9 @@ import { userInitService } from "services/api";
 import { cardsService } from "services/api";
 import { userCardsService } from "services/api";
 import { useSelector } from "react-redux";
-import DefaultImg from "../../assets/img/default-card.png";
-import Style1CardBack from "../../assets/img/card1.png";
-import Style2CardBack from "../../assets/img/card2.png";
+import DefaultImg from "assets/img/default-card.png";
+import Style1CardBack from "assets/img/card1.png";
+import Style2CardBack from "assets/img/card2.png";
 // Отсутствует определение cardBackStyles
 const cardBackStyles = {
   default: { image: DefaultImg },
@@ -44,7 +44,6 @@ const MainCarousel = ({
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
-  const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -52,18 +51,11 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-
-            // Получаем сохраненное время из localStorage
-            const savedLastUpdate = localStorage.getItem("lastEnergyUpdate");
-            const lastUpdateToUse =
-              savedLastUpdate || response.data.lastEnergyUpdate;
-
-            if (!lastUpdate || lastUpdateToUse !== lastUpdate) {
-              updateRemainingTime(lastUpdateToUse);
-            }
+            console.log(response.data);
+            const lastUpdate = response.data.lastEnergyUpdate;
+            updateRemainingTime(lastUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -71,20 +63,17 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-  }, [lastUpdate]);
+  }, []);
   const updateRemainingTime = (lastUpdate) => {
     console.log(lastUpdate);
     if (!lastUpdate) {
       setRemainingTime("00:00:00");
       return;
     }
-    // Сохраняем время последнего обновления в localStorage
-    localStorage.setItem("lastEnergyUpdate", lastUpdate);
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
@@ -215,7 +204,6 @@ const MainCarousel = ({
       // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
         setEnergy((prev) => Math.min(prev + 100, 100));
-        setLastUpdate(new Date().toISOString());
       }
       handleOpenPopup(selectedCard);
     } catch (error) {
