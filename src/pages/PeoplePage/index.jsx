@@ -26,19 +26,40 @@ const PeoplePage = () => {
       try {
         const response = await cardSetsService.getAllCardSets();
         setCardSets(response.data);
+
         // Fetch cards for each set
         const setData = {};
-
         const tg = window.Telegram.WebApp;
         const telegram_id = tg.initDataUnsafe?.user?.id;
         for (const set of response.data) {
           const cardsResponse = await cardSetsService.getSetCards(set.id);
           setData[set.id] = cardsResponse.data;
           console.log(cardsResponse.data);
-
           // Check completion status for each set
           if (telegram_id) {
-            await cardSetsService.checkSetCompletion(set.id, telegram_id);
+            try {
+              const completionResponse =
+                await cardSetsService.checkSetCompletion(set.id, telegram_id);
+              console.log(completionResponse.data); // Успешный ответ
+            } catch (completionError) {
+              // Обработка ошибки, если набор не завершён
+              if (
+                completionError.response &&
+                completionError.response.status === 400
+              ) {
+                console.error(
+                  "Набор не завершён:",
+                  completionError.response.data.error
+                );
+                // Здесь вы можете обновить состояние или показать сообщение пользователю
+                // alert("Набор не завершён. Собрано карт: " + completionError.response.data.error);
+              } else {
+                console.error(
+                  "Ошибка при проверке завершения набора:",
+                  completionError
+                );
+              }
+            }
           }
         }
         setCardSetData(setData);
@@ -47,6 +68,7 @@ const PeoplePage = () => {
         console.error("Error fetching card sets:", error);
       }
     };
+
     fetchCardSets();
   }, []);
   // Получение карт пользователя
