@@ -63,7 +63,7 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-  }, []);
+  }, [energy]);
   const updateRemainingTime = (lastUpdate) => {
     console.log(lastUpdate);
     if (!lastUpdate) {
