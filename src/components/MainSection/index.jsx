@@ -11,7 +11,7 @@ import { routeTasks } from "pages/TasksPage";
 import { routeSets } from "pages/SetsPage";
 import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
-import { userService } from "services/api";
+// import { userService } from "services/api";
 import { userInitService } from "services/api";
 
 const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
@@ -134,19 +134,19 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
     document.documentElement.classList.add("fixed");
     setActivePopup(true);
   };
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await userService.getUser(1);
-        console.log(response);
-        // Обработка данных
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await userService.getUser(1);
+  //       console.log(response);
+  //       // Обработка данных
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchUser();
-  }, []);
+  //   fetchUser();
+  // }, []);
   return (
     <div className="main-section">
       <div className="main-section__wrap">
