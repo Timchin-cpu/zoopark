@@ -51,29 +51,34 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data && response.data.energy) {
+          if (response.data && response.data.energy !== undefined) {
             setEnergy(response.data.energy);
-            console.log(response.data);
-            const lastUpdate = response.data.lastEnergyUpdate;
-            updateRemainingTime(lastUpdate);
+            if (response.data.lastEnergyUpdate) {
+              updateRemainingTime(response.data.lastEnergyUpdate);
+            }
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
         }
       }
     };
+
     fetchEnergy();
+    // Обновляем энергию каждые 5 минут
+    const interval = setInterval(fetchEnergy, 300000);
+
+    return () => clearInterval(interval);
   }, []);
   const updateRemainingTime = (lastUpdate) => {
-    console.log(lastUpdate);
     if (!lastUpdate) {
       setRemainingTime("00:00:00");
       return;
     }
-    const interval = setInterval(() => {
+    const calculateTime = () => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
+
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
@@ -87,8 +92,10 @@ const MainCarousel = ({
           .toString()
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-    }, 1000);
-    return () => clearInterval(interval);
+    };
+    calculateTime();
+    const timer = setInterval(calculateTime, 1000);
+    return () => clearInterval(timer);
   };
   useEffect(() => {
     const fetchPhotos = async () => {
