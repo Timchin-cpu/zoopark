@@ -77,19 +77,21 @@ const MainCarousel = ({
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
+      // Check if enough time has passed to add energy
       if (timeDiff >= 3600000) {
+        // 1 hour in milliseconds
         const hoursToAdd = Math.floor(timeDiff / 3600000);
         const newEnergy = Math.min(storedEnergy + hoursToAdd * 10, 100);
-
+        // Update Redux state
         dispatch(setEnergy(newEnergy));
         dispatch(setLastEnergyUpdate(new Date().toISOString()));
-
-        // Синхронизация с сервером
+        // Sync with server
         const tg = window.Telegram.WebApp;
         if (tg?.initDataUnsafe?.user?.id) {
           userInitService.updateEnergy(tg.initDataUnsafe.user.id, newEnergy);
         }
       }
+      // Calculate remaining time until next energy update
       const remainingMs = 3600000 - (timeDiff % 3600000);
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
@@ -102,7 +104,7 @@ const MainCarousel = ({
       );
     };
     const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
+    updateTimer(); // Initial call
     return () => clearInterval(timerInterval);
   }, [lastUpdate, storedEnergy, dispatch]);
   useEffect(() => {
