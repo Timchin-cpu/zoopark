@@ -77,17 +77,15 @@ const MainCarousel = ({
     // Проверяем сохраненное время в localStorage
     const savedTime = localStorage.getItem("lastUpdateTime");
     const timeToUse = savedTime || lastUpdate;
-
     const calculateTime = () => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(timeToUse).getTime();
       const timeDiff = now - lastUpdateTime;
-
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
       }
-      const remainingMs = 3600000 - (timeDiff % 3600000); // 1 час в миллисекундах
+      const remainingMs = 3600000 - (timeDiff % 3600000);
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
@@ -96,17 +94,10 @@ const MainCarousel = ({
           .toString()
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-      // Если таймер истек, обновляем энергию до 100
-      if (remainingMs === 0) {
-        const tg = window.Telegram.WebApp;
-        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
-          const telegram_id = tg.initDataUnsafe.user.id;
-          userInitService.updateEnergy(telegram_id, 100);
-          setEnergy(100);
-        }
-      }
     };
+    // Сохраняем время последнего обновления
     localStorage.setItem("lastUpdateTime", timeToUse);
+
     calculateTime();
     const timer = setInterval(calculateTime, 1000);
     return () => clearInterval(timer);
