@@ -46,6 +46,11 @@ const MainCarousel = ({
   const [remainingTime, setRemainingTime] = useState("00:00:00");
   const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
+    if (lastUpdate) {
+      updateRemainingTime(lastUpdate);
+    }
+  }, [lastUpdate]);
+  useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
