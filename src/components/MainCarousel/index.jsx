@@ -74,11 +74,13 @@ const MainCarousel = ({
       setRemainingTime("00:00:00");
       return;
     }
+    // Проверяем сохраненное время в localStorage
+    const savedTime = localStorage.getItem("lastUpdateTime");
+    const timeToUse = savedTime || lastUpdate;
     const calculateTime = () => {
       const now = new Date().getTime();
-      const lastUpdateTime = new Date(lastUpdate).getTime();
+      const lastUpdateTime = new Date(timeToUse).getTime();
       const timeDiff = now - lastUpdateTime;
-
       if (isNaN(lastUpdateTime)) {
         setRemainingTime("00:00:00");
         return;
@@ -93,6 +95,9 @@ const MainCarousel = ({
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
     };
+    // Сохраняем время последнего обновления
+    localStorage.setItem("lastUpdateTime", timeToUse);
+
     calculateTime();
     const timer = setInterval(calculateTime, 1000);
     return () => clearInterval(timer);
