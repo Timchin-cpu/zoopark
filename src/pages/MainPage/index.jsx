@@ -108,7 +108,6 @@ const MainPage = () => {
               handleOpenPopup={(photo) => handleOpenPopup(photo)}
               shouldUpdate={shouldUpdateCarousel}
               onUpdateComplete={() => setShouldUpdateCarousel(false)}
-              onError={(error) => console.error("Image loading error:", error)}
             />
           </div>
         </div>

@@ -278,13 +278,9 @@ const MainCarousel = ({
                         src={
                           cardBackStyle === "default"
                             ? cardBackStyles.default.image
-                            : cardBackStyles[cardBackStyle]?.image ||
-                              cardBackStyles.default.image
+                            : `${cardBackStyle}`
                         }
                         alt=""
-                        onError={(e) => {
-                          e.target.src = cardBackStyles.default.image;
-                        }}
                       />
                     </div>
                   }
