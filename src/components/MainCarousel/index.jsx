@@ -3,8 +3,7 @@ import ReactFlipCard from "reactjs-flip-card";
 import { userInitService } from "services/api";
 import { cardsService } from "services/api";
 import { userCardsService } from "services/api";
-import { useSelector, useDispatch } from "react-redux";
-import { setLastEnergyUpdate } from "../../redux/actions";
+import { useSelector } from "react-redux";
 import DefaultImg from "assets/img/default-card.png";
 import Style1CardBack from "assets/img/card1.png";
 import Style2CardBack from "assets/img/card2.png";
@@ -43,13 +42,8 @@ const MainCarousel = ({
   console.log(cardBackStyle);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
-
-  const [energy, setEnergy] = useState(100);
+  const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
-
-  const dispatch = useDispatch();
-  // const storedEnergy = useSelector((state) => state.energy);
-  const lastUpdate = useSelector((state) => state.lastEnergyUpdate);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -57,10 +51,11 @@ const MainCarousel = ({
         try {
           const telegram_id = tg.initDataUnsafe.user.id;
           const response = await userInitService.getEnergy(telegram_id);
-          if (response.data) {
-            dispatch(setEnergy(response.data.energy));
-            dispatch(setLastEnergyUpdate(response.data.lastEnergyUpdate));
+          if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
+            console.log(response.data);
+            const lastUpdate = response.data.lastEnergyUpdate;
+            updateRemainingTime(lastUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -68,49 +63,33 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-    const energyInterval = setInterval(fetchEnergy, 60000);
-    return () => clearInterval(energyInterval);
-  }, [dispatch]);
-  useEffect(() => {
-    if (!lastUpdate) return;
-    const updateTimer = () => {
+  }, []);
+  const updateRemainingTime = (lastUpdate) => {
+    console.log(lastUpdate);
+    if (!lastUpdate) {
+      setRemainingTime("00:00:00");
+      return;
+    }
+    const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
-      // Проверяем, прошло ли достаточно времени для добавления энергии
-      if (timeDiff >= 3600000) {
-        // 1 час в миллисекундах
-        const hoursToAdd = Math.floor(timeDiff / 3600000);
-        const newEnergy = Math.min(energy + hoursToAdd * 10, 100);
-        // Обновляем состояние энергии
-        setEnergy(newEnergy);
-
-        // Синхронизируем с Redux
-        dispatch(setEnergy(newEnergy));
-        dispatch(setLastEnergyUpdate(new Date().toISOString()));
-        // Синхронизируем с сервером
-        const tg = window.Telegram.WebApp;
-        if (tg?.initDataUnsafe?.user?.id) {
-          userInitService.updateEnergy(tg.initDataUnsafe.user.id, newEnergy);
-        }
+      if (isNaN(lastUpdateTime)) {
+        setRemainingTime("00:00:00");
+        return;
       }
-      // Вычисляем оставшееся время до следующего обновления энергии
       const remainingMs = 3600000 - (timeDiff % 3600000);
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
       setRemainingTime(
-        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-          2,
-          "0"
-        )}:${String(seconds).padStart(2, "0")}`
+        `${hours.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-    };
-    // Запускаем таймер и обновляем каждую секунду
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
-    return () => clearInterval(timerInterval);
-  }, [lastUpdate, energy, dispatch]);
+    }, 1000);
+    return () => clearInterval(interval);
+  };
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -345,10 +324,7 @@ const MainCarousel = ({
           <div className="main-nav__progress">
             <div
               className="main-nav__progress-bar"
-              style={{
-                width: `${energy}%`,
-                transition: "width 0.3s ease-in-out",
-              }}
+              style={{ width: `${energy}%` }}
             ></div>
           </div>
           <div className="main-nav__clock f-center">
