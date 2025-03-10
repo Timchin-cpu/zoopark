@@ -42,9 +42,8 @@ const MainCarousel = ({
   console.log(cardBackStyle);
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
-  const [energy, setEnergy] = useState(100);
+  const [energy, setEnergy] = useState(100); // Initial energy state
   const [remainingTime, setRemainingTime] = useState("00:00:00");
-  const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -54,7 +53,9 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy) {
             setEnergy(response.data.energy);
-            setLastUpdate(response.data.lastEnergyUpdate);
+            console.log(response.data);
+            const lastUpdate = response.data.lastEnergyUpdate;
+            updateRemainingTime(lastUpdate);
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
@@ -63,28 +64,32 @@ const MainCarousel = ({
     };
     fetchEnergy();
   }, []);
-  useEffect(() => {
-    if (!lastUpdate) return;
-    const updateTimer = () => {
+  const updateRemainingTime = (lastUpdate) => {
+    console.log(lastUpdate);
+    if (!lastUpdate) {
+      setRemainingTime("00:00:00");
+      return;
+    }
+    const interval = setInterval(() => {
       const now = new Date().getTime();
       const lastUpdateTime = new Date(lastUpdate).getTime();
       const timeDiff = now - lastUpdateTime;
+      if (isNaN(lastUpdateTime)) {
+        setRemainingTime("00:00:00");
+        return;
+      }
       const remainingMs = 3600000 - (timeDiff % 3600000);
-
       const hours = Math.floor(remainingMs / 3600000);
       const minutes = Math.floor((remainingMs % 3600000) / 60000);
       const seconds = Math.floor((remainingMs % 60000) / 1000);
-
       setRemainingTime(
         `${hours.toString().padStart(2, "0")}:${minutes
           .toString()
           .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
       );
-    };
-    const timer = setInterval(updateTimer, 1000);
-    updateTimer(); // Initial update
-    return () => clearInterval(timer);
-  }, [lastUpdate]);
+    }, 1000);
+    return () => clearInterval(interval);
+  };
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
