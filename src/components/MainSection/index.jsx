@@ -202,7 +202,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
                 <div className="main-menu__img f-center-center">
                   <img src={CardsIcon} alt="" />
                 </div>
-                <p className="main-menu__title">Карты</p>
+                <p className="main-menu__title">Сет</p>
               </NavLink>
             </li>
             <li className="main-menu__item">
