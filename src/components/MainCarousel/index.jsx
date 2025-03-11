@@ -339,6 +339,7 @@ const MainCarousel = ({
               style={{ width: `${energy}%` }}
             ></div>
           </div>
+          <div className="main-nav__energy-count">{energy}/100</div>
           <div className="main-nav__clock f-center">
             <svg
               width="15"
