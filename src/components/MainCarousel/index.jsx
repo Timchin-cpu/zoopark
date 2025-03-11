@@ -43,7 +43,9 @@ const MainCarousel = ({
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
-  const [remainingTime, setRemainingTime] = useState("00:00:00");
+  // const [remainingTime, setRemainingTime] = useState("00:00:00");
+  const [maxEnergy, setMaxEnergy] = useState(1000);
+
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -53,55 +55,57 @@ const MainCarousel = ({
           const response = await userInitService.getEnergy(telegram_id);
           if (response.data && response.data.energy !== undefined) {
             setEnergy(response.data.energy);
-            if (response.data.lastEnergyUpdate) {
-              updateRemainingTime(response.data.lastEnergyUpdate);
-            }
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
         }
       }
     };
-
     fetchEnergy();
-    // Обновляем энергию каждые 5 минут
-    const interval = setInterval(fetchEnergy, 300000);
+    // Добавляем интервал для увеличения энергии
+    const energyInterval = setInterval(() => {
+      setEnergy((prevEnergy) => {
+        if (prevEnergy < maxEnergy) {
+          return prevEnergy + 1;
+        }
+        return prevEnergy;
+      });
+    }, 1000);
+    return () => clearInterval(energyInterval);
+  }, [maxEnergy]);
+  // const updateRemainingTime = (lastUpdate) => {
+  //   if (!lastUpdate) {
+  //     setRemainingTime("00:00:00");
+  //     return;
+  //   }
+  //   // Проверяем сохраненное время в localStorage
+  //   const savedTime = localStorage.getItem("lastUpdateTime");
+  //   const timeToUse = savedTime || lastUpdate;
+  //   const calculateTime = () => {
+  //     const now = new Date().getTime();
+  //     const lastUpdateTime = new Date(timeToUse).getTime();
+  //     const timeDiff = now - lastUpdateTime;
+  //     if (isNaN(lastUpdateTime)) {
+  //       setRemainingTime("00:00:00");
+  //       return;
+  //     }
+  //     const remainingMs = 3600000 - (timeDiff % 3600000);
+  //     const hours = Math.floor(remainingMs / 3600000);
+  //     const minutes = Math.floor((remainingMs % 3600000) / 60000);
+  //     const seconds = Math.floor((remainingMs % 60000) / 1000);
+  //     setRemainingTime(
+  //       `${hours.toString().padStart(2, "0")}:${minutes
+  //         .toString()
+  //         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+  //     );
+  //   };
+  //   // Сохраняем время последнего обновления
+  //   localStorage.setItem("lastUpdateTime", timeToUse);
 
-    return () => clearInterval(interval);
-  }, []);
-  const updateRemainingTime = (lastUpdate) => {
-    if (!lastUpdate) {
-      setRemainingTime("00:00:00");
-      return;
-    }
-    // Проверяем сохраненное время в localStorage
-    const savedTime = localStorage.getItem("lastUpdateTime");
-    const timeToUse = savedTime || lastUpdate;
-    const calculateTime = () => {
-      const now = new Date().getTime();
-      const lastUpdateTime = new Date(timeToUse).getTime();
-      const timeDiff = now - lastUpdateTime;
-      if (isNaN(lastUpdateTime)) {
-        setRemainingTime("00:00:00");
-        return;
-      }
-      const remainingMs = 3600000 - (timeDiff % 3600000);
-      const hours = Math.floor(remainingMs / 3600000);
-      const minutes = Math.floor((remainingMs % 3600000) / 60000);
-      const seconds = Math.floor((remainingMs % 60000) / 1000);
-      setRemainingTime(
-        `${hours.toString().padStart(2, "0")}:${minutes
-          .toString()
-          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-      );
-    };
-    // Сохраняем время последнего обновления
-    localStorage.setItem("lastUpdateTime", timeToUse);
-
-    calculateTime();
-    const timer = setInterval(calculateTime, 1000);
-    return () => clearInterval(timer);
-  };
+  //   calculateTime();
+  //   const timer = setInterval(calculateTime, 1000);
+  //   return () => clearInterval(timer);
+  // };
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
@@ -352,7 +356,7 @@ const MainCarousel = ({
                 fill="#AAB2BD"
               />
             </svg>
-            {remainingTime}
+            {`${energy}/${maxEnergy}`}
           </div>
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
