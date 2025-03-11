@@ -193,40 +193,59 @@ const AddEditDeck = () => {
                 : reward.value,
           })),
         });
-
         // Remove cards
         for (const cardId of pendingChanges.removedCards) {
-          await cardSetsService.removeCardFromSet(id, cardId);
-        }
-        // Add new cards
-        for (const cardId of pendingChanges.addedCards) {
-          await cardSetsService.addCardToSet(id, cardId);
+          try {
+            await cardSetsService.removeCardFromSet(id, cardId);
+          } catch (error) {
+            console.error(`Failed to remove card ${cardId} from set:`, error);
+            throw new Error(`Failed to remove card ${cardId} from set`);
+          }
         }
 
+        // Add new cards
+        for (const cardId of pendingChanges.addedCards) {
+          try {
+            await cardSetsService.addCardToSet(id, cardId);
+          } catch (error) {
+            console.error(`Failed to add card ${cardId} to set:`, error);
+            throw new Error(`Failed to add card ${cardId} to set`);
+          }
+        }
         // Refresh cards data
         const response = await cardSetsService.getSetCards(id);
         setExistingCards(response.data);
       } else {
         // Create new set
-        const response = await axios.post("/api/card-sets", {
-          name,
-          description,
-          rewards: rewards.map((reward) => ({
-            reward_type: reward.type,
-            reward_value:
-              reward.type === "card"
-                ? cards.find((c) => c.title === reward.value)?.id ||
-                  reward.value
-                : reward.value,
-          })),
-        });
-
-        // Add cards to the new set
-        const newSetId = response.data.setId;
-        for (const cardId of pendingChanges.addedCards) {
-          await cardSetsService.addCardToSet(newSetId, cardId);
+        try {
+          const response = await axios.post("/api/card-sets", {
+            name,
+            description,
+            rewards: rewards.map((reward) => ({
+              reward_type: reward.type,
+              reward_value:
+                reward.type === "card"
+                  ? cards.find((c) => c.title === reward.value)?.id ||
+                    reward.value
+                  : reward.value,
+            })),
+          });
+          // Add cards to the new set
+          const newSetId = response.data.setId;
+          for (const cardId of pendingChanges.addedCards) {
+            try {
+              await cardSetsService.addCardToSet(newSetId, cardId);
+            } catch (error) {
+              console.error(`Failed to add card ${cardId} to new set:`, error);
+              throw new Error(`Failed to add card ${cardId} to new set`);
+            }
+          }
+        } catch (error) {
+          console.error("Failed to create new set:", error);
+          throw new Error("Failed to create new set");
         }
       }
+
       // Reset pending changes
       setPendingChanges({
         addedCards: new Set(),
@@ -234,6 +253,8 @@ const AddEditDeck = () => {
       });
     } catch (error) {
       console.error("Error saving changes:", error);
+      // Здесь можно добавить обработку ошибок UI, например:
+      alert(`Ошибка при сохранении: ${error.message}`);
     }
   };
   return (
