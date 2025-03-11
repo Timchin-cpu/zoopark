@@ -155,7 +155,7 @@ const PeoplePage = () => {
                           className="info-popup__close"
                           onClick={() => setShowInfo(false)}
                         >
-                          ✕
+                          <p>✕</p>
                         </button>
                       </div>
                     </div>
