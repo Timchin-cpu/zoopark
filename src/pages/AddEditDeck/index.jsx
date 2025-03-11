@@ -193,19 +193,17 @@ const AddEditDeck = () => {
                 : reward.value,
           })),
         });
-
         // Remove cards
         for (const cardId of pendingChanges.removedCards) {
           await cardSetsService.removeCardFromSet(id, cardId);
         }
-
         // Add new cards
         for (const cardId of pendingChanges.addedCards) {
           await cardSetsService.addCardToSet(id, cardId);
         }
       } else {
         // Create new set
-        const newSet = await cardSetsService.createCardSet({
+        const response = await cardSetsService.createCardSet({
           title: name,
           description: description,
           rewards: rewards.map((reward) => ({
@@ -217,12 +215,16 @@ const AddEditDeck = () => {
                 : reward.value,
           })),
         });
-
-        // Add cards to new set
-        for (const cardId of cardsInSet) {
-          await cardSetsService.addCardToSet(newSet.id, cardId);
+        // Add cards to new set using response.data.id
+        if (response && response.data && response.data.id) {
+          for (const cardId of cardsInSet) {
+            await cardSetsService.addCardToSet(response.data.id, cardId);
+          }
+        } else {
+          throw new Error("Failed to get new set ID from response");
         }
       }
+
       // Reset pending changes
       setPendingChanges({
         addedCards: new Set(),
@@ -230,6 +232,7 @@ const AddEditDeck = () => {
       });
     } catch (error) {
       console.error("Error saving changes:", error);
+      throw error; // Re-throw to allow handling by caller
     }
   };
   return (
