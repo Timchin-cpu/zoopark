@@ -6,7 +6,7 @@ import routeAddEditDeck from "./route";
 import addimg from "assets/img/addimg.png";
 import left from "assets/img/left.png";
 import right from "assets/img/right.png";
-
+import axios from "../../axios-controller";
 const AddEditDeck = () => {
   const { id } = useParams();
   console.log(id);
