@@ -43,11 +43,11 @@ const MainCarousel = ({
   const [photos, setPhotos] = useState([]); // Добавить состояние для хранения всех фото
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   // const [energy, setEnergy] = useState(100); // Initial energy state
-  const [remainingTime, setRemainingTime] = useState("00:00:00");
+  const [remainingTime] = useState("00:00:00");
   const [energy, setEnergy] = useState(250);
   const [maxEnergy, setMaxEnergy] = useState(1000);
   const [regenRate, setRegenRate] = useState(1);
-  const [lastUpdate, setLastUpdate] = useState(null);
+  // const [lastUpdate, setLastUpdate] = useState(null);
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -59,7 +59,7 @@ const MainCarousel = ({
             setEnergy(response.data.energy);
             setMaxEnergy(response.data.max_energy);
             setRegenRate(response.data.regen_rate);
-            setLastUpdate(new Date());
+            // setLastUpdate(new Date());
           }
         } catch (error) {
           console.error("Error fetching energy:", error);
