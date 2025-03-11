@@ -66,7 +66,7 @@ export const cardSetsService = {
   getAllCardSets: () => axios.get("/card-sets"),
   getSetRewards: (setId) => axios.get(`/card-sets/${setId}/rewards`),
   updateSetRewards: (setId, data) => axios.put(`/card-sets/${setId}`, data),
-
+  createCardSet: (data) => axios.post("/card-sets", data),
   // Получение карт конкретного набора
   checkSetCompletion: (setId, telegram_id) =>
     axios.get(`/card-sets/${setId}/check-completion/${telegram_id}`),
