@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AddEditDeck.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { cardsService, cardSetsService } from "services/api";
 import routeAddEditDeck from "./route";
 import addimg from "assets/img/addimg.png";
@@ -9,6 +9,8 @@ import right from "assets/img/right.png";
 
 const AddEditDeck = () => {
   const { id } = useParams();
+  const history = useHistory();
+
   console.log(id);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
