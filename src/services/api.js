@@ -27,12 +27,14 @@ export const userInitService = {
   updateEnergy: async (telegram_id, energy) => {
     try {
       const response = await axios.put(`/user/${telegram_id}/energy`, {
-        energy,
-        lastUpdate: new Date().toISOString(),
+        energy: Number(energy),
       });
       return response.data;
     } catch (error) {
-      console.error("Error updating energy:", error);
+      console.error(
+        "Error updating energy:",
+        error.response?.data || error.message
+      );
       throw error;
     }
   },
