@@ -44,8 +44,7 @@ const MainCarousel = ({
   const [selectedPhotos, setSelectedPhotos] = useState({}); // Объект для хранения фото для каждой карточки
   const [energy, setEnergy] = useState(100); // Initial energy state
   // const [remainingTime, setRemainingTime] = useState("00:00:00");
-  const [maxEnergy, setMaxEnergy] = useState(1000);
-
+  const MAX_ENERGY = 1000;
   useEffect(() => {
     const fetchEnergy = async () => {
       const tg = window.Telegram.WebApp;
@@ -62,17 +61,17 @@ const MainCarousel = ({
       }
     };
     fetchEnergy();
-    // Добавляем интервал для увеличения энергии
+    // Обновляем интервал, используя MAX_ENERGY вместо maxEnergy
     const energyInterval = setInterval(() => {
       setEnergy((prevEnergy) => {
-        if (prevEnergy < maxEnergy) {
+        if (prevEnergy < MAX_ENERGY) {
           return prevEnergy + 1;
         }
         return prevEnergy;
       });
     }, 1000);
     return () => clearInterval(energyInterval);
-  }, [maxEnergy]);
+  }, []);
   // const updateRemainingTime = (lastUpdate) => {
   //   if (!lastUpdate) {
   //     setRemainingTime("00:00:00");
@@ -356,7 +355,7 @@ const MainCarousel = ({
                 fill="#AAB2BD"
               />
             </svg>
-            {`${energy}/${maxEnergy}`}
+            {`${energy}/${MAX_ENERGY}`}
           </div>
         </div>
         <div className="main-nav__play" onClick={nextSlide}>
