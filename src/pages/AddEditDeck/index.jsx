@@ -223,12 +223,12 @@ const AddEditDeck = () => {
           title: name,
           description: description,
           rewards: rewards.map((reward) => ({
-            type: reward.type,
-            value:
-              reward.type === "card"
-                ? cards.find((c) => c.title === reward.value)?.id ||
-                  reward.value
-                : reward.value,
+            reward_type: reward.reward_type,
+            reward_value:
+              reward.reward_type === "card"
+                ? cards.find((c) => c.title === reward.reward_value)?.id ||
+                  reward.reward_value
+                : reward.reward_value,
           })),
         });
         // Add cards to new set using response.data.id
