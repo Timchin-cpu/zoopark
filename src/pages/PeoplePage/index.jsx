@@ -150,7 +150,9 @@ const PeoplePage = () => {
                   {showInfo[set.id] && (
                     <div className="info-popup">
                       <div className="info-popup__content">
-                        <p>Информация о {set.name}</p>
+                        <p style={{ marginRight: "19px" }}>
+                          Информация о {set.name}
+                        </p>
                         <button
                           className="info-popup__close"
                           onClick={() => setShowInfo(false)}
