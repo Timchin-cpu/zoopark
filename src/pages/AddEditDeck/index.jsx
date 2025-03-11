@@ -179,30 +179,54 @@ const AddEditDeck = () => {
   };
   const handleSave = async () => {
     try {
-      // Update set data and rewards
-      await cardSetsService.updateSetRewards(id, {
-        title: name,
-        description: description,
-        rewards: rewards.map((reward) => ({
-          type: reward.type,
-          value:
-            reward.type === "card"
-              ? cards.find((c) => c.title === reward.value)?.id || reward.value
-              : reward.value,
-        })),
-      });
-      // Remove cards
-      for (const cardId of pendingChanges.removedCards) {
-        await cardSetsService.removeCardFromSet(id, cardId);
-      }
-      // Add new cards
-      for (const cardId of pendingChanges.addedCards) {
-        await cardSetsService.addCardToSet(id, cardId);
-      }
-      // Refresh cards data
-      const response = await cardSetsService.getSetCards(id);
-      setExistingCards(response.data);
+      if (id) {
+        // Update existing set
+        await cardSetsService.updateSetRewards(id, {
+          title: name,
+          description: description,
+          rewards: rewards.map((reward) => ({
+            type: reward.type,
+            value:
+              reward.type === "card"
+                ? cards.find((c) => c.title === reward.value)?.id ||
+                  reward.value
+                : reward.value,
+          })),
+        });
 
+        // Remove cards
+        for (const cardId of pendingChanges.removedCards) {
+          await cardSetsService.removeCardFromSet(id, cardId);
+        }
+        // Add new cards
+        for (const cardId of pendingChanges.addedCards) {
+          await cardSetsService.addCardToSet(id, cardId);
+        }
+
+        // Refresh cards data
+        const response = await cardSetsService.getSetCards(id);
+        setExistingCards(response.data);
+      } else {
+        // Create new set
+        const response = await axios.post("/api/card-sets", {
+          name,
+          description,
+          rewards: rewards.map((reward) => ({
+            reward_type: reward.type,
+            reward_value:
+              reward.type === "card"
+                ? cards.find((c) => c.title === reward.value)?.id ||
+                  reward.value
+                : reward.value,
+          })),
+        });
+
+        // Add cards to the new set
+        const newSetId = response.data.setId;
+        for (const cardId of pendingChanges.addedCards) {
+          await cardSetsService.addCardToSet(newSetId, cardId);
+        }
+      }
       // Reset pending changes
       setPendingChanges({
         addedCards: new Set(),
