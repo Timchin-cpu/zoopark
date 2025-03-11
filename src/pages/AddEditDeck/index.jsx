@@ -202,6 +202,16 @@ const AddEditDeck = () => {
           await cardSetsService.addCardToSet(id, cardId);
         }
       } else {
+        // Validate required fields
+        if (!name.trim()) {
+          throw { status: 400, message: "Name is required" };
+        }
+        if (!description.trim()) {
+          throw { status: 400, message: "Description is required" };
+        }
+        if (cardsInSet.size === 0) {
+          throw { status: 400, message: "At least one card is required" };
+        }
         // Create new set
         const response = await cardSetsService.createCardSet({
           title: name,
@@ -224,15 +234,21 @@ const AddEditDeck = () => {
           throw new Error("Failed to get new set ID from response");
         }
       }
-
       // Reset pending changes
       setPendingChanges({
         addedCards: new Set(),
         removedCards: new Set(),
       });
+      // Show success message
+      alert("Card set saved successfully");
+      history.push("/cardmanagement");
     } catch (error) {
       console.error("Error saving changes:", error);
-      throw error; // Re-throw to allow handling by caller
+      if (error.status === 400) {
+        alert(error.message || "Invalid data. Please check your inputs.");
+      } else {
+        alert("An error occurred while saving the card set. Please try again.");
+      }
     }
   };
   return (
