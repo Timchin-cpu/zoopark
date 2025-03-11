@@ -206,13 +206,13 @@ const AddEditDeck = () => {
       } else {
         // Validate required fields
         if (!name.trim()) {
-          throw { status: 400, message: "Name is required" };
+          throw new Error("Name is required");
         }
         if (!description.trim()) {
-          throw { status: 400, message: "Description is required" };
+          throw new Error("Description is required");
         }
         if (cardsInSet.size === 0) {
-          throw { status: 400, message: "At least one card is required" };
+          throw new Error("At least one card is required");
         }
         // Create new set
         const response = await cardSetsService.createCardSet({
