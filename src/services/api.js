@@ -26,10 +26,16 @@ export const userInitService = {
   getEnergy: (telegram_id) => axios.get(`/user/${telegram_id}/energy`),
   updateEnergy: async (telegram_id, energy) => {
     try {
+      // Добавим проверку входных данных
+      if (!telegram_id || energy === undefined) {
+        throw new Error("Отсутствуют необходимые параметры");
+      }
+
       const response = await axios.put(`/user/${telegram_id}/energy`, {
-        energy,
+        energy: Math.max(0, Math.min(energy, 1000)), // Ограничиваем значение от 0 до 1000
         lastUpdate: new Date().toISOString(),
       });
+
       return response.data;
     } catch (error) {
       console.error("Error updating energy:", error);

@@ -193,36 +193,38 @@ const MainCarousel = ({
   const handleImageClick = async (index) => {
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
+
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
     }
     if (energy < 10) {
-      // Not enough energy
-      return;
+      return; // Недостаточно энергии
     }
     try {
-      // Обновляем энергию на сервере
-      await userInitService.updateEnergy(telegram_id, energy - 10);
-      // Обновляем локальное состояние
-      setEnergy((prev) => Math.max(0, prev - 10));
+      // Обновляем энергию локально перед запросом
+      const newEnergy = Math.max(0, energy - 10);
+
+      // Отправляем запрос на обновление энергии
+      await userInitService.updateEnergy(telegram_id, newEnergy);
+
+      // Обновляем локальное состояние только после успешного запроса
+      setEnergy(newEnergy);
       setIsFlipped(true);
       const selectedCard = selectedPhotos[data[index].id];
       setOpenedCards({
         ...openedCards,
         [index]: selectedCard,
       });
-
-      // Добавляем карту пользователю и получаем обновленные данные
       await userCardsService.addCardToUser(telegram_id, selectedCard.id);
-
-      // Если это карта энергии, обновляем состояние энергии
       if (selectedCard.type === "energy_boost") {
-        setEnergy((prev) => Math.min(prev + 100, 100));
+        const boostedEnergy = Math.min(newEnergy + 100, 1000);
+        await userInitService.updateEnergy(telegram_id, boostedEnergy);
+        setEnergy(boostedEnergy);
       }
       handleOpenPopup(selectedCard);
     } catch (error) {
-      console.error("Error updating energy:", error);
+      console.error("Error in handleImageClick:", error);
     }
   };
 
