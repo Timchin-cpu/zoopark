@@ -17,10 +17,18 @@
   body.dark & {
     background: #1c1f24;
     color: white;
+
+    .info-popup__close p {
+      color: white;
+    }
   }
   body:not(.dark) & {
     background: white;
     color: black;
+
+    .info-popup__close p {
+      color: black;
+    }
   }
 }
 
