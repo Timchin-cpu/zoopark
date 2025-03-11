@@ -182,6 +182,8 @@ const AddEditDeck = () => {
   const handleSave = async () => {
     try {
       if (id) {
+        console.log(id);
+        console.log("dsfsdf");
         // Update existing set
         await cardSetsService.updateSetRewards(id, {
           title: name,
@@ -204,6 +206,8 @@ const AddEditDeck = () => {
           await cardSetsService.addCardToSet(id, cardId);
         }
       } else {
+        console.log(id);
+        console.log("dsfsdf1");
         // Validate required fields
         if (!name.trim()) {
           throw new Error("Name is required");
