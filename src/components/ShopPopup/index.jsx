@@ -141,7 +141,13 @@ const ShopPopup = (props) => {
           <button
             type="button"
             className="shop-popup__btn"
-            onClick={props.handleClosePopup}
+            onClick={() => {
+              if (props.main) {
+                handleButtonClick();
+              } else {
+                props.handleClosePopup();
+              }
+            }}
           >
             {!props.main ? "Купить" : "Ок"}
           </button>
