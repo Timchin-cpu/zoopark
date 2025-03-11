@@ -182,8 +182,6 @@ const AddEditDeck = () => {
   const handleSave = async () => {
     try {
       if (id) {
-        console.log(id);
-        console.log("dsfsdf");
         // Update existing set
         await cardSetsService.updateSetRewards(id, {
           title: name,
@@ -206,8 +204,6 @@ const AddEditDeck = () => {
           await cardSetsService.addCardToSet(id, cardId);
         }
       } else {
-        console.log(id);
-        console.log("dsfsdf1");
         // Validate required fields
         if (!name.trim()) {
           throw new Error("Name is required");
@@ -218,6 +214,7 @@ const AddEditDeck = () => {
         if (cardsInSet.size === 0) {
           throw new Error("At least one card is required");
         }
+
         // Create new set
         const response = await cardSetsService.createCardSet({
           title: name,
@@ -231,11 +228,12 @@ const AddEditDeck = () => {
                 : reward.value,
           })),
         });
-        // Add cards to new set using response.data.id
-        if (response && response.data && response.data.id) {
-          for (const cardId of cardsInSet) {
-            await cardSetsService.addCardToSet(response.data.id, cardId);
-          }
+        // Add cards to new set
+        if (response && response.data && response.data.setId) {
+          const promises = Array.from(cardsInSet).map((cardId) =>
+            cardSetsService.addCardToSet(response.data.setId, cardId)
+          );
+          await Promise.all(promises);
         } else {
           throw new Error("Failed to get new set ID from response");
         }
@@ -250,7 +248,7 @@ const AddEditDeck = () => {
       history.push("/cardmanagement");
     } catch (error) {
       console.error("Error saving changes:", error);
-      if (error.status === 400) {
+      if (error.response?.status === 400) {
         alert(error.message || "Invalid data. Please check your inputs.");
       } else {
         alert("An error occurred while saving the card set. Please try again.");
