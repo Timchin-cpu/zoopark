@@ -68,10 +68,14 @@ export const cardSetsService = {
   updateSetRewards: (setId, data) => axios.put(`/card-sets/${setId}`, data),
   createCardSet: (data) => {
     const formattedRewards = data.rewards.map((reward) => ({
-      reward_type: reward.type || reward.reward_type,
-      reward_value: reward.value || reward.reward_value,
+      reward_type: reward.type,
+      reward_value: reward.value || 0, // Устанавливаем значение по умолчанию 0
     }));
-    return axios.post("/card-sets", { ...data, rewards: formattedRewards });
+    return axios.post("/card-sets", {
+      title: data.title,
+      description: data.description,
+      rewards: formattedRewards,
+    });
   }, // Получение карт конкретного набора
   checkSetCompletion: (setId, telegram_id) =>
     axios.get(`/card-sets/${setId}/check-completion/${telegram_id}`),
