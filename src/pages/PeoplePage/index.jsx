@@ -119,7 +119,24 @@ const PeoplePage = () => {
   const handleClosePopup = () => {
     document.documentElement.classList.remove("fixed");
     setActivePopup(false);
+    setShowInfo({}); // Reset all info popups
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const popup = document.querySelector(".info-popup");
+      const infoIcon = document.querySelector(".info-icon");
+
+      if (
+        popup &&
+        !popup.contains(event.target) &&
+        !infoIcon.contains(event.target)
+      ) {
+        setShowInfo({});
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <section className="city">
       <div className="container">
