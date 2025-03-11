@@ -27,7 +27,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAchievement(true);
-    }, 200);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
