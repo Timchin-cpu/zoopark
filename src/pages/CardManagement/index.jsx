@@ -74,6 +74,19 @@ const CardManagement = () => {
                 <NavLink to={routeAddEditCard(card.id)}>
                   <button>Редактировать</button>
                 </NavLink>
+                <button
+                  style={{ background: "red", marginTop: "10px" }}
+                  onClick={async () => {
+                    try {
+                      await cardsService.deleteCard(card.id);
+                      setCards(cards.filter((c) => c.id !== card.id));
+                    } catch (error) {
+                      console.error("Error deleting card:", error);
+                    }
+                  }}
+                >
+                  Удалить
+                </button>
               </div>
             ))}
         </div>
