@@ -372,7 +372,7 @@ const MainCarousel = ({
           <div className="main-nav__progress">
             <div
               className="main-nav__progress-bar"
-              style={{ width: `${energy}%` }}
+              style={{ width: `${(energy / MAX_ENERGY) * 100}%` }}
             ></div>
           </div>
           <div className="main-nav__clock f-center">
