@@ -97,39 +97,7 @@ const MainCarousel = ({
     }, 1000);
     return () => clearInterval(energyInterval);
   }, []);
-  // const updateRemainingTime = (lastUpdate) => {
-  //   if (!lastUpdate) {
-  //     setRemainingTime("00:00:00");
-  //     return;
-  //   }
-  //   // Проверяем сохраненное время в localStorage
-  //   const savedTime = localStorage.getItem("lastUpdateTime");
-  //   const timeToUse = savedTime || lastUpdate;
-  //   const calculateTime = () => {
-  //     const now = new Date().getTime();
-  //     const lastUpdateTime = new Date(timeToUse).getTime();
-  //     const timeDiff = now - lastUpdateTime;
-  //     if (isNaN(lastUpdateTime)) {
-  //       setRemainingTime("00:00:00");
-  //       return;
-  //     }
-  //     const remainingMs = 3600000 - (timeDiff % 3600000);
-  //     const hours = Math.floor(remainingMs / 3600000);
-  //     const minutes = Math.floor((remainingMs % 3600000) / 60000);
-  //     const seconds = Math.floor((remainingMs % 60000) / 1000);
-  //     setRemainingTime(
-  //       `${hours.toString().padStart(2, "0")}:${minutes
-  //         .toString()
-  //         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-  //     );
-  //   };
-  //   // Сохраняем время последнего обновления
-  //   localStorage.setItem("lastUpdateTime", timeToUse);
 
-  //   calculateTime();
-  //   const timer = setInterval(calculateTime, 1000);
-  //   return () => clearInterval(timer);
-  // };
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
