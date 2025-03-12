@@ -176,7 +176,10 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
                   className="modal-settings__select"
                   onClick={() => setModalStep(4)}
                 >
-                  <span>{cardBackStyle}</span>
+                  <span>
+                    {cardBacks.find((cb) => cb.image === cardBackStyle)?.name ||
+                      "Default"}
+                  </span>{" "}
                   <svg
                     width="8"
                     height="14"
