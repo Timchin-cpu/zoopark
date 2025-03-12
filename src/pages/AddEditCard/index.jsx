@@ -42,8 +42,14 @@ const AddEditCard = () => {
     };
     fetchCardData();
   }, [id]);
+
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  useEffect(() => {
+    if (id && response?.data?.image) {
+      setImagePreview(response.data.image);
+    }
+  }, [id, response]);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
@@ -108,7 +114,7 @@ const AddEditCard = () => {
                   <div className={styles.whiteBox}>
                     <div className={styles.whiteBoxImg}>
                       <img src={addimg} alt="#" />
-                      <p>Добавьте изображене</p>
+                      <p>Добавьте изображение</p>
                     </div>
                   </div>
                 </label>
