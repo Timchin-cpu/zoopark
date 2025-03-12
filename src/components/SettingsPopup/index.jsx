@@ -52,13 +52,13 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
     try {
       setCardBackStyle(style);
       dispatch(setCardBack(style));
-
       const tg = window.Telegram.WebApp;
       if (tg?.initDataUnsafe?.user?.id) {
-        await cardBackService.updateUserCardBack(
-          tg.initDataUnsafe.user.id,
-          style
-        );
+        const userId = tg.initDataUnsafe.user.id;
+        // Update the API endpoint to use the correct path
+        await cardBackService.updateUserCardBack(userId, {
+          style: style,
+        });
       }
     } catch (error) {
       console.error("Error updating card back:", error);
