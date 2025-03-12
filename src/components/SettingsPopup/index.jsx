@@ -12,6 +12,8 @@ import { cardBackService } from "services/api";
 // import { setTheme } from "../../redux/actions";
 
 const SettingsPopup = ({ setActivePopup, activePopup }) => {
+  const dispatch = useDispatch();
+
   const [cardBackStyle, setCardBackStyle] = useState("default");
   const [cardBacks, setCardBacks] = useState([]);
   useEffect(() => {
@@ -46,7 +48,6 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
 
     fetchCardBacks();
   }, []);
-  const dispatch = useDispatch();
   const handleCardBackChange = async (style) => {
     try {
       setCardBackStyle(style);
