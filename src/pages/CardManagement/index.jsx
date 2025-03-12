@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./CardManagement.module.css";
 import routeCardManagement from "./route";
 import { cardsService } from "services/api";
-import { cardBackService } from "services/api";
+import { cardBackService, cardSetsService } from "services/api";
 import { NavLink } from "react-router-dom";
 import { routeAddEditCard } from "pages/AddEditCard";
 import { routeAddEditDeck } from "pages/AddEditDeck";
@@ -141,6 +141,19 @@ const CardManagement = () => {
                 <NavLink to={routeAddEditDeck(set.id)}>
                   <button>Редактировать</button>
                 </NavLink>
+                <button
+                  style={{ background: "red", marginTop: "10px" }}
+                  onClick={async () => {
+                    try {
+                      await cardSetsService.deleteCardSet(set.id);
+                      setCardSets(cardSets.filter((cs) => cs.id !== set.id));
+                    } catch (error) {
+                      console.error("Error deleting card set:", error);
+                    }
+                  }}
+                >
+                  Удалить
+                </button>
               </div>
             ))}
         </div>

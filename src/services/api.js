@@ -67,6 +67,8 @@ export const cardBackService = {
 export const cardSetsService = {
   addCardToSet: (setId, cardId) =>
     axios.post(`/card-sets/${setId}/cards`, { cardId }),
+  deleteCardSet: (setId) => axios.delete(`/card-sets/${setId}`),
+
   getSetCards: (setId) => axios.get(`/card-sets/${setId}/cards`),
   removeCardFromSet: (setId, cardId) =>
     axios.delete(`/card-sets/${setId}/cards/${cardId}`),
