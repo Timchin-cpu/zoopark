@@ -25,9 +25,7 @@ const AddEditCard = () => {
         try {
           const response = await cardsService.getCard(id);
           const card = response.data;
-          console.log(card);
-          console.log(response);
-          // Устанавливаем все поля формы из полученных данных
+          setCardResponse(response);
           setTitle(card.title || "");
           setDescription(card.description || "");
           setChance(card.chance || "100");
@@ -45,11 +43,12 @@ const AddEditCard = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [cardResponse, setCardResponse] = useState(null);
   useEffect(() => {
-    if (id && response?.data?.image) {
-      setImagePreview(response.data.image);
+    if (id && cardResponse?.data?.image) {
+      setImagePreview(cardResponse.data.image);
     }
-  }, [id, response]);
+  }, [id, cardResponse]);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
