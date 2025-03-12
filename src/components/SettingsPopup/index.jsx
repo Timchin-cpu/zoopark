@@ -14,7 +14,26 @@ import { cardBackService } from "services/api";
 const SettingsPopup = ({ setActivePopup, activePopup }) => {
   const [cardBackStyle, setCardBackStyle] = useState("default");
   const [cardBacks, setCardBacks] = useState([]);
+  useEffect(() => {
+    const loadUserCardBack = async () => {
+      try {
+        const tg = window.Telegram.WebApp;
+        if (tg?.initDataUnsafe?.user?.id) {
+          const response = await cardBackService.getUserCardBack(
+            tg.initDataUnsafe.user.id
+          );
+          if (response.data.style) {
+            setCardBackStyle(response.data.style);
+            dispatch(setCardBack(response.data.style));
+          }
+        }
+      } catch (error) {
+        console.error("Error loading card back style:", error);
+      }
+    };
 
+    loadUserCardBack();
+  }, [dispatch]);
   useEffect(() => {
     const fetchCardBacks = async () => {
       try {
