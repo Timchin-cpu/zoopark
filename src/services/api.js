@@ -58,10 +58,9 @@ export const cardsService = {
 };
 export const cardBackService = {
   getAllCardBacks: () => axios.get("/card-backs"),
-  getUserCardBack: (telegram_id) =>
-    axios.get(`/api/user/${telegram_id}/card-back`),
+  getUserCardBack: (telegram_id) => axios.get(`/user/${telegram_id}/card-back`),
   updateUserCardBack: (userId, data) =>
-    axios.put(`/api/user/${userId}/card-back`, data),
+    axios.put(`/user/${userId}/card-back`, data),
   addCardBack: (formData) => axios.post("/card-backs/add", formData),
   deleteCardBack: (id) => axios.delete(`/card-backs/${id}`),
 };
