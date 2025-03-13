@@ -108,6 +108,7 @@ const MainPage = () => {
               handleOpenPopup={(photo) => handleOpenPopup(photo)}
               shouldUpdate={shouldUpdateCarousel}
               onUpdateComplete={() => setShouldUpdateCarousel(false)}
+              isShopPopupOpen={activeShopPopup}
             />
           </div>
         </div>
