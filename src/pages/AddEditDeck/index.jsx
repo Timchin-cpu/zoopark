@@ -431,7 +431,7 @@ const AddEditDeck = () => {
             <div className={styles.rewardSection}>
               <div className={styles.rewardItem}>
                 <input
-                  type="checkbox"
+                  type="radio"
                   checked={activeRewards.coins}
                   onChange={(e) =>
                     setActiveRewards({
@@ -461,7 +461,7 @@ const AddEditDeck = () => {
               </div>
               <div className={styles.rewardItem}>
                 <input
-                  type="checkbox"
+                  type="radio"
                   checked={activeRewards.experience}
                   onChange={(e) =>
                     setActiveRewards({
@@ -492,7 +492,7 @@ const AddEditDeck = () => {
               </div>
               <div className={styles.rewardItem}>
                 <input
-                  type="checkbox"
+                  type="radio"
                   checked={activeRewards.hourly_income}
                   onChange={(e) =>
                     setActiveRewards({
@@ -523,7 +523,7 @@ const AddEditDeck = () => {
               </div>
               <div className={styles.rewardItem}>
                 <input
-                  type="checkbox"
+                  type="radio"
                   checked={activeRewards.card}
                   onChange={(e) =>
                     setActiveRewards({
