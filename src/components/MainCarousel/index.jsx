@@ -55,7 +55,7 @@ const MainCarousel = ({
     setTouchEnd(e.targetTouches[0].clientX);
   };
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || props.isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (!touchStart || !touchEnd || isShopPopupOpen) return; // Prevent swipe when popup is open
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
