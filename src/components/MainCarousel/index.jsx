@@ -339,9 +339,7 @@ const MainCarousel = ({
           </div>
           <div className="main-nav__progress">
             <div
-              className={`main-nav__progress-bar ${
-                energy >= 900 ? "energy-warning" : ""
-              }`}
+              className="main-nav__progress-bar"
               style={{ width: `${(energy / MAX_ENERGY) * 100}%` }}
             ></div>
           </div>
