@@ -136,6 +136,7 @@ const MainCarousel = ({
   };
   useEffect(() => {
     if (shouldUpdate) {
+      setIsSwipeLocked(false);
       setIsFlipped(false);
       setActiveIndex(null);
       setOpenedCards({});
