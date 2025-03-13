@@ -193,7 +193,12 @@
 .rewardItem input[type="checkbox"] {
   width: 20px;
   height: 20px;
+  margin-right: 10px;
   cursor: pointer;
+  opacity: 1; /* Убедитесь, что прозрачность не равна 0 */
+  visibility: visible; /* Убедитесь, что видимость включена */
+  appearance: auto; /* Использовать стандартный вид чекбокса */
+  -webkit-appearance: checkbox; /* Для Safari */
 }
 .rewardItem input[type="text"] {
   margin-left: 10px;
