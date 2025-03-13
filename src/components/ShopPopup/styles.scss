@@ -93,14 +93,3 @@
     }
   }
 }
-.shop-popup__image {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 9 / 16; // Соотношение сторон 9:16
-  overflow: hidden; // Обрезаем изображение по границам контейнера
-}
-.shop-popup__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; // Изображение заполняет контейнер, сохраняя пропорции
-}
