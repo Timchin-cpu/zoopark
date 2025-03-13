@@ -46,12 +46,12 @@ const MainCarousel = ({
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
-    if (props.isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (isShopPopupOpen) return; // Prevent swipe when popup is open
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
   const onTouchMove = (e) => {
-    if (props.isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (isShopPopupOpen) return; // Prevent swipe when popup is open
     setTouchEnd(e.targetTouches[0].clientX);
   };
   const onTouchEnd = () => {
