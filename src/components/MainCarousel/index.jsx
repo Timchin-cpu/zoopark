@@ -189,6 +189,10 @@ const MainCarousel = ({
 
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
+    setIsSwipeLocked(true); // Lock swiping when card is flipped
+    setTimeout(() => {
+      setIsSwipeLocked(false); // Unlock swiping after 15 seconds
+    }, 15000);
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
 
@@ -199,10 +203,7 @@ const MainCarousel = ({
     if (energy < 10) {
       return; // Недостаточно энергии
     }
-    setIsSwipeLocked(true); // Lock swiping when card is flipped
-    setTimeout(() => {
-      setIsSwipeLocked(false); // Unlock swiping after 15 seconds
-    }, 15000);
+
     try {
       // Обновляем энергию локально перед запросом
       const newEnergy = Math.max(0, energy - 10);
