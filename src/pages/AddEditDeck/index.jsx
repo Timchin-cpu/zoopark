@@ -20,7 +20,12 @@ const AddEditDeck = () => {
     { type: "coins", value: 0 },
     { type: "card", value: "" },
   ]);
-
+  const [activeRewards, setActiveRewards] = useState({
+    coins: false,
+    hourly_income: false,
+    card: false,
+    experience: false,
+  });
   const [cardReward, setCardReward] = useState("");
   console.log(cardReward);
   const [suggestions, setSuggestions] = useState([]);
@@ -46,7 +51,15 @@ const AddEditDeck = () => {
           const data = response.data;
           setName(data.title || "");
           setDescription(data.description || "");
-          // Создаем новый массив rewards с правильной структурой
+
+          // Инициализируем активные вознаграждения
+          const activeRewardsState = {
+            coins: false,
+            hourly_income: false,
+            card: false,
+            experience: false,
+          };
+          // Создаем новый массив rewards с начальной структурой
           const newRewards = [
             { type: "experience", value: 0 },
             { type: "hourly_income", value: 0 },
@@ -56,6 +69,9 @@ const AddEditDeck = () => {
           // Обновляем значения из полученных данных
           if (data.rewards) {
             data.rewards.forEach((reward) => {
+              // Отмечаем тип награды как активный
+              activeRewardsState[reward.type] = true;
+              // Обновляем значение в массиве наград
               const existingReward = newRewards.find(
                 (r) => r.type === reward.type
               );
@@ -70,9 +86,11 @@ const AddEditDeck = () => {
               }
             });
           }
+          // Устанавливаем состояния
+          setActiveRewards(activeRewardsState);
           setRewards(newRewards);
         } catch (error) {
-          console.error("Error fetching set rewards:", error);
+          console.error("Ошибка при получении наград набора:", error);
         }
       }
     };
@@ -182,11 +200,14 @@ const AddEditDeck = () => {
   const handleSave = async () => {
     try {
       if (id) {
+        const activeRewardsList = rewards.filter(
+          (reward) => activeRewards[reward.type]
+        );
         // Update existing set
         await cardSetsService.updateSetRewards(id, {
           title: name,
           description: description,
-          rewards: rewards.map((reward) => ({
+          rewards: activeRewardsList.map((reward) => ({
             type: reward.type,
             value:
               reward.type === "card"
@@ -406,88 +427,153 @@ const AddEditDeck = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <h2 className={styles.title}>Вознаграждение </h2>
-            <input
-              type="text"
-              value={rewards.find((r) => r.type === "coins")?.value || ""}
-              onChange={(e) => {
-                const newRewards = rewards.map((r) =>
-                  r.type === "coins"
-                    ? { ...r, value: parseInt(e.target.value) || 0 }
-                    : r
-                );
-                setRewards(newRewards);
-              }}
-            />
-          </div>
-          <div style={{ marginRight: "20px" }}>
-            {" "}
-            <h2 className={styles.title}>Опыт</h2>
-            <input
-              type="text"
-              value={rewards.find((r) => r.type === "experience")?.value || ""}
-              onChange={(e) => {
-                const newRewards = rewards.map((r) =>
-                  r.type === "experience"
-                    ? { ...r, value: parseInt(e.target.value) || 0 }
-                    : r
-                );
-                setRewards(newRewards);
-              }}
-            />{" "}
-            <h2 className={styles.title}>Вознаграждение в час</h2>
-            <input
-              type="text"
-              value={
-                rewards.find((r) => r.type === "hourly_income")?.value || ""
-              }
-              onChange={(e) => {
-                const newRewards = rewards.map((r) =>
-                  r.type === "hourly_income"
-                    ? { ...r, value: parseInt(e.target.value) || 0 }
-                    : r
-                );
-                setRewards(newRewards);
-              }}
-            />{" "}
-            <h2 className={styles.title}>Вознаграждение картой</h2>
-            <div className={styles.autocompleteContainer}>
-              <input
-                type="text"
-                value={rewards.find((r) => r.type === "card")?.value || ""}
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "card" ? { ...r, value: e.target.value } : r
-                  );
-                  setRewards(newRewards);
-                  handleCardRewardChange(e);
-                }}
-                placeholder="Введите название карты"
-              />
-              {showSuggestions && suggestions.length > 0 && (
-                <div className={styles.suggestionsList}>
-                  {suggestions.map((card) => (
-                    <div
-                      key={card.id}
-                      className={styles.suggestionItem}
-                      onClick={() => {
-                        handleSuggestionClick(card);
-                        const newRewards = rewards.map((r) =>
-                          r.type === "card" ? { ...r, value: card.title } : r
-                        );
-                        setRewards(newRewards);
-                      }}
-                    >
-                      {card.title}
+
+            <div className={styles.rewardSection}>
+              <div className={styles.rewardItem}>
+                <input
+                  type="checkbox"
+                  checked={activeRewards.coins}
+                  onChange={(e) =>
+                    setActiveRewards({
+                      ...activeRewards,
+                      coins: e.target.checked,
+                    })
+                  }
+                />
+                <h2 className={styles.title}>Вознаграждение</h2>
+                <input
+                  type="text"
+                  value={
+                    activeRewards.coins
+                      ? rewards.find((r) => r.type === "coins")?.value || ""
+                      : ""
+                  }
+                  onChange={(e) => {
+                    const newRewards = rewards.map((r) =>
+                      r.type === "coins"
+                        ? { ...r, value: parseInt(e.target.value) || 0 }
+                        : r
+                    );
+                    setRewards(newRewards);
+                  }}
+                  disabled={!activeRewards.coins}
+                />
+              </div>
+              <div className={styles.rewardItem}>
+                <input
+                  type="checkbox"
+                  checked={activeRewards.experience}
+                  onChange={(e) =>
+                    setActiveRewards({
+                      ...activeRewards,
+                      experience: e.target.checked,
+                    })
+                  }
+                />
+                <h2 className={styles.title}>Опыт</h2>
+                <input
+                  type="text"
+                  value={
+                    activeRewards.experience
+                      ? rewards.find((r) => r.type === "experience")?.value ||
+                        ""
+                      : ""
+                  }
+                  onChange={(e) => {
+                    const newRewards = rewards.map((r) =>
+                      r.type === "experience"
+                        ? { ...r, value: parseInt(e.target.value) || 0 }
+                        : r
+                    );
+                    setRewards(newRewards);
+                  }}
+                  disabled={!activeRewards.experience}
+                />
+              </div>
+              <div className={styles.rewardItem}>
+                <input
+                  type="checkbox"
+                  checked={activeRewards.hourly_income}
+                  onChange={(e) =>
+                    setActiveRewards({
+                      ...activeRewards,
+                      hourly_income: e.target.checked,
+                    })
+                  }
+                />
+                <h2 className={styles.title}>Вознаграждение в час</h2>
+                <input
+                  type="text"
+                  value={
+                    activeRewards.hourly_income
+                      ? rewards.find((r) => r.type === "hourly_income")
+                          ?.value || ""
+                      : ""
+                  }
+                  onChange={(e) => {
+                    const newRewards = rewards.map((r) =>
+                      r.type === "hourly_income"
+                        ? { ...r, value: parseInt(e.target.value) || 0 }
+                        : r
+                    );
+                    setRewards(newRewards);
+                  }}
+                  disabled={!activeRewards.hourly_income}
+                />
+              </div>
+              <div className={styles.rewardItem}>
+                <input
+                  type="checkbox"
+                  checked={activeRewards.card}
+                  onChange={(e) =>
+                    setActiveRewards({
+                      ...activeRewards,
+                      card: e.target.checked,
+                    })
+                  }
+                />
+                <h2 className={styles.title}>Вознаграждение картой</h2>
+                <div className={styles.autocompleteContainer}>
+                  <input
+                    type="text"
+                    value={
+                      activeRewards.card
+                        ? rewards.find((r) => r.type === "card")?.value || ""
+                        : ""
+                    }
+                    onChange={(e) => {
+                      const newRewards = rewards.map((r) =>
+                        r.type === "card" ? { ...r, value: e.target.value } : r
+                      );
+                      setRewards(newRewards);
+                      handleCardRewardChange(e);
+                    }}
+                    placeholder="Введите название карты"
+                    disabled={!activeRewards.card}
+                  />
+                  {showSuggestions && suggestions.length > 0 && (
+                    <div className={styles.suggestionsList}>
+                      {suggestions.map((card) => (
+                        <div
+                          key={card.id}
+                          className={styles.suggestionItem}
+                          onClick={() => {
+                            handleSuggestionClick(card);
+                            const newRewards = rewards.map((r) =>
+                              r.type === "card"
+                                ? { ...r, value: card.title }
+                                : r
+                            );
+                            setRewards(newRewards);
+                          }}
+                        >
+                          {card.title}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
-            </div>
-            <div className={styles.save}>
-              <button onClick={handleSave} className={styles.saveButton}>
-                Сохранить изменения
-              </button>
+              </div>
             </div>
           </div>
         </div>

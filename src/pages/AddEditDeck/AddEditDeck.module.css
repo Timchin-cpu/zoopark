@@ -180,3 +180,25 @@
 .suggestionItem:hover {
   background: #f5f5f5;
 }
+.rewardSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.rewardItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rewardItem input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.rewardItem input[type="text"] {
+  margin-left: 10px;
+}
+.rewardItem input[type="text"]:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
