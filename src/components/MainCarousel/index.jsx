@@ -184,24 +184,33 @@ const MainCarousel = ({
 
   const [isFlipped, setIsFlipped] = useState(false);
   const handleImageClick = async (index) => {
+    // Проверяем, был ли свайп
+    if (touchStart && touchEnd) {
+      const distance = touchStart - touchEnd;
+      const isLeftSwipe = distance > minSwipeDistance;
+      const isRightSwipe = distance < -minSwipeDistance;
+
+      if (isLeftSwipe) {
+        nextSlide();
+        return;
+      }
+      if (isRightSwipe) {
+        setActiveSlide((prev) => (prev - 1 + data.length) % data.length);
+        return;
+      }
+    }
     const tg = window.Telegram.WebApp;
     const telegram_id = tg.initDataUnsafe?.user?.id;
-
     if (!telegram_id) {
       console.error("Telegram ID not found");
       return;
     }
     if (energy < 10) {
-      return; // Недостаточно энергии
+      return;
     }
     try {
-      // Обновляем энергию локально перед запросом
       const newEnergy = Math.max(0, energy - 10);
-
-      // Отправляем запрос на обновление энергии
       await userInitService.updateEnergy(telegram_id, newEnergy);
-
-      // Обновляем локальное состояние только после успешного запроса
       setEnergy(newEnergy);
       setIsFlipped(true);
       const selectedCard = selectedPhotos[data[index].id];
