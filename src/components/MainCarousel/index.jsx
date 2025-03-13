@@ -36,26 +36,28 @@ const MainCarousel = ({
   handleOpenPopup,
   shouldUpdate,
   onUpdateComplete,
-  isShopPopupOpen,
 }) => {
   const [openedCards, setOpenedCards] = useState({});
   const cardBackStyle = useSelector((state) => state.cardBack);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [isSwipeLocked, setIsSwipeLocked] = useState(false);
   // Minimum distance required for swipe
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
-    if (isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (isSwipeLocked) return;
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
+
   const onTouchMove = (e) => {
-    if (isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (isSwipeLocked) return;
     setTouchEnd(e.targetTouches[0].clientX);
   };
+
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || isShopPopupOpen) return; // Prevent swipe when popup is open
+    if (!touchStart || !touchEnd || isSwipeLocked) return;
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -197,6 +199,10 @@ const MainCarousel = ({
     if (energy < 10) {
       return; // Недостаточно энергии
     }
+    setIsSwipeLocked(true); // Lock swiping when card is flipped
+    setTimeout(() => {
+      setIsSwipeLocked(false); // Unlock swiping after 15 seconds
+    }, 15000);
     try {
       // Обновляем энергию локально перед запросом
       const newEnergy = Math.max(0, energy - 10);
