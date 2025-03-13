@@ -204,13 +204,13 @@
   position: relative;
 }
 .rewardItem input[type="checkbox"]:checked {
-  border-color: #007bff;
+  border-color: green;
 }
 .rewardItem input[type="checkbox"]:checked::after {
   content: "";
   width: 10px;
   height: 10px;
-  background: #007bff;
+  background: green;
   position: absolute;
   top: 50%;
   left: 50%;
