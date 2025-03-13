@@ -41,3 +41,31 @@
     letter-spacing: 0.4px;
   }
 }
+.modal-cardback {
+  &__item {
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__select {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+  }
+  &__circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__dot {
+    width: 10px;
+    height: 10px;
+    background-color: #71b21d;
+    border-radius: 50%;
+  }
+}

@@ -432,10 +432,17 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
                 <div
                   key={cardBack.id}
                   className={`modal-cardback__item ${
-                    cardBackStyle === cardBack.id ? "active" : ""
+                    cardBackStyle === cardBack.image ? "active" : ""
                   }`}
                   onClick={() => handleCardBackChange(cardBack.image)}
                 >
+                  <div className="modal-cardback__select">
+                    <div className="modal-cardback__circle">
+                      {cardBackStyle === cardBack.image && (
+                        <div className="modal-cardback__dot"></div>
+                      )}
+                    </div>
+                  </div>
                   <img
                     src={`${cardBack.image}`}
                     alt={cardBack.name}
