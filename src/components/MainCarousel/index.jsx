@@ -41,19 +41,22 @@ const MainCarousel = ({
   const cardBackStyle = useSelector((state) => state.cardBack);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   // Minimum distance required for swipe
   const minSwipeDistance = 50;
+
   const onTouchStart = (e) => {
+    if (isPopupOpen) return; // Prevent touch events when popup is open
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
   const onTouchMove = (e) => {
+    if (isPopupOpen) return; // Prevent touch events when popup is open
     setTouchEnd(e.targetTouches[0].clientX);
   };
   const onTouchEnd = () => {
+    if (isPopupOpen) return; // Prevent touch events when popup is open
     if (!touchStart || !touchEnd) return;
-
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -216,6 +219,21 @@ const MainCarousel = ({
         setEnergy(boostedEnergy);
       }
       handleOpenPopup(selectedCard);
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.target.classList &&
+            !mutation.target.classList.contains("fixed")
+          ) {
+            setIsPopupOpen(false);
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
     } catch (error) {
       console.error("Error in handleImageClick:", error);
     }
