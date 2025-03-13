@@ -62,24 +62,15 @@ const ShopPopup = (props) => {
           </svg>
         </button>
         <div className="shop-popup__inner">
-          <div className="shop-popup__image">
-            {/* <img
-              src={
-                props.selectedPhoto
-                  ? `${props.selectedPhoto.image}`
-                  : DefaultImg
-              }
-              alt={props.selectedPhoto?.title || ""}
-            /> */}
-            {/* <img
-              src={
-                item.id === "set" || item.id === "energy" || item.id === "money"
-                  ? item.image
-                  : `${item.image}`
-              }
-              alt=""
-              className="shop-card__Img"
-            /> */}
+          <div
+            className="shop-popup__image"
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "9 / 16",
+              overflow: "hidden",
+            }}
+          >
             <img
               src={
                 props.selectedPhoto
@@ -92,6 +83,7 @@ const ShopPopup = (props) => {
                   : DefaultImg
               }
               alt={props.selectedPhoto?.title || ""}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
           <div className="shop-popup__content">
