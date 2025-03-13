@@ -124,6 +124,23 @@
         width: 70%;
         height: 100%;
         background: #ffd321;
+
+        &[data-energy="900"] {
+          background: #ff0000;
+          animation: pulsate 1s ease-in-out infinite;
+        }
+        @keyframes pulsate {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
         border-radius: 30px;
       }
     }
