@@ -190,27 +190,27 @@
   align-items: center;
   gap: 10px;
 }
-.rewardItem input[type="radio"] {
+.rewardItem input[type="checkbox"] {
   width: 20px;
   height: 20px;
   cursor: pointer;
   margin-right: 10px;
-  /* Стили для кастомизации радио-кнопки */
+  /* Стили для кастомизации чекбокса */
   appearance: none;
   -webkit-appearance: none;
   border: 2px solid #ccc;
-  border-radius: 50%;
+  border-radius: 50%; /* делаем круглым */
   outline: none;
   position: relative;
 }
-.rewardItem input[type="radio"]:checked {
-  border-color: #007bff; /* Цвет границы при выборе */
+.rewardItem input[type="checkbox"]:checked {
+  border-color: #007bff;
 }
-.rewardItem input[type="radio"]:checked::after {
+.rewardItem input[type="checkbox"]:checked::after {
   content: "";
   width: 10px;
   height: 10px;
-  background: #007bff; /* Цвет внутреннего кружка */
+  background: #007bff;
   position: absolute;
   top: 50%;
   left: 50%;
