@@ -15,10 +15,10 @@ const AddEditDeck = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [rewards, setRewards] = useState([
-    { type: "experience", value: 0, enabled: false },
-    { type: "hourly_income", value: 0, enabled: false },
-    { type: "coins", value: 0, enabled: false },
-    { type: "card", value: "", enabled: false },
+    { type: "experience", value: 0 },
+    { type: "hourly_income", value: 0 },
+    { type: "coins", value: 0 },
+    { type: "card", value: "" },
   ]);
 
   const [cardReward, setCardReward] = useState("");
@@ -186,16 +186,14 @@ const AddEditDeck = () => {
         await cardSetsService.updateSetRewards(id, {
           title: name,
           description: description,
-          rewards: rewards
-            .filter((reward) => reward.enabled)
-            .map((reward) => ({
-              type: reward.type,
-              value:
-                reward.type === "card"
-                  ? cards.find((c) => c.title === reward.value)?.id ||
-                    reward.value
-                  : reward.value,
-            })),
+          rewards: rewards.map((reward) => ({
+            type: reward.type,
+            value:
+              reward.type === "card"
+                ? cards.find((c) => c.title === reward.value)?.id ||
+                  reward.value
+                : reward.value,
+          })),
         });
         // Remove cards
         for (const cardId of pendingChanges.removedCards) {
@@ -409,123 +407,49 @@ const AddEditDeck = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
             <h2 className={styles.title}>Вознаграждение </h2>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
+            <input
+              type="text"
+              value={rewards.find((r) => r.type === "coins")?.value || ""}
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "coins"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
               }}
-            >
-              <input
-                type="checkbox"
-                checked={
-                  rewards.find((r) => r.type === "coins")?.enabled || false
-                }
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "coins" ? { ...r, enabled: e.target.checked } : r
-                  );
-                  setRewards(newRewards);
-                }}
-                style={{ marginRight: "10px" }}
-              />
-              <input
-                type="text"
-                value={rewards.find((r) => r.type === "coins")?.value || ""}
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "coins"
-                      ? { ...r, value: parseInt(e.target.value) || 0 }
-                      : r
-                  );
-                  setRewards(newRewards);
-                }}
-                disabled={!rewards.find((r) => r.type === "coins")?.enabled}
-              />
-            </div>
+            />
+          </div>
+          <div style={{ marginRight: "20px" }}>
+            {" "}
             <h2 className={styles.title}>Опыт</h2>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
+            <input
+              type="text"
+              value={rewards.find((r) => r.type === "experience")?.value || ""}
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "experience"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
               }}
-            >
-              <input
-                type="checkbox"
-                checked={
-                  rewards.find((r) => r.type === "experience")?.enabled || false
-                }
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "experience"
-                      ? { ...r, enabled: e.target.checked }
-                      : r
-                  );
-                  setRewards(newRewards);
-                }}
-                style={{ marginRight: "10px" }}
-              />
-              <input
-                type="text"
-                value={
-                  rewards.find((r) => r.type === "experience")?.value || ""
-                }
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "experience"
-                      ? { ...r, value: parseInt(e.target.value) || 0 }
-                      : r
-                  );
-                  setRewards(newRewards);
-                }}
-                disabled={
-                  !rewards.find((r) => r.type === "experience")?.enabled
-                }
-              />
-            </div>
+            />{" "}
             <h2 className={styles.title}>Вознаграждение в час</h2>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
+            <input
+              type="text"
+              value={
+                rewards.find((r) => r.type === "hourly_income")?.value || ""
+              }
+              onChange={(e) => {
+                const newRewards = rewards.map((r) =>
+                  r.type === "hourly_income"
+                    ? { ...r, value: parseInt(e.target.value) || 0 }
+                    : r
+                );
+                setRewards(newRewards);
               }}
-            >
-              <input
-                type="checkbox"
-                checked={
-                  rewards.find((r) => r.type === "hourly_income")?.enabled ||
-                  false
-                }
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "hourly_income"
-                      ? { ...r, enabled: e.target.checked }
-                      : r
-                  );
-                  setRewards(newRewards);
-                }}
-                style={{ marginRight: "10px" }}
-              />
-              <input
-                type="text"
-                value={
-                  rewards.find((r) => r.type === "hourly_income")?.value || ""
-                }
-                onChange={(e) => {
-                  const newRewards = rewards.map((r) =>
-                    r.type === "hourly_income"
-                      ? { ...r, value: parseInt(e.target.value) || 0 }
-                      : r
-                  );
-                  setRewards(newRewards);
-                }}
-                disabled={
-                  !rewards.find((r) => r.type === "hourly_income")?.enabled
-                }
-              />
-            </div>
+            />{" "}
             <h2 className={styles.title}>Вознаграждение картой</h2>
             <div className={styles.autocompleteContainer}>
               <input
