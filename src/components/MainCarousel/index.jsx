@@ -42,6 +42,8 @@ const MainCarousel = ({
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [isSwipeLocked, setIsSwipeLocked] = useState(false);
+  // Minimum distance required for swipe
+  const minSwipeDistance = 50;
   const getCardBackImage = () => {
     // Если cardBackStyle отсутствует, возвращаем изображение по умолчанию
     if (!cardBackStyle) return cardBackStyles.default.image;
@@ -59,9 +61,6 @@ const MainCarousel = ({
     // В остальных случаях возвращаем дефолтное изображение
     return cardBackStyles.default.image;
   };
-  // Minimum distance required for swipe
-  const minSwipeDistance = 50;
-
   const onTouchStart = (e) => {
     if (isSwipeLocked) return;
     setTouchEnd(null);
@@ -318,6 +317,11 @@ const MainCarousel = ({
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
+                      <img src={getCardBackImage()} alt="Card back" />
+                    </div>
+                  }
+                  backComponent={
+                    <div className="main-slider__image">
                       <img
                         src={
                           getStyles(i).isBackCard
@@ -330,22 +334,7 @@ const MainCarousel = ({
                       />
                     </div>
                   }
-                  backComponent={
-                    <div className="main-slider__image">
-                      <img
-                        src={
-                          getStyles(i).isBackCard
-                            ? cardBackStyles[cardBackStyle].image
-                            : `${
-                                openedCards[i]?.image ||
-                                selectedPhotos[item.id]?.image
-                              }`
-                        }
-                        alt=""
-                      />
-                    </div>
-                  }
-                ></ReactFlipCard>
+                />
               </div>
             </React.Fragment>
           ))}
