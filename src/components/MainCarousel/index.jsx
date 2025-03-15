@@ -301,17 +301,14 @@ const MainCarousel = ({
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
-                      <div className="main-slider__image">
-                        <img
-                          src={
-                            cardBackStyle === "default"
-                              ? cardBackStyles.default.image
-                              : cardBackStyles[cardBackStyle]?.image ||
-                                cardBackStyles.default.image
-                          }
-                          alt=""
-                        />
-                      </div>
+                      <img
+                        src={
+                          cardBackStyle === "default"
+                            ? cardBackStyles.default.image
+                            : `${cardBackStyle}`
+                        }
+                        alt=""
+                      />
                     </div>
                   }
                   backComponent={
