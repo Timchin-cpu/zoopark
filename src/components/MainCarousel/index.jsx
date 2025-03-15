@@ -12,9 +12,6 @@ const cardBackStyles = {
   default: { image: DefaultImg },
   style1: { image: Style1CardBack },
   style2: { image: Style2CardBack },
-  getImage: function (style) {
-    return this[style]?.image || this.default.image;
-  },
 };
 
 const data = [
@@ -304,16 +301,17 @@ const MainCarousel = ({
                   onClick={() => handleImageClick(i)}
                   frontComponent={
                     <div className="main-slider__image">
-                      <img
-                        src={
-                          cardBackStyle === "default"
-                            ? cardBackStyles.default.image
-                            : cardBackStyle && cardBackStyle.startsWith("http")
-                            ? cardBackStyle
-                            : cardBackStyles.default.image
-                        }
-                        alt=""
-                      />
+                      <div className="main-slider__image">
+                        <img
+                          src={
+                            cardBackStyle === "default"
+                              ? cardBackStyles.default.image
+                              : cardBackStyles[cardBackStyle]?.image ||
+                                cardBackStyles.default.image
+                          }
+                          alt=""
+                        />
+                      </div>
                     </div>
                   }
                   backComponent={
