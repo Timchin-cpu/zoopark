@@ -12,6 +12,9 @@ const cardBackStyles = {
   default: { image: DefaultImg },
   style1: { image: Style1CardBack },
   style2: { image: Style2CardBack },
+  getImage: function (style) {
+    return this[style]?.image || this.default.image;
+  },
 };
 
 const data = [
@@ -305,7 +308,9 @@ const MainCarousel = ({
                         src={
                           cardBackStyle === "default"
                             ? cardBackStyles.default.image
-                            : `${cardBackStyle}`
+                            : cardBackStyle && cardBackStyle.startsWith("http")
+                            ? cardBackStyle
+                            : cardBackStyles.default.image
                         }
                         alt=""
                       />
