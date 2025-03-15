@@ -42,6 +42,23 @@ const MainCarousel = ({
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [isSwipeLocked, setIsSwipeLocked] = useState(false);
+  const getCardBackImage = () => {
+    // Если cardBackStyle отсутствует, возвращаем изображение по умолчанию
+    if (!cardBackStyle) return cardBackStyles.default.image;
+
+    // Если cardBackStyle уже является полноценным URL (например, "/img/card1.png")
+    if (typeof cardBackStyle === "string" && cardBackStyle.startsWith("/img")) {
+      return cardBackStyle;
+    }
+
+    // Если cardBackStyle является ключом для cardBackStyles, используем его
+    if (cardBackStyles[cardBackStyle] && cardBackStyles[cardBackStyle].image) {
+      return cardBackStyles[cardBackStyle].image;
+    }
+
+    // В остальных случаях возвращаем дефолтное изображение
+    return cardBackStyles.default.image;
+  };
   // Minimum distance required for swipe
   const minSwipeDistance = 50;
 
@@ -303,10 +320,11 @@ const MainCarousel = ({
                     <div className="main-slider__image">
                       <img
                         src={
-                          cardBackStyles[cardBackStyle] &&
-                          cardBackStyles[cardBackStyle].image
-                            ? cardBackStyles[cardBackStyle].image
-                            : cardBackStyles.default.image
+                          getStyles(i).isBackCard
+                            ? getCardBackImage()
+                            : openedCards[i]?.image ||
+                              selectedPhotos[item.id]?.image ||
+                              cardBackStyles.default.image
                         }
                         alt=""
                       />
