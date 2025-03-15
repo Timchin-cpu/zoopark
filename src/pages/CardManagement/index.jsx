@@ -15,7 +15,26 @@ const CardManagement = () => {
   const [cardSets, setCardSets] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [setsSearchQuery, setSetsSearchQuery] = useState("");
-
+  const getCardBackImage = (cardBack) => {
+    // Если объекта нет или поле image отсутствует/невалидно, возвращаем дефолтное изображение
+    if (
+      !cardBack ||
+      !cardBack.image ||
+      cardBack.image === "null" ||
+      cardBack.image === "undefined"
+    ) {
+      return "/img/default-card.png";
+    }
+    // Если строка начинается с "/img", считаем её корректной
+    if (
+      typeof cardBack.image === "string" &&
+      cardBack.image.startsWith("/img")
+    ) {
+      return cardBack.image;
+    }
+    // В остальных случаях – возвращаем дефолт
+    return "/img/default-card.png";
+  };
   useEffect(() => {
     const fetchCardBacks = async () => {
       try {
@@ -224,7 +243,10 @@ const CardManagement = () => {
               style={{ height: "228px" }}
             >
               <div className={styles.cardItemImg}>
-                <img src={`${cardBack.image}`} alt="" />
+                <img
+                  src={getCardBackImage(cardBack)}
+                  alt={cardBack.name || "Card Back"}
+                />{" "}
               </div>
 
               <button
