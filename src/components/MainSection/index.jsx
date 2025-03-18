@@ -35,6 +35,12 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
+    const popupShown = sessionStorage.getItem("incomePopupShown");
+    if (popupShown) {
+      setShowIncomePopup(false);
+    }
+  }, []);
+  useEffect(() => {
     const fetchUserLevel = async () => {
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
@@ -138,6 +144,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
         setCoins(newCoins);
         setAccumulatedIncome(0);
         setShowIncomePopup(false);
+        sessionStorage.setItem("incomePopupShown", "true");
       })
       .catch((error) => console.error("Ошибка при сборе дохода", error));
   };
