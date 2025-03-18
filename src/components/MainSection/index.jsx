@@ -102,15 +102,23 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
   const [accumulatedIncome, setAccumulatedIncome] = useState(0);
   const [showIncomePopup, setShowIncomePopup] = useState(true);
   useEffect(() => {
+    if (telegramId) {
+      axios
+        .get(`/api/user/${telegramId}/accumulated-income`)
+        .then((response) => {
+          setAccumulatedIncome(response.data.accumulatedIncome);
+        })
+        .catch((error) =>
+          console.error("Ошибка при получении накопленного дохода", error)
+        );
+    }
+  }, [telegramId]);
+  // Каждую секунду прибавляем локально (с учетом ограничения)
+  useEffect(() => {
     const interval = setInterval(() => {
       setAccumulatedIncome((prev) => {
-        // Если уже достигнут максимум, дальше не начисляем
-        if (prev >= MAX_ACCUMULATED_INCOME) {
-          return prev;
-        }
-        // Доход в час делим на секунды
-        const addition = hourlyIncome / 3600;
-        const nextValue = prev + addition;
+        let addition = hourlyIncome / 3600; // начисление каждую секунду
+        let nextValue = prev + addition;
         return nextValue > MAX_ACCUMULATED_INCOME
           ? MAX_ACCUMULATED_INCOME
           : nextValue;
@@ -118,17 +126,21 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
     }, 1000);
     return () => clearInterval(interval);
   }, [hourlyIncome]);
-  // Обработчик нажатия кнопки "Забрать доход"
+  // Обработчик сбора дохода через API
   const handleCollectIncome = () => {
-    const collected = Math.floor(accumulatedIncome);
-    // Добавляем накопленный доход к монетам
-    setCoins((prevCoins) => prevCoins + collected);
-    // Сбрасываем накопленный доход
-    setAccumulatedIncome(0);
-    // Скрываем окно сбора дохода
-    setShowIncomePopup(false);
-    // Здесь можно также сделать запрос к серверу для сохранения изменений
+    axios
+      .put(`/api/user/${telegramId}/collect-income`)
+      .then((response) => {
+        const { collected, newCoins } = response.data;
+        setCoins(newCoins);
+        setAccumulatedIncome(0);
+        setShowIncomePopup(false);
+      })
+      .catch((error) => console.error("Ошибка при сборе дохода", error));
   };
+  const tg = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  const telegramId = tg ? tg.id : null;
+
   useEffect(() => {
     setHourlyIncome(propHourlyIncome);
   }, [propHourlyIncome]);
@@ -288,7 +300,10 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
             <p>
               {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
             </p>
-            <p>Чтобы закрыть окно, заберите накопленный доход.</p>
+            <p>
+              Чтобы закрыть окно, заберите накопленный доход. Доход не
+              обнуляется даже если вы покинете приложение.
+            </p>
             <button onClick={handleCollectIncome}>Забрать доход</button>
           </div>
         </div>
