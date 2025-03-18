@@ -34,12 +34,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
 
     return () => clearTimeout(timer);
   }, []);
-  useEffect(() => {
-    const popupShown = sessionStorage.getItem("incomePopupShown");
-    if (popupShown) {
-      setShowIncomePopup(false);
-    }
-  }, []);
+
   useEffect(() => {
     const fetchUserLevel = async () => {
       const tg = window.Telegram.WebApp;
@@ -109,7 +104,14 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
   }, []);
   const MAX_ACCUMULATED_INCOME = 1000000;
   const [accumulatedIncome, setAccumulatedIncome] = useState(0);
-  const [showIncomePopup, setShowIncomePopup] = useState(true);
+  const [showIncomePopup, setShowIncomePopup] = useState(() => {
+    return !localStorage.getItem("incomePopupShown");
+  });
+  useEffect(() => {
+    if (showIncomePopup) {
+      localStorage.setItem("incomePopupShown", "true");
+    }
+  }, [showIncomePopup]);
   useEffect(() => {
     if (telegramId) {
       axios
@@ -144,7 +146,6 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
         setCoins(newCoins);
         setAccumulatedIncome(0);
         setShowIncomePopup(false);
-        sessionStorage.setItem("incomePopupShown", "true");
       })
       .catch((error) => console.error("Ошибка при сборе дохода", error));
   };
