@@ -16,6 +16,8 @@ import { userInitService } from "services/api";
 import axios from "axios";
 
 const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
+  const tg = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  const telegramId = tg ? tg.id : null;
   const [coins, setCoins] = useState(propCoins || 0);
   const [hourlyIncome, setHourlyIncome] = useState(propHourlyIncome || 0);
   const [activePopup, setActivePopup] = useState(false);
@@ -132,15 +134,13 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
     axios
       .put(`/api/user/${telegramId}/collect-income`)
       .then((response) => {
-        const { collected, newCoins } = response.data;
+        const { newCoins } = response.data;
         setCoins(newCoins);
         setAccumulatedIncome(0);
         setShowIncomePopup(false);
       })
       .catch((error) => console.error("Ошибка при сборе дохода", error));
   };
-  const tg = window.Telegram?.WebApp?.initDataUnsafe?.user;
-  const telegramId = tg ? tg.id : null;
 
   useEffect(() => {
     setHourlyIncome(propHourlyIncome);
