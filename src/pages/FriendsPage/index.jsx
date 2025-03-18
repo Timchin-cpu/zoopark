@@ -24,7 +24,7 @@ const FriendsPage = () => {
           const codeResponse = await userInitService.getReferralCode(
             telegram_id
           );
-          setReferralCode(codeResponse.data.code);
+          setReferralCode(codeResponse.data.referral_code);
           // Get referrals list
           const referralsResponse = await userInitService.getReferrals(
             telegram_id
