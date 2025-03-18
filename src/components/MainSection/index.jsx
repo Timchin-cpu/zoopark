@@ -98,6 +98,37 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
     };
     initializeUser();
   }, []);
+  const MAX_ACCUMULATED_INCOME = 1000000;
+  const [accumulatedIncome, setAccumulatedIncome] = useState(0);
+  const [showIncomePopup, setShowIncomePopup] = useState(true);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAccumulatedIncome((prev) => {
+        // Если уже достигнут максимум, дальше не начисляем
+        if (prev >= MAX_ACCUMULATED_INCOME) {
+          return prev;
+        }
+        // Доход в час делим на секунды
+        const addition = hourlyIncome / 3600;
+        const nextValue = prev + addition;
+        return nextValue > MAX_ACCUMULATED_INCOME
+          ? MAX_ACCUMULATED_INCOME
+          : nextValue;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [hourlyIncome]);
+  // Обработчик нажатия кнопки "Забрать доход"
+  const handleCollectIncome = () => {
+    const collected = Math.floor(accumulatedIncome);
+    // Добавляем накопленный доход к монетам
+    setCoins((prevCoins) => prevCoins + collected);
+    // Сбрасываем накопленный доход
+    setAccumulatedIncome(0);
+    // Скрываем окно сбора дохода
+    setShowIncomePopup(false);
+    // Здесь можно также сделать запрос к серверу для сохранения изменений
+  };
   useEffect(() => {
     setHourlyIncome(propHourlyIncome);
   }, [propHourlyIncome]);
@@ -250,6 +281,18 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
           </ul>
         </div>
       </div>
+      {showIncomePopup && (
+        <div className="income-popup">
+          <div className="income-popup__content">
+            <h2>Накопленный доход</h2>
+            <p>
+              {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
+            </p>
+            <p>Чтобы закрыть окно, заберите накопленный доход.</p>
+            <button onClick={handleCollectIncome}>Забрать доход</button>
+          </div>
+        </div>
+      )}
       <div className="main-section__bg">
         <svg
           width="375"
