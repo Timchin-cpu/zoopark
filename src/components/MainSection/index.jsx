@@ -13,6 +13,7 @@ import { routeBonus } from "pages/BonusPage";
 import SettingsPopup from "components/SettingsPopup";
 // import { userService } from "services/api";
 import { userInitService } from "services/api";
+import axios from "axios";
 
 const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
   const [coins, setCoins] = useState(propCoins || 0);
