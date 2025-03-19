@@ -314,6 +314,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
             <button 
               onClick={handleCollectIncome}
               className="income-popup__button"
+              disabled={accumulatedIncome === 0}
             >
               Забрать
             </button>
