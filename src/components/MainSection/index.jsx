@@ -304,21 +304,20 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
       </div>
       {showIncomePopup && (
         <div className="income-popup">
-          <div className="income-popup__content">
-            <div className="income-popup__amount">
-              <img src={MoneyIcon} alt="coins" className="income-popup__icon" />
-              <p className="income-popup__text">
-                {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
-              </p>
-            </div>
-            <button 
-              onClick={handleCollectIncome}
-              className="income-popup__button"
-            >
-              Забрать
-            </button>
+        <div className="income-popup__content">
+          <div className="income-popup__amount">
+            <p className="income-popup__text">
+              {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
+            </p>
           </div>
+          <button 
+            onClick={handleCollectIncome}
+            className="income-popup__button"
+          >
+            Забрать
+          </button>
         </div>
+      </div>
       )}
       <div className="main-section__bg">
         <svg
