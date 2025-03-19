@@ -305,15 +305,18 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
       {showIncomePopup && (
         <div className="income-popup">
           <div className="income-popup__content">
-            <h2>Накопленный доход</h2>
-            <p>
-              {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
-            </p>
-            <p>
-              Чтобы закрыть окно, заберите накопленный доход. Доход не
-              обнуляется даже если вы покинете приложение.
-            </p>
-            <button onClick={handleCollectIncome}>Забрать доход</button>
+            <div className="income-popup__amount">
+              <img src={MoneyIcon} alt="coins" className="income-popup__icon" />
+              <p className="income-popup__text">
+                {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
+              </p>
+            </div>
+            <button 
+              onClick={handleCollectIncome}
+              className="income-popup__button"
+            >
+              Забрать
+            </button>
           </div>
         </div>
       )}
