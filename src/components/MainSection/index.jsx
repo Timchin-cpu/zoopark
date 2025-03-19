@@ -303,17 +303,80 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
         </div>
       </div>
       {showIncomePopup && (
-        <div className="income-popup">
-          <div className="income-popup__content">
-            <div className="income-popup__amount">
-              <img src={MoneyIcon} alt="coins" className="income-popup__icon" />
-              <p className="income-popup__text">
+        <div
+          className="income-popup"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div
+            className="income-popup__content"
+            style={{
+              background: "#f5f5f5",
+              borderRadius: "16px",
+              padding: "24px",
+              width: "90%",
+              maxWidth: "320px",
+              textAlign: "center",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <div
+              className="income-popup__amount"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                marginBottom: "20px",
+              }}
+            >
+              <img
+                src={MoneyIcon}
+                alt="coins"
+                className="income-popup__icon"
+                style={{
+                  width: "24px",
+                  height: "24px",
+                }}
+              />
+              <p
+                className="income-popup__text"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 500,
+                  color: "#333",
+                }}
+              >
                 {Math.floor(accumulatedIncome)} / {MAX_ACCUMULATED_INCOME}
               </p>
             </div>
-            <button 
+            <button
               onClick={handleCollectIncome}
               className="income-popup__button"
+              style={{
+                background: "#71B21D",
+                color: "white",
+                border: "none",
+                borderRadius: "12px",
+                padding: "12px 32px",
+                fontSize: "16px",
+                fontWeight: 500,
+                cursor: "pointer",
+                width: "100%",
+                transition: "background-color 0.2s",
+                opacity: accumulatedIncome === 0 ? 0.6 : 1,
+                pointerEvents: accumulatedIncome === 0 ? "none" : "auto",
+              }}
               disabled={accumulatedIncome === 0}
             >
               Забрать
