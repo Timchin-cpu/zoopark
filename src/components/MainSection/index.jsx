@@ -70,36 +70,31 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
           const telegram_id = tg.initDataUnsafe.user.id;
           const username = tg.initDataUnsafe.user.username || "Пользователь";
           const userPhoto = tg.initDataUnsafe.user.photo_url;
+
+          // Проверяем, был ли уже первый вход
+          const isFirstLogin = !localStorage.getItem("userInitialized");
+
           // Получаем существующего пользователя
           const existingUser = await userInitService.getUser(telegram_id);
-          if (!existingUser.data) {
-            // Если пользователь не существует - это первый вход
+
+          if (!existingUser.data || isFirstLogin) {
             await userInitService.initUser(telegram_id, username);
-            // Устанавливаем фото при первом входе если оно есть
-            if (userPhoto) {
-              await userInitService.updateUserPhoto(telegram_id, userPhoto);
-              setAvatar(userPhoto);
-            } else {
-              setAvatar(Avatar);
-            }
+            localStorage.setItem("userInitialized", "true");
           }
-
           setUsername(username);
-
           // Проверяем время последнего обновления фото
           const lastPhotoUpdate = existingUser.data?.last_photo_update;
           const now = new Date();
           const lastUpdate = new Date(lastPhotoUpdate);
           const timeDiff = now - lastUpdate;
           const twoDaysInMs = 2 * 24 * 60 * 60 * 1000;
+
           if (!lastPhotoUpdate || timeDiff >= twoDaysInMs) {
-            // Если прошло больше 2 дней, обновляем фото
             if (userPhoto) {
               await userInitService.updateUserPhoto(telegram_id, userPhoto);
               setAvatar(userPhoto);
             }
           } else {
-            // Используем существующее фото
             setAvatar(existingUser.data.photo_url || Avatar);
           }
         } catch (error) {
