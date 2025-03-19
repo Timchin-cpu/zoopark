@@ -302,7 +302,7 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
           </ul>
         </div>
       </div>
-      {showIncomePopup && (
+      {showIncomePopup && accumulatedIncome > 0 && (
         <div
           className="income-popup"
           style={{
