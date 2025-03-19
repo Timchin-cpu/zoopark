@@ -73,7 +73,15 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
           // Получаем существующего пользователя
           const existingUser = await userInitService.getUser(telegram_id);
           if (!existingUser.data) {
+            // Если пользователь не существует - это первый вход
             await userInitService.initUser(telegram_id, username);
+            // Устанавливаем фото при первом входе если оно есть
+            if (userPhoto) {
+              await userInitService.updateUserPhoto(telegram_id, userPhoto);
+              setAvatar(userPhoto);
+            } else {
+              setAvatar(Avatar);
+            }
           }
 
           setUsername(username);
