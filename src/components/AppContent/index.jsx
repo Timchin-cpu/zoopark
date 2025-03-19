@@ -62,7 +62,7 @@ const AppContent = () => {
               path={routeAdminPage()} 
               render={(props) => {
                 const tg = window.Telegram?.WebApp?.initDataUnsafe?.user;
-                if (tg?.id === "YOUR_ADMIN_TG_ID") {
+                if (tg?.id === 467518658) {
                   return <AdminPanel {...props} />;
                 }
                 return <Redirect to="/" />;

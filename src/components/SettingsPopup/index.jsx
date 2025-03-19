@@ -120,7 +120,8 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
   // if (settingsNight === true) {
   //     document.body.classList.add("dark");
   //   }
-
+  const tg = window.Telegram.WebApp;
+  
   return (
     <div
       ref={settingsPopupRef}
