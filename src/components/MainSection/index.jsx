@@ -64,6 +64,8 @@ const MainSection = ({ hourlyIncome: propHourlyIncome, coins: propCoins }) => {
 
   useEffect(() => {
     const initializeUser = async () => {
+      const isFirstLogin = !localStorage.getItem("firstLogin");
+
       const tg = window.Telegram.WebApp;
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
         try {
