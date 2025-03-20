@@ -70,6 +70,7 @@ const MainCarousel = ({
   const onTouchMove = (e) => {
     if (isSwipeLocked) return;
     setTouchEnd(e.targetTouches[0].clientX);
+    console.log(1)
   };
 
   const onTouchEnd = () => {
