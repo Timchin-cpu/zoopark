@@ -31,6 +31,7 @@ import PeoplePage, { routePeople as routePeoplePage } from "pages/PeoplePage";
 import { useSelector } from "react-redux";
 
 const AppContent = () => {
+  
   const theme = useSelector((state) => state.theme);
 
   if (theme === true) {
@@ -62,7 +63,7 @@ const AppContent = () => {
               path={routeAdminPage()} 
               render={(props) => {
                 const tg = window.Telegram?.WebApp?.initDataUnsafe?.user;
-                if (tg?.id === 467518658) {
+                if (tg?.id === 7241281378) {
                   return <AdminPanel {...props} />;
                 }
                 return <Redirect to="/" />;

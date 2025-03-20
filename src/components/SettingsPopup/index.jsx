@@ -132,7 +132,7 @@ const SettingsPopup = ({ setActivePopup, activePopup }) => {
           <>
             <div className="modal-settings">
             <div className="modal-settings__item f-center-jcsb">
-                {tg?.initDataUnsafe?.user?.id === 467518658 && (
+                {tg?.initDataUnsafe?.user?.id === 7241281378 && (
                   <>
                     <p className="modal-settings__title">Админ панель</p>
                     <NavLink to={routeAdmin()} className="modal-settings__select">
